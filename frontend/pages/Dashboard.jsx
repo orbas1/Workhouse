@@ -43,6 +43,9 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button mt={4} as={RouterLink} to="/networking/session/1">
+          Join Networking Session
+        </Button>
         <Button as={RouterLink} to="/networking" mt={4} colorScheme="purple">
           Networking
         </Button>
