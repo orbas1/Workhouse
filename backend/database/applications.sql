@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS applications (
+  id UUID PRIMARY KEY,
+  opportunity_id UUID NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  status VARCHAR(20) DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

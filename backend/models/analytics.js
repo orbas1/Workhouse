@@ -113,6 +113,12 @@ const userAnalytics = new Map(); // userId -> analytics
 const skillAnalytics = new Map(); // userId -> [ { skill, level, progress, updatedAt } ]
 const learningPredictions = new Map(); // userId -> { prediction, confidence, createdAt }
 
+// -----------------------------
+// Volunteer and organization analytics stores
+// -----------------------------
+const volunteerEngagement = [];
+const organizationProjectStats = [];
+
 function setPathAnalytics(pathId, data) {
   const record = Object.assign({
     id: randomUUID(),
@@ -182,6 +188,47 @@ function getPrediction(userId) {
   return learningPredictions.get(userId) || null;
 }
 
+function addVolunteerEngagement(volunteerId, hours, tasksCompleted, date = new Date()) {
+  const record = {
+    id: randomUUID(),
+    volunteerId,
+    hours: Number(hours),
+    tasksCompleted: Number(tasksCompleted),
+    date: new Date(date),
+  };
+  volunteerEngagement.push(record);
+  return record;
+}
+
+function getVolunteerEngagement({ startDate, endDate } = {}) {
+  return volunteerEngagement.filter(r => {
+    if (startDate && r.date < startDate) return false;
+    if (endDate && r.date > endDate) return false;
+    return true;
+  });
+}
+
+function addOrganizationProjectStat(organizationId, projectId, volunteers, impactScore, date = new Date()) {
+  const record = {
+    id: randomUUID(),
+    organizationId,
+    projectId,
+    volunteers: Number(volunteers),
+    impactScore: Number(impactScore),
+    date: new Date(date),
+  };
+  organizationProjectStats.push(record);
+  return record;
+}
+
+function getOrganizationProjectAnalytics({ startDate, endDate } = {}) {
+  return organizationProjectStats.filter(r => {
+    if (startDate && r.date < startDate) return false;
+    if (endDate && r.date > endDate) return false;
+    return true;
+  });
+}
+
 module.exports = {
   // Agency analytics
   addEarning,
@@ -204,5 +251,10 @@ module.exports = {
   getUserSkills,
   setPrediction,
   getPrediction,
+  // Volunteer and organization analytics
+  addVolunteerEngagement,
+  getVolunteerEngagement,
+  addOrganizationProjectStat,
+  getOrganizationProjectAnalytics,
 };
 

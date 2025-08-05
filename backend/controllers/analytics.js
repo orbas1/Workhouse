@@ -12,8 +12,17 @@ const {
   getUserAnalytics,
   getSkillsAnalytics,
   getLearningPredictions,
+  getVolunteerEngagement,
+  getOrganizationProjectAnalytics,
 } = require('../services/analytics');
 const logger = require('../utils/logger');
+
+function toCSV(records) {
+  if (!Array.isArray(records) || records.length === 0) return '';
+  const headers = Object.keys(records[0]);
+  const rows = records.map(r => headers.map(h => r[h]).join(','));
+  return `${headers.join(',')}` + '\n' + rows.join('\n');
+}
 
 // -----------------------------
 // Agency analytics handlers
@@ -172,6 +181,44 @@ async function getPredictionsHandler(req, res) {
   }
 }
 
+async function getVolunteerEngagementAnalyticsHandler(req, res) {
+  const { startDate, endDate } = req.query;
+  try {
+    const report = await getVolunteerEngagement({
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
+    });
+    if (req.reportOptions?.format === 'csv') {
+      const csv = toCSV(report.records);
+      res.header('Content-Type', 'text/csv');
+      return res.send(csv);
+    }
+    res.json(report);
+  } catch (err) {
+    logger.error('Failed to fetch volunteer engagement analytics', { error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function getOrganizationProjectAnalyticsHandler(req, res) {
+  const { startDate, endDate } = req.query;
+  try {
+    const report = await getOrganizationProjectAnalytics({
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
+    });
+    if (req.reportOptions?.format === 'csv') {
+      const csv = toCSV(report.records);
+      res.header('Content-Type', 'text/csv');
+      return res.send(csv);
+    }
+    res.json(report);
+  } catch (err) {
+    logger.error('Failed to fetch organization project analytics', { error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getAgencyEarningsHandler,
   getAgencyPerformanceHandler,
@@ -186,5 +233,7 @@ module.exports = {
   getUserAnalyticsHandler,
   getSkillsAnalyticsHandler,
   getPredictionsHandler,
+  getVolunteerEngagementAnalyticsHandler,
+  getOrganizationProjectAnalyticsHandler,
 };
 
