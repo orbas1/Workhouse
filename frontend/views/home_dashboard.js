@@ -107,6 +107,9 @@ function HomeDashboard() {
       <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/calendar'}>
         Calendar
       </Button>
+      <Button colorScheme="purple" ml={2} onClick={() => window.location.href = '/courses'}>
+        Courses
+      </Button>
     </Box>
     <ChatWidget />
     </>

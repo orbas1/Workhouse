@@ -39,6 +39,7 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
       </Routes>

@@ -6,6 +6,7 @@ const createCourseSchema = Joi.object({
   categoryId: Joi.string().uuid().required(),
   instructorId: Joi.string().uuid().required(),
   type: Joi.string().valid('course', 'workshop', 'skillLab').required(),
+  price: Joi.number().min(0).required(),
 });
 
 const updateCourseSchema = Joi.object({
@@ -14,6 +15,7 @@ const updateCourseSchema = Joi.object({
   categoryId: Joi.string().uuid(),
   instructorId: Joi.string().uuid(),
   type: Joi.string().valid('course', 'workshop', 'skillLab'),
+  price: Joi.number().min(0),
 }).min(1);
 
 const feedbackSchema = Joi.object({
@@ -34,6 +36,13 @@ const instructorIdParamSchema = Joi.object({
   instructorId: Joi.string().uuid().required(),
 });
 
+const purchaseSchema = Joi.object({
+  userId: Joi.string().uuid().required(),
+  paymentMethod: Joi.string().max(50).required(),
+  amount: Joi.number().positive().required(),
+  promoCode: Joi.string().allow('', null),
+});
+
 module.exports = {
   createCourseSchema,
   updateCourseSchema,
@@ -41,4 +50,5 @@ module.exports = {
   courseIdParamSchema,
   categoryIdParamSchema,
   instructorIdParamSchema,
+  purchaseSchema,
 };
