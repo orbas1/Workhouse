@@ -5,14 +5,18 @@ const { useNavigate } = ReactRouterDOM;
 function LandingPage() {
   const [features, setFeatures] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [partners, setPartners] = useState([]);
+  const [badges, setBadges] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/landing/content')
-      .then((res) => res.json())
+    landingAPI
+      .getLandingContent()
       .then((data) => {
         setFeatures(data.features || []);
         setTestimonials(data.testimonials || []);
+        setPartners(data.partners || []);
+        setBadges(data.badges || []);
       })
       .catch(() => {});
   }, []);
@@ -41,19 +45,18 @@ function LandingPage() {
         </Box>
         <Box className="testimonials" bg="gray.50" py={16} px={8}>
           <Heading size="lg" textAlign="center" mb={8}>What People Say</Heading>
-          <Stack spacing={6}>
-            {testimonials.map((t) => (
-              <Box key={t.id} className="testimonial" maxW="xl" mx="auto" textAlign="center">
-                <Text fontStyle="italic">"{t.quote}"</Text>
-                <Text mt={2} fontWeight="bold">- {t.name}</Text>
-              </Box>
-            ))}
-          </Stack>
+          <TestimonialCarousel testimonials={testimonials} />
+        </Box>
+        <Box py={8} px={8}>
+          <PartnerLogos partners={partners} />
         </Box>
         <Box className="secondary-cta" py={16} px={8} textAlign="center">
           <Heading mb={4}>Ready to Join?</Heading>
           <Text mb={6}>Start your journey with Workhouse today.</Text>
           <Button colorScheme="blue" size="lg" onClick={() => navigate('/login')}>Create Account</Button>
+          <Box mt={8}>
+            <TrustBadges badges={badges} />
+          </Box>
         </Box>
       </Box>
       <Box as="footer" className="landing-footer" py={8} textAlign="center" bg="gray.800" color="white">
