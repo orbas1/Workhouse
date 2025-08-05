@@ -53,6 +53,11 @@ async function getUserBehavior(userId) {
   return record.behavior;
 }
 
+async function getCreatorWebinars(ownerId) {
+  logger.info('Fetching creator webinars', { ownerId });
+  return webinarAnalyticsModel.getWebinarsByOwner(ownerId);
+}
+
 async function getPopularPages() {
   const behaviors = webinarAnalyticsModel.getAllUserBehavior();
   const pageCounts = {};
@@ -155,4 +160,5 @@ module.exports = {
   analyzeBehaviorPatterns,
   predictUserBehavior,
   segmentUserBehavior,
+  getCreatorWebinars,
 };
