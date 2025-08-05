@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const affiliateRoutes = require('./routes/affiliates');
+const analyticsRoutes = require('./routes/analytics');
 const matchmakingRoutes = require('./routes/matchmaking');
 const contractRoutes = require('./routes/contracts');
 const clientRoutes = require('./routes/clients');
@@ -27,6 +28,7 @@ app.use(express.json());
 // with "/api" when integrating the backend.
 app.use('/auth', authRoutes);
 app.use('/affiliates', affiliateRoutes);
+app.use('/agency', analyticsRoutes);
 app.use('/agency', matchmakingRoutes);
 app.use('/contracts', contractRoutes);
 app.use('/agency', clientRoutes);
