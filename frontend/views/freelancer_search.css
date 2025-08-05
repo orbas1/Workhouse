@@ -1,0 +1,9 @@
+.freelancer-search-page .filters {
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.freelancer-search-page .filters input {
+  max-width: 200px;
+}

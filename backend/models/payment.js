@@ -1,6 +1,7 @@
 const { randomUUID } = require('crypto');
 
 const payments = new Map();
+const userPayments = new Map();
 const adjustments = [];
 
 function createPayment(agencyId, { employeeId, jobId, amount }) {
@@ -49,10 +50,32 @@ function recordAdjustment(paymentId, oldAmount, newAmount, reason) {
   return record;
 }
 
+function createUserPayment({ userId, amount, method }) {
+  const id = randomUUID();
+  const timestamp = new Date();
+  const payment = {
+    id,
+    userId,
+    amount,
+    method,
+    status: 'pending',
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  };
+  userPayments.set(id, payment);
+  return payment;
+}
+
+function getUserPayment(id) {
+  return userPayments.get(id);
+}
+
 module.exports = {
   createPayment,
   getPaymentsByAgency,
   findPaymentById,
   updatePayment,
   recordAdjustment,
+  createUserPayment,
+  getUserPayment,
 };

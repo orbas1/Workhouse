@@ -6,9 +6,11 @@ const {
   deleteContractHandler,
   listContractsHandler,
   viewContractProposalsHandler,
+  viewContractInvoicesHandler,
   acceptContractProposalHandler,
   terminateContractHandler,
   submitWorkForContractHandler,
+  submitInvoiceForContractHandler,
   approveSubmittedWorkHandler,
 } = require('../controllers/contract');
 const auth = require('../middleware/auth');
@@ -19,6 +21,7 @@ const {
   submitWorkSchema,
   approveWorkSchema,
   terminateContractSchema,
+  submitInvoiceSchema,
 } = require('../validation/contract');
 
 const router = express.Router();
@@ -30,6 +33,13 @@ router.delete('/:contractId', auth, deleteContractHandler);
 router.get('/', auth, listContractsHandler);
 router.get('/:contractId/proposals', auth, viewContractProposalsHandler);
 router.post('/:contractId/proposals/:proposalId/accept', auth, acceptContractProposalHandler);
+router.get('/:contractId/invoices', auth, viewContractInvoicesHandler);
+router.post(
+  '/:contractId/invoices',
+  auth,
+  validate(submitInvoiceSchema),
+  submitInvoiceForContractHandler,
+);
 router.put('/:contractId/terminate', auth, validate(terminateContractSchema), terminateContractHandler);
 router.post('/:contractId/work/submit', auth, validate(submitWorkSchema), submitWorkForContractHandler);
 router.put('/:contractId/work/approve', auth, validate(approveWorkSchema), approveSubmittedWorkHandler);
