@@ -58,6 +58,8 @@ function HomeDashboard() {
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
       </Button>
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
+        Manage Applications
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
         Manage Gigs
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
