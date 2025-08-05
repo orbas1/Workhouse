@@ -31,6 +31,7 @@ const educationAnalyticsRoutes = require('./routes/educationAnalytics');
 const financialAnalyticsRoutes = require('./routes/financialAnalytics');
 const paymentRoutes = require('./routes/payments');
 const employmentAnalyticsRoutes = require('./routes/employmentAnalytics');
+const communicationRoutes = require('./routes/communicationTools');
 const goalRoutes = require('./routes/goals');
 const milestoneRoutes = require('./routes/milestones');
 const progressRoutes = require('./routes/progress');
@@ -74,10 +75,10 @@ app.use('/education-analytics', educationAnalyticsRoutes);
 app.use('/financial-analytics', financialAnalyticsRoutes);
 app.use('/agency/:agencyId/payments', paymentRoutes);
 app.use('/analytics/employment', employmentAnalyticsRoutes);
+app.use('/communication', communicationRoutes);
 app.use('/progress', progressRoutes);
 app.use('/achievements', achievementRoutes);
 app.use('/skills', skillRoutes);
-
 app.use('/goals', goalRoutes);
 app.use('/milestones', milestoneRoutes);
 
