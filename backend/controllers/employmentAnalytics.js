@@ -2,6 +2,7 @@ const {
   getEmploymentOverview,
   getJobAnalytics,
   getApplicationAnalytics,
+  listJobs,
 } = require('../services/employmentAnalytics');
 const logger = require('../utils/logger');
 
@@ -36,8 +37,19 @@ async function applicationAnalyticsHandler(req, res) {
   }
 }
 
+async function jobsListHandler(req, res) {
+  try {
+    const jobs = await listJobs();
+    res.json(jobs);
+  } catch (err) {
+    logger.error('Failed to list jobs', { error: err.message });
+    res.status(500).json({ error: 'Failed to list jobs' });
+  }
+}
+
 module.exports = {
   overviewHandler,
   jobAnalyticsHandler,
   applicationAnalyticsHandler,
+  jobsListHandler,
 };

@@ -36,4 +36,14 @@ async function getEvents() {
   return model.listEvents();
 }
 
-module.exports = { getPosts, createPost, getEvents };
+async function likePost(postId) {
+  const post = model.addLike(postId);
+  if (!post) {
+    logger.warn('Attempted to like missing post', { postId });
+    return null;
+  }
+  logger.info('Post liked', { postId });
+  return post;
+}
+
+module.exports = { getPosts, createPost, getEvents, likePost };
