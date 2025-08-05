@@ -1,4 +1,4 @@
-const { getPosts, createPost, getEvents } = require('../services/liveFeed');
+const { getPosts, createPost, getEvents, likePost } = require('../services/liveFeed');
 const logger = require('../utils/logger');
 
 async function listPosts(req, res) {
@@ -22,4 +22,13 @@ async function listEventsHandler(req, res) {
   res.json(events);
 }
 
-module.exports = { listPosts, createPostHandler, listEventsHandler };
+async function likePostHandler(req, res) {
+  const { postId } = req.params;
+  const post = await likePost(postId);
+  if (!post) {
+    return res.status(404).json({ error: 'Post not found' });
+  }
+  res.json(post);
+}
+
+module.exports = { listPosts, createPostHandler, listEventsHandler, likePostHandler };

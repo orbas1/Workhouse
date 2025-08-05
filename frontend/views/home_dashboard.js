@@ -3,7 +3,6 @@ const { useState, useEffect } = React;
 const { useEffect, useState } = React;
 const { Box, Heading, Text, Button, Flex } = ChakraUI;
 
-
 function HomeDashboard() {
   const { user } = useAuth();
   const [affiliate, setAffiliate] = useState(null);
@@ -28,6 +27,7 @@ function HomeDashboard() {
   }
 
   return (
+    <Box className="dashboard-container" p={4}>
     <>
     <Box className="dashboard-container">
       <NavMenu />
@@ -44,6 +44,7 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
+      <Button mt={6} colorScheme="blue" onClick={() => window.location.href = '/feed'}>
     </Box>
       <Box className="dashboard">
         <Heading size="lg" mb={2}>Dashboard</Heading>
