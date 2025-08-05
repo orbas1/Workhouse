@@ -18,3 +18,14 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Agency Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS agency_analytics (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    metrics JSONB NOT NULL,
+    calculated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_agency_analytics_agency_id ON agency_analytics(agency_id);
+

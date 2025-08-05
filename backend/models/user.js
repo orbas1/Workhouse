@@ -4,8 +4,8 @@ function findUser(username) {
   return users.find(u => u.username === username);
 }
 
-function addUser(user) {
-  users.push(user);
+function addUser({ username, password, role = 'user' }) {
+  users.push({ username, password, role });
 }
 
 module.exports = { users, findUser, addUser };
