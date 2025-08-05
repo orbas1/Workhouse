@@ -1,52 +1,62 @@
 const express = require('express');
 const {
   createMilestoneHandler,
-  listMilestonesHandler,
-  updateMilestoneHandler,
-  deleteMilestoneHandler,
-} = require('../controllers/goal');
+  getMilestoneHandler,
+  completeMilestoneHandler,
+  setMilestoneRewardHandler,
+  getNotificationsHandler,
+} = require('../controllers/milestone');
 const auth = require('../middleware/auth');
 const validate = require('../middleware/validate');
-const goalMiddleware = require('../middleware/goal');
 const milestoneMiddleware = require('../middleware/milestone');
 const {
-  goalIdParamSchema,
+  pathIdParamSchema,
   milestoneIdParamSchema,
+  userIdParamSchema,
   createMilestoneSchema,
-  updateMilestoneSchema,
-} = require('../validation/goal');
+  rewardSchema,
+} = require('../validation/milestone');
 
 const router = express.Router();
 
 router.post(
-  '/create/:goalId',
+  '/create/:pathId',
   auth,
-  validate(goalIdParamSchema, 'params'),
-  goalMiddleware,
+  validate(pathIdParamSchema, 'params'),
   validate(createMilestoneSchema),
   createMilestoneHandler
 );
+
 router.get(
-  '/:goalId',
-  auth,
-  validate(goalIdParamSchema, 'params'),
-  goalMiddleware,
-  listMilestonesHandler
-);
-router.put(
-  '/update/:milestoneId',
+  '/:milestoneId',
   auth,
   validate(milestoneIdParamSchema, 'params'),
   milestoneMiddleware,
-  validate(updateMilestoneSchema),
-  updateMilestoneHandler
+  getMilestoneHandler
 );
-router.delete(
-  '/delete/:milestoneId',
+
+router.post(
+  '/complete/:milestoneId',
   auth,
   validate(milestoneIdParamSchema, 'params'),
   milestoneMiddleware,
-  deleteMilestoneHandler
+  completeMilestoneHandler
+);
+
+router.post(
+  '/reward/:milestoneId',
+  auth,
+  validate(milestoneIdParamSchema, 'params'),
+  milestoneMiddleware,
+  validate(rewardSchema),
+  setMilestoneRewardHandler
+);
+
+router.get(
+  '/notifications/:userId',
+  auth,
+  validate(userIdParamSchema, 'params'),
+  getNotificationsHandler
 );
 
 module.exports = router;
