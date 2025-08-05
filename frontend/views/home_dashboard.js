@@ -106,6 +106,9 @@ function HomeDashboard() {
       <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
         Browse Jobs
       </Button>
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/freelancers'}>
+        Search Freelancers
+      </Button>
     </Box>
     <ChatWidget />
     </>

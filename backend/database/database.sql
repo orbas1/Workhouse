@@ -427,3 +427,16 @@ CREATE TABLE IF NOT EXISTS workspace_analytics (
     collaboration_score NUMERIC(5,2) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Freelancer Profiles Table
+CREATE TABLE IF NOT EXISTS freelancer_profiles (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    full_name VARCHAR(255),
+    title VARCHAR(255),
+    location VARCHAR(255),
+    skills TEXT[],
+    hourly_rate NUMERIC(10,2),
+    experience_years INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
