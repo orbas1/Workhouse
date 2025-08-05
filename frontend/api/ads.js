@@ -29,6 +29,7 @@ export function updateAdPreferences(preferences) {
     body: JSON.stringify({ preferences }),
   });
 }
+
 (function(global){
   async function createAd(groupId, data) {
     const res = await apiFetch(`/ads/groups/${groupId}/ads`, {

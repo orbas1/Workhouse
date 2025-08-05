@@ -461,6 +461,7 @@ CREATE TABLE IF NOT EXISTS ad_preferences (
     preferences JSONB,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 -- Indexes for dashboard performance
 CREATE INDEX IF NOT EXISTS idx_contracts_client_id ON contracts(client_id);
 CREATE INDEX IF NOT EXISTS idx_contracts_freelancer_id ON contracts(freelancer_id);
