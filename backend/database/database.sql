@@ -18,3 +18,24 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS agency_earnings (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    amount NUMERIC(12,2) NOT NULL,
+    earned_on DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS agency_employee_performance (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    employee_id UUID NOT NULL,
+    tasks_completed INTEGER NOT NULL,
+    average_rating NUMERIC(3,2),
+    period_start DATE NOT NULL,
+    period_end DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
