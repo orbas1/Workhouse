@@ -4,8 +4,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
       </Routes>
     </BrowserRouter>
