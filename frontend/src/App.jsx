@@ -84,6 +84,7 @@ import { ChakraProvider, Box } from '@chakra-ui/react';
 import NavBar from './components/NavBar.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
@@ -102,6 +103,7 @@ function App() {
               <Route path="/" element={<Navigate to="/profile" replace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/service-orders" element={<ServiceOrderManagementPage />} />
               <Route path="/services" element={<ServiceSearchPage />} />
               <Route path="/services/:id" element={<ServiceDetailPage />} />
               <Route path="/tasks" element={<TaskDashboardPage />} />
