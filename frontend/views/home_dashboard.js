@@ -1,7 +1,5 @@
-const { Box, Heading, SimpleGrid, Text } = ChakraUI;
-const { useState, useEffect } = React;
+const { Box, Heading, Text, Button, SimpleGrid } = ChakraUI;
 const { useEffect, useState } = React;
-const { Box, Heading, Text, Button } = ChakraUI;
 
 function HomeDashboard() {
   const { user } = useAuth();
@@ -27,9 +25,12 @@ function HomeDashboard() {
   }
 
   return (
-    <Box className="dashboard-container">
+    <Box className="dashboard-container" p={4}>
       <NavMenu />
       <Heading size="lg" mb={4}>Welcome, {user.username}</Heading>
+      <Button mb={4} colorScheme="teal" onClick={() => window.location.href = '/setup/financial-media'}>
+        Complete Financial Setup
+      </Button>
       <SimpleGrid columns={[1, 2, 3]} spacing={6}>
         <UserCountWidget />
         {affiliate && (
@@ -42,12 +43,6 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
-    <Box className="dashboard">
-      <Heading size="lg" mb={2}>Dashboard</Heading>
-      <Text mb={4}>Hello, {user.username}!</Text>
-      <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
-        Go to Live Feed
-      </Button>
     </Box>
   );
 }
