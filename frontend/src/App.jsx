@@ -75,6 +75,54 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter>
           <ProfileProvider>
+            <NavMenu />
+            <Box p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <ProfilePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/profile/customize"
+                  element={
+                    <Protected>
+                      <ProfileCustomizationPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/new"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/:contractId/edit"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="*" element={<Navigate to="/profile" replace />} />
+              </Routes>
+            </Box>
+          </ProfileProvider>
+        </BrowserRouter>
+      </AuthProvider>
+    <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <ProfileProvider>
             <NavBar />
             <NavMenu />
             <Box p={4}>
