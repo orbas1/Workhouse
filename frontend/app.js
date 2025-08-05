@@ -33,6 +33,7 @@ function App() {
         <Route path="/jobs" element={<Protected><JobListingsPage /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
         <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />
+        <Route path="/headhunter/dashboard" element={<Protected><HeadhunterDashboard /></Protected>} />
         <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
         <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
