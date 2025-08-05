@@ -1,0 +1,20 @@
+.classroom-chat {
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.classroom-chat .messages {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.classroom-chat .message {
+  background: #f7fafc;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.classroom-chat .input-area {
+  display: flex;
+}

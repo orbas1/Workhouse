@@ -6,11 +6,23 @@ const services = [
     id: 'svc-1',
     name: 'Legal Consultation',
     description: 'Connect with legal experts for startup advice.',
+    price: 200,
+    rating: 4.8,
+    category: 'legal',
+    location: 'remote',
+    image: '/images/legal.jpg',
+    availability: ['2024-09-01', '2024-09-02'],
   },
   {
     id: 'svc-2',
     name: 'Marketing Strategy',
     description: 'Professional marketing planning services.',
+    price: 150,
+    rating: 4.6,
+    category: 'marketing',
+    location: 'remote',
+    image: '/images/marketing.jpg',
+    availability: ['2024-09-03'],
   },
 ];
 
@@ -72,8 +84,30 @@ const mentors = [
 
 const mentorshipApplications = new Map();
 
-function listServices() {
-  return services;
+function listServices(filters = {}) {
+  const { search, category, minPrice, maxPrice, location } = filters;
+  return services.filter((svc) => {
+    if (search && !svc.name.toLowerCase().includes(search.toLowerCase())) {
+      return false;
+    }
+    if (category && svc.category !== category) {
+      return false;
+    }
+    if (location && svc.location !== location) {
+      return false;
+    }
+    if (minPrice !== undefined && svc.price < minPrice) {
+      return false;
+    }
+    if (maxPrice !== undefined && svc.price > maxPrice) {
+      return false;
+    }
+    return true;
+  });
+}
+
+function getServiceById(id) {
+  return services.find((s) => s.id === id) || null;
 }
 
 function createServiceRequest(userId, serviceId, description = '') {
@@ -138,6 +172,7 @@ function listMentors() {
 
 module.exports = {
   listServices,
+  getServiceById,
   createServiceRequest,
   getResourcesByType,
   isValidResourceType,
