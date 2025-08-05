@@ -8,6 +8,8 @@ const schemas = require('../validation/serviceProviderAnalytics');
 const router = express.Router();
 
 router.get('/analytics', authenticate, requireRole('service_provider'), controller.getAnalytics);
+router.post('/services', authenticate, requireRole('service_provider'), validate(schemas.serviceCreationSchema), controller.createService);
+router.put('/services/:serviceId', authenticate, requireRole('service_provider'), validate(schemas.serviceUpdateSchema), controller.updateService);
 router.put('/services/:serviceId/pricing', authenticate, requireRole('service_provider'), validate(schemas.pricingUpdateSchema), controller.updatePricing);
 router.post('/calendar/availability', authenticate, requireRole('service_provider'), validate(schemas.availabilitySchema), controller.setAvailability);
 router.post('/bookings', authenticate, requireRole('client'), validate(schemas.bookingSchema), controller.createBooking);
