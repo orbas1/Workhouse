@@ -1,6 +1,9 @@
 const { register, login, verifyToken } = require('../services/auth');
 
 async function registerHandler(req, res) {
+  const { username, password, roles } = req.body;
+  try {
+    const user = await register(username, password, roles);
   const { username, password, role } = req.body;
   try {
     const user = await register(username, password, role);
@@ -26,6 +29,7 @@ function meHandler(req, res) {
   if (!payload) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
+  res.json({ username: payload.username, roles: payload.roles });
   res.json({ id: payload.id, username: payload.username, role: payload.role });
   res.json({ username: payload.username, role: payload.role });
 }

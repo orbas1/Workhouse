@@ -391,3 +391,23 @@ CREATE TABLE IF NOT EXISTS payment_adjustments (
     reason VARCHAR(255),
     adjusted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Employment Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS employment_analytics (
+    id UUID PRIMARY KEY,
+    job_id UUID UNIQUE NOT NULL,
+    views INTEGER DEFAULT 0,
+    applications INTEGER DEFAULT 0,
+    hires INTEGER DEFAULT 0,
+    status VARCHAR(20) DEFAULT 'open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS application_analytics (
+    id UUID PRIMARY KEY,
+    job_id UUID NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
