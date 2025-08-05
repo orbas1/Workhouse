@@ -5,6 +5,7 @@ const {
   updateProjectHandler,
   deleteProjectHandler,
   createTaskHandler,
+  listTasksHandler,
   getTaskHandler,
   updateTaskHandler,
   deleteTaskHandler,
@@ -45,6 +46,7 @@ const {
   createTaskSchema,
   updateTaskSchema,
   assignTaskSchema,
+  taskQuerySchema,
   aiProjectSchema,
   hireSchema,
   feedPostSchema,
@@ -69,6 +71,7 @@ router.delete('/projects/delete/:projectId', auth, validate(projectIdParamSchema
 
 // Task routes
 router.post('/tasks/create', auth, validate(createTaskSchema), createTaskHandler);
+router.get('/tasks', auth, validate(taskQuerySchema, 'query'), listTasksHandler);
 router.get('/tasks/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, getTaskHandler);
 router.put('/tasks/update/:taskId', auth, validate(taskIdParamSchema, 'params'), validate(updateTaskSchema), taskExists, updateTaskHandler);
 router.delete('/tasks/delete/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, deleteTaskHandler);
