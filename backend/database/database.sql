@@ -18,3 +18,23 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS content_analytics (
+    id UUID PRIMARY KEY,
+    content_id UUID NOT NULL,
+    views INTEGER DEFAULT 0,
+    engagement_rate DECIMAL(5,2) DEFAULT 0,
+    feedback_score DECIMAL(3,2) DEFAULT 0,
+    captured_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS content_feedback (
+    id UUID PRIMARY KEY,
+    content_id UUID NOT NULL,
+    user_id UUID NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
