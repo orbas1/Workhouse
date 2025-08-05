@@ -77,6 +77,7 @@ const learningPathRoutes = require('./routes/paths');
 const socialRoutes = require('./routes/social');
 const projectRoutes = require('./routes/projects');
 const expertAccessRoutes = require('./routes/expertAccess');
+const successStoryRoutes = require('./routes/successStories');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -160,6 +161,7 @@ app.use('/milestones', milestoneRoutes);
 app.use('/assessments', assessmentRoutes);
 app.use('/certificates', certificateRoutes);
 app.use('/experts', expertAccessRoutes);
+app.use('/success', successStoryRoutes);
 
 // Commission rate adjustment notifications
 app.use('/affiliates/notifications', notificationRoutes);
