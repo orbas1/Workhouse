@@ -6,23 +6,22 @@ function LiveFeed() {
   const [events, setEvents] = useState([]);
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
-  const token = localStorage.getItem('token');
 
   async function fetchPosts(cat) {
-    const url = new URL('/api/live-feed/posts', window.location.origin);
-    if (cat) url.searchParams.set('category', cat);
-    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-    if (res.ok) {
-      const data = await res.json();
+    try {
+      const data = await liveFeedAPI.getPosts(cat);
       setPosts(data);
+    } catch (err) {
+      console.error('Failed to load posts', err);
     }
   }
 
   async function fetchEvents() {
-    const res = await fetch('/api/live-feed/events', { headers: { Authorization: `Bearer ${token}` } });
-    if (res.ok) {
-      const data = await res.json();
+    try {
+      const data = await liveFeedAPI.getEvents();
       setEvents(data);
+    } catch (err) {
+      console.error('Failed to load events', err);
     }
   }
 
@@ -33,17 +32,12 @@ function LiveFeed() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await fetch('/api/live-feed/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ content, category }),
-    });
-    if (res.ok) {
+    try {
+      await liveFeedAPI.createPost({ content, category });
       setContent('');
       fetchPosts(category);
+    } catch (err) {
+      console.error('Failed to create post', err);
     }
   }
 
@@ -76,9 +70,9 @@ function LiveFeed() {
             <Button type="submit" colorScheme="blue">Post</Button>
           </Flex>
         </Box>
-        {posts.map(post => (
-          <FeedPost key={post.id} post={post} />
-        ))}
+          {posts.map(post => (
+            <FeedPost key={post.id} post={post} />
+          ))}
       </Box>
       <Box flex="1" ml={4}>
         <Heading size="md" mb={2}>Live Events</Heading>

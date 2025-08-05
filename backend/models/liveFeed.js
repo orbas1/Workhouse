@@ -7,6 +7,7 @@ const posts = [
     content: 'Welcome to the live feed!',
     category: 'general',
     createdAt: new Date(),
+    likes: 0,
   },
 ];
 
@@ -19,7 +20,7 @@ function listPosts(category) {
 }
 
 function addPost({ author, content, category }) {
-  const post = { id: randomUUID(), author, content, category, createdAt: new Date() };
+  const post = { id: randomUUID(), author, content, category, createdAt: new Date(), likes: 0 };
   posts.unshift(post);
   return post;
 }
@@ -28,4 +29,15 @@ function listEvents() {
   return events;
 }
 
-module.exports = { listPosts, addPost, listEvents };
+function getPost(postId) {
+  return posts.find(p => p.id === postId) || null;
+}
+
+function addLike(postId) {
+  const post = getPost(postId);
+  if (!post) return null;
+  post.likes = (post.likes || 0) + 1;
+  return post;
+}
+
+module.exports = { listPosts, addPost, listEvents, getPost, addLike };
