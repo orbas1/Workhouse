@@ -1,5 +1,6 @@
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
+import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
-            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+           <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
@@ -39,6 +41,7 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
