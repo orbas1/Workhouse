@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const affiliateRoutes = require('./routes/affiliates');
+const classroomAnalyticsRoutes = require('./routes/classroomAnalytics');
 
 const app = express();
 app.use(cors());
@@ -11,6 +12,7 @@ app.use(express.json());
 // with "/api" when integrating the backend.
 app.use('/auth', authRoutes);
 app.use('/affiliates', affiliateRoutes);
+app.use('/classroom-analytics', classroomAnalyticsRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
