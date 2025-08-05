@@ -13,7 +13,12 @@
     />
     <link rel="stylesheet" href="views/landing_page.css" />
     <link rel="stylesheet" href="views/login_page.css" />
+    <link rel="stylesheet" href="views/home_page.css" />
     <link rel="stylesheet" href="components/FeatureCard.css" />
+    <link rel="stylesheet" href="nav/menu.css" />
+    <link rel="stylesheet" href="components/widgets/user_count.css" />
+    <link rel="stylesheet" href="components/widgets/quote.css" />
+    <link rel="stylesheet" href="views/home_dashboard.css" />
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js"></script>
@@ -24,8 +29,13 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="text/babel" data-presets="env,react" src="views/home_page.js"></script>
+    <script type="text/babel" data-presets="env,react" src="utils/api.js"></script>
+    <script type="text/babel" data-presets="env,react" src="context/AuthContext.js"></script>
+    <script type="text/babel" data-presets="env,react" src="nav/menu.js"></script>
     <script type="text/babel" data-presets="env,react" src="components/FeatureCard.js"></script>
+    <script type="text/babel" data-presets="env,react" src="components/widgets/user_count.js"></script>
+    <script type="text/babel" data-presets="env,react" src="components/widgets/quote.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/home_page.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/landing_page.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/login_page.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/home_dashboard.js"></script>

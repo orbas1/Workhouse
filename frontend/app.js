@@ -1,15 +1,20 @@
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
+const { ChakraProvider } = ChakraUI;
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
-      </Routes>
-    </BrowserRouter>
+    <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </ChakraProvider>
   );
 }
 
