@@ -8,6 +8,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
+        <Route path="/onboarding/documents" element={<Protected><CvCoverLetterPage /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
