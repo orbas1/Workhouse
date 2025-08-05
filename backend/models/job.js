@@ -3,14 +3,14 @@ const { randomUUID } = require('crypto');
 const jobs = new Map();
 const jobApplications = new Map();
 
-function createJob(agencyId, { title, description, budget = null, deadline = null }) {
+function createJob(agencyId, { title, description = '', budget = null, deadline = null }) {
   const id = randomUUID();
   const timestamp = new Date();
   const job = {
     id,
-    agencyId: agencyId || null,
+    agencyId,
     title,
-    description: description || '',
+    description,
     budget,
     deadline,
     status: 'open',
@@ -73,6 +73,27 @@ function assignJob(id, employeeId) {
   return job;
 }
 
+function findJobsByAgency(agencyId) {
+  return Array.from(jobs.values()).filter((job) => job.agencyId === agencyId);
+}
+
+function findJobById(jobId) {
+  return jobs.get(jobId);
+}
+
+function updateJob(jobId, updates) {
+  const job = jobs.get(jobId);
+  if (!job) return null;
+  const updated = { ...job, ...updates, updatedAt: new Date() };
+  jobs.set(jobId, updated);
+  return updated;
+}
+
+function deleteJob(jobId) {
+  jobs.delete(jobId);
+  jobApplications.delete(jobId);
+}
+
 function addApplication(jobId, application) {
   const apps = jobApplications.get(jobId);
   if (!apps) return null;
@@ -88,6 +109,8 @@ function getApplications(jobId) {
 module.exports = {
   createJob,
   findById,
+  acceptJob,
+  assignJob,
   listJobs,
   findJobsByAgency,
   updateJob,
