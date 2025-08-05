@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const employeeRoutes = require('./routes/employee');
 const affiliateRoutes = require('./routes/affiliates');
 const jobRoutes = require('./routes/jobs');
 const analyticsRoutes = require('./routes/analytics');
@@ -28,6 +29,7 @@ app.use(express.json());
 // Mount authentication routes. The parent application may prefix these
 // with "/api" when integrating the backend.
 app.use('/auth', authRoutes);
+app.use('/hr', employeeRoutes);
 app.use('/affiliates', affiliateRoutes);
 app.use('/agency/jobs', jobRoutes);
 app.use('/agency', jobRoutes);
