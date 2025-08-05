@@ -1,6 +1,23 @@
-const { getAgencyEarnings, getAgencyPerformance } = require('../services/analytics');
+const {
+  getAgencyEarnings,
+  getAgencyPerformance,
+  getContentPerformance,
+  getContentPerformanceById,
+  detectPerformanceAnomalies,
+  getContentTrends,
+  getPopularContent,
+  getContentRecommendations,
+  submitContentFeedback,
+  getPathAnalytics,
+  getUserAnalytics,
+  getSkillsAnalytics,
+  getLearningPredictions,
+} = require('../services/analytics');
 const logger = require('../utils/logger');
 
+// -----------------------------
+// Agency analytics handlers
+// -----------------------------
 async function getAgencyEarningsHandler(req, res) {
   const { agencyId } = req.params;
   const { startDate, endDate } = req.query;
@@ -27,17 +44,13 @@ async function getAgencyPerformanceHandler(req, res) {
     res.json(data);
   } catch (err) {
     logger.error('Failed to fetch agency performance analytics', { agencyId, error: err.message });
-const {
-  getContentPerformance,
-  getContentPerformanceById,
-  detectPerformanceAnomalies,
-  getContentTrends,
-  getPopularContent,
-  getContentRecommendations,
-  submitContentFeedback,
-} = require('../services/analytics');
-const logger = require('../utils/logger');
+    res.status(404).json({ error: err.message });
+  }
+}
 
+// -----------------------------
+// Content analytics handlers
+// -----------------------------
 async function getContentPerformanceHandler(req, res) {
   try {
     const data = await getContentPerformance();
@@ -54,14 +67,11 @@ async function getContentPerformanceByIdHandler(req, res) {
     const data = await getContentPerformanceById(contentId);
     res.json(data);
   } catch (err) {
-    logger.error('Failed to fetch content performance by id', { error: err.message });
+    logger.error('Failed to fetch content performance by id', { contentId, error: err.message });
     res.status(404).json({ error: err.message });
   }
 }
 
-module.exports = {
-  getAgencyEarningsHandler,
-  getAgencyPerformanceHandler,
 async function detectAnomaliesHandler(req, res) {
   const { metrics, threshold } = req.body;
   try {
@@ -115,7 +125,56 @@ async function submitContentFeedbackHandler(req, res) {
   }
 }
 
+// -----------------------------
+// Learning analytics handlers
+// -----------------------------
+async function getPathAnalyticsHandler(req, res) {
+  const { pathId } = req.params;
+  try {
+    const data = await getPathAnalytics(pathId);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to fetch path analytics', { pathId, error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function getUserAnalyticsHandler(req, res) {
+  const { userId } = req.params;
+  try {
+    const data = await getUserAnalytics(userId);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to fetch user analytics', { userId, error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function getSkillsAnalyticsHandler(req, res) {
+  const { userId } = req.params;
+  try {
+    const data = await getSkillsAnalytics(userId);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to fetch skills analytics', { userId, error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function getPredictionsHandler(req, res) {
+  const { userId } = req.params;
+  try {
+    const data = await getLearningPredictions(userId);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to fetch learning predictions', { userId, error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
 module.exports = {
+  getAgencyEarningsHandler,
+  getAgencyPerformanceHandler,
   getContentPerformanceHandler,
   getContentPerformanceByIdHandler,
   detectAnomaliesHandler,
@@ -123,4 +182,9 @@ module.exports = {
   getPopularContentHandler,
   getContentRecommendationsHandler,
   submitContentFeedbackHandler,
+  getPathAnalyticsHandler,
+  getUserAnalyticsHandler,
+  getSkillsAnalyticsHandler,
+  getPredictionsHandler,
 };
+
