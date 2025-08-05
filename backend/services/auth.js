@@ -5,6 +5,7 @@ const { findUser, addUser } = require('../models/user');
 const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
 
 async function register(username, password, roles = ['user']) {
+async function register(username, password, role = 'user') {
   const existing = findUser(username);
   if (existing) {
     throw new Error('User already exists');
@@ -13,6 +14,12 @@ async function register(username, password, roles = ['user']) {
   const user = { username, password: hashed, roles };
   addUser(user);
   return { username, roles };
+  const user = { username, password: hashed, role };
+  addUser(user);
+  const user = addUser({ username, password: hashed, role });
+  return { id: user.id, username: user.username, role: user.role };
+  addUser({ username, password: hashed, role });
+  return { username, role };
 }
 
 async function login(username, password) {
@@ -25,6 +32,19 @@ async function login(username, password) {
     throw new Error('Invalid credentials');
   }
   const token = jwt.sign({ username, roles: user.roles }, JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, {
+    expiresIn: '1h',
+  });
+  const token = jwt.sign(
+    { id: user.id, username: user.username, role: user.role },
+    JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, {
+    expiresIn: '1h',
+  });
+  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
   return { token };
 }
 

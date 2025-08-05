@@ -4,6 +4,9 @@ async function registerHandler(req, res) {
   const { username, password, roles } = req.body;
   try {
     const user = await register(username, password, roles);
+  const { username, password, role } = req.body;
+  try {
+    const user = await register(username, password, role);
     res.status(201).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -27,6 +30,8 @@ function meHandler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   res.json({ username: payload.username, roles: payload.roles });
+  res.json({ id: payload.id, username: payload.username, role: payload.role });
+  res.json({ username: payload.username, role: payload.role });
 }
 
 module.exports = { registerHandler, loginHandler, meHandler };
