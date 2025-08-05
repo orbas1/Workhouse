@@ -122,6 +122,7 @@ app.use('/feedback', volunteerFeedbackRoutes);
 app.use('/agency', financialRoutes);
 app.use('/financial', financialTransactionRoutes);
 app.use('/hr/training', trainingRoutes);
+app.use('/training', trainingRoutes);
 app.use('/analytics', analyticsRoutes);
 app.use('/analytics', agencyAnalyticsRoutes);
 app.use('/analytics', realTimeAnalyticsRoutes);
