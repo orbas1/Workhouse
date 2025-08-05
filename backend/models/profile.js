@@ -10,6 +10,10 @@ function createProfile({
   preferences = {},
   skills = [],
   geographicPreferences = {},
+  fullName = '',
+  title = '',
+  location = '',
+  avatarUrl = '',
 }) {
   const profile = {
     id: randomUUID(),
@@ -23,6 +27,10 @@ function createProfile({
     verificationStatus: 'unverified',
     continuousVerification: false,
     geographicPreferences,
+    fullName,
+    title,
+    location,
+    avatarUrl,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
