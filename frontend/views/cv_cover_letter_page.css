@@ -1,4 +1,13 @@
 .cv-cover-letter-page {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.cv-cover-letter-page .cv-section,
+.cv-cover-letter-page .cover-section {
+  padding: 1rem;
+}
+
+.cv-cover-letter-page .cover-section {
+  background-color: #f9f9f9;
 }

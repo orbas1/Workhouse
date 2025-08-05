@@ -1,7 +1,5 @@
-const { Box, Heading, SimpleGrid, Text } = ChakraUI;
+const { Box, Heading, SimpleGrid, Text, Button } = ChakraUI;
 const { useState, useEffect } = React;
-const { useEffect, useState } = React;
-const { Box, Heading, Text, Button } = ChakraUI;
 
 function HomeDashboard() {
   const { user } = useAuth();
@@ -48,7 +46,11 @@ function HomeDashboard() {
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
       </Button>
+      <Button mt={2} colorScheme="green" onClick={() => window.location.href = '/onboarding/documents'}>
+        Upload CV & Cover Letter
+      </Button>
     </Box>
+  </Box>
   );
 }
 
