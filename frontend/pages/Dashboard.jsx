@@ -1,3 +1,5 @@
+import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { ChakraProvider, Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -41,6 +43,9 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/networking" mt={4} colorScheme="purple">
+          Networking
+        </Button>
         <Button as={RouterLink} to="/proposals-invoices" mt={4} colorScheme="teal">
           Manage Proposals & Invoices
         </Button>
