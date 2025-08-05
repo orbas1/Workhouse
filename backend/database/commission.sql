@@ -1,0 +1,23 @@
+CREATE TABLE commission_rates (
+  tier VARCHAR(50) PRIMARY KEY,
+  rate DECIMAL(5, 4) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE commission_rate_history (
+  id SERIAL PRIMARY KEY,
+  tier VARCHAR(50) NOT NULL,
+  old_rate DECIMAL(5, 4),
+  new_rate DECIMAL(5, 4) NOT NULL,
+  changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  reason VARCHAR(255)
+);
+
+CREATE TABLE commissions (
+  id UUID PRIMARY KEY,
+  affiliate_id VARCHAR(255) NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'pending',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
