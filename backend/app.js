@@ -129,6 +129,7 @@ const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
 const adsRoutes = require('./routes/ads');
 const userSetupRoutes = require('./routes/userSetup');
 const interviewRoutes = require('./routes/interviews');
+const simDashboardRoutes = require('./routes/simDashboard');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -268,6 +269,12 @@ app.use('/workspace', projectManagementRoutes);
 app.use('/ads', adsRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
+app.use('/sim', simDashboardRoutes);
+
+const port = process.env.PORT || 5000;
+if (require.main === module) {
+  app.listen(port, () => console.log(`Server running on port ${port}`));
+}
 app.get('/operations/retail/product/:productId', (req, res) => {
   const product = products.find(p => p.id === req.params.productId);
   if (!product) {

@@ -23,6 +23,8 @@ function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
+          <Button as={RouterLink} to="/sim-dashboard" variant="ghost" color="white" mr={2}>
+            Dashboard
           <Button as={RouterLink} to="/connections" variant="ghost" color="white" mr={2}>
             Connections
           </Button>
@@ -50,6 +52,7 @@ function NavBar() {
     </Flex>
   );
 }
+
 import { Flex } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { Flex, Heading, Spacer, Button } from '@chakra-ui/react';

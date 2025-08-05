@@ -192,6 +192,7 @@ import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
+import SimDashboardPage from './pages/SimDashboardPage.jsx';
 import ContentLibraryPage from './pages/ContentLibraryPage.jsx';
 import ContractManagementPage from './pages/ContractManagementPage.jsx';
 import ClassroomPage from './pages/ClassroomPage.jsx';
@@ -258,6 +259,7 @@ function App() {
               <Route path="/" element={<Navigate to="/profile" replace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/sim-dashboard" element={<SimDashboardPage />} />
               <Route path="/content-library" element={<ContentLibraryPage />} />
               <Route path="/payments" element={<PaymentPage />} />
               <Route path="/contracts" element={<ContractManagementPage />} />
