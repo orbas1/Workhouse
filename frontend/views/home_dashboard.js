@@ -27,6 +27,7 @@ function HomeDashboard() {
   }
 
   return (
+    <>
     <Box className="dashboard-container">
       <NavMenu />
       <Heading size="lg" mb={4}>Welcome, {user.username}</Heading>
@@ -42,6 +43,7 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
+    </Box>
     <Box className="dashboard">
       <Heading size="lg" mb={2}>Dashboard</Heading>
       <Text mb={4}>Hello, {user.username}!</Text>
@@ -49,6 +51,8 @@ function HomeDashboard() {
         Go to Live Feed
       </Button>
     </Box>
+    <ChatWidget />
+    </>
   );
 }
 
