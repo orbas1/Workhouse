@@ -18,3 +18,25 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Payment Module Tables
+
+CREATE TABLE IF NOT EXISTS payments (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    employee_id UUID NOT NULL,
+    job_id UUID NOT NULL,
+    amount NUMERIC(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'disbursed',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS payment_adjustments (
+    id UUID PRIMARY KEY,
+    payment_id UUID NOT NULL REFERENCES payments(id) ON DELETE CASCADE,
+    old_amount NUMERIC(10,2) NOT NULL,
+    new_amount NUMERIC(10,2) NOT NULL,
+    reason VARCHAR(255),
+    adjusted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
