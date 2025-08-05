@@ -103,8 +103,12 @@ function HomeDashboard() {
         Manage Gigs
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
         Gigs Dashboard
-      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
-        Browse Jobs
+      <
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/calendar'}>
+        Calendar
+      </Button>
+      <Button colorScheme="purple" ml={2} onClick={() => window.location.href = '/courses'}>
+        Courses
       </Button>
     </Box>
     <ChatWidget />
