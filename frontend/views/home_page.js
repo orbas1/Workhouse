@@ -10,7 +10,8 @@ function HomePage() {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Workhouse
           </Typography>
-          <Button color="inherit" onClick={() => navigate('/login')}>
+
+          <Button color="inherit" onClick={() => navigate('/')}>
             Login
           </Button>
         </Toolbar>
@@ -22,7 +23,7 @@ function HomePage() {
         <Typography variant="body1" gutterBottom>
           Manage your work efficiently with our platform.
         </Typography>
-        <Button variant="contained" onClick={() => navigate('/login')}>
+        <Button variant="contained" onClick={() => navigate('/')}> 
           Get Started
         </Button>
       </Container>
