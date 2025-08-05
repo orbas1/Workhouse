@@ -3,6 +3,7 @@ const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
 const validate = require('../middleware/validate');
 const analyticsMiddleware = require('../middleware/analytics');
+const parseReportOptions = require('../middleware/reportOptions');
 const {
   agencyIdParamSchema,
   analyticsQuerySchema,
@@ -10,6 +11,7 @@ const {
   feedbackSchema,
   pathIdParamSchema,
   userIdParamSchema,
+  reportQuerySchema,
 } = require('../validation/analytics');
 const {
   getAgencyEarningsHandler,
@@ -25,6 +27,8 @@ const {
   getUserAnalyticsHandler,
   getSkillsAnalyticsHandler,
   getPredictionsHandler,
+  getVolunteerEngagementAnalyticsHandler,
+  getOrganizationProjectAnalyticsHandler,
 } = require('../controllers/analytics');
 
 const router = express.Router();
@@ -129,6 +133,25 @@ router.get(
   validate(userIdParamSchema, 'params'),
   analyticsMiddleware.ensureUserAnalytics,
   getPredictionsHandler
+);
+
+// Volunteer and organization analytics routes
+router.get(
+  '/volunteer/engagement',
+  auth,
+  authorize('admin', 'organization'),
+  parseReportOptions,
+  validate(reportQuerySchema, 'query'),
+  getVolunteerEngagementAnalyticsHandler
+);
+
+router.get(
+  '/organization/projects',
+  auth,
+  authorize('admin', 'organization'),
+  parseReportOptions,
+  validate(reportQuerySchema, 'query'),
+  getOrganizationProjectAnalyticsHandler
 );
 
 module.exports = router;
