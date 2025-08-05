@@ -2,7 +2,7 @@ const { randomUUID } = require('crypto');
 
 const courses = new Map();
 
-function createCourse({ title, description, categoryId, instructorId, type }) {
+function createCourse({ title, description, categoryId, instructorId, type, price }) {
   const id = randomUUID();
   const now = new Date();
   const course = {
@@ -12,6 +12,7 @@ function createCourse({ title, description, categoryId, instructorId, type }) {
     categoryId,
     instructorId,
     type,
+    price: Number(price) || 0,
     feedback: [],
     modules: [],
     createdAt: now,
