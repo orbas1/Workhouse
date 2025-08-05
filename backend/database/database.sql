@@ -19,6 +19,16 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
 );
 
 
+-- Job Module Tables
+
+CREATE TABLE IF NOT EXISTS jobs (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    budget NUMERIC,
+    deadline DATE,
+    status VARCHAR(20) DEFAULT 'open',
 -- Analytics Module Tables
 
 CREATE TABLE IF NOT EXISTS agency_earnings (
@@ -162,6 +172,15 @@ CREATE TABLE IF NOT EXISTS training_sessions (
     scheduled_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS job_applications (
+    id UUID PRIMARY KEY,
+    job_id UUID NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
+    applicant_id UUID NOT NULL,
+    cover_letter TEXT,
+    status VARCHAR(20) DEFAULT 'pending',
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS contract_proposals (

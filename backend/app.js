@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const affiliateRoutes = require('./routes/affiliates');
+const jobRoutes = require('./routes/jobs');
 const analyticsRoutes = require('./routes/analytics');
 const matchmakingRoutes = require('./routes/matchmaking');
 const contractRoutes = require('./routes/contracts');
@@ -28,6 +29,7 @@ app.use(express.json());
 // with "/api" when integrating the backend.
 app.use('/auth', authRoutes);
 app.use('/affiliates', affiliateRoutes);
+app.use('/agency', jobRoutes);
 app.use('/agency', analyticsRoutes);
 app.use('/agency', matchmakingRoutes);
 app.use('/contracts', contractRoutes);
