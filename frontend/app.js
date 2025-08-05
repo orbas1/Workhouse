@@ -11,6 +11,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
+            <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
