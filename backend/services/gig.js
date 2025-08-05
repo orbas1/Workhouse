@@ -35,10 +35,16 @@ async function removeGig(id, ownerId) {
   return deleted;
 }
 
+async function searchGigs(filters) {
+  logger.info('Gig search invoked', filters);
+  return gigModel.searchGigs(filters);
+}
+
 module.exports = {
   createGig,
   listGigs,
   getGig,
   updateGig,
   removeGig,
+  searchGigs,
 };

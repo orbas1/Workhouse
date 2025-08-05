@@ -40,6 +40,7 @@ function App() {
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
+        <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
       </Routes>
     </BrowserRouter>
   );

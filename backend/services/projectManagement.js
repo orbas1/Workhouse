@@ -30,8 +30,18 @@ async function createTask(data) {
   return task;
 }
 
+async function listTasks(filter = {}) {
+  return model.listTasks(filter);
+}
+
 async function getTask(taskId) {
   return model.getTaskById(taskId);
+}
+
+async function listTasks(projectId) {
+  const list = model.listTasksByProject(projectId);
+  logger.info('Tasks retrieved', { projectId, count: list.length });
+  return list;
 }
 
 async function updateTask(taskId, data) {
@@ -176,7 +186,9 @@ module.exports = {
   updateProject,
   deleteProject,
   createTask,
+  listTasks,
   getTask,
+  listTasks,
   updateTask,
   deleteTask,
   assignTask,
