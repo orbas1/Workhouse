@@ -1,5 +1,8 @@
 import apiClient from '../utils/apiClient.js';
 
+export async function listTasks(params = {}) {
+  const { data } = await apiClient.get('/workspace/tasks', { params });
+  return data;
 export function createTask(data) {
   return apiClient.post('/workspace/tasks/create', data).then(res => res.data);
 }

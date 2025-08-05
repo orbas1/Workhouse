@@ -47,7 +47,7 @@ function deleteProject(projectId) {
   return projects.delete(projectId);
 }
 
-function createTask({ projectId, title, description = '', dueDate = null }) {
+function createTask({ projectId, title, description = '', dueDate = null, ownerId }) {
   const id = randomUUID();
   const now = new Date();
   const task = {
@@ -58,6 +58,7 @@ function createTask({ projectId, title, description = '', dueDate = null }) {
     dueDate,
     status: 'pending',
     assignee: null,
+    ownerId,
     createdAt: now,
     updatedAt: now,
   };
@@ -69,6 +70,12 @@ function getTaskById(taskId) {
   return tasks.get(taskId);
 }
 
+function listTasks({ ownerId, assignee } = {}) {
+  return Array.from(tasks.values()).filter((t) => {
+    if (ownerId && t.ownerId !== ownerId) return false;
+    if (assignee && t.assignee !== assignee) return false;
+    return true;
+  });
 function listTasksByProject(projectId) {
   return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
 }
@@ -199,6 +206,7 @@ module.exports = {
   deleteProject,
   createTask,
   getTaskById,
+  listTasks,
   listTasksByProject,
   updateTask,
   deleteTask,
