@@ -5,6 +5,7 @@ const {
   getEngagement,
   getSeriesOverview,
   getEpisodeDetails,
+  recordListen,
 } = require('../services/podcastAnalytics');
 const logger = require('../utils/logger');
 
@@ -83,6 +84,19 @@ async function episodeDetailsHandler(req, res) {
   }
 }
 
+async function recordListenHandler(req, res) {
+  try {
+    const data = await recordListen(req.params.podcastId);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to record podcast listen', {
+      error: err.message,
+      podcastId: req.params.podcastId,
+    });
+    res.status(err.status || 500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   overviewHandler,
   episodeAnalyticsHandler,
@@ -90,4 +104,5 @@ module.exports = {
   engagementHandler,
   seriesOverviewHandler,
   episodeDetailsHandler,
+  recordListenHandler,
 };

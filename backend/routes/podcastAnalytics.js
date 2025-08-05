@@ -6,6 +6,7 @@ const {
   engagementHandler,
   seriesOverviewHandler,
   episodeDetailsHandler,
+  recordListenHandler,
 } = require('../controllers/podcastAnalytics');
 const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
@@ -51,6 +52,13 @@ router.get(
   authorize('admin', 'content-manager'),
   validate(podcastIdParamSchema, 'params'),
   engagementHandler
+);
+
+router.post(
+  '/:podcastId/listen',
+  auth,
+  validate(podcastIdParamSchema, 'params'),
+  recordListenHandler
 );
 
 // Creator-specific analytics endpoints

@@ -38,6 +38,7 @@ import { ChakraProvider, Box } from '@chakra-ui/react';
 import NavBar from './components/NavBar.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
               <Route path="/" element={<Navigate to="/profile" replace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/live" element={<LivePlaybackPage />} />
             </Routes>
           </Box>
         </ProfileProvider>
