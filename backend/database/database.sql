@@ -427,3 +427,18 @@ CREATE TABLE IF NOT EXISTS workspace_analytics (
     collaboration_score NUMERIC(5,2) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Ads Module Tables
+CREATE TABLE IF NOT EXISTS ads (
+    id UUID PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT,
+    cta_url TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS ad_preferences (
+    user_id UUID PRIMARY KEY,
+    preferences JSONB,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
