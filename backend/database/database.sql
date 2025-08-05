@@ -19,6 +19,22 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
 );
 
 
+-- Data Protection Module Tables
+CREATE TABLE IF NOT EXISTS data_protection_policies (
+    id UUID PRIMARY KEY,
+    version INTEGER NOT NULL,
+    policy TEXT NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_privacy_settings (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    marketing_emails BOOLEAN DEFAULT TRUE,
+    data_sharing BOOLEAN DEFAULT FALSE,
+    personalized_ads BOOLEAN DEFAULT FALSE,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 -- Analytics Module Tables
 
 CREATE TABLE IF NOT EXISTS content_analytics (
