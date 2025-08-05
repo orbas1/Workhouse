@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
@@ -103,6 +104,7 @@ const campaignRoutes = require('./routes/campaigns');
 const projectManagementRoutes = require('./routes/projectManagement');
 const successStoryRoutes = require('./routes/successStories');
 const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
+const userSetupRoutes = require('./routes/userSetup');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -214,6 +216,7 @@ app.use('/success', successStoryRoutes);
 app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
+app.use('/user-setup', userSetupRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
