@@ -27,6 +27,7 @@ function App() {
         <Route path="/jobs" element={<Protected><JobListingsPage /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
         <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />
+        <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
