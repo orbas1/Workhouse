@@ -1,0 +1,56 @@
+-- SQL schema for user integration tracking
+
+CREATE TABLE IF NOT EXISTS user_lms_progress (
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR(50) NOT NULL,
+  course_id VARCHAR(100) NOT NULL,
+  progress INTEGER NOT NULL,
+  description TEXT,
+  completed_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_mentorship_feedback (
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR(50) NOT NULL,
+  mentor_id VARCHAR(50) NOT NULL,
+  feedback TEXT NOT NULL,
+  rating INTEGER,
+  feedback_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_job_application_progress (
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR(50) NOT NULL,
+  company VARCHAR(100) NOT NULL,
+  position VARCHAR(100) NOT NULL,
+  status VARCHAR(20) NOT NULL,
+  applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_projects (
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR(50) NOT NULL,
+  project_id VARCHAR(100) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_certifications (
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR(50) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  institution VARCHAR(255) NOT NULL,
+  obtained_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS career_insights (
+  id SERIAL PRIMARY KEY,
+  user_id VARCHAR(50) NOT NULL,
+  insight TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
