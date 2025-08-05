@@ -1,12 +1,16 @@
 const { register, login, verifyToken } = require('../services/auth');
+const { createProfile } = require('../services/profile');
+const verifyRecaptcha = require('../utils/verifyRecaptcha');
 
 async function registerHandler(req, res) {
-  const { username, password, roles } = req.body;
+  const { email, password, fullName, phone, location, bio, expertise, recaptchaToken } = req.body;
   try {
-    const user = await register(username, password, roles);
-  const { username, password, role } = req.body;
-  try {
-    const user = await register(username, password, role);
+    const validCaptcha = await verifyRecaptcha(recaptchaToken);
+    if (!validCaptcha) {
+      return res.status(400).json({ error: 'Invalid CAPTCHA' });
+    }
+    const user = await register(email, password, 'user', { fullName, phone, location });
+    await createProfile(user.id, { bio, preferences: { expertise } });
     res.status(201).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -29,9 +33,7 @@ function meHandler(req, res) {
   if (!payload) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  res.json({ username: payload.username, roles: payload.roles });
   res.json({ id: payload.id, username: payload.username, role: payload.role });
-  res.json({ username: payload.username, role: payload.role });
 }
 
 module.exports = { registerHandler, loginHandler, meHandler };
