@@ -1,38 +1,54 @@
 const { randomUUID } = require('crypto');
 
 const jobs = new Map();
-
-function createJob({ title, description, agencyId }) {
 const jobApplications = new Map();
 
-function createJob(agencyId, { title, description, budget = null, deadline = null }) {
+function createJob(agencyId, { title, description = '', budget = null, deadline = null }) {
   const id = randomUUID();
   const timestamp = new Date();
   const job = {
     id,
-    title,
-    description: description || '',
-    agencyId: agencyId || null,
-    status: 'open',
-    acceptedBy: null,
-    acceptedAt: null,
-    assignedTo: null,
-    assignedAt: null,
     agencyId,
     title,
     description,
     budget,
     deadline,
     status: 'open',
+    acceptedBy: null,
+    acceptedAt: null,
+    assignedTo: null,
+    assignedAt: null,
     createdAt: timestamp,
     updatedAt: timestamp,
   };
   jobs.set(id, job);
+  jobApplications.set(id, []);
   return job;
 }
 
 function findById(id) {
   return jobs.get(id);
+}
+
+function listJobs() {
+  return Array.from(jobs.values());
+}
+
+function findJobsByAgency(agencyId) {
+  return Array.from(jobs.values()).filter((job) => job.agencyId === agencyId);
+}
+
+function updateJob(jobId, updates) {
+  const job = jobs.get(jobId);
+  if (!job) return null;
+  const updated = { ...job, ...updates, updatedAt: new Date() };
+  jobs.set(jobId, updated);
+  return updated;
+}
+
+function deleteJob(jobId) {
+  jobs.delete(jobId);
+  jobApplications.delete(jobId);
 }
 
 function acceptJob(id, agencyId) {
@@ -55,12 +71,10 @@ function assignJob(id, employeeId) {
   job.updatedAt = new Date();
   jobs.set(id, job);
   return job;
-  jobApplications.set(id, []);
-  return job;
 }
 
 function findJobsByAgency(agencyId) {
-  return Array.from(jobs.values()).filter(job => job.agencyId === agencyId);
+  return Array.from(jobs.values()).filter((job) => job.agencyId === agencyId);
 }
 
 function findJobById(jobId) {
@@ -97,12 +111,12 @@ module.exports = {
   findById,
   acceptJob,
   assignJob,
-};
+  listJobs,
   findJobsByAgency,
-  findJobById,
   updateJob,
   deleteJob,
+  acceptJob,
+  assignJob,
   addApplication,
   getApplications,
 };
-

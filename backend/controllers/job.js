@@ -1,5 +1,13 @@
-const { acceptJob, assignJob } = require('../services/job');
 const logger = require('../utils/logger');
+const {
+  acceptJob,
+  assignJob,
+  createJob,
+  getJobsByAgency,
+  updateJob,
+  deleteJob,
+  getJobApplications,
+} = require('../services/job');
 
 async function acceptJobHandler(req, res) {
   const { jobId } = req.params;
@@ -9,22 +17,6 @@ async function acceptJobHandler(req, res) {
     res.json(job);
   } catch (err) {
     logger.error('Failed to accept job', { error: err.message, jobId, agencyId });
-const {
-  createJob,
-  getJobsByAgency,
-  updateJob,
-  deleteJob,
-  getJobApplications,
-} = require('../services/job');
-const logger = require('../utils/logger');
-
-async function createJobHandler(req, res) {
-  const { agencyId } = req.params;
-  try {
-    const job = await createJob(agencyId, req.body);
-    res.status(201).json(job);
-  } catch (err) {
-    logger.error('Failed to create job', { error: err.message });
     res.status(400).json({ error: err.message });
   }
 }
@@ -37,6 +29,21 @@ async function assignJobHandler(req, res) {
     res.json(job);
   } catch (err) {
     logger.error('Failed to assign job', { error: err.message, jobId, employeeId, agencyId });
+    res.status(400).json({ error: err.message });
+  }
+}
+
+async function createJobHandler(req, res) {
+  const { agencyId } = req.params;
+  try {
+    const job = await createJob(agencyId, req.body);
+    res.status(201).json(job);
+  } catch (err) {
+    logger.error('Failed to create job', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 async function listJobsHandler(req, res) {
   const { agencyId } = req.params;
   try {
@@ -48,9 +55,6 @@ async function listJobsHandler(req, res) {
   }
 }
 
-module.exports = {
-  acceptJobHandler,
-  assignJobHandler,
 async function updateJobHandler(req, res) {
   const { agencyId, jobId } = req.params;
   try {
@@ -85,6 +89,8 @@ async function getJobApplicationsHandler(req, res) {
 }
 
 module.exports = {
+  acceptJobHandler,
+  assignJobHandler,
   createJobHandler,
   listJobsHandler,
   updateJobHandler,

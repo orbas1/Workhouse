@@ -9,4 +9,6 @@
 
 .nav-link.active {
   text-decoration: underline;
+.nav-bar {
+  background-color: #319795;
 }
