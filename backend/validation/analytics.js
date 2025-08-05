@@ -9,6 +9,12 @@ const analyticsQuerySchema = Joi.object({
   endDate: Joi.date().iso(),
 }).with('startDate', 'endDate').with('endDate', 'startDate');
 
+const reportQuerySchema = Joi.object({
+  startDate: Joi.date().iso(),
+  endDate: Joi.date().iso(),
+  format: Joi.string().valid('json', 'csv').default('json'),
+}).with('startDate', 'endDate').with('endDate', 'startDate');
+
 const anomalySchema = Joi.object({
   metrics: Joi.array().items(Joi.number()).min(1).required(),
   threshold: Joi.number().positive().default(2),
@@ -31,6 +37,7 @@ const userIdParamSchema = Joi.object({
 module.exports = {
   agencyIdParamSchema,
   analyticsQuerySchema,
+  reportQuerySchema,
   anomalySchema,
   feedbackSchema,
   pathIdParamSchema,
