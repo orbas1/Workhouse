@@ -9,10 +9,15 @@ export default function Dashboard() {
     <ChakraProvider>
       <NavMenu />
       <Box p={4} className="dashboard">
+        <Heading mb={4}>Dashboard</Heading>
+        <Button colorScheme="teal" onClick={() => navigate('/services')}>
+          Browse Services
+        </Button>
         <Heading>Dashboard</Heading>
         <Button mt={4} colorScheme="teal" onClick={() => navigate('/classroom/WorkhouseClassroom')}>
           Enter Classroom
         </Button>
+        <Button mt={4} colorScheme="teal" onClick={() => window.location.href = '/calendar'}>Calendar</Button>
       </Box>
     </ChakraProvider>
   );
