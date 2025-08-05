@@ -24,6 +24,9 @@ async function login(username, password) {
   if (!match) {
     throw new Error('Invalid credentials');
   }
+  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, {
+    expiresIn: '1h',
+  });
   const token = jwt.sign({ username, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
   return { token };
 }

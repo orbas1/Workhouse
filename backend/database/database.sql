@@ -18,6 +18,18 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Dispute Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS disputes (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'open',
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    resolved_at TIMESTAMP
+);
+
 
 -- Education Analytics Module Tables
 
