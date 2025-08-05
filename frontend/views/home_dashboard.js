@@ -1,5 +1,7 @@
 const { Box, Heading, SimpleGrid, Text } = ChakraUI;
 const { useState, useEffect } = React;
+const { useEffect, useState } = React;
+const { Box, Heading, Text, Button } = ChakraUI;
 
 function HomeDashboard() {
   const { user } = useAuth();
@@ -40,6 +42,12 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
+    <Box className="dashboard">
+      <Heading size="lg" mb={2}>Dashboard</Heading>
+      <Text mb={4}>Hello, {user.username}!</Text>
+      <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
+        Go to Live Feed
+      </Button>
     </Box>
   );
 }
