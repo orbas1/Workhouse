@@ -2,7 +2,23 @@ const { randomUUID } = require('crypto');
 
 const opportunities = new Map();
 
-function create({ organizationId, title, description, location = '', remote = false, commitmentTime = '', urgency = 'normal', requirements = '', multimedia = [], isFeatured = false }) {
+function create({
+  organizationId,
+  title,
+  description,
+  location = '',
+  remote = false,
+  commitmentTime = '',
+  urgency = 'normal',
+  requirements = '',
+  multimedia = [],
+  isFeatured = false,
+  category = '',
+  duration = '',
+  compensation = 0,
+  experienceLevel = '',
+  status = 'open',
+}) {
   const id = randomUUID();
   const now = new Date();
   const opportunity = {
@@ -20,6 +36,11 @@ function create({ organizationId, title, description, location = '', remote = fa
     applications: 0,
     matches: 0,
     isFeatured,
+    category,
+    duration,
+    compensation,
+    experienceLevel,
+    status,
     deleted: false,
     createdAt: now,
     updatedAt: now,

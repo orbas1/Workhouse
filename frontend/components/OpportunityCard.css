@@ -1,0 +1,7 @@
+.opportunity-card {
+  transition: background-color 0.2s ease;
+}
+
+.opportunity-card:hover {
+  background-color: #f7fafc;
+}
