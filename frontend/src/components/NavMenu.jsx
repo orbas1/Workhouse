@@ -17,8 +17,25 @@ function NavMenu() {
     <Flex className="nav-menu" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
-      <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
+        onClick={() => navigate('/profile')}
+      >
+        Profile
+      </Button>
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
+        onClick={() => navigate('/contracts/new')}
+      >
+        New Contract
+      </Button>
+      <Button variant="outline" color="white" onClick={handleLogout}>
+        Logout
+      </Button>
     </Flex>
   );
 }
