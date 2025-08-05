@@ -116,6 +116,7 @@ const successStoryRoutes = require('./routes/successStories');
 const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
 const userSetupRoutes = require('./routes/userSetup');
 const interviewRoutes = require('./routes/interviews');
+const startupRoutes = require('./routes/startups');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -239,6 +240,7 @@ app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
+app.use('/startups', startupRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {

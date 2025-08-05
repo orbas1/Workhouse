@@ -3,4 +3,5 @@ window.env = {
   AVATAR_API: 'https://api.dicebear.com/7.x/avataaars/svg'
   WORLD_TIME_API: 'https://worldtimeapi.org/api'
   JITSI_DOMAIN: 'https://meet.jit.si'
+  INDUSTRIES_API: 'https://raw.githubusercontent.com/dariusk/corpora/master/data/humans/occupations.json',
 };

@@ -95,6 +95,8 @@ function HomeDashboard() {
       <Button mt={2} colorScheme="green" onClick={() => window.location.href = '/onboarding/documents'}>
         Upload CV & Cover Letter
       </Button>
+              
+      <Button mt={2} colorScheme='purple' onClick={() => window.location.href = '/startups/profile-plan'}>Manage Startup Profile</Button>
     </Box>
   </Box>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
