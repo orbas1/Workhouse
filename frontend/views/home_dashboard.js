@@ -50,6 +50,10 @@ function HomeDashboard() {
       </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
         Manage Gigs
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
+        Gigs Dashboard
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
       </Button>
     </Box>
   );

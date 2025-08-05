@@ -10,4 +10,5 @@ CREATE TABLE gigs (
   status VARCHAR(20) NOT NULL DEFAULT 'active',
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL
+
 );
