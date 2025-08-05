@@ -34,6 +34,7 @@ const updateProjectSchema = Joi.object({
 
 const createTaskSchema = Joi.object({
   projectId: Joi.string().guid({ version: 'uuidv4' }).required(),
+  ownerId: Joi.string().required(),
   title: Joi.string().min(3).max(255).required(),
   description: Joi.string().max(1000).allow('', null),
   dueDate: Joi.date().iso().optional(),
@@ -53,6 +54,11 @@ const assignTaskSchema = Joi.object({
 
 const aiProjectSchema = Joi.object({
   projectId: Joi.string().guid({ version: 'uuidv4' }).required(),
+});
+
+const taskListSchema = Joi.object({
+  ownerId: Joi.string().guid({ version: 'uuidv4' }).optional(),
+  assignee: Joi.string().optional(),
 });
 
 const hireSchema = Joi.object({
@@ -134,6 +140,7 @@ module.exports = {
   createTaskSchema,
   updateTaskSchema,
   assignTaskSchema,
+  taskListSchema,
   aiProjectSchema,
   hireSchema,
   feedPostSchema,

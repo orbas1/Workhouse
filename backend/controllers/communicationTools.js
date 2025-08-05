@@ -79,6 +79,20 @@ async function translateMessageHandler(req, res) {
   }
 }
 
+function getSessionAnalyticsHandler(req, res) {
+  try {
+    const { sessionId } = req.params;
+    const analytics = communicationService.getSessionAnalytics(sessionId);
+    if (!analytics) {
+      return res.status(404).json({ error: 'Session not found' });
+    }
+    res.json(analytics);
+  } catch (err) {
+    logger.error('Failed to fetch session analytics', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   startVideoCallHandler,
   endVideoCallHandler,
@@ -87,4 +101,5 @@ module.exports = {
   createLanguageRoomHandler,
   getCommunicationHistoryHandler,
   translateMessageHandler,
+  getSessionAnalyticsHandler,
 };
