@@ -34,6 +34,15 @@ const instructorIdParamSchema = Joi.object({
   instructorId: Joi.string().uuid().required(),
 });
 
+const moduleSchema = Joi.object({
+  title: Joi.string().min(1).max(255),
+  content: Joi.string().allow('', null),
+});
+
+const moduleIdParamSchema = Joi.object({
+  moduleId: Joi.string().uuid().required(),
+});
+
 module.exports = {
   createCourseSchema,
   updateCourseSchema,
@@ -41,4 +50,6 @@ module.exports = {
   courseIdParamSchema,
   categoryIdParamSchema,
   instructorIdParamSchema,
+  moduleSchema,
+  moduleIdParamSchema,
 };

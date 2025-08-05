@@ -8,6 +8,7 @@ export default function NavMenu() {
       <HStack spacing={4}>
         <Link as={RouterLink} to="/">Dashboard</Link>
         <Link as={RouterLink} to="/jobs">Job Posts</Link>
+        <Link as={RouterLink} to="/education/courses">Courses</Link>
       </HStack>
     </Box>
   );
