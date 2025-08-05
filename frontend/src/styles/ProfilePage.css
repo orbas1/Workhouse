@@ -3,3 +3,7 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+.profile-page-container .customize-btn {
+  align-self: flex-end;
+}

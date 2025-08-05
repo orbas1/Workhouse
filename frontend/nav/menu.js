@@ -25,6 +25,29 @@ function NavMenu() {
           <Button variant="outline" color="white" onClick={() => navigate('/signup')}>Sign Up</Button>
         </>
       )}
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/dashboard')}>
+        Dashboard
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/messages')}>
+        Messages
+      </Button>
+      <Button variant="outline" color="white" onClick={handleLogout}>
+        Logout
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/dashboard')}>Dashboard</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/setup/financial-media')}>Setup</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/onboarding/documents')}>Documents</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/feed')}>Feed</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/feed')}>Live Feed</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/employment')}>Employment</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/applications-interviews')}>Applications</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/interview/1')}>Interview</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/manage')}>Gigs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs')}>Gigs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/jobs')}>Jobs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/orders')}>Orders</Button>
+      <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );
 }

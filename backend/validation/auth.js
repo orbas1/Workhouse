@@ -9,6 +9,9 @@ const registerSchema = Joi.object({
   phone: Joi.string().max(20).required(),
   location: Joi.string().max(255).required(),
   bio: Joi.string().max(1000).required(),
+  phone: Joi.string().max(20).allow('', null),
+  location: Joi.string().max(255).allow('', null),
+  bio: Joi.string().max(1000).allow('', null),
   expertise: Joi.string().max(255).allow('', null),
   recaptchaToken: Joi.string().required()
 });

@@ -1,0 +1,7 @@
+.job-card {
+  transition: background-color 0.2s ease;
+}
+
+.job-card:hover {
+  background-color: #f7fafc;
+}

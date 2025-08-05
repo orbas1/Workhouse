@@ -1,8 +1,9 @@
 const financials = new Map();
 
-function setFinancials(userId, { paymentMethod, taxId = null, vatNumber = null }) {
+function setFinancials(userId, { paymentMethod, cardBrand = null, taxId = null, vatNumber = null }) {
   const record = {
     paymentMethod,
+    cardBrand,
     taxId,
     vatNumber,
     updatedAt: new Date(),
