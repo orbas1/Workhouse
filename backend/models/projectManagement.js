@@ -15,7 +15,7 @@ const workflows = new Map();
 const spreadsheets = new Map();
 const textDocs = new Map();
 
-function createProject({ name, description = '', ownerId }) {
+function createProject({ name, description = '', ownerId, budget = 0 }) {
   const id = randomUUID();
   const now = new Date();
   const project = {
@@ -23,6 +23,7 @@ function createProject({ name, description = '', ownerId }) {
     name,
     description,
     ownerId,
+    budget,
     status: 'active',
     createdAt: now,
     updatedAt: now,
@@ -188,6 +189,26 @@ function createText({ projectId, title = '', content }) {
   return doc;
 }
 
+function listProjects() {
+  return Array.from(projects.values());
+}
+
+function listTasksByProject(projectId) {
+  return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
+}
+
+function getBudgetSummary(projectId) {
+  const project = projects.get(projectId) || {};
+  const allocatedBudget = project.budget || 0;
+  const entries = Array.from(budgetEntries.values()).filter((e) => e.projectId === projectId);
+  const totalSpent = entries.reduce((sum, e) => sum + e.amount, 0);
+  return {
+    allocatedBudget,
+    totalSpent,
+    remainingBudget: allocatedBudget - totalSpent,
+  };
+}
+
 module.exports = {
   createProject,
   getProjectById,
@@ -215,4 +236,7 @@ module.exports = {
   storeSpreadsheet,
   getSpreadsheet,
   createText,
+  listProjects,
+  listTasksByProject,
+  getBudgetSummary,
 };

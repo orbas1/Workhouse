@@ -29,6 +29,9 @@ const {
   setupWorkflowHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
+  listProjectsHandler,
+  listProjectTasksHandler,
+  getBudgetHandler,
 } = require('../controllers/projectManagement');
 const auth = require('../middleware/auth');
 const validate = require('../middleware/validate');
@@ -62,10 +65,13 @@ const {
 const router = express.Router();
 
 // Project routes
+router.get('/projects', auth, listProjectsHandler);
 router.post('/projects/create', auth, validate(createProjectSchema), createProjectHandler);
 router.get('/projects/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, getProjectHandler);
 router.put('/projects/update/:projectId', auth, validate(projectIdParamSchema, 'params'), validate(updateProjectSchema), projectExists, updateProjectHandler);
 router.delete('/projects/delete/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, deleteProjectHandler);
+router.get('/projects/:projectId/tasks', auth, validate(projectIdParamSchema, 'params'), projectExists, listProjectTasksHandler);
+router.get('/projects/:projectId/budget', auth, validate(projectIdParamSchema, 'params'), projectExists, getBudgetHandler);
 
 // Task routes
 router.post('/tasks/create', auth, validate(createTaskSchema), createTaskHandler);

@@ -24,12 +24,14 @@ const createProjectSchema = Joi.object({
   name: Joi.string().min(3).max(255).required(),
   description: Joi.string().max(1000).allow('', null),
   ownerId: Joi.string().required(),
+  budget: Joi.number().positive().optional(),
 });
 
 const updateProjectSchema = Joi.object({
   name: Joi.string().min(3).max(255),
   description: Joi.string().max(1000).allow('', null),
   status: Joi.string().valid('active', 'archived', 'completed'),
+  budget: Joi.number().positive(),
 });
 
 const createTaskSchema = Joi.object({
