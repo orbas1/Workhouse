@@ -11,6 +11,10 @@ const mentorProfileSchema = Joi.object({
   yearsExperience: Joi.number().integer().min(0).required(),
   preferences: Joi.object().optional(),
   skills: Joi.array().items(Joi.string()).optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
 });
 
 const menteeProfileSchema = Joi.object({
@@ -20,6 +24,10 @@ const menteeProfileSchema = Joi.object({
   interests: Joi.array().items(Joi.string()).optional(),
   preferences: Joi.object().optional(),
   skills: Joi.array().items(Joi.string()).optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
 });
 
 const visibilitySchema = Joi.object({
@@ -70,6 +78,10 @@ const createProfileSchema = Joi.object({
   title: Joi.string().optional(),
   bio: Joi.string().allow('').optional(),
   contact: contactSchema.optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
   geographicPreferences: Joi.object({
     country: Joi.string().required(),
     city: Joi.string().optional(),
@@ -83,6 +95,10 @@ const updateInvestorProfileSchema = Joi.object({
   title: Joi.string().optional(),
   bio: Joi.string().optional(),
   contact: contactSchema.optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
   geographicPreferences: Joi.object({
     country: Joi.string().required(),
     city: Joi.string().optional(),

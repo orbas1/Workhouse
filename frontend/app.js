@@ -6,9 +6,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
+        <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
