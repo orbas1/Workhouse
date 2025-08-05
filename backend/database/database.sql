@@ -18,3 +18,21 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Training Module Tables
+
+CREATE TABLE IF NOT EXISTS training_sessions (
+    id UUID PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    description TEXT,
+    scheduled_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS training_attendance (
+    id UUID PRIMARY KEY,
+    session_id UUID NOT NULL REFERENCES training_sessions(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL,
+    attended_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
