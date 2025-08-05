@@ -92,8 +92,14 @@ router.post('/intrusion/report-incident', auth, validate(incidentReportSchema), 
 router.post('/intrusion/resolve-incident', auth, validate(incidentResolveSchema), incidentResolveHandler);
 
 router.post('/data/protection-policy-update', auth, validate(policyUpdateSchema), policyUpdateHandler);
-router.get('/data/privacy-settings', auth, privacySettingsGetHandler);
-router.put('/data/privacy-settings', auth, validate(privacyUpdateSchema), privacySettingsUpdateHandler);
+// Separate privacy settings routes to avoid duplicate paths
+router.get('/data/privacy-settings/view', auth, privacySettingsGetHandler);
+router.put(
+  '/data/privacy-settings/update',
+  auth,
+  validate(privacyUpdateSchema),
+  privacySettingsUpdateHandler
+);
 
 router.post('/api/rate-limiting', auth, validate(rateLimitSchema), rateLimitConfigHandler);
 router.post('/api/endpoint-encryption', auth, validate(endpointEncryptionSchema), endpointEncryptionConfigHandler);
