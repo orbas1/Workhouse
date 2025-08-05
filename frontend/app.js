@@ -18,6 +18,7 @@ function App() {
            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
             <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
             <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
@@ -45,6 +46,7 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
         <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
         <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
         <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
