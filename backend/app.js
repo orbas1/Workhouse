@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const payoutRoutes = require('./routes/payouts');
 const linkRoutes = require('./routes/link');
 const referralRoutes = require('./routes/referrals');
 const onboardingRoutes = require('./routes/onboarding');
@@ -34,6 +35,7 @@ app.use(express.json());
 // Mount routes. The parent application may prefix these with "/api"
 // when integrating the backend.
 app.use('/auth', authRoutes);
+app.use('/payouts', payoutRoutes);
 app.use('/affiliates', linkRoutes);
 app.use('/referrals', referralRoutes);
 app.use('/affiliates', onboardingRoutes);
