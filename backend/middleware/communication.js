@@ -6,6 +6,10 @@ function requireConversation(req, res, next) {
   if (!conversation) {
     return res.status(404).json({ error: 'Conversation not found' });
   }
+  const userId = req.user?.id || req.user?.username;
+  if (userId && !conversation.participants.includes(userId)) {
+    return res.status(403).json({ error: 'Access to conversation denied' });
+  }
   req.conversation = conversation;
   next();
 }
