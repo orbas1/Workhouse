@@ -54,6 +54,10 @@ async function assignTask(taskId, assignee) {
   return task;
 }
 
+async function listTasksByAssignee(assignee) {
+  return model.listTasksByAssignee(assignee);
+}
+
 async function suggestTasks(projectId) {
   // Basic placeholder suggestion
   logger.info('AI task suggestion requested', { projectId });
@@ -180,6 +184,7 @@ module.exports = {
   updateTask,
   deleteTask,
   assignTask,
+  listTasksByAssignee,
   suggestTasks,
   suggestBudget,
   suggestObjectives,
