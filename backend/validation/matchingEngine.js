@@ -5,8 +5,12 @@ const runMatchingSchema = Joi.object({
 });
 
 const searchSchema = Joi.object({
-  role: Joi.string().valid('mentor', 'mentee').optional(),
+  role: Joi.string().valid('mentor', 'mentee', 'startup', 'investor').optional(),
   skills: Joi.array().items(Joi.string()).optional(),
+  industry: Joi.string().max(100).optional(),
+  location: Joi.string().max(100).optional(),
+  fundingStage: Joi.string().max(50).optional(),
+  expertise: Joi.string().max(100).optional(),
 });
 
 const inviteSchema = Joi.object({
