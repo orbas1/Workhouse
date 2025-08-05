@@ -1,6 +1,6 @@
-require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const products = require('./data/products.json');
 const authRoutes = require('./routes/auth');
 const landingRoutes = require('./routes/landing');
 const dashboardRoutes = require('./routes/dashboard');
@@ -129,6 +129,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/operations/retail/products', (req, res) => {
+  res.json(products);
+});
 // Mount routes. The parent application may prefix these with "/api"
 // when integrating the backend.
 app.use('/auth', authRoutes);
@@ -257,10 +260,12 @@ app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
-
-const port = process.env.PORT || 5000;
-if (require.main === module) {
-  app.listen(port, () => console.log(`Server running on port ${port}`));
-}
+app.get('/operations/retail/product/:productId', (req, res) => {
+  const product = products.find(p => p.id === req.params.productId);
+  if (!product) {
+    return res.status(404).json({ error: 'Product not found' });
+  }
+  res.json(product);
+});
 
 module.exports = app;
