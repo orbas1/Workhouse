@@ -13,6 +13,15 @@ function NavMenu() {
     <Flex className="nav-menu" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/dashboard')}>
+        Dashboard
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/messages')}>
+        Messages
+      </Button>
+      <Button variant="outline" color="white" onClick={handleLogout}>
+        Logout
+      </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/dashboard')}>Dashboard</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/applications-interviews')}>Applications</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/interview/1')}>Interview</Button>
