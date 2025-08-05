@@ -60,6 +60,9 @@ function NavBar() {
       <Button as={RouterLink} to="/orders" variant="ghost" color="white">
         Orders
       </Button>
+      <Button as={RouterLink} to="/contracts" variant="ghost" color="white">
+        Contracts
+      </Button>
     </Flex>
   );
 }
