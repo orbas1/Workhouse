@@ -44,6 +44,14 @@ async function viewContractProposals(contractId) {
   return contractModel.getProposals(contractId);
 }
 
+async function viewContractInvoices(contractId) {
+  const contract = contractModel.findById(contractId);
+  if (!contract) {
+    throw new Error('Contract not found');
+  }
+  return contractModel.getInvoices(contractId);
+}
+
 async function acceptContractProposal(contractId, proposalId) {
   const proposal = contractModel.acceptProposal(contractId, proposalId);
   if (!proposal) {
@@ -81,6 +89,22 @@ async function submitWorkForContract(contractId, submission) {
   return record;
 }
 
+async function submitInvoiceForContract(contractId, invoice) {
+  const contract = contractModel.findById(contractId);
+  if (!contract) {
+    throw new Error('Contract not found');
+  }
+  if (contract.freelancerId !== invoice.freelancerId) {
+    throw new Error('Freelancer not authorized for this contract');
+  }
+  const record = contractModel.addInvoice(contractId, invoice);
+  if (!record) {
+    throw new Error('Unable to submit invoice');
+  }
+  logger.info('Invoice submitted for contract', { contractId, invoiceId: record.id });
+  return record;
+}
+
 async function approveSubmittedWork(contractId, submissionId) {
   const submission = contractModel.approveWork(contractId, submissionId);
   if (!submission) {
@@ -97,9 +121,11 @@ module.exports = {
   deleteContract,
   listContracts,
   viewContractProposals,
+  viewContractInvoices,
   acceptContractProposal,
   terminateContract,
   submitWorkForContract,
+  submitInvoiceForContract,
   approveSubmittedWork,
 };
 

@@ -3,17 +3,44 @@ const { randomUUID } = require('crypto');
 const contracts = new Map();
 const contractProposals = new Map();
 const workSubmissions = new Map();
+const contractInvoices = new Map();
 
-function createContract({ clientId, title, description, budget, timeline }) {
+function createContract({
+  clientId,
+  title,
+  description,
+  paymentType,
+  budget,
+  hourlyRate,
+  expectedHours,
+  milestones = [],
+  deliverables = [],
+  timeline,
+}) {
   const id = randomUUID();
   const timestamp = new Date();
+  const mappedMilestones = milestones.map((m) => ({
+    id: randomUUID(),
+    title: m.title,
+    dueDate: m.dueDate ? new Date(m.dueDate) : null,
+    amount: m.amount ?? null,
+  }));
+  const mappedDeliverables = deliverables.map((d) => ({
+    id: randomUUID(),
+    description: d.description,
+  }));
   const contract = {
     id,
     clientId,
     freelancerId: null,
     title,
     description: description || null,
+    paymentType: paymentType || 'fixed',
     budget: budget ?? null,
+    hourlyRate: hourlyRate ?? null,
+    expectedHours: expectedHours ?? null,
+    milestones: mappedMilestones,
+    deliverables: mappedDeliverables,
     timeline: timeline || null,
     status: 'open',
     createdAt: timestamp,
@@ -22,6 +49,7 @@ function createContract({ clientId, title, description, budget, timeline }) {
   contracts.set(id, contract);
   contractProposals.set(id, []);
   workSubmissions.set(id, []);
+  contractInvoices.set(id, []);
   return contract;
 }
 
@@ -33,6 +61,20 @@ function updateContract(id, updates) {
   const contract = contracts.get(id);
   if (!contract || ['terminated', 'completed'].includes(contract.status)) {
     return null;
+  }
+  if (updates.milestones) {
+    updates.milestones = updates.milestones.map((m) => ({
+      id: m.id || randomUUID(),
+      title: m.title,
+      dueDate: m.dueDate ? new Date(m.dueDate) : null,
+      amount: m.amount ?? null,
+    }));
+  }
+  if (updates.deliverables) {
+    updates.deliverables = updates.deliverables.map((d) => ({
+      id: d.id || randomUUID(),
+      description: d.description,
+    }));
   }
   Object.assign(contract, updates, { updatedAt: new Date() });
   contracts.set(id, contract);
@@ -58,6 +100,10 @@ function getByClient(clientId) {
 
 function getProposals(contractId) {
   return contractProposals.get(contractId) || [];
+}
+
+function getInvoices(contractId) {
+  return contractInvoices.get(contractId) || [];
 }
 
 function addProposal(contractId, { freelancerId, proposalText }) {
@@ -119,6 +165,22 @@ function submitWork(contractId, { freelancerId, workUrl, notes }) {
   return submission;
 }
 
+function addInvoice(contractId, { freelancerId, amount, description }) {
+  const invoices = contractInvoices.get(contractId);
+  if (!invoices) return null;
+  const invoice = {
+    id: randomUUID(),
+    contractId,
+    freelancerId,
+    amount,
+    description: description || null,
+    status: 'pending',
+    createdAt: new Date(),
+  };
+  invoices.push(invoice);
+  return invoice;
+}
+
 function approveWork(contractId, submissionId) {
   const submissions = workSubmissions.get(contractId);
   if (!submissions) return null;
@@ -143,7 +205,9 @@ module.exports = {
   listAll,
   getByClient,
   getProposals,
+  getInvoices,
   addProposal,
+  addInvoice,
   acceptProposal,
   terminateContract,
   submitWork,
