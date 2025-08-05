@@ -6,7 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
+// Mount authentication routes. The parent application may prefix these
+// with "/api" when integrating the backend.
+app.use('/auth', authRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
