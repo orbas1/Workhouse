@@ -1,0 +1,11 @@
+.application-interview {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.schedule-form {
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #f7fafc;
+}

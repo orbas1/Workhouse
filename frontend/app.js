@@ -11,6 +11,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
+            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/feed" element={<Protected><LiveFeed /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
         <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />
+        <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
