@@ -36,6 +36,7 @@ function App() {
         <Route path="/headhunter/dashboard" element={<Protected><HeadhunterDashboard /></Protected>} />
         <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
         <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+        <Route path="/progress" element={<Protected><ProgressDashboard /></Protected>} />
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />

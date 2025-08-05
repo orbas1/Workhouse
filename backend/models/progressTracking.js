@@ -4,6 +4,7 @@ const { randomUUID } = require('crypto');
 const achievements = [];
 const skills = [];
 const customAlerts = [];
+const tasks = [];
 
 function addAchievement({ userId, title, description, achievedAt = new Date() }) {
   const record = {
@@ -80,6 +81,23 @@ function getTimeline(userId) {
   return items.sort((x, y) => new Date(x.date) - new Date(y.date));
 }
 
+function addTask({ userId, title, summary, completedAt = new Date(), feedback }) {
+  const record = {
+    id: randomUUID(),
+    userId,
+    title,
+    summary: summary || null,
+    completedAt,
+    feedback: feedback || null,
+  };
+  tasks.push(record);
+  return record;
+}
+
+function listTasks(userId) {
+  return tasks.filter((t) => t.userId === userId);
+}
+
 module.exports = {
   addAchievement,
   listAchievements,
@@ -90,4 +108,6 @@ module.exports = {
   addCustomAlert,
   listCustomAlerts,
   getTimeline,
+  addTask,
+  listTasks,
 };
