@@ -57,8 +57,11 @@ function NavBar() {
       <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
         Profile
       </Button>
-      <Button as={RouterLink} to="/orders" variant="ghost" color="white">
+      <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
         Orders
+      </Button>
+      <Button as={RouterLink} to="/tasks" variant="ghost" color="white">
+        Tasks
       </Button>
     </Flex>
   );

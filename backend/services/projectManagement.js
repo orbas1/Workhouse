@@ -34,6 +34,12 @@ async function getTask(taskId) {
   return model.getTaskById(taskId);
 }
 
+async function listTasks(projectId) {
+  const list = model.listTasksByProject(projectId);
+  logger.info('Tasks retrieved', { projectId, count: list.length });
+  return list;
+}
+
 async function updateTask(taskId, data) {
   const task = model.updateTask(taskId, data);
   if (!task) throw new Error('Task not found');
@@ -177,6 +183,7 @@ module.exports = {
   deleteProject,
   createTask,
   getTask,
+  listTasks,
   updateTask,
   deleteTask,
   assignTask,

@@ -69,6 +69,10 @@ function getTaskById(taskId) {
   return tasks.get(taskId);
 }
 
+function listTasksByProject(projectId) {
+  return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
+}
+
 function updateTask(taskId, data) {
   const task = tasks.get(taskId);
   if (!task) return null;
@@ -195,6 +199,7 @@ module.exports = {
   deleteProject,
   createTask,
   getTaskById,
+  listTasksByProject,
   updateTask,
   deleteTask,
   assignTask,

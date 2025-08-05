@@ -38,21 +38,26 @@ import { ChakraProvider, Box } from '@chakra-ui/react';
 import NavBar from './components/NavBar.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
+import { TaskProvider } from './context/TaskContext.jsx';
 
 function App() {
   return (
     <ChakraProvider>
       <BrowserRouter>
         <ProfileProvider>
-          <NavBar />
-          <Box p={4}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/profile" replace />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
-            </Routes>
-          </Box>
+          <TaskProvider>
+            <NavBar />
+            <Box p={4}>
+              <Routes>
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+                <Route path="/tasks" element={<TaskManagementPage />} />
+              </Routes>
+            </Box>
+          </TaskProvider>
         </ProfileProvider>
       </BrowserRouter>
     </ChakraProvider>
