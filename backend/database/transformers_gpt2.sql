@@ -1,0 +1,8 @@
+CREATE TABLE gpt2_interactions (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  prompt TEXT NOT NULL,
+  response TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

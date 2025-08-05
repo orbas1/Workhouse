@@ -1,5 +1,10 @@
 const Joi = require('joi');
 
+const attachmentSchema = Joi.object({
+  type: Joi.string().max(50).required(),
+  url: Joi.string().uri().required(),
+});
+
 const messageSchema = Joi.object({
   conversationId: Joi.string().guid({ version: 'uuidv4' }).optional(),
   recipientId: Joi.string().when('conversationId', {
@@ -8,6 +13,8 @@ const messageSchema = Joi.object({
     otherwise: Joi.string().required(),
   }),
   content: Joi.string().max(1000).required(),
+  attachments: Joi.array().items(attachmentSchema).optional(),
+  category: Joi.string().max(50).optional(),
 });
 
 const conversationIdParamSchema = Joi.object({
@@ -39,6 +46,10 @@ const callIdParamSchema = Joi.object({
   callId: Joi.string().guid({ version: 'uuidv4' }).required(),
 });
 
+const conversationsListSchema = Joi.object({
+  category: Joi.string().max(50).optional(),
+});
+
 module.exports = {
   messageSchema,
   conversationIdParamSchema,
@@ -47,4 +58,5 @@ module.exports = {
   meetingIdParamSchema,
   scheduleCallSchema,
   callIdParamSchema,
+  conversationsListSchema,
 };
