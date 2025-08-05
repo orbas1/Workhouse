@@ -97,22 +97,25 @@ function HomeDashboard() {
       </Button>
     </Box>
   </Box>
-      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
-        Manage Applications
-      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
-        Manage Gigs
-      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
-        Gigs Dashboard
-      <
-      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/calendar'}>
-        Calendar
-      </Button>
-      <Button colorScheme="purple" ml={2} onClick={() => window.location.href = '/courses'}>
-        Courses
-      </Button>
-    </Box>
-    <ChatWidget />
-    </>
+  <Flex mt={4} gap={2} wrap="wrap">
+    <Button colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
+      Manage Applications
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
+      Manage Gigs
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
+      Gigs Dashboard
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/jobs'}>
+      Browse Jobs
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/education/courses'}>
+      Courses
+    </Button>
+  </Flex>
+  <ChatWidget />
+  </>
   );
 }
 

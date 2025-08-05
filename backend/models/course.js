@@ -14,6 +14,7 @@ function createCourse({ title, description, categoryId, instructorId, type, pric
     type,
     price: Number(price) || 0,
     feedback: [],
+    modules: [],
     createdAt: now,
     updatedAt: now,
   };
@@ -56,6 +57,36 @@ function findByInstructor(instructorId) {
   return findAll().filter(c => c.instructorId === instructorId);
 }
 
+function addModule(courseId, { title, content }) {
+  const course = courses.get(courseId);
+  if (!course) return null;
+  const module = { id: randomUUID(), title, content: content || null, createdAt: new Date(), updatedAt: new Date() };
+  course.modules.push(module);
+  course.updatedAt = new Date();
+  return module;
+}
+
+function updateModule(courseId, moduleId, updates) {
+  const course = courses.get(courseId);
+  if (!course) return null;
+  const idx = course.modules.findIndex(m => m.id === moduleId);
+  if (idx === -1) return null;
+  const updated = { ...course.modules[idx], ...updates, updatedAt: new Date() };
+  course.modules[idx] = updated;
+  course.updatedAt = new Date();
+  return updated;
+}
+
+function removeModule(courseId, moduleId) {
+  const course = courses.get(courseId);
+  if (!course) return null;
+  const idx = course.modules.findIndex(m => m.id === moduleId);
+  if (idx === -1) return null;
+  course.modules.splice(idx, 1);
+  course.updatedAt = new Date();
+  return true;
+}
+
 module.exports = {
   createCourse,
   updateCourse,
@@ -65,4 +96,7 @@ module.exports = {
   addFeedback,
   findByCategory,
   findByInstructor,
+  addModule,
+  updateModule,
+  removeModule,
 };
