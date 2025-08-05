@@ -23,6 +23,7 @@ function NavMenu() {
         Logout
       </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/dashboard')}>Dashboard</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/feed')}>Feed</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/feed')}>Live Feed</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/employment')}>Employment</Button>

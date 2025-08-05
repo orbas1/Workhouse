@@ -1,5 +1,6 @@
 const { Box, Heading, SimpleGrid, Text, Button } = ChakraUI;
 const { useState, useEffect } = React;
+const { useAuth } = window;
 const { useEffect, useState } = React;
 const { Box, Heading, Text, Button, Flex } = ChakraUI;
 
@@ -10,11 +11,8 @@ function HomeDashboard() {
   useEffect(() => {
     async function loadAffiliate() {
       try {
-        const res = await apiFetch('/api/affiliates/dashboard/1');
-        if (res.ok) {
-          const data = await res.json();
-          setAffiliate(data);
-        }
+        const data = await dashboardAPI.getAffiliateDashboard(1);
+        setAffiliate(data);
       } catch (err) {
         console.error('Failed to load affiliate dashboard', err);
       }
@@ -32,7 +30,7 @@ function HomeDashboard() {
     <Box className="dashboard-container">
       <NavMenu />
       <Heading size="lg" mb={4}>Welcome, {user.username}</Heading>
-      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+      <SimpleGrid columns={[1, 2, 3]} spacing={6} className="summary-grid">
         <UserCountWidget />
         {affiliate && (
           <Box className="affiliate-widget" p={4} borderWidth="1px" borderRadius="md" bg="white">
@@ -44,6 +42,11 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
+      <Box mt={6} textAlign="center">
+        <Button colorScheme="blue" className="cta-button" onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+      </Box>
       <Button mt={6} colorScheme="blue" onClick={() => window.location.href = '/feed'}>
     </Box>
       <Box className="dashboard">
