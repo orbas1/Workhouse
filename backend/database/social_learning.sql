@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS social_group_memberships (
+  id UUID PRIMARY KEY,
+  group_id VARCHAR(255) NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
+  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS social_posts (
+  id UUID PRIMARY KEY,
+  group_id VARCHAR(255) NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS live_study_sessions (
+  id UUID PRIMARY KEY,
+  group_id VARCHAR(255) NOT NULL,
+  host_id VARCHAR(255) NOT NULL,
+  topic VARCHAR(255) NOT NULL,
+  scheduled_for TIMESTAMP NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS mentorship_applications (
+  id UUID PRIMARY KEY,
+  mentee_id VARCHAR(255) NOT NULL,
+  message TEXT,
+  status VARCHAR(50) DEFAULT 'pending',
+  applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

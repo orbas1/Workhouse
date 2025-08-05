@@ -1,22 +1,19 @@
 const express = require('express');
-const {
-  getAgencyEarningsHandler,
-  getAgencyPerformanceHandler,
-} = require('../controllers/analytics');
-const auth = require('../middleware/auth');
-const validate = require('../middleware/validate');
-const {
-  agencyIdParamSchema,
-  analyticsQuerySchema,
-} = require('../validation/analytics');
 const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
 const validate = require('../middleware/validate');
+const analyticsMiddleware = require('../middleware/analytics');
 const {
+  agencyIdParamSchema,
+  analyticsQuerySchema,
   anomalySchema,
   feedbackSchema,
+  pathIdParamSchema,
+  userIdParamSchema,
 } = require('../validation/analytics');
 const {
+  getAgencyEarningsHandler,
+  getAgencyPerformanceHandler,
   getContentPerformanceHandler,
   getContentPerformanceByIdHandler,
   detectAnomaliesHandler,
@@ -24,10 +21,15 @@ const {
   getPopularContentHandler,
   getContentRecommendationsHandler,
   submitContentFeedbackHandler,
+  getPathAnalyticsHandler,
+  getUserAnalyticsHandler,
+  getSkillsAnalyticsHandler,
+  getPredictionsHandler,
 } = require('../controllers/analytics');
 
 const router = express.Router();
 
+// Agency analytics routes
 router.get(
   '/:agencyId/analytics/earnings',
   auth,
@@ -42,6 +44,10 @@ router.get(
   validate(agencyIdParamSchema, 'params'),
   validate(analyticsQuerySchema, 'query'),
   getAgencyPerformanceHandler
+);
+
+// Content analytics routes
+router.get(
   '/content/performance',
   auth,
   authorize('admin', 'content-manager'),
@@ -92,4 +98,38 @@ router.post(
   submitContentFeedbackHandler
 );
 
+// Learning analytics routes
+router.get(
+  '/paths/:pathId',
+  auth,
+  validate(pathIdParamSchema, 'params'),
+  analyticsMiddleware.ensurePathAnalytics,
+  getPathAnalyticsHandler
+);
+
+router.get(
+  '/user/:userId',
+  auth,
+  validate(userIdParamSchema, 'params'),
+  analyticsMiddleware.ensureUserAnalytics,
+  getUserAnalyticsHandler
+);
+
+router.get(
+  '/skills/:userId',
+  auth,
+  validate(userIdParamSchema, 'params'),
+  analyticsMiddleware.ensureUserAnalytics,
+  getSkillsAnalyticsHandler
+);
+
+router.get(
+  '/predictions/:userId',
+  auth,
+  validate(userIdParamSchema, 'params'),
+  analyticsMiddleware.ensureUserAnalytics,
+  getPredictionsHandler
+);
+
 module.exports = router;
+
