@@ -1,0 +1,10 @@
+CREATE TABLE volunteers (
+  id UUID PRIMARY KEY,
+  user_id UUID NOT NULL UNIQUE,
+  skills TEXT[] DEFAULT ARRAY[]::TEXT[],
+  interests TEXT[] DEFAULT ARRAY[]::TEXT[],
+  availability JSONB,
+  badges TEXT[] DEFAULT ARRAY[]::TEXT[],
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
