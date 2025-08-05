@@ -4,6 +4,8 @@ import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import '../styles/Dashboard.css';
+import { Link as RouterLink } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -19,6 +21,9 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/proposals-invoices" mt={4} colorScheme="teal">
+          Manage Proposals & Invoices
+        </Button>
         <Button mt={4} colorScheme="teal" onClick={() => navigate('/classroom/WorkhouseClassroom')}>
           Enter Classroom
         </Button>

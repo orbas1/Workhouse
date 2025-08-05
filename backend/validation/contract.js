@@ -50,11 +50,18 @@ const terminateContractSchema = Joi.object({
   reason: Joi.string().min(3).max(500).required(),
 });
 
+const submitInvoiceSchema = Joi.object({
+  freelancerId: Joi.string().required(),
+  amount: Joi.number().precision(2).positive().required(),
+  description: Joi.string().allow('').optional(),
+});
+
 module.exports = {
   createContractSchema,
   updateContractSchema,
   submitWorkSchema,
   approveWorkSchema,
   terminateContractSchema,
+  submitInvoiceSchema,
 };
 
