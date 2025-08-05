@@ -7,6 +7,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 import { ChakraProvider } from '@chakra-ui/react';
+import App from './App.jsx';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProfilePage from './pages/ProfilePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
@@ -19,6 +20,7 @@ import NavBar from './components/NavBar.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ChakraProvider>
+      <App />
       <AuthProvider>
         <BrowserRouter>
           <Routes>

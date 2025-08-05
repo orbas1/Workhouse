@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, VStack, Spinner } from '@chakra-ui/react';
+import NavBar from '../components/NavBar.jsx';
 import React, { useEffect } from 'react';
 import { Box, VStack, Spinner, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
@@ -44,6 +45,7 @@ function ProfilePage() {
 
   return (
     <Box className="profile-page-container">
+      <NavBar />
       <NavMenu />
 import { useProfile } from '../context/ProfileContext.jsx';
 

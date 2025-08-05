@@ -1,3 +1,5 @@
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { me } from '../api/auth.js';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { login as apiLogin, fetchMe } from '../api/auth.js';
 
@@ -10,6 +12,10 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     async function loadUser() {
       try {
+        const data = await me();
+        setUser(data);
+      } catch {
+        setUser(null);
         const data = await fetchMe();
         setUser(data);
       } catch {
@@ -21,6 +27,8 @@ export function AuthProvider({ children }) {
     loadUser();
   }, []);
 
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
   async function login(username, password) {
     const { token } = await apiLogin({ username, password });
     localStorage.setItem('token', token);
