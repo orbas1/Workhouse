@@ -7,6 +7,7 @@ const {
   getMeeting,
   scheduleCall,
   getCall,
+  listConversations,
 } = require('../services/communication');
 const logger = require('../utils/logger');
 
@@ -32,6 +33,18 @@ async function getConversationMessagesHandler(req, res) {
       conversationId,
     });
     res.status(404).json({ error: err.message });
+  }
+}
+
+async function listConversationsHandler(req, res) {
+  const userId = req.user?.id || req.user?.username;
+  const { category } = req.query;
+  try {
+    const conversations = await listConversations(userId, category);
+    res.json(conversations);
+  } catch (err) {
+    logger.error('Failed to list conversations', { error: err.message, userId });
+    res.status(500).json({ error: err.message });
   }
 }
 
@@ -109,4 +122,5 @@ module.exports = {
   getMeetingHandler,
   scheduleCallHandler,
   getCallHandler,
+  listConversationsHandler,
 };

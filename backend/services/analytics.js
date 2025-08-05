@@ -155,6 +155,44 @@ async function getLearningPredictions(userId) {
   return prediction;
 }
 
+// -----------------------------
+// Volunteer and organization analytics services
+// -----------------------------
+async function getVolunteerEngagement({ startDate, endDate } = {}) {
+  const records = analyticsModel.getVolunteerEngagement({ startDate, endDate });
+  if (records.length === 0) {
+    throw new Error('No volunteer engagement data found');
+  }
+  const volunteerIds = new Set(records.map(r => r.volunteerId));
+  const totalHours = records.reduce((sum, r) => sum + r.hours, 0);
+  const tasksCompleted = records.reduce((sum, r) => sum + r.tasksCompleted, 0);
+  logger.info('Volunteer engagement analytics retrieved', { count: records.length });
+  return {
+    totalVolunteers: volunteerIds.size,
+    totalHours,
+    averageHours: volunteerIds.size ? totalHours / volunteerIds.size : 0,
+    tasksCompleted,
+    records,
+  };
+}
+
+async function getOrganizationProjectAnalytics({ startDate, endDate } = {}) {
+  const records = analyticsModel.getOrganizationProjectAnalytics({ startDate, endDate });
+  if (records.length === 0) {
+    throw new Error('No organization project analytics data found');
+  }
+  const projectIds = new Set(records.map(r => r.projectId));
+  const activeVolunteers = records.reduce((sum, r) => sum + r.volunteers, 0);
+  const totalImpact = records.reduce((sum, r) => sum + r.impactScore, 0);
+  logger.info('Organization project analytics retrieved', { count: records.length });
+  return {
+    totalProjects: projectIds.size,
+    activeVolunteers,
+    averageImpactScore: records.length ? totalImpact / records.length : 0,
+    records,
+  };
+}
+
 module.exports = {
   getAgencyEarnings,
   getAgencyPerformance,
@@ -169,5 +207,7 @@ module.exports = {
   getUserAnalytics,
   getSkillsAnalytics,
   getLearningPredictions,
+  getVolunteerEngagement,
+  getOrganizationProjectAnalytics,
 };
 
