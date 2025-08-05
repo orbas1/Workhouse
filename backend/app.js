@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const affiliateRoutes = require('./routes/affiliates');
+const analyticsRoutes = require('./routes/analytics');
 const agencyAnalyticsRoutes = require('./routes/agencyAnalytics');
 const aiAnalyticsRoutes = require('./routes/aiAnalytics');
 const classroomAnalyticsRoutes = require('./routes/classroomAnalytics');
@@ -18,6 +19,7 @@ app.use(express.json());
 // with "/api" when integrating the backend.
 app.use('/auth', authRoutes);
 app.use('/affiliates', affiliateRoutes);
+app.use('/analytics', analyticsRoutes);
 app.use('/analytics', agencyAnalyticsRoutes);
 app.use('/ai-analytics', aiAnalyticsRoutes);
 app.use('/classroom-analytics', classroomAnalyticsRoutes);

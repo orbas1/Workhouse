@@ -10,6 +10,8 @@ async function register(username, password, role = 'user') {
     throw new Error('User already exists');
   }
   const hashed = await bcrypt.hash(password, 10);
+  const user = addUser({ username, password: hashed, role });
+  return { id: user.id, username: user.username, role: user.role };
   addUser({ username, password: hashed, role });
   return { username, role };
 }
@@ -23,6 +25,11 @@ async function login(username, password) {
   if (!match) {
     throw new Error('Invalid credentials');
   }
+  const token = jwt.sign(
+    { id: user.id, username: user.username, role: user.role },
+    JWT_SECRET,
+    { expiresIn: '1h' }
+  );
 
   const token = jwt.sign({ username, role: user.role }, JWT_SECRET, {
     expiresIn: '1h',
