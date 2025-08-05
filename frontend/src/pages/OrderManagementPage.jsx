@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Spinner, Select, useDisclosure } from '@chakra-ui/react';
+import { Box, Heading, Spinner, Select, useDisclosure, Button } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import '../styles/OrderManagementPage.css';
 import { getOrders } from '../api/orders.js';
 import OrderList from '../components/OrderList.jsx';
@@ -45,6 +46,9 @@ function OrderManagementPage() {
   return (
     <Box className="order-management-page" p={4}>
       <Heading size="md" mb={4}>Orders</Heading>
+      <Button as={RouterLink} to="/payments" colorScheme="teal" mb={4}>
+        Make Payment
+      </Button>
       <Select placeholder="Filter by status" value={statusFilter} onChange={handleFilterChange} mb={4}>
         <option value="pending">Pending</option>
         <option value="in_progress">In Progress</option>
