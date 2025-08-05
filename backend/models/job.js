@@ -30,6 +30,27 @@ function findById(id) {
   return jobs.get(id);
 }
 
+function listJobs() {
+  return Array.from(jobs.values());
+}
+
+function findJobsByAgency(agencyId) {
+  return Array.from(jobs.values()).filter((job) => job.agencyId === agencyId);
+}
+
+function updateJob(jobId, updates) {
+  const job = jobs.get(jobId);
+  if (!job) return null;
+  const updated = { ...job, ...updates, updatedAt: new Date() };
+  jobs.set(jobId, updated);
+  return updated;
+}
+
+function deleteJob(jobId) {
+  jobs.delete(jobId);
+  jobApplications.delete(jobId);
+}
+
 function acceptJob(id, agencyId) {
   const job = jobs.get(id);
   if (!job) return null;
@@ -90,10 +111,12 @@ module.exports = {
   findById,
   acceptJob,
   assignJob,
+  listJobs,
   findJobsByAgency,
-  findJobById,
   updateJob,
   deleteJob,
+  acceptJob,
+  assignJob,
   addApplication,
   getApplications,
 };
