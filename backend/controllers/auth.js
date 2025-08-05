@@ -1,12 +1,19 @@
 const { register, login, verifyToken } = require('../services/auth');
+const { createProfile } = require('../services/profile');
+const verifyRecaptcha = require('../utils/verifyRecaptcha');
 
 async function registerHandler(req, res) {
-  const { username, password, roles } = req.body;
+  const { email, password, fullName, phone, location, bio, expertise, recaptchaToken } = req.body;
   try {
-    const user = await register(username, password, roles);
-  const { username, password, role } = req.body;
+    const validCaptcha = await verifyRecaptcha(recaptchaToken);
+    if (!validCaptcha) {
+      return res.status(400).json({ error: 'Invalid CAPTCHA' });
+    }
+    const user = await register(email, password, 'user', { fullName, phone, location });
+    await createProfile(user.id, { bio, preferences: { expertise } });
+  const { username, password, role, fullName, email, phone, location, bio, expertise } = req.validatedBody;
   try {
-    const user = await register(username, password, role);
+    const user = await register({ username, password, role, fullName, email, phone, location, bio, expertise });
     res.status(201).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -14,7 +21,7 @@ async function registerHandler(req, res) {
 }
 
 async function loginHandler(req, res) {
-  const { username, password } = req.body;
+  const { username, password } = req.validatedBody;
   try {
     const result = await login(username, password);
     res.json(result);
@@ -29,9 +36,8 @@ function meHandler(req, res) {
   if (!payload) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  res.json({ username: payload.username, roles: payload.roles });
   res.json({ id: payload.id, username: payload.username, role: payload.role });
-  res.json({ username: payload.username, role: payload.role });
+  res.json({ id: payload.id, username: payload.username, role: payload.role, fullName: payload.fullName, email: payload.email });
 }
 
 module.exports = { registerHandler, loginHandler, meHandler };

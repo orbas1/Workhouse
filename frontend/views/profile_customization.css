@@ -1,0 +1,18 @@
+.profile-customization{
+  width: 100%;
+}
+.profile-customization .preview{
+  border-left: 1px solid #eee;
+  padding-left: 2rem;
+}
+@media (max-width: 768px){
+  .profile-customization{
+    flex-direction: column;
+  }
+  .profile-customization .preview{
+    border-left: none;
+    border-top: 1px solid #eee;
+    padding-left: 0;
+    padding-top: 2rem;
+  }
+}

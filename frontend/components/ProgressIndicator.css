@@ -1,0 +1,7 @@
+.progress-indicator {
+  margin-bottom: 1rem;
+}
+.progress-indicator .progress-label {
+  text-align: right;
+  font-size: 0.85rem;
+}
