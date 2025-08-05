@@ -29,6 +29,7 @@ function App() {
         <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
         <Route path="/onboarding/documents" element={<Protected><CvCoverLetterPage /></Protected>} />
         <Route path="/feed" element={<Protected><LiveFeed /></Protected>} />
+        <Route path="/profile" element={<Protected><ProfilePage /></Protected>} />
         <Route path="/jobs" element={<Protected><JobListingsPage /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
         <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />

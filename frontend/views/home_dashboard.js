@@ -1,5 +1,8 @@
 const { Box, Heading, SimpleGrid, Text, Button } = ChakraUI;
 const { useState, useEffect } = React;
+const { useEffect, useState } = React;
+const { Box, Heading, Text, Button, Flex } = ChakraUI;
+
 
 function HomeDashboard() {
   const { user } = useAuth();
@@ -66,6 +69,14 @@ function HomeDashboard() {
     <Box className="dashboard">
       <Heading size="lg" mb={2}>Dashboard</Heading>
       <Text mb={4}>Hello, {user.username}!</Text>
+      <Flex gap={2}>
+        <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+        <Button colorScheme="teal" onClick={() => window.location.href = '/profile'}>
+          View Profile
+        </Button>
+      </Flex>
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
       </Button>
