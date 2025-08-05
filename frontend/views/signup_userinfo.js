@@ -11,15 +11,20 @@ const {
   Text,
   Progress,
   Stack,
+  InputGroup,
+  InputRightElement,
+  Select,
+  HStack,
   useToast
 } = ChakraUI;
 const { useState, useEffect } = React;
 const { useNavigate } = ReactRouterDOM;
 
-function SignUpPage() {
+function SignUpUserInfo() {
   const [form, setForm] = useState({
     fullName: '',
     email: '',
+    countryCode: '+1',
     phone: '',
     password: '',
     location: '',
@@ -27,6 +32,7 @@ function SignUpPage() {
     expertise: ''
   });
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [siteKey, setSiteKey] = useState('');
   const [recaptchaId, setRecaptchaId] = useState(null);
   const toast = useToast();
@@ -51,6 +57,21 @@ function SignUpPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function toggleShowPassword() {
+    setShowPassword(s => !s);
+  }
+
+  function detectLocation() {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const { latitude, longitude } = pos.coords;
+        setForm(f => ({ ...f, location: `${latitude.toFixed(4)}, ${longitude.toFixed(4)}` }));
+      },
+      () => {}
+    );
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -60,17 +81,17 @@ function SignUpPage() {
       return;
     }
     try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          email: form.email,
-          recaptchaToken: token
-        })
+      const data = await authAPI.register({
+        fullName: form.fullName,
+        email: form.email,
+        username: form.email,
+        phone: `${form.countryCode}${form.phone}`,
+        password: form.password,
+        location: form.location,
+        bio: form.bio,
+        expertise: form.expertise,
+        recaptchaToken: token
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Registration failed');
       toast({ title: 'Registration successful', status: 'success', duration: 3000, isClosable: true });
       navigate('/login');
     } catch (err) {
@@ -84,7 +105,8 @@ function SignUpPage() {
     <ChakraProvider>
       <Flex className="signup-container" minH="100vh" align="center" justify="center" bg="gray.50" p={4}>
         <Box w="lg" p={6} bg="white" boxShadow="md" borderRadius="md">
-          <Heading mb={4}>Create Account</Heading>
+          <Heading mb={2}>Create Account</Heading>
+          <Text mb={2} fontSize="sm" color="gray.600" textAlign="right">Step 1 of 3</Text>
           <Progress value={33} mb={4} />
           <form onSubmit={handleSubmit}>
             <Stack spacing={3}>
@@ -98,15 +120,32 @@ function SignUpPage() {
               </FormControl>
               <FormControl id="phone">
                 <FormLabel>Phone Number</FormLabel>
-                <Input name="phone" value={form.phone} onChange={handleChange} />
+                <HStack>
+                  <Select name="countryCode" w="30%" value={form.countryCode} onChange={handleChange}>
+                    <option value="+1">+1</option>
+                    <option value="+44">+44</option>
+                    <option value="+61">+61</option>
+                  </Select>
+                  <Input name="phone" value={form.phone} onChange={handleChange} />
+                </HStack>
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" name="password" value={form.password} onChange={handleChange} />
+                <InputGroup>
+                  <Input type={showPassword ? 'text' : 'password'} name="password" value={form.password} onChange={handleChange} />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={toggleShowPassword}>
+                      {showPassword ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
               </FormControl>
               <FormControl id="location">
                 <FormLabel>Location</FormLabel>
-                <Input name="location" value={form.location} onChange={handleChange} />
+                <HStack>
+                  <Input name="location" value={form.location} onChange={handleChange} />
+                  <Button onClick={detectLocation}>Use my location</Button>
+                </HStack>
               </FormControl>
               <FormControl id="bio">
                 <FormLabel>Professional Bio</FormLabel>
@@ -133,4 +172,4 @@ function SignUpPage() {
   );
 }
 
-window.SignUpPage = SignUpPage;
+window.SignUpUserInfo = SignUpUserInfo;
