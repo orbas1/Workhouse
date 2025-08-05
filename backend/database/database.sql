@@ -446,6 +446,9 @@ CREATE TABLE IF NOT EXISTS workspace_analytics (
     collaboration_score NUMERIC(5,2) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+-- Indexes for dashboard performance
+CREATE INDEX IF NOT EXISTS idx_contracts_client_id ON contracts(client_id);
+CREATE INDEX IF NOT EXISTS idx_contracts_freelancer_id ON contracts(freelancer_id);
 
 -- Freelancer Profiles Table
 CREATE TABLE IF NOT EXISTS freelancer_profiles (

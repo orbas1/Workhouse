@@ -1,8 +1,11 @@
+import { ChakraProvider, Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
+import ClientDashboard from '../components/dashboards/ClientDashboard';
+import FreelancerDashboard from '../components/dashboards/FreelancerDashboard';
 import '../styles/Dashboard.css';
 import { Button } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -16,6 +19,20 @@ export default function Dashboard() {
       <NavMenu />
       <Box p={4} className="dashboard">
         <Heading mb={4}>Dashboard</Heading>
+        <Tabs variant="enclosed">
+          <TabList>
+            <Tab>Client</Tab>
+            <Tab>Freelancer</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <ClientDashboard />
+            </TabPanel>
+            <TabPanel>
+              <FreelancerDashboard />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
         <Button as={RouterLink} to="/contracts" colorScheme="teal">Manage Contracts</Button>
         <Link as={RouterLink} to="/payments" color="teal.500">
           Manage Payments & Timesheets
