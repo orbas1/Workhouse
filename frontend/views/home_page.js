@@ -1,30 +1,16 @@
-const { Container, Typography, Button, AppBar, Toolbar, Box } = MaterialUI;
+const { Box, Container, Heading, Text, Button } = ChakraUI;
 const { useNavigate } = ReactRouterDOM;
 
 function HomePage() {
   const navigate = useNavigate();
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Workhouse
-          </Typography>
-
-          <Button color="inherit" onClick={() => navigate('/')}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <Container sx={{ mt: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Welcome to Workhouse
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Manage your work efficiently with our platform.
-        </Typography>
-        <Button variant="contained" onClick={() => navigate('/')}> 
-          Get Started
+    <Box className="home-page">
+      <NavMenu />
+      <Container maxW="container.md" mt={6}>
+        <Heading mb={4}>Welcome to Workhouse</Heading>
+        <Text mb={4}>Manage your work efficiently with our platform.</Text>
+        <Button colorScheme="teal" onClick={() => navigate('/dashboard')}>
+          Go to Dashboard
         </Button>
       </Container>
     </Box>

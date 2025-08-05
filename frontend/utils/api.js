@@ -1,3 +1,9 @@
+function apiFetch(url, options = {}) {
+  const token = localStorage.getItem('token');
+  const headers = options.headers ? { ...options.headers } : {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
 const API_BASE_URL = window.API_BASE_URL || '/api';
 
 async function apiRequest(path, options = {}) {
