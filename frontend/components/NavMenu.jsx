@@ -6,7 +6,7 @@ export default function NavMenu() {
   return (
     <Box as="nav" className="nav-menu" p={2}>
       <HStack spacing={4}>
-        <Link as={RouterLink} to="/">Dashboard</Link>
+        <Link as={RouterLink} to="/dashboard">Client/Freelancer Dashboard</Link>
         <Link as={RouterLink} to="/jobs">Job Posts</Link>
       </HStack>
     </Box>

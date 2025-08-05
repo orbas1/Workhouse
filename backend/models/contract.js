@@ -56,6 +56,10 @@ function getByClient(clientId) {
   return listAll().filter((c) => c.clientId === clientId);
 }
 
+function getByFreelancer(freelancerId) {
+  return listAll().filter((c) => c.freelancerId === freelancerId);
+}
+
 function getProposals(contractId) {
   return contractProposals.get(contractId) || [];
 }
@@ -142,6 +146,7 @@ module.exports = {
   deleteContract,
   listAll,
   getByClient,
+  getByFreelancer,
   getProposals,
   addProposal,
   acceptProposal,
