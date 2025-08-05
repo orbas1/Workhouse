@@ -26,6 +26,7 @@ function App() {
         <Route path="/feed" element={<Protected><LiveFeed /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
         <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />
+        <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
