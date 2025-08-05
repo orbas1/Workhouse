@@ -10,10 +10,13 @@ const {
   Input,
   Textarea,
   Button,
+  useToast,
 } = ChakraUI;
+const { useState, useEffect } = React;
+const { useNavigate } = ReactRouterDOM;
 
 function FinancialMediaSetupPage() {
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState({
     paymentMethod: '',
     taxId: '',
     vatNumber: '',
@@ -25,6 +28,35 @@ function FinancialMediaSetupPage() {
   });
 
   const userId = localStorage.getItem('userId');
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await userSetupAPI.getFinancialMedia(userId);
+        if (data.financial) {
+          setForm((prev) => ({
+            ...prev,
+            paymentMethod: '',
+            taxId: data.financial.taxId || '',
+            vatNumber: data.financial.vatNumber || '',
+          }));
+        }
+        if (data.profile) {
+          setForm((prev) => ({
+            ...prev,
+            bio: data.profile.bio || '',
+            portfolioLink: (data.profile.portfolioLinks && data.profile.portfolioLinks[0]) || '',
+            title: data.profile.title || '',
+          }));
+        }
+      } catch (err) {
+        // ignore if not found
+      }
+    }
+    if (userId) load();
+  }, [userId]);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -55,18 +87,11 @@ function FinancialMediaSetupPage() {
         portfolioLinks: form.portfolioLink ? [form.portfolioLink] : [],
         title: form.title || undefined,
       };
-      const res = await window.apiFetch(`/user-setup/${userId}/financial-media`, {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      });
-      if (res.ok) {
-        alert('Setup saved');
-      } else {
-        const data = await res.json();
-        alert(data.error || 'Error saving setup');
-      }
+      await userSetupAPI.saveFinancialMedia(userId, payload);
+      toast({ title: 'Setup saved', status: 'success', duration: 3000, isClosable: true });
+      navigate('/onboarding/documents');
     } catch (err) {
-      alert('Network error');
+      toast({ title: err.message || 'Error saving setup', status: 'error', duration: 3000, isClosable: true });
     }
   }
 

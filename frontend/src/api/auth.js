@@ -17,4 +17,12 @@ export async function register(data) {
 export async function me() {
   const res = await apiClient.get('/auth/me');
   return res.data;
+export async function login({ username, password }) {
+  const { data } = await apiClient.post('/auth/login', { username, password });
+  return data;
+}
+
+export async function fetchMe() {
+  const { data } = await apiClient.get('/auth/me');
+  return data;
 }
