@@ -41,6 +41,8 @@ import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
+import ServiceSearchPage from './pages/ServiceSearchPage.jsx';
+import ServiceDetailPage from './pages/ServiceDetailPage.jsx';
 import { TaskProvider } from './context/TaskContext.jsx';
 
 function App() {
@@ -54,6 +56,8 @@ function App() {
               <Route path="/" element={<Navigate to="/profile" replace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/services" element={<ServiceSearchPage />} />
+              <Route path="/services/:id" element={<ServiceDetailPage />} />
               <Route path="/tasks" element={<TaskDashboardPage />} />
             </Routes>
           </Box>

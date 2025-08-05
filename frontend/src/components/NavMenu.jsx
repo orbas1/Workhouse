@@ -19,6 +19,9 @@ function NavMenu() {
       <Spacer />
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>Tasks</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
+        Services
+      </Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );
