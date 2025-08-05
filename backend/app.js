@@ -64,6 +64,7 @@ const milestoneRoutes = require('./routes/milestones');
 const progressRoutes = require('./routes/progress');
 const achievementRoutes = require('./routes/achievements');
 const skillRoutes = require('./routes/skills');
+const reviewRoutes = require('./routes/reviews');
 
 const app = express();
 app.use(cors());
@@ -133,6 +134,7 @@ app.use('/communication', communicationRoutes);
 app.use('/progress', progressRoutes);
 app.use('/achievements', achievementRoutes);
 app.use('/skills', skillRoutes);
+app.use('/reviews', reviewRoutes);
 app.use('/goals', goalRoutes);
 app.use('/milestones', milestoneRoutes);
 
