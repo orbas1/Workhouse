@@ -4,24 +4,29 @@ const { findUser, addUser } = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
 
-async function register(username, password, roles = ['user']) {
+/**
+ * Register a new user.
+ * @param {string} username
+ * @param {string} password Plain text password
+ * @param {string} [role='user'] Role assigned to the user
+ * @returns {Promise<{id: string, username: string, role: string}>}
+ */
 async function register(username, password, role = 'user') {
   const existing = findUser(username);
   if (existing) {
     throw new Error('User already exists');
   }
   const hashed = await bcrypt.hash(password, 10);
-  const user = { username, password: hashed, roles };
-  addUser(user);
-  return { username, roles };
-  const user = { username, password: hashed, role };
-  addUser(user);
   const user = addUser({ username, password: hashed, role });
   return { id: user.id, username: user.username, role: user.role };
-  addUser({ username, password: hashed, role });
-  return { username, role };
 }
 
+/**
+ * Authenticate a user and return a JWT token.
+ * @param {string} username
+ * @param {string} password
+ * @returns {Promise<{token: string}>}
+ */
 async function login(username, password) {
   const user = findUser(username);
   if (!user) {
@@ -31,23 +36,19 @@ async function login(username, password) {
   if (!match) {
     throw new Error('Invalid credentials');
   }
-  const token = jwt.sign({ username, roles: user.roles }, JWT_SECRET, { expiresIn: '1h' });
-  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, {
-    expiresIn: '1h',
-  });
   const token = jwt.sign(
     { id: user.id, username: user.username, role: user.role },
     JWT_SECRET,
     { expiresIn: '1h' }
   );
-
-  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, {
-    expiresIn: '1h',
-  });
-  const token = jwt.sign({ username, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
   return { token };
 }
 
+/**
+ * Verify a JWT token.
+ * @param {string} token
+ * @returns {object|null} Decoded token or null if invalid
+ */
 function verifyToken(token) {
   try {
     return jwt.verify(token, JWT_SECRET);
@@ -57,3 +58,4 @@ function verifyToken(token) {
 }
 
 module.exports = { register, login, verifyToken };
+

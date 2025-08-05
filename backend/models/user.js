@@ -1,19 +1,36 @@
 const { randomUUID } = require('crypto');
 
+// In-memory user store. In a real application this would be persisted
+// to a database table. Each user has a UUID identifier, username,
+// hashed password and role.
 const users = [];
 
+/**
+ * Find a user by username.
+ * @param {string} username
+ * @returns {object|undefined}
+ */
 function findUser(username) {
   return users.find(u => u.username === username);
 }
 
-function addUser({ username, password, role }) {
+/**
+ * Add a new user to the store.
+ * @param {{username: string, password: string, role?: string}} param0
+ * @returns {object} The created user record
+ */
+function addUser({ username, password, role = 'user' }) {
   const user = { id: randomUUID(), username, password, role };
   users.push(user);
   return user;
-function addUser({ username, password, role = 'user' }) {
-  users.push({ username, password, role });
 }
 
+/**
+ * Update an existing user's password.
+ * @param {string} username
+ * @param {string} password
+ * @returns {boolean} True if the user was found and updated
+ */
 function updatePassword(username, password) {
   const user = findUser(username);
   if (!user) return false;
@@ -22,3 +39,4 @@ function updatePassword(username, password) {
 }
 
 module.exports = { users, findUser, addUser, updatePassword };
+
