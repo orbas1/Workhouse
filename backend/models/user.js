@@ -8,4 +8,11 @@ function addUser(user) {
   users.push(user);
 }
 
-module.exports = { users, findUser, addUser };
+function updatePassword(username, password) {
+  const user = findUser(username);
+  if (!user) return false;
+  user.password = password;
+  return true;
+}
+
+module.exports = { users, findUser, addUser, updatePassword };

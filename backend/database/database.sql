@@ -18,3 +18,39 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Security Module Tables
+
+CREATE TABLE IF NOT EXISTS security_logs (
+    id UUID PRIMARY KEY,
+    user_identifier VARCHAR(255),
+    action TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS security_sessions (
+    id UUID PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS security_incidents (
+    id UUID PRIMARY KEY,
+    description TEXT NOT NULL,
+    status VARCHAR(20) DEFAULT 'open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS privacy_settings (
+    id UUID PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    settings JSONB NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS compliance_audits (
+    id UUID PRIMARY KEY,
+    description TEXT NOT NULL,
+    status VARCHAR(20) DEFAULT 'in-progress',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
