@@ -1,5 +1,6 @@
 const logger = require('../utils/logger');
 
+
 /**
  * Middleware to authorize users based on role.
  * @param {...string} allowedRoles - Roles permitted to access the route.
@@ -15,6 +16,7 @@ module.exports = (allowedRoles = []) => {
   return (req, res, next) => {
     const userRole = req.user?.role;
     if (!userRole || !allowedRoles.includes(userRole)) {
+      logger.error('Forbidden access', { user: req.user?.username, requiredRoles: allowedRoles });
       logger.error('Access denied', { userId: req.user?.id, role: userRole });
 module.exports = (...allowedRoles) => {
   return (req, res, next) => {
