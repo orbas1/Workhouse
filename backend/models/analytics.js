@@ -1,7 +1,10 @@
 const { randomUUID } = require('crypto');
 
-const earnings = new Map(); // agencyId => [{ id, date, amount }]
-const performance = new Map(); // agencyId => [{ id, employeeId, tasksCompleted, rating, periodStart, periodEnd }]
+// -----------------------------
+// Agency-level analytics stores
+// -----------------------------
+const earnings = new Map(); // agencyId => [ { id, date, amount } ]
+const performance = new Map(); // agencyId => [ { id, employeeId, tasksCompleted, rating, periodStart, periodEnd } ]
 
 function addEarning(agencyId, amount, date = new Date()) {
   const record = {
@@ -45,12 +48,9 @@ function getPerformanceByAgency(agencyId) {
   return performance.get(agencyId) || [];
 }
 
-module.exports = {
-  addEarning,
-  getEarningsByAgency,
-  addPerformance,
-  getPerformanceByAgency,
-// In-memory stores
+// -----------------------------
+// Content analytics stores
+// -----------------------------
 const contentAnalytics = new Map(); // contentId -> metrics
 const contentFeedback = []; // list of feedback entries
 
@@ -105,11 +105,104 @@ function updateFeedbackScore(contentId) {
   return score;
 }
 
+// -----------------------------
+// Learning analytics stores
+// -----------------------------
+const pathAnalytics = new Map(); // pathId -> analytics
+const userAnalytics = new Map(); // userId -> analytics
+const skillAnalytics = new Map(); // userId -> [ { skill, level, progress, updatedAt } ]
+const learningPredictions = new Map(); // userId -> { prediction, confidence, createdAt }
+
+function setPathAnalytics(pathId, data) {
+  const record = Object.assign({
+    id: randomUUID(),
+    pathId,
+    views: 0,
+    enrollments: 0,
+    completions: 0,
+    averageScore: 0,
+    updatedAt: new Date(),
+  }, data, { updatedAt: new Date() });
+  pathAnalytics.set(pathId, record);
+  return record;
+}
+
+function getPathAnalytics(pathId) {
+  return pathAnalytics.get(pathId) || null;
+}
+
+function setUserAnalytics(userId, data) {
+  const record = Object.assign({
+    id: randomUUID(),
+    userId,
+    pathsEnrolled: 0,
+    pathsCompleted: 0,
+    averageScore: 0,
+    learningHours: 0,
+    updatedAt: new Date(),
+  }, data, { updatedAt: new Date() });
+  userAnalytics.set(userId, record);
+  return record;
+}
+
+function getUserAnalytics(userId) {
+  return userAnalytics.get(userId) || null;
+}
+
+function setUserSkills(userId, skills) {
+  const records = skills.map(s => ({
+    id: randomUUID(),
+    userId,
+    skill: s.skill,
+    level: s.level,
+    progress: s.progress || 0,
+    updatedAt: new Date(),
+  }));
+  skillAnalytics.set(userId, records);
+  return records;
+}
+
+function getUserSkills(userId) {
+  return skillAnalytics.get(userId) || [];
+}
+
+function setPrediction(userId, prediction, confidence = 0) {
+  const record = {
+    id: randomUUID(),
+    userId,
+    prediction,
+    confidence: Number(confidence),
+    createdAt: new Date(),
+  };
+  learningPredictions.set(userId, record);
+  return record;
+}
+
+function getPrediction(userId) {
+  return learningPredictions.get(userId) || null;
+}
+
 module.exports = {
+  // Agency analytics
+  addEarning,
+  getEarningsByAgency,
+  addPerformance,
+  getPerformanceByAgency,
+  // Content analytics
   getAllContentAnalytics,
   getContentAnalytics,
   upsertContentAnalytics,
   addFeedback,
   getFeedbackByContent,
   updateFeedbackScore,
+  // Learning analytics
+  setPathAnalytics,
+  getPathAnalytics,
+  setUserAnalytics,
+  getUserAnalytics,
+  setUserSkills,
+  getUserSkills,
+  setPrediction,
+  getPrediction,
 };
+
