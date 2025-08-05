@@ -1,4 +1,4 @@
-const { storeCv, generateCv, generateCoverLetter, getResume } = require('../services/resume');
+const { storeCv, generateCv, storeCoverLetter, generateCoverLetter, getResume } = require('../services/resume');
 
 async function uploadCv(req, res) {
   try {
@@ -32,6 +32,16 @@ async function createCoverLetter(req, res) {
   }
 }
 
+async function uploadCoverLetter(req, res) {
+  try {
+    const record = await storeCoverLetter(req.user.username, req.file);
+    res.status(201).json(record);
+  } catch (err) {
+    console.error('Cover letter upload failed', err);
+    res.status(500).json({ error: 'Failed to upload cover letter' });
+  }
+}
+
 async function fetchResume(req, res) {
   try {
     const data = await getResume(req.user.username);
@@ -42,4 +52,4 @@ async function fetchResume(req, res) {
   }
 }
 
-module.exports = { uploadCv, createCv, createCoverLetter, fetchResume };
+module.exports = { uploadCv, createCv, createCoverLetter, uploadCoverLetter, fetchResume };
