@@ -1,0 +1,14 @@
+.navbar {
+  gap: 1rem;
+}
+
+.nav-link {
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+.nav-bar {
+  background-color: #319795;
+}
