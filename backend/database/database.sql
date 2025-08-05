@@ -18,6 +18,26 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Classroom Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS classroom_engagement (
+    id UUID PRIMARY KEY,
+    classroom_id UUID NOT NULL REFERENCES classrooms(id) ON DELETE CASCADE,
+    attendance_rate NUMERIC(5,2) NOT NULL,
+    participation_rate NUMERIC(5,2) NOT NULL,
+    average_score NUMERIC(5,2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS classroom_completion (
+    id UUID PRIMARY KEY,
+    classroom_id UUID NOT NULL REFERENCES classrooms(id) ON DELETE CASCADE,
+    completion_rate NUMERIC(5,2) NOT NULL,
+    average_completion_time INTEGER,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Dispute Analytics Module Tables
 
 CREATE TABLE IF NOT EXISTS disputes (

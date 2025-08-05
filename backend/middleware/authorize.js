@@ -1,5 +1,10 @@
 const logger = require('../utils/logger');
 
+module.exports = (allowedRoles = []) => {
+  return (req, res, next) => {
+    const userRole = req.user?.role;
+    if (!userRole || !allowedRoles.includes(userRole)) {
+      logger.error('Access denied', { userId: req.user?.id, role: userRole });
 module.exports = (...allowedRoles) => {
   return (req, res, next) => {
     const role = req.user?.role;
@@ -22,3 +27,4 @@ module.exports = (...allowedRoles) => {
     next();
   };
 };
+
