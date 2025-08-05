@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const linkRoutes = require('./routes/link');
 const referralRoutes = require('./routes/referrals');
 const onboardingRoutes = require('./routes/onboarding');
 const notificationRoutes = require('./routes/notification');
@@ -30,9 +31,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Mount authentication routes. The parent application may prefix these
-// with "/api" when integrating the backend.
+// Mount routes. The parent application may prefix these with "/api"
+// when integrating the backend.
 app.use('/auth', authRoutes);
+app.use('/affiliates', linkRoutes);
 app.use('/referrals', referralRoutes);
 app.use('/affiliates', onboardingRoutes);
 app.use('/agency', agencyRoutes);
