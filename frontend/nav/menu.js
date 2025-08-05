@@ -14,6 +14,7 @@ function NavMenu() {
       <Heading size="md">Workhouse</Heading>
       <Spacer />
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/dashboard')}>Dashboard</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs')}>Gigs</Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );
