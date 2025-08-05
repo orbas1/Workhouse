@@ -10,7 +10,8 @@ function HomePage() {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Workhouse
           </Typography>
-          <Button color="inherit" onClick={() => navigate('/')}> 
+
+          <Button color="inherit" onClick={() => navigate('/')}>
             Login
           </Button>
         </Toolbar>
