@@ -18,6 +18,26 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Financial Module Tables
+
+CREATE TABLE IF NOT EXISTS financial_records (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    type VARCHAR(20) NOT NULL CHECK (type IN ('income', 'expense')),
+    amount NUMERIC(12,2) NOT NULL,
+    description VARCHAR(255),
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS financial_forecasts (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    month DATE NOT NULL,
+    projected_revenue NUMERIC(12,2) NOT NULL,
+    projected_expense NUMERIC(12,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Training Module Tables
 
 CREATE TABLE IF NOT EXISTS training_sessions (
