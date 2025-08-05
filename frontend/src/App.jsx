@@ -7,12 +7,14 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 
 function Protected({ children }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  if (loading) return null;
   if (!user) {
     return <Navigate to="/login" replace />;
   }
@@ -21,6 +23,54 @@ function Protected({ children }) {
 
 export default function App() {
   return (
+    <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <ProfileProvider>
+            <NavMenu />
+            <Box p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <ProfilePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/profile/customize"
+                  element={
+                    <Protected>
+                      <ProfileCustomizationPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/new"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/:contractId/edit"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="*" element={<Navigate to="/profile" replace />} />
+              </Routes>
+            </Box>
+          </ProfileProvider>
+        </BrowserRouter>
+      </AuthProvider>
     <ChakraProvider>
       <AuthProvider>
         <BrowserRouter>
