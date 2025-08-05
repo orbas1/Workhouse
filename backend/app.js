@@ -51,8 +51,8 @@ const podcastAnalyticsRoutes = require('./routes/podcastAnalytics');
 const workspaceAnalyticsRoutes = require('./routes/workspaceAnalytics');
 const sentimentAnalysisRoutes = require('./routes/sentimentAnalysis');
 const podcastAnalyticsRoutes = require('./routes/podcastAnalytics');
-const serviceProviderAnalyticsRoutes = require('./routes/serviceProviderAnalytics');
-const serviceProviderOrdersRoutes = require('./routes/serviceProviderOrders');
+
+const serviceProviderCalendarRoutes = require('./routes/serviceProviderCalendar');
 const userAnalyticsRoutes = require('./routes/userAnalytics');
 const webinarAnalyticsRoutes = require('./routes/webinarAnalytics');
 const workspaceAnalyticsRoutes = require('./routes/workspaceAnalytics');
@@ -173,7 +173,8 @@ app.use('/analytics/workspace', workspaceAnalyticsRoutes);
 app.use('/sentiment', sentimentAnalysisRoutes);
 app.use('/podcast-analytics', podcastAnalyticsRoutes);
 app.use('/service-providers', serviceProviderAnalyticsRoutes);
-app.use('/service-providers/orders', serviceProviderOrdersRoutes);
+
+app.use('/service-providers/calendar', serviceProviderCalendarRoutes);
 app.use('/analytics/user', userAnalyticsRoutes);
 app.use('/webinar-analytics', webinarAnalyticsRoutes);
 app.use('/analytics/workspace', workspaceAnalyticsRoutes);

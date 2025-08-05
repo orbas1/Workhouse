@@ -13,6 +13,8 @@ export default function Dashboard() {
         <Button colorScheme="teal" onClick={() => navigate('/services')}>
           Browse Services
         </Button>
+        <Heading>Dashboard</Heading>
+        <Button mt={4} colorScheme="teal" onClick={() => window.location.href = '/calendar'}>Calendar</Button>
       </Box>
     </ChakraProvider>
   );
