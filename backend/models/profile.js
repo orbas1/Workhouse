@@ -14,6 +14,10 @@ function createProfile({
   title = '',
   location = '',
   avatarUrl = '',
+  profilePicture = '',
+  introVideo = '',
+  portfolioLinks = [],
+  title = '',
 }) {
   const profile = {
     id: randomUUID(),
@@ -23,6 +27,10 @@ function createProfile({
     preferences,
     skills,
     portfolio: [],
+    profilePicture,
+    introVideo,
+    portfolioLinks,
+    title,
     analytics: { views: 0 },
     verificationStatus: 'unverified',
     continuousVerification: false,
