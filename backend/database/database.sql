@@ -427,3 +427,21 @@ CREATE TABLE IF NOT EXISTS workspace_analytics (
     collaboration_score NUMERIC(5,2) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Advertising tables for billing and campaign analytics
+CREATE TABLE IF NOT EXISTS ad_campaigns (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    impressions INT DEFAULT 0,
+    clicks INT DEFAULT 0,
+    ctr NUMERIC DEFAULT 0,
+    spend NUMERIC DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS ad_transactions (
+    id SERIAL PRIMARY KEY,
+    campaign_id INT REFERENCES ad_campaigns(id),
+    amount NUMERIC NOT NULL,
+    payment_date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL
+);

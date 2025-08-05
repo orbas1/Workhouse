@@ -115,6 +115,7 @@ const projectManagementRoutes = require('./routes/projectManagement');
 const successStoryRoutes = require('./routes/successStories');
 const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
 const userSetupRoutes = require('./routes/userSetup');
+const adsRoutes = require('./routes/ads');
 const interviewRoutes = require('./routes/interviews');
 const app = express();
 app.use(cors());
@@ -239,6 +240,7 @@ app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
+app.use('/ads', adsRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
