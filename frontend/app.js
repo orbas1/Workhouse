@@ -24,9 +24,12 @@ function App() {
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
         <Route path="/onboarding/documents" element={<Protected><CvCoverLetterPage /></Protected>} />
         <Route path="/feed" element={<Protected><LiveFeed /></Protected>} />
+        <Route path="/jobs" element={<Protected><JobListingsPage /></Protected>} />
         <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
         <Route path="/setup/financial-media" element={<Protected><FinancialMediaSetupPage /></Protected>} />
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
+        <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
+        <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
