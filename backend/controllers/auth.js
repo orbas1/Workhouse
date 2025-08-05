@@ -1,9 +1,6 @@
-const { register, login, verifyToken } = require('../services/auth');
+const { register, login, resetPassword, verifyToken } = require('../services/auth');
 
 async function registerHandler(req, res) {
-  const { username, password, roles } = req.body;
-  try {
-    const user = await register(username, password, roles);
   const { username, password, role } = req.body;
   try {
     const user = await register(username, password, role);
@@ -23,15 +20,23 @@ async function loginHandler(req, res) {
   }
 }
 
+async function resetPasswordHandler(req, res) {
+  const { username, password } = req.body;
+  try {
+    await resetPassword(username, password);
+    res.json({ message: 'Password updated' });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 function meHandler(req, res) {
   const token = req.headers.authorization?.split(' ')[1];
   const payload = verifyToken(token);
   if (!payload) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  res.json({ username: payload.username, roles: payload.roles });
   res.json({ id: payload.id, username: payload.username, role: payload.role });
-  res.json({ username: payload.username, role: payload.role });
 }
 
-module.exports = { registerHandler, loginHandler, meHandler };
+module.exports = { registerHandler, loginHandler, resetPasswordHandler, meHandler };

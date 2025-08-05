@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { findUser, addUser } = require('../models/user');
+const { findUser, addUser, updatePassword } = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
 
@@ -45,6 +45,21 @@ async function login(username, password) {
 }
 
 /**
+ * Reset a user's password.
+ * @param {string} username
+ * @param {string} newPassword
+ * @returns {Promise<void>}
+ */
+async function resetPassword(username, newPassword) {
+  const user = findUser(username);
+  if (!user) {
+    throw new Error('User not found');
+  }
+  const hashed = await bcrypt.hash(newPassword, 10);
+  updatePassword(username, hashed);
+}
+
+/**
  * Verify a JWT token.
  * @param {string} token
  * @returns {object|null} Decoded token or null if invalid
@@ -57,5 +72,5 @@ function verifyToken(token) {
   }
 }
 
-module.exports = { register, login, verifyToken };
+module.exports = { register, login, resetPassword, verifyToken };
 
