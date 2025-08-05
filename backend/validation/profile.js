@@ -38,6 +38,36 @@ const skillsSchema = Joi.object({
   skills: Joi.array().items(Joi.string().min(1)).min(1).required(),
 });
 
+// Stage 82 Investor-Entrepreneur Profile Schemas
+const profileIdParamSchema = Joi.object({
+  profileId: Joi.string().uuid().required(),
+});
+
+const createProfileSchema = Joi.object({
+  bio: Joi.string().allow('').optional(),
+  geographicPreferences: Joi.object({
+    country: Joi.string().required(),
+    city: Joi.string().optional(),
+  }).optional(),
+});
+
+const updateInvestorProfileSchema = Joi.object({
+  bio: Joi.string().optional(),
+  geographicPreferences: Joi.object({
+    country: Joi.string().required(),
+    city: Joi.string().optional(),
+  }).optional(),
+}).min(1);
+
+const continuousVerificationSchema = Joi.object({
+  enabled: Joi.boolean().required(),
+});
+
+const geographicPreferenceSchema = Joi.object({
+  country: Joi.string().required(),
+  city: Joi.string().optional(),
+});
+
 module.exports = {
   userIdParamSchema,
   mentorProfileSchema,
@@ -45,4 +75,9 @@ module.exports = {
   updateProfileSchema,
   portfolioItemSchema,
   skillsSchema,
+  profileIdParamSchema,
+  createProfileSchema,
+  updateInvestorProfileSchema,
+  continuousVerificationSchema,
+  geographicPreferenceSchema,
 };
