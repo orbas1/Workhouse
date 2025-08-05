@@ -42,6 +42,16 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
+      <Box className="dashboard" mt={6}>
+        <Heading size="lg" mb={2}>Dashboard</Heading>
+        <Text mb={4}>Hello, {user.username}!</Text>
+        <Button colorScheme="blue" mr={2} onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+        <Button colorScheme="teal" onClick={() => window.location.href = '/interview/1'}>
+          Join Interview
+        </Button>
+      </Box>
     <Box className="dashboard">
       <Heading size="lg" mb={2}>Dashboard</Heading>
       <Text mb={4}>Hello, {user.username}!</Text>
@@ -50,6 +60,12 @@ function HomeDashboard() {
       </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
         Manage Applications
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
+        Manage Gigs
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
+        Gigs Dashboard
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
       </Button>
     </Box>
   );
