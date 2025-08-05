@@ -1,3 +1,6 @@
+import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import NavMenu from '../components/NavMenu.jsx';
 import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { ChakraProvider, Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
@@ -21,6 +24,9 @@ export default function Dashboard() {
       <NavMenu />
       <Box p={4} className="dashboard">
         <Heading mb={4}>Dashboard</Heading>
+        <Link as={RouterLink} to="/ads" color="blue.500">
+          View Sponsored Content
+        </Link>
         <Tabs variant="enclosed">
           <TabList>
             <Tab>Client</Tab>

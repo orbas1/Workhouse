@@ -126,6 +126,7 @@ const campaignRoutes = require('./routes/campaigns');
 const projectManagementRoutes = require('./routes/projectManagement');
 const successStoryRoutes = require('./routes/successStories');
 const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
+const adsRoutes = require('./routes/ads');
 const userSetupRoutes = require('./routes/userSetup');
 const interviewRoutes = require('./routes/interviews');
 const app = express();
@@ -264,6 +265,7 @@ app.use('/interviews', interviewRoutes);
 app.use('/success', successStoryRoutes);
 app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
+app.use('/ads', adsRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
 app.get('/operations/retail/product/:productId', (req, res) => {
