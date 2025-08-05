@@ -22,10 +22,32 @@ const menteeProfileSchema = Joi.object({
   skills: Joi.array().items(Joi.string()).optional(),
 });
 
+const visibilitySchema = Joi.object({
+  portfolio: Joi.boolean(),
+  reviews: Joi.boolean(),
+  activity: Joi.boolean(),
+});
+
+const themeSchema = Joi.object({
+  color: Joi.string(),
+  bannerUrl: Joi.string().uri().allow(''),
+  font: Joi.string(),
+});
+
+const contactSchema = Joi.object({
+  email: Joi.string().email(),
+  phone: Joi.string(),
+});
+
 const updateProfileSchema = Joi.object({
+  name: Joi.string(),
+  title: Joi.string(),
   bio: Joi.string(),
+  contact: contactSchema,
   preferences: Joi.object(),
   skills: Joi.array().items(Joi.string()),
+  visibility: visibilitySchema,
+  theme: themeSchema,
 }).min(1);
 
 const portfolioItemSchema = Joi.object({
@@ -44,19 +66,29 @@ const profileIdParamSchema = Joi.object({
 });
 
 const createProfileSchema = Joi.object({
+  name: Joi.string().optional(),
+  title: Joi.string().optional(),
   bio: Joi.string().allow('').optional(),
+  contact: contactSchema.optional(),
   geographicPreferences: Joi.object({
     country: Joi.string().required(),
     city: Joi.string().optional(),
   }).optional(),
+  visibility: visibilitySchema.optional(),
+  theme: themeSchema.optional(),
 });
 
 const updateInvestorProfileSchema = Joi.object({
+  name: Joi.string().optional(),
+  title: Joi.string().optional(),
   bio: Joi.string().optional(),
+  contact: contactSchema.optional(),
   geographicPreferences: Joi.object({
     country: Joi.string().required(),
     city: Joi.string().optional(),
   }).optional(),
+  visibility: visibilitySchema.optional(),
+  theme: themeSchema.optional(),
 }).min(1);
 
 const continuousVerificationSchema = Joi.object({

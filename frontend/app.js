@@ -8,6 +8,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
+        <Route path="/profile/customize" element={<Protected><ProfileCustomization /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
