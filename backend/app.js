@@ -29,6 +29,7 @@ app.use(express.json());
 // with "/api" when integrating the backend.
 app.use('/auth', authRoutes);
 app.use('/affiliates', affiliateRoutes);
+app.use('/agency/jobs', jobRoutes);
 app.use('/agency', jobRoutes);
 app.use('/agency', analyticsRoutes);
 app.use('/agency', matchmakingRoutes);
