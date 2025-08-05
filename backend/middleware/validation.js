@@ -1,3 +1,10 @@
+const { validationResult } = require('express-validator');
+
+function handleValidationErrors(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.warn('Validation failed', errors.array());
+    return res.status(400).json({ errors: errors.array() });
 function validateAgencyRegistration(req, res, next) {
   const { name, services, contactEmail } = req.body;
   const errors = [];
@@ -33,4 +40,5 @@ function validateAgencyUpdate(req, res, next) {
   next();
 }
 
+module.exports = { handleValidationErrors };
 module.exports = { validateAgencyRegistration, validateAgencyUpdate };
