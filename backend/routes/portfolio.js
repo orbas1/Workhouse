@@ -18,6 +18,7 @@ const {
 
 const router = express.Router();
 
+// Stage 81 routes
 router.post(
   '/add/:userId',
   auth,
@@ -49,5 +50,15 @@ router.post(
   validate(addProjectDetailSchema),
   addProjectDetailHandler
 );
+
+// Stage 101 routes
+router.post(
+  '/projects',
+  auth,
+  validate(addPortfolioItemSchema),
+  addPortfolioItemHandler
+);
+
+router.get('/user', auth, getPortfolioHandler);
 
 module.exports = router;
