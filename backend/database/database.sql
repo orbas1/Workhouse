@@ -240,6 +240,16 @@ CREATE TABLE IF NOT EXISTS contract_work_submissions (
     approved_at TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS contract_invoices (
+    id UUID PRIMARY KEY,
+    contract_id UUID NOT NULL REFERENCES contracts(id) ON DELETE CASCADE,
+    freelancer_id UUID NOT NULL,
+    amount NUMERIC(12,2) NOT NULL,
+    description TEXT,
+    status VARCHAR(20) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS training_attendance (
     id UUID PRIMARY KEY,
     session_id UUID NOT NULL REFERENCES training_sessions(id) ON DELETE CASCADE,
@@ -311,6 +321,15 @@ CREATE TABLE IF NOT EXISTS classroom_completion (
     completion_rate NUMERIC(5,2) NOT NULL,
     average_completion_time INTEGER,
     recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Classroom chat messages
+CREATE TABLE IF NOT EXISTS classroom_messages (
+    id UUID PRIMARY KEY,
+    classroom_id UUID NOT NULL REFERENCES classrooms(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Dispute Analytics Module Tables
@@ -430,3 +449,16 @@ CREATE TABLE IF NOT EXISTS workspace_analytics (
 -- Indexes for dashboard performance
 CREATE INDEX IF NOT EXISTS idx_contracts_client_id ON contracts(client_id);
 CREATE INDEX IF NOT EXISTS idx_contracts_freelancer_id ON contracts(freelancer_id);
+
+-- Freelancer Profiles Table
+CREATE TABLE IF NOT EXISTS freelancer_profiles (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    full_name VARCHAR(255),
+    title VARCHAR(255),
+    location VARCHAR(255),
+    skills TEXT[],
+    hourly_rate NUMERIC(10,2),
+    experience_years INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

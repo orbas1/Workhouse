@@ -17,7 +17,37 @@ function NavMenu() {
     <Flex className="nav-menu" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
+        onClick={() => navigate('/profile')}
+      >
+        Profile
+      </Button>
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
+        onClick={() => navigate('/contracts/new')}
+      >
+        New Contract
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
+        Profile
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services/new')}>
+        New Service
+      </Button>
+      <Button variant="outline" color="white" onClick={handleLogout}>
+        Logout
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>Tasks</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/freelancers')}>Freelancers</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/service-orders')}>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
+        Services
+      </Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );
