@@ -39,3 +39,49 @@ CREATE TABLE IF NOT EXISTS user_course_engagement (
     last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Financial Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS financial_revenues (
+    id UUID PRIMARY KEY,
+    source VARCHAR(100) NOT NULL,
+    amount NUMERIC(12, 2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS financial_expenses (
+    id UUID PRIMARY KEY,
+    category VARCHAR(100) NOT NULL,
+    amount NUMERIC(12, 2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS crypto_transactions (
+    id UUID PRIMARY KEY,
+    currency VARCHAR(20) NOT NULL,
+    amount NUMERIC(18, 8) NOT NULL,
+    value_usd NUMERIC(12, 2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Payment Module Tables
+
+CREATE TABLE IF NOT EXISTS payments (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    employee_id UUID NOT NULL,
+    job_id UUID NOT NULL,
+    amount NUMERIC(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'disbursed',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS payment_adjustments (
+    id UUID PRIMARY KEY,
+    payment_id UUID NOT NULL REFERENCES payments(id) ON DELETE CASCADE,
+    old_amount NUMERIC(10,2) NOT NULL,
+    new_amount NUMERIC(10,2) NOT NULL,
+    reason VARCHAR(255),
+    adjusted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
