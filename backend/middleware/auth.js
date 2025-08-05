@@ -1,6 +1,11 @@
 const { verifyToken } = require('../services/auth');
 
 function authenticate(req, res, next) {
+  const header = req.headers.authorization;
+  if (!header) {
+    return res.status(401).json({ error: 'Authorization header missing' });
+  }
+  const token = header.split(' ')[1];
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     return res.status(401).json({ error: 'Authorization header missing' });
@@ -14,6 +19,7 @@ function authenticate(req, res, next) {
   next();
 }
 
+module.exports = authenticate;
 module.exports = { authenticate };
 // Middleware to verify JWT token and attach payload to req.user
 module.exports = function authMiddleware(req, res, next) {

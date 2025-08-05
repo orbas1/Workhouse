@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const notificationRoutes = require('./routes/notification');
 const agencyRoutes = require('./routes/agency');
 const employeeRoutes = require('./routes/employee');
 const affiliateRoutes = require('./routes/affiliates');
@@ -52,6 +53,9 @@ app.use('/analytics/disputes', disputeAnalyticsRoutes);
 app.use('/education-analytics', educationAnalyticsRoutes);
 app.use('/financial-analytics', financialAnalyticsRoutes);
 app.use('/agency/:agencyId/payments', paymentRoutes);
+
+// Commission rate adjustment notifications
+app.use('/affiliates/notifications', notificationRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
