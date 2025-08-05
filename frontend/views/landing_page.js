@@ -1,3 +1,4 @@
+const { Container, TextField, Button, Typography, Box, AppBar, Toolbar } = MaterialUI;
 const { useState } = React;
 const { useNavigate } = ReactRouterDOM;
 
@@ -29,16 +30,48 @@ function LandingPage() {
   }
 
   return (
-    <div>
-      <h2>Welcome to Workhouse</h2>
-      <input value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-      <div>
-        <button onClick={() => handle('login')}>Login</button>
-        <button onClick={() => handle('register')}>Register</button>
-      </div>
-      {error && <p style={{color:'red'}}>{error}</p>}
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            Workhouse
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm" sx={{ mt: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Welcome to Workhouse
+        </Typography>
+        <TextField
+          label="Username"
+          fullWidth
+          margin="normal"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          fullWidth
+          margin="normal"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error && (
+          <Typography color="error" sx={{ mt: 1 }}>
+            {error}
+          </Typography>
+        )}
+        <Box sx={{ mt: 2, display: 'flex', gap: 2 }}>
+          <Button variant="contained" onClick={() => handle('login')}>
+            Login
+          </Button>
+          <Button variant="outlined" onClick={() => handle('register')}>
+            Register
+          </Button>
+        </Box>
+      </Container>
+    </Box>
   );
 }
 
