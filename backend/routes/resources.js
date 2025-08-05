@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   listServicesHandler,
+  getServiceHandler,
   requestServiceHandler,
   getResourcesByTypeHandler,
   getLegalResourcesHandler,
@@ -30,6 +31,7 @@ const router = express.Router();
 router.use(auth);
 
 router.get('/marketplace/services', listServicesHandler);
+router.get('/marketplace/services/:id', getServiceHandler);
 router.post(
   '/marketplace/services/request',
   validate(serviceRequestSchema),
