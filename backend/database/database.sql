@@ -1,3 +1,5 @@
+-- Main database schema initialization
+\i referrals.sql
 
 -- Affiliate Onboarding resources and webinar registration tables
 

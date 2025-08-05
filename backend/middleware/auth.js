@@ -1,3 +1,10 @@
+const { verifyToken } = require('../services/auth');
+
+/**
+ * Express middleware to authenticate requests using a Bearer token.
+ * Attaches the decoded user payload to req.user on success.
+ */
+function authenticate(req, res, next) {
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
@@ -15,6 +22,8 @@ function authenticate(req, res, next) {
   if (!authHeader) {
     return res.status(401).json({ error: 'Authorization header missing' });
   }
+
+  const token = authHeader.split(' ')[1];
   const token = authHeader.split(' ')[1];
   try {
     const payload = jwt.verify(token, JWT_SECRET);
@@ -28,6 +37,12 @@ function authenticate(req, res, next) {
   if (!payload) {
     return res.status(401).json({ error: 'Invalid or expired token' });
   }
+
+  req.user = payload;
+  return next();
+}
+
+module.exports = authenticate;
   req.user = payload;
   next();
 }
