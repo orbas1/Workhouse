@@ -77,6 +77,17 @@ async function getTaskHandler(req, res) {
   }
 }
 
+async function listTasksHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const tasks = await service.listTasks(projectId);
+    res.json(tasks);
+  } catch (err) {
+    logger.error('Failed to list tasks', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 async function updateTaskHandler(req, res) {
   const { taskId } = req.params;
   try {
@@ -331,6 +342,7 @@ module.exports = {
   createTaskHandler,
   listTasksHandler,
   getTaskHandler,
+  listTasksHandler,
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,

@@ -76,6 +76,8 @@ function listTasks({ ownerId, assignee } = {}) {
     if (assignee && t.assignee !== assignee) return false;
     return true;
   });
+function listTasksByProject(projectId) {
+  return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
 }
 
 function updateTask(taskId, data) {
@@ -205,6 +207,7 @@ module.exports = {
   createTask,
   getTaskById,
   listTasks,
+  listTasksByProject,
   updateTask,
   deleteTask,
   assignTask,

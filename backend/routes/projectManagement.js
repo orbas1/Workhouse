@@ -7,6 +7,7 @@ const {
   createTaskHandler,
   listTasksHandler,
   getTaskHandler,
+  listTasksHandler,
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,
@@ -73,6 +74,7 @@ router.delete('/projects/delete/:projectId', auth, validate(projectIdParamSchema
 router.post('/tasks/create', auth, validate(createTaskSchema), createTaskHandler);
 router.get('/tasks', auth, validate(taskListSchema, 'query'), listTasksHandler);
 router.get('/tasks/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, getTaskHandler);
+router.get('/projects/:projectId/tasks', auth, validate(projectIdParamSchema, 'params'), projectExists, listTasksHandler);
 router.put('/tasks/update/:taskId', auth, validate(taskIdParamSchema, 'params'), validate(updateTaskSchema), taskExists, updateTaskHandler);
 router.delete('/tasks/delete/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, deleteTaskHandler);
 router.post('/tasks/assign', auth, validate(assignTaskSchema), assignTaskHandler);
