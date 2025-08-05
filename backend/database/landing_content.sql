@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS landing_content (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  icon VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS testimonials (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  quote TEXT NOT NULL
+);
