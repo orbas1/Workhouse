@@ -91,6 +91,7 @@ const socialRoutes = require('./routes/social');
 const projectRoutes = require('./routes/projects');
 const expertAccessRoutes = require('./routes/expertAccess');
 const projectManagementRoutes = require('./routes/projectManagement');
+const successStoryRoutes = require('./routes/successStories');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -187,6 +188,7 @@ app.use('/', resourceRoutes);
 app.use('/assessments', assessmentRoutes);
 app.use('/certificates', certificateRoutes);
 app.use('/experts', expertAccessRoutes);
+app.use('/success', successStoryRoutes);
 app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
 
