@@ -39,6 +39,7 @@ import NavBar from './components/NavBar.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
+import ClassroomPage from './pages/ClassroomPage.jsx';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
               <Route path="/" element={<Navigate to="/profile" replace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/classroom/:id" element={<ClassroomPage />} />
             </Routes>
           </Box>
         </ProfileProvider>
