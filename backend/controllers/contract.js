@@ -5,10 +5,12 @@ const {
   deleteContract,
   listContracts,
   viewContractProposals,
+  viewContractInvoices,
   acceptContractProposal,
   terminateContract,
   submitWorkForContract,
   approveSubmittedWork,
+  submitInvoiceForContract,
 } = require('../services/contract');
 const logger = require('../utils/logger');
 
@@ -72,6 +74,16 @@ async function viewContractProposalsHandler(req, res) {
   }
 }
 
+async function viewContractInvoicesHandler(req, res) {
+  try {
+    const invoices = await viewContractInvoices(req.params.contractId);
+    res.json(invoices);
+  } catch (err) {
+    logger.error('Failed to view contract invoices', { error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
 async function acceptContractProposalHandler(req, res) {
   try {
     const contract = await acceptContractProposal(
@@ -118,6 +130,16 @@ async function approveSubmittedWorkHandler(req, res) {
   }
 }
 
+async function submitInvoiceForContractHandler(req, res) {
+  try {
+    const invoice = await submitInvoiceForContract(req.params.contractId, req.body);
+    res.status(201).json(invoice);
+  } catch (err) {
+    logger.error('Failed to submit invoice for contract', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createContractHandler,
   getContractDetailsHandler,
@@ -125,9 +147,11 @@ module.exports = {
   deleteContractHandler,
   listContractsHandler,
   viewContractProposalsHandler,
+  viewContractInvoicesHandler,
   acceptContractProposalHandler,
   terminateContractHandler,
   submitWorkForContractHandler,
+  submitInvoiceForContractHandler,
   approveSubmittedWorkHandler,
 };
 
