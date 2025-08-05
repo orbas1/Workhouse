@@ -75,6 +75,91 @@ async function calculateMatchPotential(userId) {
   return { userId, score };
 }
 
+// Stage 82 Investor-Entrepreneur Profile Services
+async function createProfile(userId, data = {}) {
+  const profile = profileModel.createProfile({ userId, ...data });
+  logger.info('Profile created', { userId, profileId: profile.id });
+  return profile;
+}
+
+async function updateProfileById(profileId, updates) {
+  const profile = profileModel.findById(profileId);
+  if (!profile) {
+    logger.error('Profile not found for update', { profileId });
+    throw new Error('Profile not found');
+  }
+  Object.assign(profile, updates, { updatedAt: new Date() });
+  logger.info('Profile updated', { profileId });
+  return profile;
+}
+
+async function getProfileById(profileId) {
+  const profile = profileModel.findById(profileId);
+  if (!profile) {
+    logger.error('Profile not found', { profileId });
+    throw new Error('Profile not found');
+  }
+  return profile;
+}
+
+async function uploadPortfolioItemById(profileId, item) {
+  const result = profileModel.addPortfolioItemById(profileId, item);
+  if (!result) {
+    logger.error('Profile not found for portfolio upload', { profileId });
+    throw new Error('Profile not found');
+  }
+  logger.info('Portfolio item added', { profileId, itemId: result.id });
+  return result;
+}
+
+async function getProfileAnalytics(profileId) {
+  const analytics = profileModel.getAnalytics(profileId);
+  if (!analytics) {
+    logger.error('Profile analytics not found', { profileId });
+    throw new Error('Profile not found');
+  }
+  return analytics;
+}
+
+async function submitProfileForVerification(profileId) {
+  const profile = profileModel.submitForVerification(profileId);
+  if (!profile) {
+    logger.error('Profile not found for verification', { profileId });
+    throw new Error('Profile not found');
+  }
+  logger.info('Profile submitted for verification', { profileId });
+  return profile;
+}
+
+async function getVerificationStatus(profileId) {
+  const status = profileModel.getVerificationStatus(profileId);
+  if (!status) {
+    logger.error('Profile not found for verification status', { profileId });
+    throw new Error('Profile not found');
+  }
+  return { status };
+}
+
+async function enableContinuousVerification(profileId, enabled) {
+  const profile = profileModel.enableContinuousVerification(profileId, enabled);
+  if (!profile) {
+    logger.error('Profile not found for continuous verification', { profileId });
+    throw new Error('Profile not found');
+  }
+  logger.info('Continuous verification updated', { profileId, enabled });
+  return profile;
+}
+
+async function setGeographicPreferences(profileId, prefs) {
+  const profile = profileModel.setGeographicPreferences(profileId, prefs);
+  if (!profile) {
+    logger.error('Profile not found for geographic preferences', { profileId });
+    throw new Error('Profile not found');
+  }
+  logger.info('Geographic preferences updated', { profileId });
+  return profile.geographicPreferences;
+}
+
 module.exports = {
   createMentorProfile,
   createMenteeProfile,
@@ -84,4 +169,14 @@ module.exports = {
   getPreferences,
   addOrUpdateSkills,
   calculateMatchPotential,
+  // Stage 82 exports
+  createProfile,
+  updateProfileById,
+  getProfileById,
+  uploadPortfolioItemById,
+  getProfileAnalytics,
+  submitProfileForVerification,
+  getVerificationStatus,
+  enableContinuousVerification,
+  setGeographicPreferences,
 };
