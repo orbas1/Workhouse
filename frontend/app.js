@@ -1,3 +1,4 @@
+import OpportunityManagement from './pages/OpportunityManagement.jsx';
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/opportunities" element={<Protected><OpportunityManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
