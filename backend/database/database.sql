@@ -18,3 +18,27 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Financial Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS financial_revenues (
+    id UUID PRIMARY KEY,
+    source VARCHAR(100) NOT NULL,
+    amount NUMERIC(12, 2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS financial_expenses (
+    id UUID PRIMARY KEY,
+    category VARCHAR(100) NOT NULL,
+    amount NUMERIC(12, 2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS crypto_transactions (
+    id UUID PRIMARY KEY,
+    currency VARCHAR(20) NOT NULL,
+    amount NUMERIC(18, 8) NOT NULL,
+    value_usd NUMERIC(12, 2) NOT NULL,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
