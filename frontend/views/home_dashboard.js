@@ -88,6 +88,9 @@ function HomeDashboard() {
         <Button colorScheme="teal" onClick={() => window.location.href = '/profile'}>
           View Profile
         </Button>
+        <Button colorScheme="purple" onClick={() => window.location.href = '/volunteering'}>
+          Volunteering
+        </Button>
       </Flex>
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
