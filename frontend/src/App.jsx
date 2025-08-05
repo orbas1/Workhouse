@@ -61,6 +61,65 @@ export default function App() {
           </ProfileProvider>
         </BrowserRouter>
       </AuthProvider>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <ProfilePage />
+              </Protected>
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+import { ChakraProvider, Box } from '@chakra-ui/react';
+import NavBar from './components/NavBar.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
+import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
+import TaskManagementPage from './pages/TaskManagementPage.jsx';
+import { ProfileProvider } from './context/ProfileContext.jsx';
+import ServiceSearchPage from './pages/ServiceSearchPage.jsx';
+import ServiceDetailPage from './pages/ServiceDetailPage.jsx';
+import { TaskProvider } from './context/TaskContext.jsx';
+
+function App() {
+  return (
+    <ChakraProvider>
+      <BrowserRouter>
+        <ProfileProvider>
+          <NavBar />
+          <Box p={4}>
+            <Routes>
+              <Route path="/" element={<Navigate to="/profile" replace />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/services" element={<ServiceSearchPage />} />
+              <Route path="/services/:id" element={<ServiceDetailPage />} />
+              <Route path="/tasks" element={<TaskDashboardPage />} />
+            </Routes>
+          </Box>
+          <TaskProvider>
+            <NavBar />
+            <Box p={4}>
+              <Routes>
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+                <Route path="/tasks" element={<TaskManagementPage />} />
+              </Routes>
+            </Box>
+          </TaskProvider>
+        </ProfileProvider>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }
