@@ -48,6 +48,9 @@ function HomeDashboard() {
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
       </Button>
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
+      </Button>
     </Box>
   );
 }
