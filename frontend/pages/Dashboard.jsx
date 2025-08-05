@@ -43,6 +43,9 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/ads/create" mt={4} colorScheme="blue">
+          Create Ad
+        </Button>
         <Button mt={4} as={RouterLink} to="/creator/analytics" colorScheme="teal">
           Creator Analytics
         </Button>

@@ -1,3 +1,4 @@
+import AdCreateEdit from './pages/AdCreateEdit';
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import InSessionNetworking from './pages/InSessionNetworking.jsx';
@@ -19,6 +20,8 @@ function App() {
            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
             <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/ads/create" element={<Protected><AdCreateEdit /></Protected>} />
+            <Route path="/ads/:adId/edit" element={<Protected><AdCreateEdit /></Protected>} />
             <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
             <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
@@ -47,6 +50,8 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/ads/create" element={<Protected><AdCreateEdit /></Protected>} />
+        <Route path="/ads/:adId/edit" element={<Protected><AdCreateEdit /></Protected>} />
         <Route path="/creator/dashboard" element={<Protected><CreatorDashboard /></Protected>} />
         <Route path="/networking/session/:sessionId" element={<Protected><InSessionNetworking /></Protected>} />
         <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
