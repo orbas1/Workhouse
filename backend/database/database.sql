@@ -313,6 +313,15 @@ CREATE TABLE IF NOT EXISTS classroom_completion (
     recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Classroom chat messages
+CREATE TABLE IF NOT EXISTS classroom_messages (
+    id UUID PRIMARY KEY,
+    classroom_id UUID NOT NULL REFERENCES classrooms(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Dispute Analytics Module Tables
 
 CREATE TABLE IF NOT EXISTS disputes (
