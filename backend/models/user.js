@@ -16,9 +16,27 @@ function findUser(username) {
 
 /**
  * Add a new user to the store.
- * @param {{username: string, password: string, role?: string}} param0
+ * @param {{
+ *   username: string,
+ *   password: string,
+ *   role?: string,
+ *   fullName?: string,
+ *   phone?: string,
+ *   location?: string
+ * }} param0
  * @returns {object} The created user record
  */
+function addUser({ username, password, role = 'user', fullName = '', phone = '', location = '' }) {
+  const user = {
+    id: randomUUID(),
+    username,
+    email: username,
+    password,
+    role,
+    fullName,
+    phone,
+    location,
+  };
 function addUser({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
   const user = { id: randomUUID(), username, password, role, fullName, email, phone, location, bio, expertise };
   users.push(user);

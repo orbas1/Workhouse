@@ -15,6 +15,12 @@ function LoginPage() {
         method: 'POST',
         body: JSON.stringify({ username, password })
       });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Error');
+      if (action === 'login') {
+        localStorage.setItem('token', data.token);
+        navigate('/dashboard');
+      }
       localStorage.setItem('token', data.token);
       navigate('/dashboard');
     } catch (err) {
@@ -28,8 +34,8 @@ function LoginPage() {
         <Heading mb={6}>Workhouse</Heading>
         <Box w="sm" p={6} bg="white" boxShadow="md" borderRadius="md">
           <FormControl id="username" mb={4}>
-            <FormLabel>Username</FormLabel>
-            <Input value={username} onChange={(e) => setUsername(e.target.value)} />
+            <FormLabel>Email</FormLabel>
+            <Input type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
           </FormControl>
           <FormControl id="password" mb={4}>
             <FormLabel>Password</FormLabel>
@@ -38,6 +44,10 @@ function LoginPage() {
           {error && (
             <Text color="red.500" mb={2}>{error}</Text>
           )}
+          <Flex gap={3} mt={4}>
+            <Button colorScheme="blue" flex="1" onClick={() => handle('login')}>Login</Button>
+            <Button variant="outline" flex="1" onClick={() => navigate('/signup')}>Register</Button>
+          </Flex>
           <Button colorScheme="blue" w="100%" mt={4} onClick={handleLogin}>Login</Button>
           <Text mt={4} textAlign="center">New here? <a href="#" onClick={(e)=>{e.preventDefault();navigate('/signup');}}>Create an account</a></Text>
         </Box>
