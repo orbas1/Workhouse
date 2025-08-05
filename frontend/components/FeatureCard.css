@@ -1,0 +1,6 @@
+.feature-card {
+  transition: transform 0.2s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+}
