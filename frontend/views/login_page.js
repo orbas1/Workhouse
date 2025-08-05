@@ -1,4 +1,4 @@
-const { ChakraProvider, Box, Flex, Heading, Input, Button, FormControl, FormLabel, Text, useToast } = ChakraUI;
+const { ChakraProvider, Box, Flex, Heading, Input, Button, FormControl, FormLabel, Text } = ChakraUI;
 const { useState } = React;
 const { useNavigate } = ReactRouterDOM;
 
@@ -6,25 +6,17 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const toast = useToast();
   const navigate = useNavigate();
 
-  async function handle(action) {
+  async function handleLogin() {
     setError('');
     try {
-      const res = await fetch(`/api/auth/${action}`, {
+      const data = await apiFetch('/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Error');
-      if (action === 'login') {
-        localStorage.setItem('token', data.token);
-        navigate('/dashboard');
-      } else {
-        toast({ title: 'Registered! You can now log in.', status: 'success', duration: 3000, isClosable: true });
-      }
+      localStorage.setItem('token', data.token);
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message);
     }
@@ -46,10 +38,8 @@ function LoginPage() {
           {error && (
             <Text color="red.500" mb={2}>{error}</Text>
           )}
-          <Flex gap={3} mt={4}>
-            <Button colorScheme="blue" flex="1" onClick={() => handle('login')}>Login</Button>
-            <Button variant="outline" flex="1" onClick={() => handle('register')}>Register</Button>
-          </Flex>
+          <Button colorScheme="blue" w="100%" mt={4} onClick={handleLogin}>Login</Button>
+          <Text mt={4} textAlign="center">New here? <a href="#" onClick={(e)=>{e.preventDefault();navigate('/signup');}}>Create an account</a></Text>
         </Box>
       </Flex>
     </ChakraProvider>
