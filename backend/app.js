@@ -89,6 +89,7 @@ const learningPathRoutes = require('./routes/paths');
 const socialRoutes = require('./routes/social');
 const projectRoutes = require('./routes/projects');
 const expertAccessRoutes = require('./routes/expertAccess');
+const investorGroupRoutes = require('./routes/investors');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -184,6 +185,7 @@ app.use('/', resourceRoutes);
 app.use('/assessments', assessmentRoutes);
 app.use('/certificates', certificateRoutes);
 app.use('/experts', expertAccessRoutes);
+app.use('/investors', investorGroupRoutes);
 app.use('/affiliates/notifications', notificationRoutes);
 
 const port = process.env.PORT || 5000;

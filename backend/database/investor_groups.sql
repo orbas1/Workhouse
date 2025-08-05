@@ -1,0 +1,15 @@
+CREATE TABLE investor_groups (
+  id UUID PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  owner_id VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE investor_group_members (
+  id UUID PRIMARY KEY,
+  group_id UUID REFERENCES investor_groups(id) ON DELETE CASCADE,
+  member_id VARCHAR(255) NOT NULL,
+  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
