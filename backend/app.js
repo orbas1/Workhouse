@@ -32,6 +32,9 @@ const paymentRoutes = require('./routes/payments');
 const employmentAnalyticsRoutes = require('./routes/employmentAnalytics');
 const goalRoutes = require('./routes/goals');
 const milestoneRoutes = require('./routes/milestones');
+const progressRoutes = require('./routes/progress');
+const achievementRoutes = require('./routes/achievements');
+const skillRoutes = require('./routes/skills');
 
 const app = express();
 app.use(cors());
@@ -69,6 +72,9 @@ app.use('/education-analytics', educationAnalyticsRoutes);
 app.use('/financial-analytics', financialAnalyticsRoutes);
 app.use('/agency/:agencyId/payments', paymentRoutes);
 app.use('/analytics/employment', employmentAnalyticsRoutes);
+app.use('/progress', progressRoutes);
+app.use('/achievements', achievementRoutes);
+app.use('/skills', skillRoutes);
 
 app.use('/goals', goalRoutes);
 app.use('/milestones', milestoneRoutes);
