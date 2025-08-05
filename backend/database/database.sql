@@ -18,6 +18,27 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Education Analytics Module Tables
+
+CREATE TABLE IF NOT EXISTS course_analytics (
+    course_id UUID PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    enrollments INTEGER DEFAULT 0,
+    completions INTEGER DEFAULT 0,
+    average_score NUMERIC(5,2) DEFAULT 0,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_course_engagement (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    course_id UUID NOT NULL,
+    time_spent INTEGER DEFAULT 0,
+    progress NUMERIC(5,2) DEFAULT 0,
+    last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Financial Analytics Module Tables
 
 CREATE TABLE IF NOT EXISTS financial_revenues (
