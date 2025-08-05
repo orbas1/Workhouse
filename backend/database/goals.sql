@@ -1,0 +1,30 @@
+CREATE TABLE goals (
+  id UUID PRIMARY KEY,
+  user_id VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  due_date DATE,
+  status VARCHAR(50) DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE goal_milestones (
+  id UUID PRIMARY KEY,
+  goal_id UUID REFERENCES goals(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  due_date DATE,
+  status VARCHAR(50) DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE goal_shares (
+  id UUID PRIMARY KEY,
+  goal_id UUID REFERENCES goals(id) ON DELETE CASCADE,
+  shared_with VARCHAR(255) NOT NULL,
+  shared_by VARCHAR(255) NOT NULL,
+  message TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
