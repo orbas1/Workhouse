@@ -1,3 +1,5 @@
+const { Box, Heading, Text, Button, SimpleGrid } = ChakraUI;
+const { useEffect, useState } = React;
 const { Box, Heading, SimpleGrid, Text, Button } = ChakraUI;
 const { useState, useEffect } = React;
 const { useAuth } = window;
@@ -26,6 +28,12 @@ function HomeDashboard() {
 
   return (
     <Box className="dashboard-container" p={4}>
+      <NavMenu />
+      <Heading size="lg" mb={4}>Welcome, {user.username}</Heading>
+      <Button mb={4} colorScheme="teal" onClick={() => window.location.href = '/setup/financial-media'}>
+        Complete Financial Setup
+      </Button>
+      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
     <>
     <Box className="dashboard-container">
       <NavMenu />

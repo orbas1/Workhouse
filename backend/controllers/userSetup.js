@@ -1,8 +1,9 @@
-const { setFinancials } = require('../models/userFinancial');
-const { updateProfile } = require('../models/profile');
+const { setFinancials, getFinancials } = require('../models/userFinancial');
+const { updateProfile, findByUserId } = require('../models/profile');
 const { maskCardNumber } = require('../utils/finance');
+const { getCardBrand } = require('../utils/card');
 
-function saveFinancialMediaSetup(req, res) {
+async function saveFinancialMediaSetup(req, res) {
   const { userId } = req.params;
   const {
     paymentMethod,
@@ -15,7 +16,13 @@ function saveFinancialMediaSetup(req, res) {
     title,
   } = req.body;
   try {
-    const financial = setFinancials(userId, { paymentMethod: maskCardNumber(paymentMethod), taxId, vatNumber });
+    const cardBrand = await getCardBrand(paymentMethod);
+    const financial = setFinancials(userId, {
+      paymentMethod: maskCardNumber(paymentMethod),
+      cardBrand,
+      taxId,
+      vatNumber,
+    });
     const profile = updateProfile(userId, {
       bio,
       profilePicture,
@@ -29,6 +36,21 @@ function saveFinancialMediaSetup(req, res) {
   }
 }
 
+function getFinancialMediaSetup(req, res) {
+  const { userId } = req.params;
+  try {
+    const financial = getFinancials(userId);
+    const profile = findByUserId(userId);
+    if (!financial && !profile) {
+      return res.status(404).json({ error: 'Setup not found' });
+    }
+    return res.json({ financial, profile });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   saveFinancialMediaSetup,
+  getFinancialMediaSetup,
 };
