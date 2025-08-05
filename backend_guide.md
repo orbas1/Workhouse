@@ -5,6 +5,14 @@
 
 Expressjs Endpoints For The Workhouse Backend
 
+## Third-Party API Clients
+
+- **DeepSeek** – chat completions via `backend/api/deepseek.js`
+- **Gemini** – Google Generative AI models in `backend/api/gemini.js`
+- **AWS S3** – file storage helper in `backend/api/s3.js`
+- **SMTP** – email transport using `backend/api/smtp.js`
+- **Pusher** – real-time events through `backend/api/pusher.js`
+
 Affiliates
 
 
