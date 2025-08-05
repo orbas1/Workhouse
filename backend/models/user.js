@@ -10,6 +10,8 @@ function addUser({ username, password, role }) {
   const user = { id: randomUUID(), username, password, role };
   users.push(user);
   return user;
+function addUser({ username, password, role = 'user' }) {
+  users.push({ username, password, role });
 }
 
 module.exports = { users, findUser, addUser };

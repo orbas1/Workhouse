@@ -27,6 +27,7 @@ function meHandler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   res.json({ id: payload.id, username: payload.username, role: payload.role });
+  res.json({ username: payload.username, role: payload.role });
 }
 
 module.exports = { registerHandler, loginHandler, meHandler };
