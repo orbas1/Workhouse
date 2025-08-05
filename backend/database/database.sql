@@ -18,6 +18,25 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Matchmaking Module Tables
+
+CREATE TABLE IF NOT EXISTS match_criteria (
+    agency_id UUID PRIMARY KEY,
+    skills_weight NUMERIC DEFAULT 0.5,
+    availability_weight NUMERIC DEFAULT 0.3,
+    performance_weight NUMERIC DEFAULT 0.2,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS job_matches (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL,
+    job_id UUID NOT NULL,
+    employee_id UUID NOT NULL,
+    match_score NUMERIC NOT NULL,
+    matched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Contract Module Tables
 
 CREATE TABLE IF NOT EXISTS contracts (
