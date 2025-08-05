@@ -18,6 +18,16 @@ CREATE TABLE IF NOT EXISTS affiliate_agreements (
     agreed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Client Module Tables
+
+CREATE TABLE IF NOT EXISTS clients (
+    id UUID PRIMARY KEY,
+    agency_id UUID NOT NULL REFERENCES agencies(id) ON DELETE CASCADE,
+    company_name VARCHAR(255) NOT NULL,
+    contact_name VARCHAR(100),
+    contact_email VARCHAR(255),
+    contact_phone VARCHAR(50),
+    preferences JSONB,
 -- Security Module Tables
 
 CREATE TABLE IF NOT EXISTS security_logs (
