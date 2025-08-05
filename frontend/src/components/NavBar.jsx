@@ -54,12 +54,15 @@ function NavBar() {
     <Flex className="nav-bar" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
-      <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
-        Profile
-      </Button>
-      <Button as={RouterLink} to="/orders" variant="ghost" color="white">
-        Orders
-      </Button>
+        <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
+          Profile
+        </Button>
+        <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
+          Orders
+        </Button>
+        <Button as={RouterLink} to="/creator/analytics" variant="ghost" color="white">
+          Analytics
+        </Button>
     </Flex>
   );
 }

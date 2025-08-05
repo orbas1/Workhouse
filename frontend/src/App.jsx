@@ -38,6 +38,7 @@ import { ChakraProvider, Box } from '@chakra-ui/react';
 import NavBar from './components/NavBar.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 
 function App() {
@@ -47,11 +48,12 @@ function App() {
         <ProfileProvider>
           <NavBar />
           <Box p={4}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/profile" replace />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
-            </Routes>
+              <Routes>
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+                <Route path="/creator/analytics" element={<CreatorAnalyticsPage />} />
+              </Routes>
           </Box>
         </ProfileProvider>
       </BrowserRouter>
