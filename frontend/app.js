@@ -8,6 +8,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
+        <Route path="/feed" element={<Protected><LiveFeed /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
