@@ -1,0 +1,19 @@
+CREATE TABLE financial_transactions (
+  id UUID PRIMARY KEY,
+  user_id VARCHAR(255) NOT NULL,
+  event_id VARCHAR(255),
+  type VARCHAR(50) NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  description VARCHAR(255),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE refund_requests (
+  id UUID PRIMARY KEY,
+  event_id VARCHAR(255) NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  reason VARCHAR(255),
+  status VARCHAR(50) NOT NULL DEFAULT 'pending',
+  requested_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
