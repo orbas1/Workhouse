@@ -102,6 +102,7 @@ const applicationRoutes = require('./routes/applications');
 const campaignRoutes = require('./routes/campaigns');
 const projectManagementRoutes = require('./routes/projectManagement');
 const successStoryRoutes = require('./routes/successStories');
+const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -212,6 +213,7 @@ app.use('/applications', applicationRoutes);
 app.use('/success', successStoryRoutes);
 app.use('/affiliates/notifications', notificationRoutes);
 app.use('/workspace', projectManagementRoutes);
+app.use('/third-party', thirdPartyApiRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
