@@ -1,6 +1,9 @@
 const analyticsModel = require('../models/analytics');
 const logger = require('../utils/logger');
 
+// -----------------------------
+// Agency analytics services
+// -----------------------------
 async function getAgencyEarnings(agencyId, { startDate, endDate } = {}) {
   const records = analyticsModel.getEarningsByAgency(agencyId);
   if (records.length === 0) {
@@ -14,7 +17,7 @@ async function getAgencyEarnings(agencyId, { startDate, endDate } = {}) {
     filtered = filtered.filter(r => r.date <= endDate);
   }
   const total = filtered.reduce((sum, r) => sum + r.amount, 0);
-  logger.info('Earnings analytics retrieved', { agencyId, records: filtered.length });
+  logger.info('Earnings analytics retrieved', { agencyId, count: filtered.length });
   return { agencyId, totalEarnings: total, records: filtered };
 }
 
@@ -57,12 +60,9 @@ async function getAgencyPerformance(agencyId, { startDate, endDate } = {}) {
   return { agencyId, summary: { totalTasks, averageRating }, employeeStats };
 }
 
-module.exports = {
-  getAgencyEarnings,
-  getAgencyPerformance,
-const logger = require('../utils/logger');
-const analyticsModel = require('../models/analytics');
-
+// -----------------------------
+// Content analytics services
+// -----------------------------
 async function getContentPerformance() {
   return analyticsModel.getAllContentAnalytics();
 }
@@ -78,8 +78,7 @@ async function getContentPerformanceById(contentId) {
 async function detectPerformanceAnomalies(metrics, threshold = 2) {
   const mean = metrics.reduce((sum, m) => sum + m, 0) / metrics.length;
   const variance =
-    metrics.reduce((sum, m) => sum + Math.pow(m - mean, 2), 0) /
-    metrics.length;
+    metrics.reduce((sum, m) => sum + Math.pow(m - mean, 2), 0) / metrics.length;
   const stdDev = Math.sqrt(variance);
   const anomalies = metrics.filter(m => Math.abs(m - mean) > threshold * stdDev);
   logger.info('Anomaly detection executed', { mean, stdDev, threshold, anomalies });
@@ -97,7 +96,7 @@ async function getPopularContent() {
 }
 
 async function getContentRecommendations(userPrefs = {}) {
-  // Simple recommendation: reuse popular content, could be extended with real ML models
+  // Simple recommendation: reuse popular content
   return getPopularContent();
 }
 
@@ -113,7 +112,52 @@ async function submitContentFeedback(contentId, userId, rating, comment) {
   return feedback;
 }
 
+// -----------------------------
+// Learning analytics services
+// -----------------------------
+async function getPathAnalytics(pathId) {
+  const data = analyticsModel.getPathAnalytics(pathId);
+  if (!data) {
+    throw new Error('Analytics not found for path');
+  }
+  return data;
+}
+
+async function getUserAnalytics(userId) {
+  const data = analyticsModel.getUserAnalytics(userId);
+  if (!data) {
+    throw new Error('Analytics not found for user');
+  }
+  return data;
+}
+
+async function getSkillsAnalytics(userId) {
+  return analyticsModel.getUserSkills(userId);
+}
+
+async function getLearningPredictions(userId) {
+  let prediction = analyticsModel.getPrediction(userId);
+  if (!prediction) {
+    // Generate a naive prediction based on user analytics
+    const analytics = analyticsModel.getUserAnalytics(userId);
+    if (!analytics) {
+      throw new Error('Analytics not found for user');
+    }
+    const completionRate = analytics.pathsEnrolled
+      ? analytics.pathsCompleted / analytics.pathsEnrolled
+      : 0;
+    const confidence = Math.min(0.9, completionRate + 0.1);
+    const message = completionRate > 0.7
+      ? 'High likelihood of completing current paths'
+      : 'Focus required to improve completion rate';
+    prediction = analyticsModel.setPrediction(userId, message, confidence);
+  }
+  return prediction;
+}
+
 module.exports = {
+  getAgencyEarnings,
+  getAgencyPerformance,
   getContentPerformance,
   getContentPerformanceById,
   detectPerformanceAnomalies,
@@ -121,4 +165,9 @@ module.exports = {
   getPopularContent,
   getContentRecommendations,
   submitContentFeedback,
+  getPathAnalytics,
+  getUserAnalytics,
+  getSkillsAnalytics,
+  getLearningPredictions,
 };
+
