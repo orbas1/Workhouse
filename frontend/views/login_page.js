@@ -8,12 +8,11 @@ function LoginPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  async function handle(action) {
+  async function handleLogin() {
     setError('');
     try {
-      const res = await fetch(`/api/auth/${action}`, {
+      const data = await apiFetch('/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
       });
       const data = await res.json();
@@ -22,6 +21,8 @@ function LoginPage() {
         localStorage.setItem('token', data.token);
         navigate('/dashboard');
       }
+      localStorage.setItem('token', data.token);
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message);
     }
@@ -47,6 +48,8 @@ function LoginPage() {
             <Button colorScheme="blue" flex="1" onClick={() => handle('login')}>Login</Button>
             <Button variant="outline" flex="1" onClick={() => navigate('/signup')}>Register</Button>
           </Flex>
+          <Button colorScheme="blue" w="100%" mt={4} onClick={handleLogin}>Login</Button>
+          <Text mt={4} textAlign="center">New here? <a href="#" onClick={(e)=>{e.preventDefault();navigate('/signup');}}>Create an account</a></Text>
         </Box>
       </Flex>
     </ChakraProvider>

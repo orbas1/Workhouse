@@ -13,6 +13,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
  * @returns {Promise<{id: string, username: string, role: string, fullName?: string, phone?: string, location?: string}>}
  */
 async function register(username, password, role = 'user', extra = {}) {
+async function register({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
   const existing = findUser(username);
   if (existing) {
     throw new Error('User already exists');
@@ -27,6 +28,8 @@ async function register(username, password, role = 'user', extra = {}) {
     phone: user.phone,
     location: user.location,
   };
+  const user = addUser({ username, password: hashed, role, fullName, email, phone, location, bio, expertise });
+  return { id: user.id, username: user.username, role: user.role, fullName: user.fullName, email: user.email };
 }
 
 /**
@@ -45,7 +48,7 @@ async function login(username, password) {
     throw new Error('Invalid credentials');
   }
   const token = jwt.sign(
-    { id: user.id, username: user.username, role: user.role },
+    { id: user.id, username: user.username, role: user.role, fullName: user.fullName, email: user.email },
     JWT_SECRET,
     { expiresIn: '1h' }
   );

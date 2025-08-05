@@ -11,6 +11,10 @@ const mentorProfileSchema = Joi.object({
   yearsExperience: Joi.number().integer().min(0).required(),
   preferences: Joi.object().optional(),
   skills: Joi.array().items(Joi.string()).optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
 });
 
 const menteeProfileSchema = Joi.object({
@@ -20,12 +24,20 @@ const menteeProfileSchema = Joi.object({
   interests: Joi.array().items(Joi.string()).optional(),
   preferences: Joi.object().optional(),
   skills: Joi.array().items(Joi.string()).optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
 });
 
 const updateProfileSchema = Joi.object({
   bio: Joi.string(),
   preferences: Joi.object(),
   skills: Joi.array().items(Joi.string()),
+  fullName: Joi.string(),
+  title: Joi.string(),
+  location: Joi.string(),
+  avatarUrl: Joi.string().uri(),
 }).min(1);
 
 const portfolioItemSchema = Joi.object({
@@ -45,6 +57,10 @@ const profileIdParamSchema = Joi.object({
 
 const createProfileSchema = Joi.object({
   bio: Joi.string().allow('').optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
   geographicPreferences: Joi.object({
     country: Joi.string().required(),
     city: Joi.string().optional(),
@@ -53,6 +69,10 @@ const createProfileSchema = Joi.object({
 
 const updateInvestorProfileSchema = Joi.object({
   bio: Joi.string().optional(),
+  fullName: Joi.string().optional(),
+  title: Joi.string().optional(),
+  location: Joi.string().optional(),
+  avatarUrl: Joi.string().uri().optional(),
   geographicPreferences: Joi.object({
     country: Joi.string().required(),
     city: Joi.string().optional(),

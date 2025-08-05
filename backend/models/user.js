@@ -37,6 +37,8 @@ function addUser({ username, password, role = 'user', fullName = '', phone = '',
     phone,
     location,
   };
+function addUser({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
+  const user = { id: randomUUID(), username, password, role, fullName, email, phone, location, bio, expertise };
   users.push(user);
   return user;
 }
