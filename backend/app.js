@@ -49,6 +49,8 @@ const milestoneRoutes = require('./routes/milestones');
 const progressRoutes = require('./routes/progress');
 const achievementRoutes = require('./routes/achievements');
 const skillRoutes = require('./routes/skills');
+const assessmentRoutes = require('./routes/assessments');
+const certificateRoutes = require('./routes/certificates');
 
 const app = express();
 app.use(cors());
@@ -105,6 +107,8 @@ app.use('/achievements', achievementRoutes);
 app.use('/skills', skillRoutes);
 app.use('/goals', goalRoutes);
 app.use('/milestones', milestoneRoutes);
+app.use('/assessments', assessmentRoutes);
+app.use('/certificates', certificateRoutes);
 
 // Commission rate adjustment notifications
 app.use('/affiliates/notifications', notificationRoutes);
