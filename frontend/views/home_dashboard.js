@@ -1,7 +1,8 @@
-const { Box, Heading, SimpleGrid, Text } = ChakraUI;
+const { Box, Heading, SimpleGrid, Text, Button } = ChakraUI;
 const { useState, useEffect } = React;
+const { useAuth } = window;
 const { useEffect, useState } = React;
-const { Box, Heading, Text, Button } = ChakraUI;
+const { Box, Heading, Text, Button, Flex } = ChakraUI;
 
 function HomeDashboard() {
   const { user } = useAuth();
@@ -10,11 +11,8 @@ function HomeDashboard() {
   useEffect(() => {
     async function loadAffiliate() {
       try {
-        const res = await apiFetch('/api/affiliates/dashboard/1');
-        if (res.ok) {
-          const data = await res.json();
-          setAffiliate(data);
-        }
+        const data = await dashboardAPI.getAffiliateDashboard(1);
+        setAffiliate(data);
       } catch (err) {
         console.error('Failed to load affiliate dashboard', err);
       }
@@ -27,10 +25,12 @@ function HomeDashboard() {
   }
 
   return (
+    <Box className="dashboard-container" p={4}>
+    <>
     <Box className="dashboard-container">
       <NavMenu />
       <Heading size="lg" mb={4}>Welcome, {user.username}</Heading>
-      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+      <SimpleGrid columns={[1, 2, 3]} spacing={6} className="summary-grid">
         <UserCountWidget />
         {affiliate && (
           <Box className="affiliate-widget" p={4} borderWidth="1px" borderRadius="md" bg="white">
@@ -42,13 +42,60 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
+      <Box mt={6} textAlign="center">
+        <Button colorScheme="blue" className="cta-button" onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+      </Box>
+      <Button mt={6} colorScheme="blue" onClick={() => window.location.href = '/feed'}>
+    </Box>
+      <Box className="dashboard">
+        <Heading size="lg" mb={2}>Dashboard</Heading>
+        <Text mb={4}>Hello, {user.username}!</Text>
+        <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+        <Button colorScheme="green" mt={2} onClick={() => window.location.href = '/employment'}>
+          Employment Dashboard
+        </Button>
+      </Box>
+    </Box>
+      <Box className="dashboard" mt={6}>
+        <Heading size="lg" mb={2}>Dashboard</Heading>
+        <Text mb={4}>Hello, {user.username}!</Text>
+        <Button colorScheme="blue" mr={2} onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+        <Button colorScheme="teal" onClick={() => window.location.href = '/interview/1'}>
+          Join Interview
+        </Button>
+      </Box>
     <Box className="dashboard">
       <Heading size="lg" mb={2}>Dashboard</Heading>
       <Text mb={4}>Hello, {user.username}!</Text>
+      <Flex gap={2}>
+        <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+        <Button colorScheme="teal" onClick={() => window.location.href = '/profile'}>
+          View Profile
+        </Button>
+      </Flex>
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
       </Button>
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
+        Manage Applications
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
+        Manage Gigs
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
+        Gigs Dashboard
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
+      </Button>
     </Box>
+    <ChatWidget />
+    </>
   );
 }
 

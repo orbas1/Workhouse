@@ -9,4 +9,8 @@ const categoryQuerySchema = Joi.object({
   category: Joi.string().valid('employment', 'freelancing', 'education', 'networking', 'local', 'general').optional(),
 });
 
-module.exports = { postSchema, categoryQuerySchema };
+const postIdParamSchema = Joi.object({
+  postId: Joi.string().required(),
+});
+
+module.exports = { postSchema, categoryQuerySchema, postIdParamSchema };
