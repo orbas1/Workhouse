@@ -41,8 +41,14 @@ router.get('/benefits', auth, controller.listBenefits);
 router.post('/benefits/enroll', auth, requireFields('employeeId', 'benefitId'), controller.enrollBenefits);
 
 // Employee Relations
-router.post('/feedback', auth, requireFields('employeeId', 'message'), controller.submitFeedback);
-router.get('/feedback', auth, controller.listFeedback);
+// Separate feedback routes to avoid duplicate path names
+router.post(
+  '/feedback/submit',
+  auth,
+  requireFields('employeeId', 'message'),
+  controller.submitFeedback
+);
+router.get('/feedback/list', auth, controller.listFeedback);
 router.post('/issues/report', auth, requireFields('employeeId', 'issue'), controller.reportIssue);
 router.get('/issues', auth, controller.listIssues);
 

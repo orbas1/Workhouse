@@ -15,7 +15,13 @@ const {
 const router = express.Router();
 
 router.post('/protection-policy-update', auth, requireAdmin, validate(policyUpdateSchema), protectionPolicyUpdateHandler);
-router.get('/privacy-settings', auth, getPrivacySettingsHandler);
-router.put('/privacy-settings', auth, validate(privacySettingsSchema), updatePrivacySettingsHandler);
+// Split privacy settings routes to avoid duplicate path names
+router.get('/privacy-settings/view', auth, getPrivacySettingsHandler);
+router.put(
+  '/privacy-settings/update',
+  auth,
+  validate(privacySettingsSchema),
+  updatePrivacySettingsHandler
+);
 
 module.exports = router;
