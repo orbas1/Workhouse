@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, VStack, Spinner } from '@chakra-ui/react';
+import NavBar from '../components/NavBar.jsx';
 import ProfileHeader from '../components/ProfileHeader.jsx';
 import AboutSection from '../components/AboutSection.jsx';
 import ProfessionalDetails from '../components/ProfessionalDetails.jsx';
@@ -32,6 +33,7 @@ function ProfilePage() {
 
   return (
     <Box className="profile-page-container">
+      <NavBar />
       <VStack spacing={6} align="stretch">
         <ProfileHeader profile={profile} />
         <AboutSection bio={profile.bio} />
