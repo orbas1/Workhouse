@@ -4,18 +4,18 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/NavBar.css';
 
-export default function NavBar() {
+function NavBar() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  function handleLogout() {
     localStorage.removeItem('token');
     setUser(null);
     navigate('/login');
-  };
+  }
 
   return (
-    <Flex className="nav-bar" p={4} align="center">
+    <Flex className="nav-bar" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
       {user ? (
@@ -23,6 +23,8 @@ export default function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
+          <Button as={RouterLink} to="/freelancers" variant="ghost" color="white" mr={2}>
+            Freelancers
           <Button as={RouterLink} to="/classroom/WorkhouseClassroom" variant="ghost" color="white" mr={2}>
             Classroom
           </Button>
