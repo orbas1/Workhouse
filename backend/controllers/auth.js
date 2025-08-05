@@ -1,9 +1,9 @@
 const { register, login, verifyToken } = require('../services/auth');
 
 async function registerHandler(req, res) {
-  const { username, password } = req.body;
+  const { username, password, roles } = req.body;
   try {
-    const user = await register(username, password);
+    const user = await register(username, password, roles);
     res.status(201).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -26,7 +26,7 @@ function meHandler(req, res) {
   if (!payload) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
-  res.json({ username: payload.username });
+  res.json({ username: payload.username, roles: payload.roles });
 }
 
 module.exports = { registerHandler, loginHandler, meHandler };

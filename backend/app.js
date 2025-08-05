@@ -3,6 +3,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const affiliateRoutes = require('./routes/affiliates');
 const paymentRoutes = require('./routes/payments');
+const employmentAnalyticsRoutes = require('./routes/employmentAnalytics');
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/affiliates', affiliateRoutes);
 app.use('/agency/:agencyId/payments', paymentRoutes);
+app.use('/analytics/employment', employmentAnalyticsRoutes);
 
 const port = process.env.PORT || 5000;
 if (require.main === module) {
