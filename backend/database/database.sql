@@ -240,6 +240,16 @@ CREATE TABLE IF NOT EXISTS contract_work_submissions (
     approved_at TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS contract_invoices (
+    id UUID PRIMARY KEY,
+    contract_id UUID NOT NULL REFERENCES contracts(id) ON DELETE CASCADE,
+    freelancer_id UUID NOT NULL,
+    amount NUMERIC(12,2) NOT NULL,
+    description TEXT,
+    status VARCHAR(20) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS training_attendance (
     id UUID PRIMARY KEY,
     session_id UUID NOT NULL REFERENCES training_sessions(id) ON DELETE CASCADE,

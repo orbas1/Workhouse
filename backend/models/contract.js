@@ -3,6 +3,7 @@ const { randomUUID } = require('crypto');
 const contracts = new Map();
 const contractProposals = new Map();
 const workSubmissions = new Map();
+const contractInvoices = new Map();
 
 function createContract({ clientId, title, description, budget, timeline }) {
   const id = randomUUID();
@@ -22,6 +23,7 @@ function createContract({ clientId, title, description, budget, timeline }) {
   contracts.set(id, contract);
   contractProposals.set(id, []);
   workSubmissions.set(id, []);
+  contractInvoices.set(id, []);
   return contract;
 }
 
@@ -58,6 +60,10 @@ function getByClient(clientId) {
 
 function getProposals(contractId) {
   return contractProposals.get(contractId) || [];
+}
+
+function getInvoices(contractId) {
+  return contractInvoices.get(contractId) || [];
 }
 
 function addProposal(contractId, { freelancerId, proposalText }) {
@@ -119,6 +125,22 @@ function submitWork(contractId, { freelancerId, workUrl, notes }) {
   return submission;
 }
 
+function addInvoice(contractId, { freelancerId, amount, description }) {
+  const invoices = contractInvoices.get(contractId);
+  if (!invoices) return null;
+  const invoice = {
+    id: randomUUID(),
+    contractId,
+    freelancerId,
+    amount,
+    description: description || null,
+    status: 'pending',
+    createdAt: new Date(),
+  };
+  invoices.push(invoice);
+  return invoice;
+}
+
 function approveWork(contractId, submissionId) {
   const submissions = workSubmissions.get(contractId);
   if (!submissions) return null;
@@ -143,7 +165,9 @@ module.exports = {
   listAll,
   getByClient,
   getProposals,
+  getInvoices,
   addProposal,
+  addInvoice,
   acceptProposal,
   terminateContract,
   submitWork,
