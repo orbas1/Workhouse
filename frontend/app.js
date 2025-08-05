@@ -4,7 +4,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LandingPage />} />
         <Route path="/dashboard" element={<Protected><HomeDashboard /></Protected>} />
       </Routes>
     </BrowserRouter>
@@ -14,7 +15,7 @@ function App() {
 function Protected({ children }) {
   const token = localStorage.getItem('token');
   if (!token) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
   return children;
 }
