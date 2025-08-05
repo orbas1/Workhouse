@@ -30,6 +30,9 @@ const educationAnalyticsRoutes = require('./routes/educationAnalytics');
 const financialAnalyticsRoutes = require('./routes/financialAnalytics');
 const paymentRoutes = require('./routes/payments');
 const employmentAnalyticsRoutes = require('./routes/employmentAnalytics');
+const progressRoutes = require('./routes/progress');
+const achievementRoutes = require('./routes/achievements');
+const skillRoutes = require('./routes/skills');
 
 const app = express();
 app.use(cors());
@@ -67,6 +70,9 @@ app.use('/education-analytics', educationAnalyticsRoutes);
 app.use('/financial-analytics', financialAnalyticsRoutes);
 app.use('/agency/:agencyId/payments', paymentRoutes);
 app.use('/analytics/employment', employmentAnalyticsRoutes);
+app.use('/progress', progressRoutes);
+app.use('/achievements', achievementRoutes);
+app.use('/skills', skillRoutes);
 
 // Commission rate adjustment notifications
 app.use('/affiliates/notifications', notificationRoutes);
