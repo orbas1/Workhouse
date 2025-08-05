@@ -99,10 +99,16 @@ function HomeDashboard() {
   </Box>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
         Manage Applications
+      </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
         Manage Gigs
+      </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
         Gigs Dashboard
+      </Button>
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/sessions'}>
+        Manage Sessions
+      </Button>
       <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
         Browse Jobs
       </Button>
