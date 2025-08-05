@@ -1,7 +1,10 @@
 const communicationModel = require('../models/communication');
 const logger = require('../utils/logger');
 
-async function sendMessage(userId, { conversationId, recipientId, content }) {
+async function sendMessage(
+  userId,
+  { conversationId, recipientId, content, attachments = [], category }
+) {
   let conversation;
   if (conversationId) {
     conversation = communicationModel.getConversation(conversationId);
@@ -12,12 +15,29 @@ async function sendMessage(userId, { conversationId, recipientId, content }) {
     if (!recipientId) {
       throw new Error('recipientId is required to start a conversation');
     }
-    conversation = communicationModel.createConversation([userId, recipientId]);
+    conversation = communicationModel.createConversation(
+      [userId, recipientId],
+      category
+    );
     conversationId = conversation.id;
-    logger.info('Conversation created', { conversationId, participants: conversation.participants });
+    logger.info('Conversation created', {
+      conversationId,
+      participants: conversation.participants,
+      category: conversation.category,
+    });
   }
-  const message = communicationModel.addMessage(conversationId, userId, content);
-  logger.info('Message sent', { messageId: message.id, conversationId, senderId: userId });
+  const message = communicationModel.addMessage(
+    conversationId,
+    userId,
+    content,
+    attachments
+  );
+  logger.info('Message sent', {
+    messageId: message.id,
+    conversationId,
+    senderId: userId,
+    attachments: attachments.length,
+  });
   return { conversationId, message };
 }
 
@@ -85,6 +105,10 @@ function getConversation(conversationId) {
   return communicationModel.getConversation(conversationId);
 }
 
+async function listConversations(userId, category) {
+  return communicationModel.listConversationsByUser(userId, category);
+}
+
 module.exports = {
   sendMessage,
   getConversationMessages,
@@ -95,4 +119,5 @@ module.exports = {
   scheduleCall,
   getCall,
   getConversation,
+  listConversations,
 };

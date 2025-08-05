@@ -15,6 +15,7 @@ const {
   getMeetingHandler,
   scheduleCallHandler,
   getCallHandler,
+  listConversationsHandler,
 } = require('../controllers/communication');
 const {
   messageSchema,
@@ -24,17 +25,24 @@ const {
   meetingIdParamSchema,
   scheduleCallSchema,
   callIdParamSchema,
+  conversationsListSchema,
 } = require('../validation/communication');
 
 const router = express.Router();
 
-router.post('/messages/send', auth, validate(messageSchema), sendMessageHandler);
+router.post('/messages', auth, validate(messageSchema), sendMessageHandler);
 router.get(
   '/messages/conversation/:conversationId',
   auth,
   validate(conversationIdParamSchema, 'params'),
   requireConversation,
   getConversationMessagesHandler
+);
+router.get(
+  '/messages/conversations',
+  auth,
+  validate(conversationsListSchema, 'query'),
+  listConversationsHandler
 );
 router.get('/messages/templates', auth, listTemplatesHandler);
 router.post(
