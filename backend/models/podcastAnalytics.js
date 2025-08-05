@@ -111,6 +111,10 @@ function getEpisodeDetails(episodeId) {
   return episodes.get(episodeId);
 }
 
+function getAllPodcasts() {
+  return Array.from(podcasts.values());
+}
+
 module.exports = {
   getOverview,
   getEpisodeAnalytics,
@@ -121,4 +125,5 @@ module.exports = {
   getEpisodeDetails,
   getPodcast,
   getEpisode,
+  getAllPodcasts,
 };
