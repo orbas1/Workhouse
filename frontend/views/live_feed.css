@@ -1,5 +1,6 @@
 .live-feed {
   width: 100%;
+  gap: 1rem;
 }
 .live-event {
   background-color: #ffffff;

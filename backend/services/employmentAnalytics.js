@@ -20,8 +20,14 @@ async function getApplicationAnalytics() {
   return model.getApplicationStats();
 }
 
+async function listJobs() {
+  logger.info('Listing employment jobs');
+  return model.listJobs();
+}
+
 module.exports = {
   getEmploymentOverview,
   getJobAnalytics,
   getApplicationAnalytics,
+  listJobs,
 };

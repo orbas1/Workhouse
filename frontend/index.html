@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orbas Profile</title>
-    <link rel="stylesheet" href="./src/styles/ProfilePage.css" />
+    <title>Workhouse</title>
+    <link rel="stylesheet" href="/src/styles/ProfilePage.css" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <title>Workhouse</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -20,13 +19,19 @@
     />
     <link rel="stylesheet" href="views/landing_page.css" />
     <link rel="stylesheet" href="views/login_page.css" />
-    <link rel="stylesheet" href="views/home_page.css" />
-    <link rel="stylesheet" href="components/FeatureCard.css" />
-    <link rel="stylesheet" href="nav/menu.css" />
+      <link rel="stylesheet" href="views/home_page.css" />
+      <link rel="stylesheet" href="components/FeatureCard.css" />
+      <link rel="stylesheet" href="components/TestimonialCarousel.css" />
+      <link rel="stylesheet" href="components/PartnerLogos.css" />
+      <link rel="stylesheet" href="components/TrustBadges.css" />
+      <link rel="stylesheet" href="nav/menu.css" />
     <link rel="stylesheet" href="components/widgets/user_count.css" />
     <link rel="stylesheet" href="components/widgets/quote.css" />
+    <link rel="stylesheet" href="components/widgets/chat_widget.css" />
     <link rel="stylesheet" href="views/home_dashboard.css" />
     <link rel="stylesheet" href="views/home_dashboard.css" />
+    <link rel="stylesheet" href="components/JobCard.css" />
+    <link rel="stylesheet" href="views/job_listings.css" />
     <link rel="stylesheet" href="views/live_feed.css" />
     <link rel="stylesheet" href="components/FeatureCard.css" />
     <link rel="stylesheet" href="components/FileUpload.css" />
@@ -35,9 +40,20 @@
     <link rel="stylesheet" href="views/profile_customization.css" />
     <link rel="stylesheet" href="views/signup_userinfo.css" />
     <link rel="stylesheet" href="views/signup_page.css" />
+    <link rel="stylesheet" href="views/chat_inbox.css" />
     <link rel="stylesheet" href="components/FeatureCard.css" />
     <link rel="stylesheet" href="components/ProgressIndicator.css" />
     <link rel="stylesheet" href="views/financial_media_setup.css" />
+    <link rel="stylesheet" href="components/ProfileHeader.css" />
+    <link rel="stylesheet" href="components/AboutSection.css" />
+    <link rel="stylesheet" href="components/ProfessionalDetails.css" />
+    <link rel="stylesheet" href="components/ActivityFeed.css" />
+    <link rel="stylesheet" href="views/profile_page.css" />
+    <link rel="stylesheet" href="views/employment_dashboard.css" />
+    <link rel="stylesheet" href="views/application_interview_management.css" />
+    <link rel="stylesheet" href="views/virtual_interview.css" />
+    <link rel="stylesheet" href="views/gig_creation.css" />
+    <link rel="stylesheet" href="views/gigs_dashboard.css" />
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js"></script>
@@ -55,8 +71,12 @@
     <script type="text/babel" data-presets="env,react" src="utils/api.js"></script>
     <script type="text/babel" data-presets="env,react" src="context/AuthContext.js"></script>
     <script type="text/babel" data-presets="env,react" src="nav/menu.js"></script>
-    <script type="text/babel" data-presets="env,react" src="components/FeatureCard.js"></script>
-    <script type="text/babel" data-presets="env,react" src="components/widgets/user_count.js"></script>
+      <script type="text/babel" data-presets="env,react" src="components/FeatureCard.js"></script>
+      <script type="text/babel" data-presets="env,react" src="components/TestimonialCarousel.js"></script>
+      <script type="text/babel" data-presets="env,react" src="components/PartnerLogos.js"></script>
+      <script type="text/babel" data-presets="env,react" src="components/TrustBadges.js"></script>
+      <script type="text/babel" data-presets="env,react" src="api/landing.js"></script>
+      <script type="text/babel" data-presets="env,react" src="components/widgets/user_count.js"></script>
     <script type="text/babel" data-presets="env,react" src="components/widgets/quote.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/home_page.js"></script>
     <script>
@@ -70,7 +90,9 @@
     <script type="text/babel" data-presets="env,react" src="components/ProgressIndicator.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/landing_page.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/login_page.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/liveFeed.js"></script>
     <script type="text/babel" data-presets="env,react" src="components/FeedPost.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/dashboard.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/home_dashboard.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/live_feed.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/signup_userinfo.js"></script>
@@ -78,10 +100,46 @@
     <script type="text/babel" data-presets="env,react" src="views/home_dashboard.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/cv_cover_letter_page.js"></script>
     <script type="text/babel" data-presets="env,react" src="utils/auth.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/auth.js"></script>
+<script type="text/babel" data-presets="env,react" src="api/profile.js"></script>
+<script type="text/babel" data-presets="env,react" src="components/ProfileHeader.js"></script>
+<script type="text/babel" data-presets="env,react" src="components/AboutSection.js"></script>
+<script type="text/babel" data-presets="env,react" src="components/ProfessionalDetails.js"></script>
+<script type="text/babel" data-presets="env,react" src="components/ActivityFeed.js"></script>
+<script type="text/babel" data-presets="env,react" src="views/profile_page.js"></script>
+<script type="text/babel" data-presets="env,react" src="views/profile_customization.js"></script>
+<script type="text/babel" data-presets="env,react" src="utils/api.js"></script>
+<script type="text/babel" data-presets="env,react" src="views/financial_media_setup.js"></script>
+    <script type="text/babel" data-presets="env,react" src="utils/date.js"></script>
     <script type="text/babel" data-presets="env,react" src="api/profile.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/resume.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/employment.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/profile_customization.js"></script>
     <script type="text/babel" data-presets="env,react" src="utils/api.js"></script>
     <script type="text/babel" data-presets="env,react" src="views/financial_media_setup.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/communications.js"></script>
+    <script type="text/babel" data-presets="env,react" src="components/widgets/chat_widget.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/chat_inbox.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/employment_dashboard.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/interviews.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/profile_customization.js"></script>
+    <script type="text/babel" data-presets="env,react" src="utils/api.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/financial_media_setup.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/communications.js"></script>
+    <script type="text/babel" data-presets="env,react" src="components/widgets/chat_widget.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/chat_inbox.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/application_interview_management.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/virtual_interview.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/gigs.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/profile_customization.js"></script>
+    <script type="text/babel" data-presets="env,react" src="utils/api.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/financial_media_setup.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/gigs.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/gig_creation.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/gigs_dashboard.js"></script>
+    <script type="text/babel" data-presets="env,react" src="api/jobs.js"></script>
+    <script type="text/babel" data-presets="env,react" src="components/JobCard.js"></script>
+    <script type="text/babel" data-presets="env,react" src="views/job_listings.js"></script>
     <script type="text/babel" data-presets="env,react" src="app.js"></script>
   </body>
 </html>

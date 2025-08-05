@@ -51,6 +51,10 @@ function getJobStats(jobId) {
   return jobs.get(jobId) || null;
 }
 
+function listJobs() {
+  return Array.from(jobs.values());
+}
+
 function getApplicationStats() {
   const byStatus = applications.reduce((acc, curr) => {
     acc[curr.status] = (acc[curr.status] || 0) + 1;
@@ -76,5 +80,6 @@ module.exports = {
   recordApplication,
   getOverview,
   getJobStats,
+  listJobs,
   getApplicationStats,
 };

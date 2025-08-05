@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS live_feed_posts (
   author VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
   category VARCHAR(50) DEFAULT 'general',
-  created_at TIMESTAMP DEFAULT NOW()
+  created_at TIMESTAMP DEFAULT NOW(),
+  likes INT DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS live_feed_events (
