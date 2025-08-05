@@ -78,6 +78,7 @@ const infrastructureOptimizationRoutes = require('./routes/infrastructureOptimiz
 const externalDataMLRoutes = require('./routes/externalDataML');
 const machineLearningRoutes = require('./routes/machineLearning');
 const transformersGpt2Routes = require('./routes/transformersGpt2');
+const contentLibraryRoutes = require('./routes/contentLibrary');
 const trendRoutes = require('./routes/trends');
 const sessionRoutes = require('./routes/sessions');
 const profilesRoutes = require('./routes/profiles');
@@ -179,6 +180,7 @@ app.use('/webinar-analytics', webinarAnalyticsRoutes);
 app.use('/analytics/workspace', workspaceAnalyticsRoutes);
 app.use('/analytics/live-feed', liveFeedAnalyticsRoutes);
 app.use('/live-feed', liveFeedRoutes);
+app.use('/content-library', contentLibraryRoutes);
 app.use('/ml', mlAnalyticsRoutes);
 app.use('/ml', enhancedUserExperienceMLRoutes);
 app.use('/ml', operationalEfficiencySecurityMlRoutes);
