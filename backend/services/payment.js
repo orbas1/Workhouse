@@ -46,8 +46,21 @@ async function adjustPayment(agencyId, paymentId, newAmount, reason) {
   return { payment: paymentModel.findPaymentById(paymentId), adjustment };
 }
 
+async function initiatePayment(userId, amount, method) {
+  if (typeof amount !== 'number' || amount <= 0) {
+    throw new Error('Invalid amount');
+  }
+  return paymentModel.createUserPayment({ userId, amount, method });
+}
+
+async function getPaymentStatus(paymentId) {
+  return paymentModel.getUserPayment(paymentId);
+}
+
 module.exports = {
   distributePayments,
   getAgencyPayments,
   adjustPayment,
+  initiatePayment,
+  getPaymentStatus,
 };
