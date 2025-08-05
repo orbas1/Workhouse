@@ -31,6 +31,7 @@ const disputeAnalyticsRoutes = require('./routes/disputeAnalytics');
 const educationAnalyticsRoutes = require('./routes/educationAnalytics');
 const financialAnalyticsRoutes = require('./routes/financialAnalytics');
 const employmentAnalyticsRoutes = require('./routes/employmentAnalytics');
+const freelanceAnalyticsRoutes = require('./routes/freelanceAnalytics');
 const gigAnalyticsRoutes = require('./routes/gigAnalytics');
 const messageAnalyticsRoutes = require('./routes/messageAnalytics');
 const realTimeMlAnalyticsRoutes = require('./routes/realTimeMlAnalytics');
@@ -120,6 +121,7 @@ app.use('/education-analytics', educationAnalyticsRoutes);
 app.use('/financial-analytics', financialAnalyticsRoutes);
 app.use('/agency/:agencyId/payments', paymentRoutes);
 app.use('/analytics/employment', employmentAnalyticsRoutes);
+app.use('/analytics/freelance', freelanceAnalyticsRoutes);
 app.use('/analytics/gig', gigAnalyticsRoutes);
 app.use('/analytics/messages', messageAnalyticsRoutes);
 app.use('/ml/real-time', realTimeMlAnalyticsRoutes);
@@ -170,8 +172,6 @@ app.use('/milestones', milestoneRoutes);
 app.use('/assessments', assessmentRoutes);
 app.use('/certificates', certificateRoutes);
 app.use('/experts', expertAccessRoutes);
-
-// Commission rate adjustment notifications
 app.use('/affiliates/notifications', notificationRoutes);
 
 const port = process.env.PORT || 5000;
