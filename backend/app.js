@@ -64,6 +64,7 @@ const milestoneRoutes = require('./routes/milestones');
 const progressRoutes = require('./routes/progress');
 const achievementRoutes = require('./routes/achievements');
 const skillRoutes = require('./routes/skills');
+const gamificationRoutes = require('./routes/gamification');
 
 const app = express();
 app.use(cors());
@@ -135,6 +136,7 @@ app.use('/achievements', achievementRoutes);
 app.use('/skills', skillRoutes);
 app.use('/goals', goalRoutes);
 app.use('/milestones', milestoneRoutes);
+app.use('/gamification', gamificationRoutes);
 
 // Commission rate adjustment notifications
 app.use('/affiliates/notifications', notificationRoutes);
