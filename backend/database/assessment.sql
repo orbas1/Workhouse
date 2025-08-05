@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS assessments (
+  id UUID PRIMARY KEY,
+  course_id VARCHAR(255) NOT NULL,
+  user_id VARCHAR(255) NOT NULL,
+  responses JSONB NOT NULL,
+  score NUMERIC(5,2),
+  graded BOOLEAN DEFAULT FALSE,
+  submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  graded_at TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS assessment_feedback (
+  id UUID PRIMARY KEY,
+  assessment_id UUID REFERENCES assessments(id),
+  user_id VARCHAR(255) NOT NULL,
+  course_id VARCHAR(255) NOT NULL,
+  message TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS certificates (
+  id UUID PRIMARY KEY,
+  user_id VARCHAR(255) NOT NULL,
+  course_id VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  issuer_id VARCHAR(255) NOT NULL,
+  issued_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

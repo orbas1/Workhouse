@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS user_progress (
+  id UUID PRIMARY KEY,
+  user_id VARCHAR(255) NOT NULL,
+  course_id VARCHAR(255) NOT NULL,
+  activity VARCHAR(255),
+  progress DECIMAL(5,2) NOT NULL,
+  details TEXT,
+  tracked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS learning_goals (
+  id UUID PRIMARY KEY,
+  user_id VARCHAR(255) NOT NULL,
+  goal TEXT NOT NULL,
+  target_date DATE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
