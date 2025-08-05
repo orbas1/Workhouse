@@ -11,14 +11,14 @@ const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
  * @param {string} [role='user'] Role assigned to the user
  * @returns {Promise<{id: string, username: string, role: string}>}
  */
-async function register(username, password, role = 'user') {
+async function register({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
   const existing = findUser(username);
   if (existing) {
     throw new Error('User already exists');
   }
   const hashed = await bcrypt.hash(password, 10);
-  const user = addUser({ username, password: hashed, role });
-  return { id: user.id, username: user.username, role: user.role };
+  const user = addUser({ username, password: hashed, role, fullName, email, phone, location, bio, expertise });
+  return { id: user.id, username: user.username, role: user.role, fullName: user.fullName, email: user.email };
 }
 
 /**
@@ -37,7 +37,7 @@ async function login(username, password) {
     throw new Error('Invalid credentials');
   }
   const token = jwt.sign(
-    { id: user.id, username: user.username, role: user.role },
+    { id: user.id, username: user.username, role: user.role, fullName: user.fullName, email: user.email },
     JWT_SECRET,
     { expiresIn: '1h' }
   );
