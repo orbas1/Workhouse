@@ -42,13 +42,22 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/feed')}>Live Feed</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/employment')}>Employment</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/education/schedule')}>Schedule</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/applications-interviews')}>Applications</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/interview/1')}>Interview</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/manage')}>Gigs</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs')}>Gigs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/calendar')}>Calendar</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/search')}>Discover Gigs</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/jobs')}>Jobs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/proposals-invoices')}>
+        Proposals & Invoices
+      </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/orders')}>Orders</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/creator/dashboard')}>Creator</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts')}>Contracts</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/classroom/WorkhouseClassroom')}>Classroom</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/courses')}>Courses</Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );
