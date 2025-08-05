@@ -69,6 +69,7 @@ const aiEnhancedLearningRoutes = require('./routes/aiEnhancedLearningDevelopment
 const userFeedbackAdjustmentRoutes = require('./routes/userFeedbackAdjustment');
 const integrationRoutes = require('./routes/integration');
 const sessionRoutes = require('./routes/sessions');
+const interviewRoutes = require('./routes/interviews');
 const infrastructureOptimizationRoutes = require('./routes/infrastructureOptimization');
 const externalDataMLRoutes = require('./routes/externalDataML');
 const machineLearningRoutes = require('./routes/machineLearning');
@@ -185,6 +186,7 @@ app.use('/ml/learning', aiEnhancedLearningRoutes);
 app.use('/', userFeedbackAdjustmentRoutes);
 app.use('/integration', integrationRoutes);
 app.use('/sessions', sessionRoutes);
+app.use('/interviews', interviewRoutes);
 app.use('/ml', infrastructureOptimizationRoutes);
 app.use('/', externalDataMLRoutes);
 app.use('/ml', machineLearningRoutes);

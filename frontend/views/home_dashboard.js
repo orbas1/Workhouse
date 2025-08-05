@@ -42,12 +42,16 @@ function HomeDashboard() {
         )}
         <QuoteWidget />
       </SimpleGrid>
-    <Box className="dashboard">
-      <Heading size="lg" mb={2}>Dashboard</Heading>
-      <Text mb={4}>Hello, {user.username}!</Text>
-      <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
-        Go to Live Feed
-      </Button>
+      <Box className="dashboard" mt={6}>
+        <Heading size="lg" mb={2}>Dashboard</Heading>
+        <Text mb={4}>Hello, {user.username}!</Text>
+        <Button colorScheme="blue" mr={2} onClick={() => window.location.href = '/feed'}>
+          Go to Live Feed
+        </Button>
+        <Button colorScheme="teal" onClick={() => window.location.href = '/interview/1'}>
+          Join Interview
+        </Button>
+      </Box>
     </Box>
   );
 }
