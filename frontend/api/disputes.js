@@ -27,4 +27,22 @@ function getDispute(disputeId) {
   return request(`/${disputeId}`);
 }
 
-window.disputesAPI = { createDispute, respondToDispute, getDispute };
+function listDisputes(params = {}) {
+  const query = new URLSearchParams(params).toString();
+  return request(query ? `?${query}` : '');
+}
+
+function postDisputeMessage(disputeId, message) {
+  return request(`/${disputeId}/messages`, {
+    method: 'POST',
+    body: JSON.stringify({ message }),
+  });
+}
+
+window.disputesAPI = {
+  createDispute,
+  respondToDispute,
+  getDispute,
+  listDisputes,
+  postDisputeMessage,
+};

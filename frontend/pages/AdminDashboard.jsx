@@ -6,6 +6,9 @@ import FlaggedContentTable from '../components/admin/FlaggedContentTable.jsx';
 import TicketTable from '../components/admin/TicketTable.jsx';
 import DisputeTable from '../components/admin/DisputeTable.jsx';
 import '../api/adminDashboard';
+import EmployeeTable from '../components/admin/EmployeeTable';
+import SystemSettings from '../components/admin/SystemSettings';
+import { listEmployees } from '../api/admin.js';
 import '../styles/AdminDashboard.css';
 
 export default function AdminDashboard() {
@@ -15,6 +18,13 @@ export default function AdminDashboard() {
   const [tickets, setTickets] = useState([]);
   const [disputes, setDisputes] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const loadEmployees = () => {
+    listEmployees()
+      .then(setEmployees)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     async function load() {
