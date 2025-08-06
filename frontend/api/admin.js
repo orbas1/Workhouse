@@ -1,85 +1,43 @@
-(function(global){
-  async function listEmployees() {
-    const res = await apiFetch('/hr/employees');
-    if (!res.ok) throw new Error('Failed to load employees');
-    return res.json();
-  }
+import apiFetch from '../utils/api.js';
 
-  async function createEmployee(data) {
-    const res = await apiFetch('/hr/employees', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (!res.ok) throw new Error('Failed to create employee');
-    return res.json();
-  }
+export async function fetchSystemSettings() {
+  return apiFetch('/admin/system-settings');
+}
 
-  async function updateEmployee(id, data) {
-    const res = await apiFetch(`/hr/employees/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (!res.ok) throw new Error('Failed to update employee');
-    return res.json();
-  }
+export async function updateSystemSettings(data) {
+  return apiFetch('/admin/system-settings', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
 
-  async function deleteEmployee(id) {
-    const res = await apiFetch(`/hr/employees/${id}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Failed to delete employee');
-    return res.json();
-  }
+export async function listEmployees() {
+  return apiFetch('/hr/employees');
+}
 
-  async function getConfig() {
-    const res = await apiFetch('/config');
-    if (!res.ok) throw new Error('Failed to load config');
-    return res.json();
-  }
+export async function createEmployee(data) {
+  return apiFetch('/hr/employees', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
 
-  async function updateConfig(data) {
-    const res = await apiFetch('/config', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (!res.ok) throw new Error('Failed to update config');
-    return res.json();
-  }
+export async function updateEmployee(id, data) {
+  return apiFetch(`/hr/employees/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
 
-  global.adminAPI = {
-    listEmployees,
-    createEmployee,
-    updateEmployee,
-    deleteEmployee,
-    getConfig,
-    updateConfig
-  };
-  async function fetchSystemSettings(){
-    const res = await apiFetch('/admin/system-settings');
-    if(!res.ok) throw new Error('Failed to load settings');
-    return res.json();
-  }
-  async function updateSystemSettings(payload){
-    const res = await apiFetch('/admin/system-settings', {
-      method: 'PUT',
-      body: JSON.stringify(payload)
-    });
-    if(!res.ok) throw new Error('Failed to update settings');
-    return res.json();
-  }
-  async function listEmployees(){
-    const res = await apiFetch('/hr/employees');
-    if(!res.ok) throw new Error('Failed to load employees');
-    return res.json();
-  }
-  async function createEmployee(data){
-    const res = await apiFetch('/hr/employees', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-    if(!res.ok) throw new Error('Failed to create employee');
-    return res.json();
-  }
-  global.adminAPI = { fetchSystemSettings, updateSystemSettings, listEmployees, createEmployee };
-})(window);
+export async function deleteEmployee(id) {
+  return apiFetch(`/hr/employees/${id}`, { method: 'DELETE' });
+}
+
+export default {
+  fetchSystemSettings,
+  updateSystemSettings,
+  listEmployees,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+};
