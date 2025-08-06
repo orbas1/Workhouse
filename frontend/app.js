@@ -67,6 +67,7 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/ads" element={<Protected><BillingAnalyticsAdLibraryPage /></Protected>} />
         <Route path="/sessions" element={<Protected><NetworkingSessions /></Protected>} />
         <Route path="/startups/profile-plan" element={<Protected><StartupProfilePlanPage /></Protected>} />
         <Route path="/content/manage" element={<Protected><ContentManager /></Protected>} />
