@@ -8,8 +8,8 @@ export default function ClassroomPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    const domain = (window.env && window.env.JITSI_DOMAIN) || 'https://meet.jit.si';
-    const room = id || (window.env && window.env.CLASSROOM_DEFAULT_ROOM) || 'WorkhouseClassroom';
+    const domain = import.meta.env.VITE_JITSI_DOMAIN || 'https://meet.jit.si';
+    const room = id || import.meta.env.VITE_CLASSROOM_DEFAULT_ROOM || 'WorkhouseClassroom';
     const options = {
       roomName: room,
       parentNode: document.getElementById('jitsi-container'),
