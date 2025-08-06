@@ -56,5 +56,4 @@ function remove(id) {
   return true;
 }
 
-module.exports = { create, list, update, remove };
-module.exports = { create, list, findById, updateStatus, remove };
+module.exports = { create, list, update, remove, findById, updateStatus };
