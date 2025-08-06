@@ -4,6 +4,7 @@ window.env = {
   API_BASE_URL: apiBase,
   AVATAR_API: import.meta.env.VITE_AVATAR_API,
   JITSI_DOMAIN: import.meta.env.VITE_JITSI_DOMAIN,
+  JITSI_ROOM_PREFIX: import.meta.env.VITE_JITSI_ROOM_PREFIX,
   CLASSROOM_DEFAULT_ROOM: import.meta.env.VITE_CLASSROOM_DEFAULT_ROOM,
   ADVICE_API: apiBase + (import.meta.env.VITE_ADVICE_API || '/advice'),
   WORLD_TIME_API: apiBase + (import.meta.env.VITE_WORLD_TIME_API || '/worldtime'),
