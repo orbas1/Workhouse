@@ -5,6 +5,10 @@ export async function fetchUserApplications() {
   return data;
 }
 
+export async function getUserApplications() {
+  return fetchUserApplications();
+}
+
 export async function fetchOpportunityApplications(opportunityId) {
   const { data } = await apiClient.get(`/applications/opportunity/${opportunityId}`);
   return data;
