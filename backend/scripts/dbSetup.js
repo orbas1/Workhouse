@@ -3,14 +3,18 @@ const path = require('path');
 const mysql = require('mysql2/promise');
 
 async function runMigrations() {
+  const dbName = process.env.DB_NAME || 'workhouse';
   const connection = await mysql.createConnection({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'workhouse',
     port: process.env.DB_PORT || 3306,
     multipleStatements: true
   });
+
+  // Ensure the database exists before running migrations
+  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
+  await connection.changeUser({ database: dbName });
 
   const dir = path.join(__dirname, '..', 'database');
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.sql')).sort();
