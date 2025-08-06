@@ -14,6 +14,21 @@ function addConnection(userId, { name = '', title = '', tags = [], status = 'new
     status,
     notes,
     activity: [],
+// In-memory storage for connections
+const connections = new Map();
+
+function createConnection({ ownerId, name, role = '', company = '', status = 'active', notes = '', tags = [] }) {
+  const id = randomUUID();
+  const now = new Date();
+  const connection = {
+    id,
+    ownerId,
+    name,
+    role,
+    company,
+    status,
+    notes,
+    tags,
     lastInteraction: now,
     createdAt: now,
     updatedAt: now,
@@ -46,5 +61,35 @@ module.exports = {
   addConnection,
   getConnectionsByUser,
   updateConnection,
+  connections.set(id, connection);
+  return connection;
+}
+
+function listConnectionsByOwner(ownerId) {
+  return Array.from(connections.values()).filter((c) => c.ownerId === ownerId);
+}
+
+function getConnection(id) {
+  return connections.get(id);
+}
+
+function updateConnection(id, updates) {
+  const connection = connections.get(id);
+  if (!connection) return null;
+  Object.assign(connection, updates, { updatedAt: new Date() });
+  connections.set(id, connection);
+  return connection;
+}
+
+function removeConnection(id) {
+  return connections.delete(id);
+}
+
+module.exports = {
+  createConnection,
+  listConnectionsByOwner,
+  getConnection,
+  updateConnection,
+  removeConnection,
 };
 

@@ -10,30 +10,36 @@ export default function ConnectionManagementPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const userId = localStorage.getItem('userId') || 'default-user';
+  const [form, setForm] = useState({ name: '', role: '', tags: '' });
 
   useEffect(() => {
     async function fetchConnections() {
       try {
-        const data = await getConnections(userId);
+        const data = await getConnections();
         setConnections(data);
       } catch (err) {
         console.error('Failed to load connections', err);
       }
     }
     fetchConnections();
-  }, [userId]);
+  }, []);
 
   const handleAdd = async () => {
     if (!form.name) return;
     try {
       const tags = form.tags.split(',').map((t) => t.trim()).filter((t) => t);
       const newConn = await addConnection(userId, {
+      const tags = form.tags
+        .split(',')
+        .map((t) => t.trim())
+        .filter((t) => t);
+      const newConn = await addConnection({
         name: form.name,
-        title: form.title,
+        role: form.role,
         tags,
       });
       setConnections((prev) => [...prev, newConn]);
-      setForm({ name: '', title: '', tags: '' });
+      setForm({ name: '', role: '', tags: '' });
     } catch (err) {
       console.error('Failed to add connection', err);
     }
@@ -58,9 +64,9 @@ export default function ConnectionManagementPage() {
           mr={2}
         />
         <Input
-          placeholder="Title"
-          value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
+          placeholder="Role"
+          value={form.role}
+          onChange={(e) => setForm({ ...form, role: e.target.value })}
           mr={2}
         />
         <Input
@@ -101,6 +107,34 @@ export default function ConnectionManagementPage() {
               setConnections((prev) => prev.map((c) => (c.id === u.id ? u : c)))
             }
           />
+        {connections.map((conn) => (
+          <Box key={conn.id} borderWidth="1px" borderRadius="md" p={4} className="connection-card">
+            <Flex justify="space-between" align="center">
+              <Box>
+                <Heading size="sm">{conn.name}</Heading>
+                <Text fontSize="sm">{conn.role}</Text>
+                <Flex mt={2} wrap="wrap">
+                  {conn.tags &&
+                    conn.tags.map((tag) => (
+                      <Tag key={tag} size="sm" colorScheme="teal" mr={1} mb={1}>
+                        <TagLabel>{tag}</TagLabel>
+                      </Tag>
+                    ))}
+                </Flex>
+              </Box>
+              <Flex>
+                <Button size="sm" mr={2} onClick={() => handleStatus(conn.id, 'followed')}>
+                  Follow-Up
+                </Button>
+                <Button size="sm" onClick={() => handleStatus(conn.id, 'messaged')}>
+                  Messaged
+                </Button>
+              </Flex>
+            </Flex>
+            <Text mt={2} fontSize="xs">
+              Status: {conn.status}
+            </Text>
+          </Box>
         ))}
       </Stack>
     </Box>
