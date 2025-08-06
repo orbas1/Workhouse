@@ -67,6 +67,9 @@ export default function Dashboard() {
         <Button as={RouterLink} to="/proposals-invoices" mt={4} colorScheme="teal">
           Manage Proposals & Invoices
         </Button>
+        <Button as={RouterLink} to="/billing" mt={4} colorScheme="teal">
+          Billing & Subscription
+        </Button>
         <Button mt={4} colorScheme="teal" onClick={() => navigate('/classroom/WorkhouseClassroom')}>
           Enter Classroom
         </Button>
