@@ -1,6 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 const ANALYTICS_ENDPOINT = import.meta.env.VITE_ANALYTICS_ENDPOINT || '/analytics/content/performance';
-const AUDIT_ENDPOINT = import.meta.env.VITE_AUDIT_RESULTS_ENDPOINT || '/security/compliance/audit-results';
+const AUDIT_ENDPOINT = import.meta.env.VITE_AUDIT_RESULTS_ENDPOINT || '/admin/audit-logs';
 
 async function request(path, options = {}) {
   const token = localStorage.getItem('token');

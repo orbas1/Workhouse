@@ -1,0 +1,10 @@
+.schedule-calendar-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.schedule-calendar-page .event-item {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+}

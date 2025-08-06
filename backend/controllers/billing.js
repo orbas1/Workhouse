@@ -5,6 +5,7 @@ const {
   addPaymentMethod,
   removePaymentMethod,
   getTransactions,
+  generateInvoice,
 } = require('../services/billing');
 const logger = require('../utils/logger');
 
@@ -69,6 +70,20 @@ async function getTransactionsHandler(req, res) {
   }
 }
 
+async function getInvoiceHandler(req, res) {
+  try {
+    const pdf = await generateInvoice(req.user.id, req.params.transactionId);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename=invoice_${req.params.transactionId}.pdf`,
+    });
+    res.send(pdf);
+  } catch (err) {
+    logger.error('Failed to generate invoice', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getSubscriptionHandler,
   updateSubscriptionHandler,
@@ -76,4 +91,5 @@ module.exports = {
   addPaymentMethodHandler,
   removePaymentMethodHandler,
   getTransactionsHandler,
+  getInvoiceHandler,
 };
