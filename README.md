@@ -45,16 +45,20 @@ Workhouse/
    ```
 2. **Install dependencies** for both services:
    ```bash
-   cd backend && npm install
-   cd ../frontend && npm install
+   npm install
    ```
 
 ## Running the App
 ### Development
-Run the API and frontend separately for a faster feedback loop:
+Run the API and frontend separately for a faster feedback loop. From the repository root you can use:
 ```bash
-cd backend && npm start            # launches API on port 5000
-cd ../frontend && npm run dev      # serves frontend with hot reload
+npm run start:backend   # launches API on port 5000
+npm run start:frontend  # serves frontend with hot reload
+```
+Or you can still run the scripts from within each directory:
+```bash
+cd backend && npm start
+cd frontend && npm run dev
 ```
 Configure `VITE_API_URL` in `.env` to point the frontend to the backend server.
 
