@@ -1,0 +1,7 @@
+.opportunity-search-card {
+  transition: background-color 0.2s ease;
+}
+
+.opportunity-search-card:hover {
+  background-color: #f7fafc;
+}
