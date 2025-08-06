@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { getVolunteeringDashboard } from '../api/volunteering.js';
+import VolunteerEngagementChart from '../components/VolunteerEngagementChart.jsx';
 import '../styles/VolunteeringDashboardPage.css';
 
 export default function VolunteeringDashboardPage() {
@@ -67,6 +68,12 @@ export default function VolunteeringDashboardPage() {
           </>
         )}
       </SimpleGrid>
+      {user?.role !== 'organization' && stats.engagementHistory?.length > 0 && (
+        <Box mb={6} bg="white" p={4} borderRadius="md" borderWidth="1px">
+          <Heading size="md" mb={2}>Hours Over Time</Heading>
+          <VolunteerEngagementChart data={stats.engagementHistory} />
+        </Box>
+      )}
       <Flex gap={4} className="shortcut-buttons">
         {user?.role === 'organization' ? (
           <Button colorScheme="teal" onClick={() => (window.location.href = '/opportunities/manage')}>
