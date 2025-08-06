@@ -186,6 +186,7 @@ import PaymentPage from './pages/PaymentPage.jsx';
 import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
+import DisputeDashboardPage from './pages/DisputeDashboardPage.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 import ContractManagementPage from './pages/ContractManagementPage.jsx';
 import ClassroomPage from './pages/ClassroomPage.jsx';
@@ -211,6 +212,7 @@ function App() {
               <Route path="/services" element={<ServiceSearchPage />} />
               <Route path="/services/:id" element={<ServiceDetailPage />} />
               <Route path="/tasks" element={<TaskDashboardPage />} />
+              <Route path="/disputes" element={<DisputeDashboardPage />} />
             </Routes>
           </Box>
           <TaskProvider>
