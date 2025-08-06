@@ -66,6 +66,15 @@ cd .. && node app.js               # serves static frontend and mounts /api rout
 ```
 `API_BASE_URL` in `.env` controls the path where the backend is mounted when using `app.js`.
 
+## Vercel Deployment
+The repository includes a `vercel.json` configuration that builds the React frontend and packages the Express backend as a serverless function. To deploy:
+
+1. In Vercel, create a project and set the root directory to the repository root (where `vercel.json` lives).
+2. Add the required environment variables listed in `.env.example` to the project settings.
+3. Trigger a deployment. Vercel will build `frontend` with Vite and expose the API under `/api` using the backend code.
+
+If you prefer separate deployments, create one Vercel project with `frontend/` as the root and another with `backend/` configured with the Node runtime.
+
 ## Additional Resources
 Detailed endpoint and UI design notes live in:
 - `backend_guide.md` – overview of backend routes and planned services.
