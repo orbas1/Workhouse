@@ -11,6 +11,7 @@ const {
   createLanguageRoomHandler,
   getCommunicationHistoryHandler,
   translateMessageHandler,
+  getSessionAnalyticsHandler,
 } = require('../controllers/communicationTools');
 const {
   videoStartSchema,
@@ -26,5 +27,6 @@ router.get('/message/template', auth, getMessageTemplateHandler);
 router.post('/room/language-specific', auth, validate(languageRoomSchema), createLanguageRoomHandler);
 router.get('/history/:userId', auth, getCommunicationHistoryHandler);
 router.post('/language/translate', auth, validate(translateSchema), translateMessageHandler);
+router.get('/analytics/:sessionId', auth, getSessionAnalyticsHandler);
 
 module.exports = router;
