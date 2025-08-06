@@ -4,6 +4,7 @@ const cors = require('cors');
 const products = require('./data/products.json');
 const authRoutes = require('./routes/auth');
 const landingRoutes = require('./routes/landing');
+const api = require("./api");
 
 const app = express();
 app.use(cors());
