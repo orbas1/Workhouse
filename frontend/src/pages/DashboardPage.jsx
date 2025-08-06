@@ -8,7 +8,6 @@ import {
   StatNumber,
   Spinner,
   HStack,
-  Switch,
   Text,
   Button,
 } from '@chakra-ui/react';
@@ -16,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/DashboardPage.css';
 import { getDashboard } from '../api/dashboard.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import WeatherWidget from '../components/WeatherWidget.jsx';
+import NewsWidget from '../components/NewsWidget.jsx';
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -59,13 +60,14 @@ export default function DashboardPage() {
 
   return (
     <Box className="dashboard-page" p={4}>
-      <HStack justify="space-between" mb={6} align="center">
-        <Heading size="lg">Welcome back, {user?.name || user?.username}</Heading>
-        <HStack>
-          <Text>Feed</Text>
-          <Switch colorScheme="teal" onChange={() => navigate('/feed')} aria-label="Toggle live feed" />
-        </HStack>
-      </HStack>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4} mb={6}>
+        <Box p={4} borderWidth="1px" borderRadius="md" bg="white">
+          <Heading size="md">Welcome, {user?.name || user?.username}</Heading>
+          <Text mt={2}>Glad to have you here.</Text>
+        </Box>
+        <WeatherWidget />
+        <NewsWidget />
+      </SimpleGrid>
       <SimpleGrid columns={[1, 2, 4]} spacing={4}>
         {stats.map((s) =>
           s.key in data ? (
