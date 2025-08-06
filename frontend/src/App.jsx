@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import ArticlePage from './pages/ArticlePage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 
@@ -66,6 +67,8 @@ export default function App() {
                 />
                 <Route path="/" element={<Navigate to="/profile" replace />} />
                 <Route path="*" element={<Navigate to="/profile" replace />} />
+                <Route path="/articles" element={<ArticlePage />} />
+                <Route path="/articles/:articleId" element={<ArticlePage />} />
               </Routes>
             </Box>
           </ProfileProvider>
