@@ -44,6 +44,7 @@ import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
 import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
+import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -107,7 +108,8 @@ export default function App() {
     { path: '/job-posts', element: <JobPostManagement />, protected: true },
     { path: '/gigs', element: <PlaceholderPage title="Gigs Dashboard" />, protected: true },
     { path: '/gigs/manage', element: <PlaceholderPage title="Gig Creation & Management" />, protected: true },
-    { path: '/gigs/search', element: <PlaceholderPage title="Gig Search & Discovery" />, protected: true },
+    { path: '/gigs/search', element: <ServiceSearchPage />, protected: true },
+    { path: '/gigs/:id', element: <ServiceDetailPage />, protected: true },
     { path: '/orders', element: <OrderManagementPage />, protected: true },
     { path: '/payments', element: <PaymentPage />, protected: true },
     { path: '/ads', element: <AdsDashboardPage />, protected: true },
@@ -115,6 +117,7 @@ export default function App() {
     { path: '/ads/:adId/edit', element: <AdCreateEdit />, protected: true },
 
     // Contracts & Freelancing
+    { path: '/freelance', element: <FreelanceDashboardPage />, protected: true },
     { path: '/contracts', element: <ContractManagementPage />, protected: true },
     { path: '/contracts/new', element: <ContractFormPage />, protected: true },
     { path: '/proposals-invoices', element: <ProposalInvoiceManagement />, protected: true },

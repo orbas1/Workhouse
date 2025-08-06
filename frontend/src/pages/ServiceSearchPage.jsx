@@ -85,7 +85,7 @@ export default function ServiceSearchPage() {
             borderWidth="1px"
             borderRadius="md"
             overflow="hidden"
-            onClick={() => navigate(`/services/${svc.id}`)}
+            onClick={() => navigate(`/gigs/${svc.id}`)}
             cursor="pointer"
           >
             <Image src={svc.image} alt={svc.name} className="service-image" />

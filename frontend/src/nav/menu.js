@@ -33,6 +33,7 @@ export const menu = [
       { label: 'Proposals & Invoices', path: '/proposals-invoices' },
       { label: 'Orders', path: '/orders' },
       { label: 'Payments', path: '/payments' },
+      { label: 'Freelance Dashboard', path: '/freelance' },
       { label: 'Contracts', path: '/contracts' },
       { label: 'New Contract', path: '/contracts/new' },
       { label: 'Services', path: '/services' },
