@@ -1,15 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
-
-async function runMigrations() {
-  const dbName = process.env.DB_NAME || 'workhouse';
-  const psql = (command) => {
-    execSync(`sudo -u postgres psql -d ${dbName} -c "${command}"`, { stdio: 'inherit' });
-  };
-
-  // Ensure required extensions are present
-  psql('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
 const net = require('net');
 const { Client } = require('pg');
 
@@ -36,23 +26,36 @@ async function runMigrations() {
   const client = new Client({ host, user, password, port, database: dbName });
   await client.connect();
 
+  // ensure required extensions
+  await client.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
+
   const dir = path.join(__dirname, '..', 'database');
   const files = fs
     .readdirSync(dir)
-    .filter(f => f.endsWith('.sql') && f !== 'database.sql')
+    .filter(f => f.endsWith('.sql'))
     .sort();
 
   for (const file of files) {
     const filePath = path.join(dir, file);
+    let sql = fs.readFileSync(filePath, 'utf8');
+    // remove psql include commands to avoid errors
+    sql = sql
+      .split('\n')
+      .filter(line => !line.trim().startsWith('\\i'))
+      .join('\n');
+
+    if (!sql.trim()) {
+      console.log(`Skipped ${file}`);
+      continue;
+    }
+
     try {
-      execSync(`sudo -u postgres psql -d ${dbName} -f "${filePath}"`, { stdio: 'inherit' });
       await client.query(sql);
       console.log(`Executed ${file}`);
     } catch (err) {
-      console.error(`Error executing ${file}: ${err.stderr?.toString().trim() || err.message}`);
+      console.error(`Error executing ${file}: ${err.message}`);
     }
   }
-
 
   await client.end();
 }
