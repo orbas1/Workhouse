@@ -6,7 +6,10 @@
   "type": "commonjs",
   "scripts": {
     "start": "node app.js",
-    "test": "jest"
+    "test": "jest",
+    "setup": "node scripts/setupWizard.js",
+    "db:migrate": "node scripts/dbSetup.js",
+    "db:seed": "node scripts/seedData.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,7 +21,8 @@
     "pdfkit": "^0.15.0",
     "express-validator": "^6.15.0",
     "multer": "^1.4.5-lts.1",
-    "axios": "^1.7.2"
+    "axios": "^1.7.2",
+    "mysql2": "^3.9.2"
   },
   "devDependencies": {
     "jest": "^30.0.5"
