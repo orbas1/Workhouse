@@ -62,7 +62,8 @@ import FileResourceManagement from '../pages/FileResourceManagement.jsx';
 import InSessionNetworking from '../pages/InSessionNetworking.jsx';
 import NetworkingSessions from '../pages/NetworkingSessions.jsx';
 import ProjectManagement from '../pages/ProjectManagement.jsx';
-import ProposalInvoiceManagement from '../pages/ProposalInvoiceManagement.jsx';
+import ProposalInvoiceManagementPage from './pages/ProposalInvoiceManagementPage.jsx';
+import FreelancerSearchPage from './pages/FreelancerSearchPage.jsx';
 import SettingsPage from '../pages/SettingsPage.jsx';
 import SystemSettingsEmployeeManagement from '../pages/SystemSettingsEmployeeManagement.jsx';
 import PaymentTimesheetManagement from '../pages/PaymentTimesheetManagement.jsx';
@@ -129,10 +130,11 @@ export default function App() {
     { path: '/ads/:adId/edit', element: <AdCreateEdit />, protected: true },
 
     // Contracts & Freelancing
+    { path: '/freelancers', element: <FreelancerSearchPage />, protected: true },
     { path: '/freelance', element: <FreelanceDashboardPage />, protected: true },
     { path: '/contracts', element: <ContractManagementPage />, protected: true },
     { path: '/contracts/new', element: <ContractFormPage />, protected: true },
-    { path: '/proposals-invoices', element: <ProposalInvoiceManagement />, protected: true },
+    { path: '/proposals-invoices', element: <ProposalInvoiceManagementPage />, protected: true },
     { path: '/services', element: <ServiceSearchPage />, protected: true },
     { path: '/services/new', element: <ServiceCreationPage />, protected: true },
     { path: '/services/:id', element: <ServiceDetailPage />, protected: true },
@@ -204,7 +206,6 @@ export default function App() {
     { path: '/admin/system-settings', element: <SystemSettingsEmployeeManagement />, admin: true },
     { path: '/affiliates', element: <AffiliateManagementPage />, protected: true },
     { path: '/sim-dashboard', element: <SimDashboardPage />, protected: true },
-    { path: '/proposal-invoices', element: <ProposalInvoiceManagement />, protected: true },
 
     // Fallback
     { path: '*', element: <Navigate to="/" replace /> }
