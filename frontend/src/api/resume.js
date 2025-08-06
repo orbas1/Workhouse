@@ -32,3 +32,8 @@ export async function fetchResume() {
   const { data } = await apiClient.get('/resume');
   return data;
 }
+
+export async function analyzeCv(content) {
+  const { data } = await apiClient.post('/resume/cv/analyze', { content });
+  return data;
+}

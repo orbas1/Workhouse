@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { adminDashboardHandler } = require('../controllers/adminDashboard');
 const { users, addUser } = require('../models/user');
-const { createJob } = require('../models/job');
-const { createGig } = require('../models/gig');
-const { createContract } = require('../models/contract');
+const supportTickets = require('../models/supportTicket');
+const disputes = require('../models/dispute');
+const flaggedContent = require('../models/flaggedContent');
 
 describe('admin dashboard', () => {
   test('route defines an Express router', () => {
@@ -17,17 +17,17 @@ describe('admin dashboard', () => {
   test('adminDashboardHandler returns site metrics', () => {
     users.length = 0;
     addUser({ username: 'a', password: 'p', role: 'admin' });
-    createJob('agency', { title: 'Job test' });
-    createGig({ title: 'Gig', description: '', category: 'cat', price: 5, ownerId: 'owner' });
-    createContract({ clientId: 'c1', title: 'Contract', description: '', paymentType: 'fixed', budget: 1, hourlyRate: null, expectedHours: null, milestones: [], deliverables: [], timeline: null });
+    supportTickets.createTicket({ userId: 'a', subject: 's', message: 'm' });
+    flaggedContent.flagContent({ contentId: '1', reporterId: 'a', reason: 'spam' });
+    disputes.createDispute({ userId: 'a', disputeeId: 'b', category: 'test' });
 
     const req = {};
     const res = { json: jest.fn() };
     adminDashboardHandler(req, res);
     const payload = res.json.mock.calls[0][0];
-    expect(payload.totalUsers).toBeGreaterThanOrEqual(1);
-    expect(payload.totalJobs).toBeGreaterThanOrEqual(1);
-    expect(payload.totalGigs).toBeGreaterThanOrEqual(1);
-    expect(payload.totalContracts).toBeGreaterThanOrEqual(1);
+    expect(payload.activeUsers).toBeGreaterThanOrEqual(1);
+    expect(payload.flaggedContent).toBeGreaterThanOrEqual(1);
+    expect(payload.openTickets).toBeGreaterThanOrEqual(1);
+    expect(payload.activeDisputes).toBeGreaterThanOrEqual(1);
   });
 });

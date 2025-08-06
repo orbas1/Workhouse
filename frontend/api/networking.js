@@ -22,6 +22,10 @@ export function fetchNetworkingEvents() {
   return request('/events/networking');
 }
 
+export function fetchHostedNetworkingEvents() {
+  return request('/events/networking/host');
+}
+
 export function attendNetworkingEvent(eventId) {
   return request(`/events/networking/attend/${eventId}`, { method: 'POST' });
 }

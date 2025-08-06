@@ -33,7 +33,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <Box>
+    <Box className="landing-page">
       <HStack as="header" className="landing-header" justify="space-between" align="center" p={4} boxShadow="sm" position="sticky" top="0" bg="white" zIndex="1000">
         <Heading size="md">Workhouse</Heading>
         <HStack spacing={4}>
