@@ -36,6 +36,7 @@ function searchProfiles({
   expertise,
   minExperience,
   maxSalary,
+  search,
 }) {
   let results = Array.from(profiles.values());
   if (role) results = results.filter((p) => p.role === role);
@@ -52,6 +53,32 @@ function searchProfiles({
   if (maxSalary !== undefined) {
     results = results.filter((p) => p.salary !== null && p.salary <= Number(maxSalary));
   }
+  if (search) {
+    const q = search.toLowerCase();
+    results = results.filter(
+      (p) =>
+        (p.fullName || '').toLowerCase().includes(q) ||
+        (p.skills || []).some((s) => s.toLowerCase().includes(q))
+    );
+  }
+  // scoring for advanced matching
+  results = results
+    .map((p) => {
+      let score = 0;
+      if (skills.length) {
+        const overlap = skills.filter((s) => p.skills.includes(s)).length;
+        score += overlap;
+      }
+      if (industry && p.industry === industry) score += 1;
+      if (location && p.location === location) score += 1;
+      if (search) {
+        const q = search.toLowerCase();
+        if ((p.fullName || '').toLowerCase().includes(q)) score += 1;
+        if ((p.skills || []).some((s) => s.toLowerCase().includes(q))) score += 1;
+      }
+      return { ...p, score };
+    })
+    .sort((a, b) => b.score - a.score);
   return results;
 }
 
