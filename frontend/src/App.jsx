@@ -39,6 +39,9 @@ import AdsDashboardPage from './pages/AdsDashboardPage.jsx';
 import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
+import LandingPage from './pages/LandingPage.jsx';
+import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
+import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -78,11 +81,11 @@ const PlaceholderPage = ({ title }) => <Box p={4}>{title}</Box>;
 export default function App() {
   const routes = [
     // Entry & Authentication
-    { path: '/', element: <PlaceholderPage title="Landing Page" /> },
+    { path: '/', element: <LandingPage /> },
     { path: '/login', element: <LoginPage /> },
     { path: '/signup', element: <SignupPage /> },
-    { path: '/onboarding/documents', element: <PlaceholderPage title="CV & Cover Letter Upload" /> },
-    { path: '/setup/financial-media', element: <PlaceholderPage title="Financials & Media Setup" /> },
+    { path: '/onboarding/documents', element: <OnboardingDocumentsPage />, protected: true },
+    { path: '/setup/financial-media', element: <FinancialMediaSetupPage />, protected: true },
 
     // Core User Hub
     { path: '/dashboard', element: <PlaceholderPage title="Home Dashboard" />, protected: true },
