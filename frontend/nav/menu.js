@@ -49,6 +49,14 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/applications-interviews')}>Applications</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/interview/1')}>Interview</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/manage')}>Gigs</Button>
+        <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs')}>Gigs</Button>
+        <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/jobs')}>Jobs</Button>
+        <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/analytics')}>Analytics</Button>
+        <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/orders')}>Orders</Button>
+        <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
+      </Flex>
+    );
+  }
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs')}>Gigs</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/calendar')}>Calendar</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/search')}>Discover Gigs</Button>
