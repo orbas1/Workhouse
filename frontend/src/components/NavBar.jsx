@@ -4,7 +4,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/NavBar.css';
 
-function NavBar() {
+export default function NavBar() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
@@ -23,10 +23,14 @@ function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
-          <Button as={RouterLink} to="/freelancers" variant="ghost" color="white" mr={2}>
-            Freelancers
-          <Button as={RouterLink} to="/classroom/WorkhouseClassroom" variant="ghost" color="white" mr={2}>
-            Classroom
+          <Button as={RouterLink} to="/services" variant="ghost" color="white" mr={2}>
+            Services
+          </Button>
+          <Button as={RouterLink} to="/tasks" variant="ghost" color="white" mr={2}>
+            Tasks
+          </Button>
+          <Button as={RouterLink} to="/admin/analytics" variant="ghost" color="white" mr={2}>
+            Analytics
           </Button>
           <Button variant="outline" color="white" onClick={handleLogout}>
             Logout
@@ -45,39 +49,3 @@ function NavBar() {
     </Flex>
   );
 }
-import { Flex } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
-import { Flex, Heading, Spacer, Button } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
-import '../styles/NavBar.css';
-
-function NavBar() {
-  return (
-    <Flex className="nav-bar" bg="teal.500" color="white" p={4} align="center">
-      <Heading size="md">Workhouse</Heading>
-      <Spacer />
-      <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
-        Profile
-      </Button>
-      <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
-        Orders
-      </Button>
-      <Button as={RouterLink} to="/payments" variant="ghost" color="white">
-        Payments
-      <Button as={RouterLink} to="/services" variant="ghost" color="white" mr={2}>
-        Services
-      </Button>
-      <Button as={RouterLink} to="/orders" variant="ghost" color="white">
-      <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
-        Orders
-      </Button>
-      <Button as={RouterLink} to="/contracts" variant="ghost" color="white">
-        Contracts
-      <Button as={RouterLink} to="/tasks" variant="ghost" color="white">
-        Tasks
-      </Button>
-    </Flex>
-  );
-}
-
-export default NavBar;

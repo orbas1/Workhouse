@@ -48,6 +48,9 @@ export default function Dashboard() {
           Enter Classroom
         </Button>
         <Button mt={4} colorScheme="teal" onClick={() => window.location.href = '/calendar'}>Calendar</Button>
+        <Button as={RouterLink} to="/admin/analytics" mt={4} colorScheme="teal">
+          Analytics & Audit
+        </Button>
       </Box>
     </ChakraProvider>
   );
