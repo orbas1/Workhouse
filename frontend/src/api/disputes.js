@@ -1,16 +1,36 @@
 import apiClient from '../utils/apiClient.js';
 
-export function listDisputes(params = {}) {
-  return apiClient.get('/admin/disputes', { params }).then(res => res.data);
+export async function listDisputes(params = {}) {
+  const { data } = await apiClient.get('/disputes', { params });
+  return data;
 }
 
-export function getDispute(disputeId) {
-  return apiClient.get(`/disputes/${disputeId}`).then(res => res.data);
+export async function getDispute(disputeId) {
+  const { data } = await apiClient.get(`/disputes/${disputeId}`);
+  return data;
+}
+
+export async function postDisputeMessage(disputeId, message) {
+  const { data } = await apiClient.post(`/disputes/${disputeId}/messages`, { message });
+  return data;
+}
+
+export async function createDispute(data) {
+  const { data: dispute } = await apiClient.post('/disputes/create', data);
+  return dispute;
 }
 
 export function createDispute(data) {
   return apiClient.post('/disputes/create', data).then(res => res.data);
 }
+
+export default {
+  listDisputes,
+  getDispute,
+  postDisputeMessage,
+  createDispute,
+  respondToDispute,
+};
 
 export function respondToDispute(disputeId, data) {
   return apiClient.post(`/disputes/${disputeId}/respond`, data).then(res => res.data);
