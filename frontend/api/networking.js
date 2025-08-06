@@ -6,13 +6,14 @@ async function request(path, options = {}) {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
-    ...(options.headers || {}),
   };
+
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   if (!res.ok) {
     const message = await res.text();
     throw new Error(message || 'Request failed');
   }
+  if (res.status === 204) return {};
   return res.json();
 }
 
@@ -22,8 +23,6 @@ export function fetchNetworkingEvents() {
 
 export function attendNetworkingEvent(eventId) {
   return request(`/events/networking/attend/${eventId}`, { method: 'POST' });
-}
-  return res.json().catch(() => ({}));
 }
 
 export function startVideo(sessionId, data = {}) {
@@ -58,13 +57,20 @@ export function getNextOneMinuteMatch(eventId) {
 export function getSessionMetrics(sessionId) {
   return request(`/communication/analytics/${sessionId}`);
 }
-(function(global){
-  async function getNetworkingDashboard() {
-    const res = await apiFetch('/events/networking');
-    if (!res.ok) {
-      throw new Error('Failed to load networking data');
-    }
-    return res.json();
-  }
-  global.networkingAPI = { getNetworkingDashboard };
-})(window);
+
+export function getNetworkingDashboard() {
+  return request('/events/networking');
+}
+
+export default {
+  fetchNetworkingEvents,
+  attendNetworkingEvent,
+  startVideo,
+  endVideo,
+  exchangeContact,
+  rateMatch,
+  getNextOneMinuteMatch,
+  getSessionMetrics,
+  getNetworkingDashboard,
+};
+

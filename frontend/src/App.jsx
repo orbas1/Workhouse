@@ -48,6 +48,7 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+import NetworkingDashboardPage from './pages/NetworkingDashboardPage.jsx';
 
 import DashboardPage from './pages/DashboardPage.jsx';
 import LiveFeedPage from './pages/LiveFeedPage.jsx';
@@ -161,7 +162,7 @@ export default function App() {
     { path: '/volunteer/opportunities', element: <PlaceholderPage title="Volunteer Opportunities" />, protected: true },
 
     // Networking
-    { path: '/networking', element: <PlaceholderPage title="Networking Dashboard" />, protected: true },
+    { path: '/networking', element: <NetworkingDashboardPage />, protected: true },
     { path: '/sessions', element: <NetworkingSessions />, protected: true },
     { path: '/networking/session/:sessionId', element: <InSessionNetworking />, protected: true },
     { path: '/session-management', element: <PlaceholderPage title="Session Management" />, protected: true },
