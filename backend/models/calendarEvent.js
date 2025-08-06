@@ -2,12 +2,13 @@ const { randomUUID } = require('crypto');
 
 const events = [];
 
-function createEvent({ sellerId, buyerId = null, serviceId = null, startTime, endTime, status = 'available' }) {
+function createEvent({ sellerId, buyerId = null, serviceId = null, title = '', startTime, endTime, status = 'available' }) {
   const event = {
     id: randomUUID(),
     sellerId,
     buyerId,
     serviceId,
+    title,
     startTime: new Date(startTime),
     endTime: new Date(endTime),
     status,
