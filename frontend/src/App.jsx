@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import SupportDisputePage from './pages/SupportDisputePage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 
@@ -61,6 +62,14 @@ export default function App() {
                   element={
                     <Protected>
                       <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/support"
+                  element={
+                    <Protected>
+                      <SupportDisputePage />
                     </Protected>
                   }
                 />
