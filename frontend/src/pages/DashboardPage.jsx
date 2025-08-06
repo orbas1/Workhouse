@@ -46,6 +46,8 @@ export default function DashboardPage() {
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
         View Live Feed
       </Button>
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/community')}>
+        My Community
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/notifications')}>
         Message Notifications
       </Button>

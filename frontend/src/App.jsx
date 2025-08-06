@@ -49,6 +49,7 @@ import SharedUserInteractionPage from './pages/SharedUserInteractionPage.jsx';
 import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
+import GatedCommunityPage from './pages/GatedCommunityPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import InstallationWizardPage from './pages/InstallationWizardPage.jsx';
 import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
@@ -173,6 +174,10 @@ export default function App() {
     // Volunteering
     { path: '/volunteering', element: <PlaceholderPage title="Volunteering Dashboard" />, protected: true },
     { path: '/volunteer/opportunities', element: <VolunteerOpportunitySearchPage />, protected: true },
+
+    // Community
+    { path: '/community', element: <GatedCommunityPage />, protected: true },
+    { path: '/community/:communityId', element: <GatedCommunityPage />, protected: true },
 
     // Networking
     { path: '/networking', element: <PlaceholderPage title="Networking Dashboard" />, protected: true },
