@@ -1,4 +1,5 @@
-const API_BASE_URL = window.env?.API_BASE_URL || window.API_BASE_URL || '/api';
+export const API_BASE_URL =
+  window.env?.API_BASE_URL || window.API_BASE_URL || '/api';
 
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem('token');
