@@ -41,6 +41,13 @@ export default function DashboardPage() {
   return (
     <Box className="dashboard-page" p={4}>
       <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')} mr={2}>
+        View Live Feed
+      </Button>
+      <Button mb={4} colorScheme="blue" onClick={() => navigate('/profile')}>
+        View Profile
+      </Button>
+      <SimpleGrid columns={[1, 3]} spacing={4} mt={4}>
       <Flex gap={2} mb={4} flexWrap="wrap">
         <Button colorScheme="purple" onClick={() => navigate('/install')}>Run Installation Wizard</Button>
         <Button colorScheme="teal" onClick={() => navigate('/feed')}>View Live Feed</Button>
