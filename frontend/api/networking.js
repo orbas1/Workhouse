@@ -5,6 +5,7 @@ async function request(path, options = {}) {
   const headers = {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...options.headers,
     ...(options.headers || {}),
   };
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
@@ -12,6 +13,16 @@ async function request(path, options = {}) {
     const message = await res.text();
     throw new Error(message || 'Request failed');
   }
+  return res.json();
+}
+
+export function fetchNetworkingEvents() {
+  return request('/events/networking');
+}
+
+export function attendNetworkingEvent(eventId) {
+  return request(`/events/networking/attend/${eventId}`, { method: 'POST' });
+}
   return res.json().catch(() => ({}));
 }
 

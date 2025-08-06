@@ -50,6 +50,16 @@ async function getNetworkingEvent(eventId) {
   return ensureType(eventModel.findById(eventId), 'networking');
 }
 
+async function listNetworkingEvents() {
+  return eventModel.listByType('networking');
+}
+
+async function attendNetworkingEvent(eventId, userId) {
+  const event = await getNetworkingEvent(eventId);
+  if (!event) return null;
+  eventModel.addAttendee(eventId, userId);
+  logger.info('User attending networking event', { eventId, userId });
+  return { success: true };
 async function listNetworkingEventsForHost(hostId) {
   return eventModel
     .findByHost(hostId)
@@ -97,6 +107,8 @@ module.exports = {
   getPitchLivestream,
   createNetworkingEvent,
   getNetworkingEvent,
+  listNetworkingEvents,
+  attendNetworkingEvent,
   listNetworkingEventsForHost,
   listNetworkingEventsForUser,
   createWorkshopEvent,

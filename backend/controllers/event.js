@@ -54,6 +54,14 @@ async function getNetworkingEvent(req, res) {
 }
 
 async function listNetworkingEvents(req, res) {
+  const events = await eventService.listNetworkingEvents();
+  res.json(events);
+}
+
+async function attendNetworkingEvent(req, res) {
+  const result = await eventService.attendNetworkingEvent(req.params.eventId, req.user.id);
+  if (!result) return res.status(404).json({ error: 'Event not found' });
+  res.json(result);
   const userId = req.user.id;
   const hosted = await eventService.listNetworkingEventsForHost(userId);
   const attending = await eventService.listNetworkingEventsForUser(userId);
@@ -99,6 +107,7 @@ module.exports = {
   createNetworkingEvent,
   getNetworkingEvent,
   listNetworkingEvents,
+  attendNetworkingEvent,
   createWorkshop,
   getWorkshop,
   submitQuestion,

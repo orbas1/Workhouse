@@ -1,3 +1,7 @@
+import { ChakraProvider, Box, Heading } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import NavMenu from '../components/NavMenu';
+import { Button } from '@chakra-ui/react';
 import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -67,6 +71,8 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/sessions" mt={4} colorScheme="teal">
+          Browse Sessions
         <Button as={RouterLink} to="/live" mt={4} colorScheme="teal">
           Go to Live Room
         <Button mt={4} colorScheme="teal" as={RouterLink} to="/content/manage">

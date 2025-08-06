@@ -41,7 +41,9 @@ router.post('/pitch/livestream/:eventId', auth, eventItemExists, validate(livest
 router.get('/pitch/livestream/:eventId', eventItemExists, investorEventController.getPitchLivestream);
 
 router.post('/networking/create', auth, validate(networkingEventSchema), investorEventController.createNetworkingEvent);
+router.get('/networking', investorEventController.listNetworkingEvents);
 router.get('/networking/:eventId', eventItemExists, investorEventController.getNetworkingEvent);
+router.post('/networking/attend/:eventId', auth, eventItemExists, investorEventController.attendNetworkingEvent);
 router.get('/networking', auth, investorEventController.listNetworkingEvents);
 
 router.post('/workshop/create', auth, validate(workshopEventSchema), investorEventController.createWorkshop);
