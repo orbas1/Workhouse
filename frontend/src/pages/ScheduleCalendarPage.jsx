@@ -32,7 +32,9 @@ function ScheduleCalendarPage() {
 
   useEffect(() => {
     if (user) {
-      fetchEvents(user.id).then(setEvents).catch(console.error);
+      const params =
+        user.role === 'seller' ? { sellerId: user.id } : { buyerId: user.id };
+      fetchEvents(params).then(setEvents).catch(console.error);
     }
   }, [user]);
 
@@ -43,11 +45,15 @@ function ScheduleCalendarPage() {
   async function handleAdd() {
     try {
       const payload = {
-        sellerId: user.id,
         title: form.title,
         startTime: form.startTime,
         endTime: form.endTime,
       };
+      if (user.role === 'seller') {
+        payload.sellerId = user.id;
+      } else {
+        payload.buyerId = user.id;
+      }
       const newEvent = await createEvent(payload);
       setEvents((prev) => [...prev, newEvent]);
       setForm({ title: '', startTime: '', endTime: '' });
