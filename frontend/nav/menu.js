@@ -45,6 +45,7 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/feed')}>Live Feed</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/employment')}>Employment</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/volunteering')}>Volunteering</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/education/schedule')}>Schedule</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/applications-interviews')}>Applications</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/interview/1')}>Interview</Button>
