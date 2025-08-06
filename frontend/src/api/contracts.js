@@ -25,11 +25,13 @@ export async function terminateContract(contractId, reason) {
   return data;
 }
 
+export async function getProposals(contractId) {
 export async function fetchProposals(contractId) {
   const { data } = await apiClient.get(`/contracts/${contractId}/proposals`);
   return data;
 }
 
+export async function getInvoices(contractId) {
 export async function fetchInvoices(contractId) {
   const { data } = await apiClient.get(`/contracts/${contractId}/invoices`);
   return data;
@@ -37,5 +39,20 @@ export async function fetchInvoices(contractId) {
 
 export async function submitInvoice(contractId, invoice) {
   const { data } = await apiClient.post(`/contracts/${contractId}/invoices`, invoice);
+  return data;
+}
+
+export async function getWorkSubmissions(contractId) {
+  const { data } = await apiClient.get(`/contracts/${contractId}/work`);
+  return data;
+}
+
+export async function submitWork(contractId, submission) {
+  const { data } = await apiClient.post(`/contracts/${contractId}/work/submit`, submission);
+  return data;
+}
+
+export async function approveWork(contractId, submissionId) {
+  const { data } = await apiClient.put(`/contracts/${contractId}/work/approve`, { submissionId });
   return data;
 }

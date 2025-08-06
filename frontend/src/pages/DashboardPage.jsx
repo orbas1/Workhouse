@@ -72,6 +72,10 @@ export default function DashboardPage() {
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
         View Live Feed
       </Button>
+      <Button mb={4} ml={2} colorScheme="teal" onClick={() => navigate('/contracts')}>
+        Manage Contracts
+      </Button>
+      <SimpleGrid columns={[1, 3]} spacing={4} mt={4}>
       <SimpleGrid columns={[1, 2, 4]} spacing={4}>
       <Button mb={4} colorScheme="purple" onClick={() => navigate('/creator/analytics')}>
         Creator Analytics
