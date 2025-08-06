@@ -8,6 +8,14 @@ function getVolunteerStats(volunteerId) {
     .getVolunteerEngagement()
     .filter((r) => r.volunteerId === volunteerId);
   const totalHours = engagement.reduce((sum, r) => sum + r.hours, 0);
+  const engagementHistory = engagement
+    .slice()
+    .sort((a, b) => a.date - b.date)
+    .map((r) => ({
+      date: r.date,
+      hours: r.hours,
+      tasksCompleted: r.tasksCompleted,
+    }));
   const activeApplications = applicationModel
     .getApplicationsByUser(volunteerId)
     .filter((a) => a.status === 'pending').length;
@@ -17,7 +25,7 @@ function getVolunteerStats(volunteerId) {
   const feedbackScore = feedbacks.length
     ? feedbacks.reduce((sum, f) => sum + f.rating, 0) / feedbacks.length
     : 0;
-  return { totalHours, activeApplications, feedbackScore };
+  return { totalHours, activeApplications, feedbackScore, engagementHistory };
 }
 
 function getEmployerStats(organizationId) {
