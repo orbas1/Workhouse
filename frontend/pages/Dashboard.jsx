@@ -74,6 +74,7 @@ export default function Dashboard() {
           Enter Classroom
         </Button>
         <Button mt={4} colorScheme="teal" onClick={() => window.location.href = '/calendar'}>Calendar</Button>
+        <Button mt={4} colorScheme="teal" as={RouterLink} to="/settings">Settings</Button>
         <Button mt={4} colorScheme="purple" as={RouterLink} to="/admin">Admin Dashboard</Button>
         <Button as={RouterLink} to="/admin/analytics" mt={4} colorScheme="teal">
           Analytics & Audit
