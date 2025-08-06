@@ -2,17 +2,32 @@ const { getStatus, saveInstallation } = require('../models/installation');
 const { addUser, findUser } = require('../models/user');
 const logger = require('../utils/logger');
 const mysql = require('mysql2/promise');
+const { Client } = require('pg');
 
 async function checkInstallation() {
   return getStatus();
 }
 
 async function testDbConnection(dbConfig = {}) {
+  const type = (dbConfig.type || 'mysql').toLowerCase();
+  if (type === 'postgres') {
+    const client = new Client({
+      host: dbConfig.host,
+      user: dbConfig.user,
+      password: dbConfig.password,
+      database: dbConfig.name,
+      port: dbConfig.port,
+    });
+    await client.connect();
+    await client.end();
+    return;
+  }
   const connection = await mysql.createConnection({
     host: dbConfig.host,
     user: dbConfig.user,
     password: dbConfig.password,
     database: dbConfig.name,
+    port: dbConfig.port,
   });
   await connection.ping();
   await connection.end();
