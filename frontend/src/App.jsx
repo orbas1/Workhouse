@@ -73,6 +73,7 @@ import LiveEngagementAnalyticsPage from './pages/LiveEngagementAnalyticsPage.jsx
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
 import BillingSubscription from '../pages/BillingSubscription.jsx';
+import AdsBillingAnalytics from '../pages/AdsBillingAnalytics.jsx';
 import FileResourceManagement from '../pages/FileResourceManagement.jsx';
 import InSessionNetworking from '../pages/InSessionNetworking.jsx';
 import NetworkingSessions from '../pages/NetworkingSessions.jsx';
@@ -150,6 +151,7 @@ export default function App() {
     { path: '/orders', element: <OrderManagementPage />, protected: true },
     { path: '/payments', element: <PaymentPage />, protected: true },
     { path: '/ads', element: <AdsDashboardPage />, protected: true },
+    { path: '/ads/billing', element: <AdsBillingAnalytics />, protected: true },
     { path: '/ads/interactions', element: <SharedUserInteractionPage />, protected: true },
     { path: '/ads/create', element: <AdCreateEdit />, protected: true },
     { path: '/ads/:adId/edit', element: <AdCreateEdit />, protected: true },
