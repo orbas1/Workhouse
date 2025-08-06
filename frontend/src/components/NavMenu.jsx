@@ -29,6 +29,14 @@ function NavMenu() {
         variant="ghost"
         color="white"
         mr={2}
+        onClick={() => navigate('/disputes')}
+      >
+        Disputes
+      </Button>
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
         onClick={() => navigate('/contracts/new')}
       >
         New Contract
