@@ -93,7 +93,7 @@ function AdminProtected({ children }) {
   const { user, loading } = useAuth();
   if (loading) return null;
   if (!user) return <Navigate to="/login" replace />;
-  return user.role === 'admin' ? children : <Navigate to="/profile" replace />;
+  return ['admin', 'moderator', 'support'].includes(user.role) ? children : <Navigate to="/profile" replace />;
 }
 
 const PlaceholderPage = ({ title }) => <Box p={4}>{title}</Box>;
