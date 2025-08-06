@@ -11,6 +11,16 @@ async function createProjectHandler(req, res) {
   }
 }
 
+async function listProjectsHandler(req, res) {
+  try {
+    const projects = await service.listProjects(req.user.id);
+    res.json(projects);
+  } catch (err) {
+    logger.error('Failed to list projects', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 async function getProjectHandler(req, res) {
   const { projectId } = req.params;
   try {
@@ -336,6 +346,7 @@ async function createTextDocumentHandler(req, res) {
 
 module.exports = {
   createProjectHandler,
+  listProjectsHandler,
   getProjectHandler,
   updateProjectHandler,
   deleteProjectHandler,

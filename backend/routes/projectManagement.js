@@ -1,13 +1,13 @@
 const express = require('express');
 const {
   createProjectHandler,
+  listProjectsHandler,
   getProjectHandler,
   updateProjectHandler,
   deleteProjectHandler,
   createTaskHandler,
   listTasksHandler,
   getTaskHandler,
-  listTasksHandler,
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,
@@ -66,6 +66,7 @@ const router = express.Router();
 
 // Project routes
 router.post('/projects/create', auth, validate(createProjectSchema), createProjectHandler);
+router.get('/projects', auth, listProjectsHandler);
 router.get('/projects/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, getProjectHandler);
 router.put('/projects/update/:projectId', auth, validate(projectIdParamSchema, 'params'), validate(updateProjectSchema), projectExists, updateProjectHandler);
 router.delete('/projects/delete/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, deleteProjectHandler);

@@ -1,6 +1,7 @@
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import ProjectManagement from './pages/ProjectManagement';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
+            <Route path="/workspace/projects" element={<Protected><ProjectManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
           </Routes>
         </BrowserRouter>
@@ -52,6 +54,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/workspace/projects" element={<Protected><ProjectManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
