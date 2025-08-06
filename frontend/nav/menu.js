@@ -61,6 +61,7 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/calendar')}>Calendar</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/search')}>Discover Gigs</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/jobs')}>Jobs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/volunteer/opportunities')}>Volunteer Ops</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/stats')}>Stats</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/proposals-invoices')}>
         Proposals & Invoices

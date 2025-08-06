@@ -63,6 +63,7 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/volunteer/opportunities" element={<Protected><VolunteerOpportunitiesPage /></Protected>} />
         <Route path="/analytics" element={<Protected><LiveEngagementAnalytics /></Protected>} />
         <Route path="/ads/create" element={<Protected><AdCreateEdit /></Protected>} />
         <Route path="/ads/:adId/edit" element={<Protected><AdCreateEdit /></Protected>} />

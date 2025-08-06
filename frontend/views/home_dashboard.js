@@ -109,6 +109,11 @@ function HomeDashboard() {
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
         Gigs Dashboard
       </Button>
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
+      </Button>
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/volunteer/opportunities'}>
+        Volunteer Opportunities
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/sessions'}>
         Manage Sessions
       </Button>
