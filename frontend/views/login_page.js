@@ -20,17 +20,16 @@ const {
   useDisclosure,
   useToast
 } = ChakraUI;
-const { ChakraProvider, Box, Flex, Heading, Input, Button, FormControl, FormLabel, Text } = ChakraUI;
 const { useState } = React;
 const { useNavigate } = ReactRouterDOM;
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [remember, setRemember] = useState(true);
   const [use2FA, setUse2FA] = useState(false);
   const [code, setCode] = useState('');
+  const [error, setError] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [resetPassword, setResetPassword] = useState('');
   const toast = useToast();
@@ -38,20 +37,17 @@ function LoginPage() {
 
   async function handleLogin() {
     setError('');
+    const payload = { username, password };
+    if (use2FA) payload.code = code;
     try {
-      const data = await apiRequest(`/auth/${action}`, {
+      const res = await apiFetch('/api/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ username, password, code })
-      const data = await apiFetch('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(payload),
       });
-      if (action === 'login') {
-        const storage = remember ? localStorage : sessionStorage;
-        storage.setItem('token', data.token);
-        navigate('/dashboard');
-      }
-      localStorage.setItem('token', data.token);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
+      const storage = remember ? localStorage : sessionStorage;
+      storage.setItem('token', data.token);
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);
@@ -60,10 +56,14 @@ function LoginPage() {
 
   async function handleReset() {
     try {
-      await apiRequest('/auth/reset-password', {
+      const res = await apiFetch('/api/auth/reset-password', {
         method: 'POST',
-        body: JSON.stringify({ username, password: resetPassword })
+        body: JSON.stringify({ username, password: resetPassword }),
       });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Reset failed');
+      }
       toast({ title: 'Password updated', status: 'success', duration: 3000, isClosable: true });
       onClose();
     } catch (err) {
@@ -99,11 +99,13 @@ function LoginPage() {
             <Text color="red.500" mb={2}>{error}</Text>
           )}
           <Flex gap={3} mt={4}>
-            <Button colorScheme="blue" flex="1" onClick={() => handle('login')}>Login</Button>
+            <Button colorScheme="blue" flex="1" onClick={handleLogin}>Login</Button>
             <Button variant="outline" flex="1" onClick={() => navigate('/signup')}>Register</Button>
           </Flex>
-          <Button colorScheme="blue" w="100%" mt={4} onClick={handleLogin}>Login</Button>
-          <Text mt={4} textAlign="center">New here? <a href="#" onClick={(e)=>{e.preventDefault();navigate('/signup');}}>Create an account</a></Text>
+          <Text mt={4} textAlign="center">
+            New here?{' '}
+            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signup'); }}>Create an account</a>
+          </Text>
         </Box>
       </Flex>
 
