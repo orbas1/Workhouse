@@ -1,14 +1,17 @@
 const express = require('express');
 const {
   createProjectHandler,
+  listProjectsHandler,
   getProjectHandler,
   updateProjectHandler,
   deleteProjectHandler,
   createTaskHandler,
+  listTasksHandler,
   getTaskHandler,
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,
+  listTasksHandler,
   suggestTasksHandler,
   suggestBudgetHandler,
   suggestObjectivesHandler,
@@ -26,9 +29,14 @@ const {
   getReportsHandler,
   uploadFileHandler,
   getFileHandler,
+  listFilesHandler,
   setupWorkflowHandler,
+  listWorkflowsHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
+  listProjectsHandler,
+  listProjectTasksHandler,
+  getBudgetHandler,
 } = require('../controllers/projectManagement');
 const auth = require('../middleware/auth');
 const validate = require('../middleware/validate');
@@ -43,8 +51,11 @@ const {
   createProjectSchema,
   updateProjectSchema,
   createTaskSchema,
+  taskListSchema,
   updateTaskSchema,
   assignTaskSchema,
+  taskQuerySchema,
+  listTasksQuerySchema,
   aiProjectSchema,
   hireSchema,
   feedPostSchema,
@@ -62,17 +73,25 @@ const {
 const router = express.Router();
 
 // Project routes
+router.get('/projects', auth, listProjectsHandler);
 router.post('/projects/create', auth, validate(createProjectSchema), createProjectHandler);
+router.get('/projects', auth, listProjectsHandler);
 router.get('/projects/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, getProjectHandler);
 router.put('/projects/update/:projectId', auth, validate(projectIdParamSchema, 'params'), validate(updateProjectSchema), projectExists, updateProjectHandler);
 router.delete('/projects/delete/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, deleteProjectHandler);
+router.get('/projects/:projectId/tasks', auth, validate(projectIdParamSchema, 'params'), projectExists, listProjectTasksHandler);
+router.get('/projects/:projectId/budget', auth, validate(projectIdParamSchema, 'params'), projectExists, getBudgetHandler);
 
 // Task routes
 router.post('/tasks/create', auth, validate(createTaskSchema), createTaskHandler);
+router.get('/tasks', auth, validate(taskQuerySchema, 'query'), listTasksHandler);
+router.get('/tasks', auth, validate(taskListSchema, 'query'), listTasksHandler);
 router.get('/tasks/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, getTaskHandler);
+router.get('/projects/:projectId/tasks', auth, validate(projectIdParamSchema, 'params'), projectExists, listTasksHandler);
 router.put('/tasks/update/:taskId', auth, validate(taskIdParamSchema, 'params'), validate(updateTaskSchema), taskExists, updateTaskHandler);
 router.delete('/tasks/delete/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, deleteTaskHandler);
 router.post('/tasks/assign', auth, validate(assignTaskSchema), assignTaskHandler);
+router.get('/tasks', auth, validate(listTasksQuerySchema, 'query'), listTasksHandler);
 
 // AI routes
 router.post('/ai/tasks/suggest', auth, validate(aiProjectSchema), suggestTasksHandler);
@@ -104,7 +123,9 @@ router.get('/reports/:projectId', auth, validate(projectIdParamSchema, 'params')
 // Files & workflows
 router.post('/files/upload', auth, validate(fileUploadSchema), uploadFileHandler);
 router.get('/files/:fileId', auth, validate(fileIdParamSchema, 'params'), getFileHandler);
+router.get('/files/project/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, listFilesHandler);
 router.post('/workflows/setup', auth, validate(workflowSetupSchema), setupWorkflowHandler);
+router.get('/projects/:projectId/workflows', auth, validate(projectIdParamSchema, 'params'), projectExists, listWorkflowsHandler);
 
 // Miscellaneous
 router.get('/spreadsheets/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, getSpreadsheetHandler);
