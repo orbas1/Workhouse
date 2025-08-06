@@ -8,7 +8,6 @@ export const menu = [
       { label: 'Profile', path: '/profile' },
       { label: 'Customize Profile', path: '/profile/customize' },
       { label: 'Connections', path: '/connections' },
-      { label: 'Support', path: '/support' },
       { label: 'Notifications', path: '/notifications' },
       { label: 'Settings', path: '/settings' }
     ]
@@ -48,6 +47,7 @@ export const menu = [
       { label: 'Experience', path: '/experience' },
       { label: 'Calendar', path: '/calendar' },
       { label: 'Ads & Billing', path: '/ads' },
+      { label: 'Ad Interactions', path: '/ads/interactions' },
       { label: 'Create Ad', path: '/ads/create' },
       { label: 'Analytics', path: '/analytics' },
       { label: 'Creator Dashboard', path: '/creator/dashboard' },
@@ -56,6 +56,7 @@ export const menu = [
       { label: 'Content Library', path: '/content-library' },
       { label: 'Stats', path: '/stats' },
       { label: 'Startup Profile', path: '/startups/profile-plan' },
+      { label: 'Startup Search', path: '/startups/search' },
       { label: 'Financial & Media Setup', path: '/setup/financial-media' },
       { label: 'Onboarding Documents', path: '/onboarding/documents' }
     ]
@@ -88,6 +89,7 @@ export const menu = [
       { label: 'Admin Dashboard', path: '/admin' },
       { label: 'Admin Analytics', path: '/admin/analytics' },
       { label: 'Admin Settings', path: '/admin/system-settings' },
+            { label: 'Support & Disputes', path: '/admin/support' },
       { label: 'Affiliates', path: '/affiliates' },
       { label: 'Sim Dashboard', path: '/sim-dashboard' },
       { label: 'Install Wizard', path: '/install' }

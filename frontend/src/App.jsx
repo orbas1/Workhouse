@@ -8,6 +8,8 @@ import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
+import SearchConnectionPage from './pages/SearchConnectionPage.jsx';
+import StartupProfilePlanPage from './pages/StartupProfilePlanPage.jsx';
 import NotificationSettingsPage from './pages/NotificationSettingsPage.jsx';
 import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
@@ -43,6 +45,7 @@ import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
 import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import AffiliateManagementPage from './pages/AffiliateManagementPage.jsx';
 import AdsDashboardPage from './pages/AdsDashboardPage.jsx';
+import SharedUserInteractionPage from './pages/SharedUserInteractionPage.jsx';
 import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
@@ -133,6 +136,7 @@ export default function App() {
     { path: '/orders', element: <OrderManagementPage />, protected: true },
     { path: '/payments', element: <PaymentPage />, protected: true },
     { path: '/ads', element: <AdsDashboardPage />, protected: true },
+    { path: '/ads/interactions', element: <SharedUserInteractionPage />, protected: true },
     { path: '/ads/create', element: <AdCreateEdit />, protected: true },
     { path: '/ads/:adId/edit', element: <AdCreateEdit />, protected: true },
 
@@ -191,7 +195,8 @@ export default function App() {
     { path: '/analytics', element: <AnalyticsAuditPage />, protected: true },
 
     // Startup Ecosystem
-    { path: '/startups/profile-plan', element: <PlaceholderPage title="Startup Profile & Plan" />, protected: true },
+    { path: '/startups/profile-plan', element: <StartupProfilePlanPage />, protected: true },
+    { path: '/startups/search', element: <SearchConnectionPage />, protected: true },
 
     // Workspace & Projects
     { path: '/workspace', element: <WorkspaceDashboard />, protected: true },
@@ -213,7 +218,7 @@ export default function App() {
     { path: '/disputes/new', element: <DisputeFormPage />, protected: true },
     { path: '/disputes/:disputeId/respond', element: <DisputeFormPage />, protected: true },
     { path: '/disputes/:disputeId?', element: <DisputeManagementPage />, protected: true },
-    { path: '/support', element: <SupportDisputePage />, protected: true },
+    { path: '/admin/support', element: <SupportDisputePage />, admin: true },
     { path: '/admin', element: <AdminDashboard />, admin: true },
     { path: '/admin/analytics', element: <AnalyticsAuditPage />, admin: true },
     { path: '/admin/system-settings', element: <SystemSettingsEmployeeManagement />, admin: true },

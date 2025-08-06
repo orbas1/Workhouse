@@ -48,6 +48,8 @@ export default function DashboardPage() {
       </Button>
       <Button mb={4} colorScheme="orange" onClick={() => navigate('/community')}>
         My Community
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/notifications')}>
+        Message Notifications
       </Button>
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/service-orders')}>
         Manage Service Orders

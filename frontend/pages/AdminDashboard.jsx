@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import NavMenu from '../components/NavMenu';
 import EmployeeTable from '../components/admin/EmployeeTable';
 import SystemSettings from '../components/admin/SystemSettings';
-import '../api/admin';
+import { listEmployees } from '../api/admin.js';
 import '../styles/AdminDashboard.css';
 
 export default function AdminDashboard() {
@@ -11,8 +11,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   const loadEmployees = () => {
-    adminAPI
-      .listEmployees()
+    listEmployees()
       .then(setEmployees)
       .catch(() => {})
       .finally(() => setLoading(false));
