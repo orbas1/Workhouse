@@ -24,7 +24,14 @@ function AffiliateManagementPage() {
   return (
     <div className="affiliate-management-page">
       <Heading mb={4}>Affiliate Dashboard</Heading>
-      <AffiliateStats stats={{ referrals: stats.referrals, earnings: stats.earnings }} />
+      <AffiliateStats
+        stats={{
+          clicks: stats.performance?.clicks,
+          referrals: stats.referrals,
+          conversions: stats.performance?.conversions,
+          earnings: stats.earnings,
+        }}
+      />
       <EarningsTracker amount={stats.earnings} />
       <PayRateSection rates={rates} />
       <PayoutSection affiliateId={user.id} payouts={payouts} onRefresh={loadDashboard} />

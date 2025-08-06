@@ -16,13 +16,15 @@ import {
   Th,
   Td,
   Button,
+  Button
 } from '@chakra-ui/react';
-import '../styles/FreelanceDashboardPage.css';
+import '../../styles/FreelanceDashboardPage.css';
 import { getContracts } from '../api/contracts.js';
 import { getOrders } from '../api/orders.js';
 import { listMyGigs, updateGig } from '../api/gigs.js';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { Link } from 'react-router-dom';
 
 export default function FreelanceDashboardPage() {
   const [mode, setMode] = useState('client');
@@ -129,6 +131,14 @@ export default function FreelanceDashboardPage() {
           </Tbody>
         </Table>
       )}
+      <Box mt={6} display="flex" gap={3}>
+        <Button as={Link} to="/freelancers" colorScheme="teal">
+          Find Freelancers
+        </Button>
+        <Button as={Link} to="/proposals-invoices" colorScheme="blue">
+          Manage Proposals & Invoices
+        </Button>
+      </Box>
     </Box>
   );
 }

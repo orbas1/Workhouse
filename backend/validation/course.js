@@ -43,6 +43,8 @@ const moduleSchema = Joi.object({
 
 const moduleIdParamSchema = Joi.object({
   moduleId: Joi.string().uuid().required(),
+});
+
 const purchaseSchema = Joi.object({
   userId: Joi.string().uuid().required(),
   paymentMethod: Joi.string().max(50).required(),

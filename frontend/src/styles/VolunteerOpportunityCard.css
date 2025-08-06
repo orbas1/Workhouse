@@ -1,0 +1,13 @@
+.volunteer-op-card {
+  background: var(--chakra-colors-white);
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.org-name {
+  color: var(--chakra-colors-gray-600);
+}

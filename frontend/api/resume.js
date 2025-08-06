@@ -33,5 +33,14 @@
     return res.json();
   }
 
-  global.resumeAPI = { uploadCv, generateCv, uploadCoverLetter, generateCoverLetter };
+  async function analyzeCv(content){
+    const res = await apiFetch('/resume/cv/analyze', {
+      method: 'POST',
+      body: JSON.stringify({ content })
+    });
+    if(!res.ok) throw new Error('Failed to analyze CV');
+    return res.json();
+  }
+
+  global.resumeAPI = { uploadCv, generateCv, uploadCoverLetter, generateCoverLetter, analyzeCv };
 })(window);

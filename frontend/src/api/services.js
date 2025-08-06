@@ -25,6 +25,11 @@ export async function updateService(id, updates) {
   return data;
 }
 
+export async function deleteService(id) {
+  const { data } = await apiClient.delete(`/service-providers/services/${id}`);
+  return data;
+}
+
 export async function requestService(serviceId, description = '') {
   const { data } = await apiClient.post('/marketplace/services/request', { serviceId, description });
   return data;

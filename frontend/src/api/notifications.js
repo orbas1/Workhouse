@@ -11,3 +11,11 @@ export function fetchNotificationSettings() {
 export function updateNotificationSettings(settings) {
   return apiClient.put('/notifications/settings', settings).then(res => res.data);
 }
+
+export function updateNotification(id, updates) {
+  return apiClient.patch(`/notifications/${id}`, updates).then(res => res.data);
+}
+
+export function deleteNotification(id) {
+  return apiClient.delete(`/notifications/${id}`).then(res => res.data);
+}

@@ -15,13 +15,51 @@ async function request(path, options = {}) {
   return res.json();
 }
 
-export function searchJobSeekers(query) {
-  return request(`/headhunter/search-job-seekers?query=${encodeURIComponent(query)}`);
+export function searchJobSeekers(params = {}) {
+  const qs = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== '') qs.append(key, value);
+  });
+  return request(`/headhunter/search-job-seekers?${qs.toString()}`);
 }
 
 export function getRecommendations() {
   return request('/headhunter/recommendations');
 }
 
-export default { searchJobSeekers, getRecommendations };
+export function fetchTasks() {
+  return request('/headhunter/tasks');
+}
+
+export function updateTaskStatus(id, status) {
+  return request(`/headhunter/tasks/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  });
+}
+
+export function fetchJobAllocations() {
+  return request('/headhunter/job-allocations');
+}
+
+export function allocateJob(jobId, headhunterId) {
+  return request('/headhunter/job-allocations', {
+    method: 'POST',
+    body: JSON.stringify({ jobId, headhunterId }),
+  });
+}
+
+export function fetchHeadhunters() {
+  return request('/headhunter/list');
+}
+
+export default {
+  searchJobSeekers,
+  getRecommendations,
+  fetchTasks,
+  updateTaskStatus,
+  fetchJobAllocations,
+  allocateJob,
+  fetchHeadhunters,
+};
 
