@@ -1,0 +1,17 @@
+.volunteering-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  margin-bottom: 2rem;
+}
+
+.stat-box {
+  background: #f7fafc;
+}
+
+.shortcut-buttons {
+  justify-content: flex-start;
+}
+
