@@ -24,6 +24,7 @@ export const menu = [
       { label: 'Gigs', path: '/gigs' },
       { label: 'Manage Gigs', path: '/gigs/manage' },
       { label: 'Discover Gigs', path: '/gigs/search' },
+      { label: 'Opportunities', path: '/opportunities' },
       { label: 'Opportunity Management', path: '/opportunities/manage' },
       { label: 'Volunteer Opportunities', path: '/volunteer/opportunities' },
       { label: 'Volunteer Tracking', path: '/volunteer-applications' },
