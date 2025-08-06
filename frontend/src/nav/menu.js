@@ -92,6 +92,7 @@ export const menu = [
     items: [
       { label: 'Admin Dashboard', path: '/admin' },
       { label: 'Admin Analytics', path: '/admin/analytics' },
+      { label: 'User & Content', path: '/admin/users-content' },
       { label: 'Admin Settings', path: '/admin/system-settings' },
             { label: 'Support & Disputes', path: '/admin/support' },
       { label: 'Affiliates', path: '/affiliates' },

@@ -57,6 +57,7 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+import AdminUserContentPage from './pages/AdminUserContentPage.jsx';
 
 import DashboardPage from './pages/DashboardPage.jsx';
 import LiveFeedPage from './pages/LiveFeedPage.jsx';
@@ -100,6 +101,13 @@ function AdminProtected({ children }) {
   if (loading) return null;
   if (!user) return <Navigate to="/login" replace />;
   return ['admin', 'moderator', 'support'].includes(user.role) ? children : <Navigate to="/profile" replace />;
+}
+
+function RoleProtected({ roles, children }) {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  if (!user) return <Navigate to="/login" replace />;
+  return roles.includes(user.role) ? children : <Navigate to="/profile" replace />;
 }
 
 const PlaceholderPage = ({ title }) => <Box p={4}>{title}</Box>;
@@ -224,6 +232,7 @@ export default function App() {
     { path: '/admin/support', element: <SupportDisputePage />, admin: true },
     { path: '/admin', element: <AdminDashboard />, admin: true },
     { path: '/admin/analytics', element: <AnalyticsAuditPage />, admin: true },
+    { path: '/admin/users-content', element: <AdminUserContentPage />, roles: ['admin', 'content-manager'] },
     { path: '/admin/system-settings', element: <SystemSettingsEmployeeManagement />, admin: true },
     { path: '/affiliates', element: <AffiliateManagementPage />, protected: true },
     { path: '/sim-dashboard', element: <SimDashboardPage />, protected: true },
@@ -244,14 +253,17 @@ export default function App() {
                 <NavMenu />
                 <Box p={4}>
                   <Routes>
-                    {routes.map(({ path, element, protected: isProtected, admin }, idx) => {
-                      const wrapped = admin ? (
-                        <AdminProtected>{element}</AdminProtected>
-                      ) : isProtected ? (
-                        <Protected>{element}</Protected>
-                      ) : (
-                        element
-                      );
+                    {routes.map(({ path, element, protected: isProtected, admin, roles }, idx) => {
+                      let wrapped;
+                      if (roles) {
+                        wrapped = <RoleProtected roles={roles}>{element}</RoleProtected>;
+                      } else if (admin) {
+                        wrapped = <AdminProtected>{element}</AdminProtected>;
+                      } else if (isProtected) {
+                        wrapped = <Protected>{element}</Protected>;
+                      } else {
+                        wrapped = element;
+                      }
                       return <Route key={idx} path={path} element={wrapped} />;
                     })}
                   </Routes>

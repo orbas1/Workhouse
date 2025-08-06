@@ -6,4 +6,8 @@ const createContentSchema = Joi.object({
   description: Joi.string().min(10).required(),
 });
 
-module.exports = { createContentSchema };
+const updateContentStatusSchema = Joi.object({
+  status: Joi.string().valid('draft', 'published', 'archived').required(),
+});
+
+module.exports = { createContentSchema, updateContentStatusSchema };
