@@ -5,6 +5,8 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import KlEditionPage from './pages/KlEditionPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
+import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 
 function Protected({ children }) {
@@ -27,6 +29,22 @@ export default function App() {
                 element={
                   <Protected>
                     <DashboardPage />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <Protected>
+                    <ProfilePage />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <Protected>
+                    <SettingsDashboardPage />
                   </Protected>
                 }
               />

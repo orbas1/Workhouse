@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, VStack, Spinner, Button } from '@chakra-ui/react';
+import { Box, VStack, Spinner, Button, HStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import ProfileHeader from '../components/ProfileHeader.jsx';
 import AboutSection from '../components/AboutSection.jsx';
@@ -31,9 +31,14 @@ function ProfilePage() {
   return (
     <Box className="profile-page-container" p={4}>
       <StripeConnectButton />
-      <Button className="customize-btn" onClick={() => navigate('/profile/customize')} colorScheme="teal" mb={4}>
-        Customize Profile
-      </Button>
+      <HStack spacing={4} mb={4}>
+        <Button className="customize-btn" onClick={() => navigate('/profile/customize')} colorScheme="teal">
+          Customize Profile
+        </Button>
+        <Button onClick={() => navigate('/settings')} colorScheme="blue">
+          Settings
+        </Button>
+      </HStack>
       <VStack spacing={6} align="stretch">
         <ProfileHeader profile={profile} />
         <AboutSection bio={profile.bio} />
