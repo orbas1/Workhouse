@@ -1,6 +1,7 @@
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import SystemSettingsEmployeeManagement from './pages/SystemSettingsEmployeeManagement';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/admin/system-settings" element={<Protected><SystemSettingsEmployeeManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
