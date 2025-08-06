@@ -1,157 +1,33 @@
 import React from 'react';
-import { Flex, Heading, Spacer, Button } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
-import '../styles/NavMenu.css';
+import { Box, VStack, Link, Text } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
+import { menu } from '../nav/menu.js';
 
 export default function NavMenu() {
-  const navigate = useNavigate();
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
-
   return (
-    <Flex className="nav-menu" bg="teal.500" color="white" p={4} align="center">
-      <Heading size="md" cursor="pointer" onClick={() => navigate('/profile')}>
-        Workhouse
-      </Heading>
-      <Spacer />
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-        Profile
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/connect')}>
-        Connect
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/content/manage')}>Content</Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>Tasks</Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/experience')}>Experience</Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/opportunities')}>Opportunities</Button>
-      <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-        Profile
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks-workflow')}>
-        Tasks
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
-        Services
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-        Profile
-      </Button>
-      <Button
-        variant="ghost"
-        color="white"
-        mr={2}
-        onClick={() => navigate('/disputes')}
-      >
-        Disputes
-      </Button>
-      <Button
-        variant="ghost"
-        color="white"
-        mr={2}
-        onClick={() => navigate('/contracts/new')}
-      >
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts/new')}>
-        New Contract
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
-        Services
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/articles')}>
-        Blog
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-        Profile
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
-        Services
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>
-        Tasks
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/notifications')}>
-        Notifications
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>
-        Tasks
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/schedule')}>
-        Schedule
-      </Button>
-      <Button variant="outline" color="white" onClick={handleLogout}>
-        Logout
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/articles')}>
-        Blog
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-        Profile
-      </Button>
-      {user ? (
-        <>
-          <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-            Profile
-          </Button>
-          <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts/new')}>
-            New Contract
-          </Button>
-          <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services/new')}>
-            New Service
-          </Button>
-          <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>
-            Tasks
-          </Button>
-          <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
-            Services
-          </Button>
-          {user.role === 'admin' && (
-            <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/admin/users')}>
-              User Mgmt
-            </Button>
-          )}
-          <Button variant="outline" color="white" onClick={handleLogout}>
-            Logout
-          </Button>
-        </>
-      ) : (
-        <>
-          <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/login')}>
-            Login
-          </Button>
-          <Button variant="ghost" color="white" onClick={() => navigate('/signup')}>
-            Sign Up
-          </Button>
-        </>
-      )}
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
-        Profile
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/support')}>
-        Support
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts/new')}>
-        New Contract
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
-        Services
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/disputes')}>
-        Disputes
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>
-        Tasks
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
-        Services
-      </Button>
-      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/disputes/new')}>
-        Dispute
-      </Button>
-      <Button variant="outline" color="white" onClick={handleLogout}>
-        Logout
-      </Button>
-    </Flex>
+    <Box as="aside" w="250px" p={4} bg="gray.50" h="100vh" overflowY="auto">
+      {menu.map((section) => (
+        <Box key={section.heading} mb={4}>
+          <Text fontWeight="bold" mb={2}>
+            {section.heading}
+          </Text>
+          <VStack align="stretch" spacing={1}>
+            {section.items.map((item) => (
+              <Link
+                key={item.path}
+                as={NavLink}
+                to={item.path}
+                px={2}
+                py={1}
+                borderRadius="md"
+                _hover={{ textDecoration: 'none', bg: 'gray.100' }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </VStack>
+        </Box>
+      ))}
+    </Box>
   );
 }
