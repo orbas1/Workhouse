@@ -1,5 +1,14 @@
+import AdCreateEdit from './pages/AdCreateEdit';
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
+import InSessionNetworking from './pages/InSessionNetworking.jsx';
+import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import ProjectManagement from './pages/ProjectManagement';
+import FileResourceManagement from './pages/FileResourceManagement.jsx';
+import SettingsPage from './pages/SettingsPage';
+import BillingSubscription from './pages/BillingSubscription';
+import AdminDashboard from './pages/AdminDashboard';
+import SystemSettingsEmployeeManagement from './pages/SystemSettingsEmployeeManagement';
 
 function App() {
   return (
@@ -15,6 +24,21 @@ function App() {
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
+           <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+           <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
+            <Route path="/billing" element={<Protected><BillingSubscription /></Protected>} />
+            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/ads/create" element={<Protected><AdCreateEdit /></Protected>} />
+            <Route path="/ads/:adId/edit" element={<Protected><AdCreateEdit /></Protected>} />
+            <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
+            <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
+            <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
+            <Route path="/workspace/projects" element={<Protected><ProjectManagement /></Protected>} />
+            <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
+            <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
+            <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
+            <Route path="/admin" element={<Protected><AdminDashboard /></Protected>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
@@ -40,6 +64,30 @@ function App() {
         <Route path="/interview/:id" element={<Protected><VirtualInterviewPage /></Protected>} />
         <Route path="/gigs/manage" element={<Protected><GigManagementPage /></Protected>} />
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/volunteer/opportunities" element={<Protected><VolunteerOpportunitiesPage /></Protected>} />
+        <Route path="/analytics" element={<Protected><LiveEngagementAnalytics /></Protected>} />
+        <Route path="/ads/create" element={<Protected><AdCreateEdit /></Protected>} />
+        <Route path="/ads/:adId/edit" element={<Protected><AdCreateEdit /></Protected>} />
+        <Route path="/creator/dashboard" element={<Protected><CreatorDashboard /></Protected>} />
+        <Route path="/networking/session/:sessionId" element={<Protected><InSessionNetworking /></Protected>} />
+        <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
+        <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
+        <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
+        <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
+        <Route path="/billing" element={<Protected><BillingSubscription /></Protected>} />
+        <Route path="/education" element={<Protected><EducationDashboard /></Protected>} />
+        <Route path="/education/courses" element={<Protected><CourseModuleManagement /></Protected>} />
+        <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
+        <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
+        <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
+        <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/workspace/projects" element={<Protected><ProjectManagement /></Protected>} />
+        <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
+        <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
+        <Route path="/stats" element={<Protected><StatsAnalyticsPage /></Protected>} />
+        <Route path="/blog" element={<Protected><BlogHome /></Protected>} />
+        <Route path="/admin" element={<Protected><AdminDashboard /></Protected>} />
+        <Route path="/admin/system-settings" element={<Protected><SystemSettingsEmployeeManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
   );

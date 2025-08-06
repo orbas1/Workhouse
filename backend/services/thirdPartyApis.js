@@ -44,9 +44,11 @@ async function fetchCached(url = 'https://example.com') {
   return data;
 }
 
+const MIXCLOUD_API = process.env.MIXCLOUD_API || 'https://api.mixcloud.com';
+
 async function getPodcastSample() {
   // Mixcloud exposes a free API with podcast and music information.
-  const { data } = await axios.get('https://api.mixcloud.com/popular/');
+  const { data } = await axios.get(`${MIXCLOUD_API}/popular/`);
   return data;
 }
 

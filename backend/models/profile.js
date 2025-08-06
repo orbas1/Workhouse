@@ -21,6 +21,8 @@ function createProfile({
   profilePicture = '',
   introVideo = '',
   portfolioLinks = [],
+  hourlyRate = 0,
+  experienceYears = 0,
 }) {
   const profile = {
     id: randomUUID(),
@@ -38,6 +40,8 @@ function createProfile({
     profilePicture,
     introVideo,
     portfolioLinks,
+    hourlyRate,
+    experienceYears,
     analytics: { views: 0 },
     verificationStatus: 'unverified',
     continuousVerification: false,
