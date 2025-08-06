@@ -1,0 +1,10 @@
+{
+  "name": "workhouse-monorepo",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "test": "npm test --workspaces",
+    "start:frontend": "npm run dev --workspace frontend",
+    "start:backend": "npm start --workspace backend"
+  }
+}
