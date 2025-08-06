@@ -14,7 +14,7 @@ import {
 import NavMenu from '../components/NavMenu';
 import '../styles/AdCreateEdit.css';
 import { validateAd } from '../utils/validation';
-import '../api/ads';
+import { createAd, getAd, updateAd } from '../api/ads.js';
 
 export default function AdCreateEdit() {
   const { adId } = useParams();
@@ -32,17 +32,18 @@ export default function AdCreateEdit() {
 
   useEffect(() => {
     if (adId) {
-      adsAPI
-        .getAd(groupId, adId)
-        .then((data) => setValues({
-          title: data.title || '',
-          content: data.content || '',
-          targetUrl: data.targetUrl || '',
-          imageUrl: data.imageUrl || '',
-        }))
+      getAd(groupId, adId)
+        .then((data) =>
+          setValues({
+            title: data.title || '',
+            content: data.content || '',
+            targetUrl: data.targetUrl || '',
+            imageUrl: data.imageUrl || '',
+          })
+        )
         .catch(() => toast({ title: 'Failed to load ad', status: 'error' }));
     }
-  }, [adId]);
+  }, [adId, groupId, toast]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -55,10 +56,10 @@ export default function AdCreateEdit() {
     if (Object.keys(errs).length) return;
     try {
       if (adId) {
-        await adsAPI.updateAd(groupId, adId, values);
+        await updateAd(groupId, adId, values);
         toast({ title: 'Ad updated', status: 'success' });
       } else {
-        await adsAPI.createAd(groupId, values);
+        await createAd(groupId, values);
         toast({ title: 'Ad created', status: 'success' });
       }
       navigate('/dashboard');

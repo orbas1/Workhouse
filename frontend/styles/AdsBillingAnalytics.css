@@ -1,0 +1,8 @@
+.ads-billing-analytics {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.billing-section, .analytics-section, .library-section {
+  margin-bottom: 1.5rem;
+}
