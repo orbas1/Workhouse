@@ -3,6 +3,10 @@ const { useState, useEffect, useRef } = React;
 
 function ChatWidget({ defaultOpen = false, embedded = false }) {
   const [isOpen, setIsOpen] = useState(embedded ? true : defaultOpen);
+  const pinned = [
+    { id: 'synthron-ai', label: 'Synthron A.I.', participants: [] },
+    { id: 'support', label: 'Support', participants: [] },
+  ];
   const [conversations, setConversations] = useState([]);
   const [active, setActive] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -18,7 +22,7 @@ function ChatWidget({ defaultOpen = false, embedded = false }) {
   async function loadConversations() {
     try {
       const data = await communicationAPI.listConversations();
-      setConversations(data);
+      setConversations([...pinned, ...data]);
     } catch (err) {
       console.error('Failed to load conversations', err);
     }
@@ -55,7 +59,7 @@ function ChatWidget({ defaultOpen = false, embedded = false }) {
   if (!isOpen && !embedded) {
     return (
       <Box className="chat-widget" onClick={() => setIsOpen(true)}>
-        <Text color="white" fontWeight="bold">Chat</Text>
+        <Text fontSize="lg">💬</Text>
       </Box>
     );
   }
@@ -79,7 +83,7 @@ function ChatWidget({ defaultOpen = false, embedded = false }) {
               className={`conversation-item ${active === c.id ? 'active' : ''}`}
               onClick={() => openConversation(c.id)}
             >
-              <Text noOfLines={1}>{c.participants?.filter(p => p !== c.id).join(', ') || c.id}</Text>
+              <Text noOfLines={1}>{c.label || c.participants?.filter(p => p !== c.id).join(', ') || c.id}</Text>
             </Box>
           ))}
         </Box>
