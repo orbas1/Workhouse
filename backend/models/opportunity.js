@@ -18,6 +18,10 @@ function create({
   compensation = 0,
   experienceLevel = '',
   status = 'open',
+  field = '',
+  offering = '',
+  isPaid = false,
+  employmentType = 'freelance',
 }) {
   const id = randomUUID();
   const now = new Date();
@@ -38,6 +42,10 @@ function create({
     compensation,
     experienceLevel,
     status,
+    field,
+    offering,
+    isPaid,
+    employmentType,
     views: 0,
     applications: 0,
     matches: 0,
