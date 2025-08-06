@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, SimpleGrid, Stat, StatLabel, StatNumber, Spinner, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Spinner,
+  Button
+} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/DashboardPage.css';
 import { getDashboard } from '../api/dashboard.js';
@@ -29,36 +38,16 @@ export default function DashboardPage() {
   if (!data) return <Box p={4}>Unable to load dashboard.</Box>;
 
   return (
-    <Box className="dashboard-page">
+    <Box className="dashboard-page" p={4}>
       <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
+      <Button mb={4} colorScheme="purple" onClick={() => navigate('/profile/customize')}>
+        Customize Profile
+      </Button>
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
         View Live Feed
       </Button>
       <SimpleGrid columns={[1, 3]} spacing={4}>
         {'totalSpend' in data && (
-      <NavBar />
-      <NavMenu />
-      <Box p={4}>
-        <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
-        <Button mb={4} colorScheme="purple" onClick={() => navigate('/install')}>
-          Run Installation Wizard
-        </Button>
-        <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
-          View Live Feed
-        </Button>
-        <SimpleGrid columns={[1, 3]} spacing={4}>
-          {'totalSpend' in data && (
-            <Stat>
-              <StatLabel>Total Spend</StatLabel>
-              <StatNumber>${data.totalSpend}</StatNumber>
-            </Stat>
-          )}
-          {'totalEarnings' in data && (
-            <Stat>
-              <StatLabel>Total Earnings</StatLabel>
-              <StatNumber>${data.totalEarnings}</StatNumber>
-            </Stat>
-          )}
           <Stat>
             <StatLabel>Total Spend</StatLabel>
             <StatNumber>${data.totalSpend}</StatNumber>
@@ -82,3 +71,4 @@ export default function DashboardPage() {
     </Box>
   );
 }
+
