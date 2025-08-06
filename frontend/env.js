@@ -15,4 +15,6 @@ window.env = {
   FILE_IO_API: apiBase + (import.meta.env.VITE_FILE_IO_API || '/files'),
   ANALYTICS_ENDPOINT: import.meta.env.VITE_ANALYTICS_ENDPOINT,
   AUDIT_RESULTS_ENDPOINT: import.meta.env.VITE_AUDIT_RESULTS_ENDPOINT,
+  PUSHER_KEY: import.meta.env.VITE_PUSHER_KEY,
+  PUSHER_CLUSTER: import.meta.env.VITE_PUSHER_CLUSTER,
 };

@@ -1,9 +1,17 @@
 const model = require('../models/classroomMessages');
 const logger = require('../utils/logger');
+const pusher = require('../utils/pusher');
 
 async function postMessage(classroomId, userId, content) {
   const message = model.addMessage(classroomId, userId, content);
   logger.info('Classroom message created', { classroomId, userId });
+  if (pusher) {
+    try {
+      await pusher.trigger(`classroom-${classroomId}`, 'new-message', message);
+    } catch (err) {
+      logger.error('Pusher trigger failed', { error: err.message });
+    }
+  }
   return message;
 }
 

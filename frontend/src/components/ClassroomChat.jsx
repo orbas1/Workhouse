@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Box, VStack, Input, Button } from '@chakra-ui/react';
+import { Box, VStack, Input, Button, useToast } from '@chakra-ui/react';
+import Pusher from 'pusher-js';
 import { getMessages, sendMessage } from '../api/classrooms.js';
 import '../styles/ClassroomChat.css';
 
 export default function ClassroomChat({ classroomId }) {
   const [messages, setMessages] = useState([]);
   const [content, setContent] = useState('');
+  const toast = useToast();
 
   useEffect(() => {
     async function load() {
@@ -18,6 +20,29 @@ export default function ClassroomChat({ classroomId }) {
     }
     load();
   }, [classroomId]);
+
+  useEffect(() => {
+    if (!window.env.PUSHER_KEY) return;
+    const pusher = new Pusher(window.env.PUSHER_KEY, {
+      cluster: window.env.PUSHER_CLUSTER,
+    });
+    const channel = pusher.subscribe(`classroom-${classroomId}`);
+    channel.bind('new-message', (msg) => {
+      setMessages((m) => [...m, msg]);
+      toast({
+        title: 'New message',
+        description: `${msg.userId}: ${msg.content}`,
+        status: 'info',
+        duration: 3000,
+        isClosable: true,
+      });
+    });
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+      pusher.disconnect();
+    };
+  }, [classroomId, toast]);
 
   async function handleSend() {
     if (!content.trim()) return;
