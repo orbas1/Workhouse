@@ -6,6 +6,8 @@ const {
   engagementHandler,
   seriesOverviewHandler,
   episodeDetailsHandler,
+  recordListenHandler,
+  creatorSeriesHandler,
 } = require('../controllers/podcastAnalytics');
 const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
@@ -53,6 +55,13 @@ router.get(
   engagementHandler
 );
 
+router.post(
+  '/:podcastId/listen',
+  auth,
+  validate(podcastIdParamSchema, 'params'),
+  recordListenHandler
+);
+
 // Creator-specific analytics endpoints
 router.get(
   '/series/:seriesId/overview',
@@ -70,6 +79,13 @@ router.get(
   validate(episodeIdParamSchema, 'params'),
   ownership,
   episodeDetailsHandler
+);
+
+router.get(
+  '/creator/series',
+  auth,
+  authorize('creator'),
+  creatorSeriesHandler
 );
 
 module.exports = router;

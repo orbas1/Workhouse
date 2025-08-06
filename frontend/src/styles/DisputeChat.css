@@ -1,0 +1,9 @@
+.dispute-chat {
+  width: 100%;
+}
+
+.chat-message {
+  background: #f7fafc;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
