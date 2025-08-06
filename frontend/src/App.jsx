@@ -14,6 +14,8 @@ import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
 import ServiceDetailPage from './pages/ServiceDetailPage.jsx';
 import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import ServiceSearchPage from './pages/ServiceSearchPage.jsx';
+import GigSearchPage from './pages/GigSearchPage.jsx';
+import GigDetailPage from './pages/GigDetailPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import TaskSearchPage from './pages/TaskSearchPage.jsx';
@@ -118,8 +120,8 @@ export default function App() {
     { path: '/job-posts', element: <JobPostManagement />, protected: true },
     { path: '/gigs', element: <PlaceholderPage title="Gigs Dashboard" />, protected: true },
     { path: '/gigs/manage', element: <PlaceholderPage title="Gig Creation & Management" />, protected: true },
-    { path: '/gigs/search', element: <ServiceSearchPage />, protected: true },
-    { path: '/gigs/:id', element: <ServiceDetailPage />, protected: true },
+    { path: '/gigs/search', element: <GigSearchPage />, protected: true },
+    { path: '/gigs/:id', element: <GigDetailPage />, protected: true },
     { path: '/orders', element: <OrderManagementPage />, protected: true },
     { path: '/payments', element: <PaymentPage />, protected: true },
     { path: '/ads', element: <AdsDashboardPage />, protected: true },
