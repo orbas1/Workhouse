@@ -1,12 +1,13 @@
 import { Box, FormControl, FormLabel, Switch, VStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { fetchSystemSettings, updateSystemSettings } from '../../api/admin.js';
 import './SystemSettings.css';
 
 export default function SystemSettings() {
   const [settings, setSettings] = useState(null);
 
   useEffect(() => {
-    adminAPI.getConfig().then(setSettings).catch(() => {});
+    fetchSystemSettings().then(setSettings).catch(() => {});
   }, []);
 
   const handleToggle = async (key) => {
@@ -15,7 +16,7 @@ export default function SystemSettings() {
       features: { ...settings.features, [key]: !settings.features[key] }
     };
     setSettings(updated);
-    await adminAPI.updateConfig({ features: updated.features });
+    await updateSystemSettings({ features: updated.features });
   };
 
   if (!settings) return null;

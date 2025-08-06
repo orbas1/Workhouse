@@ -17,5 +17,12 @@ export async function updateOrder(id, updates) {
 
 export async function createOrder(payload) {
   const { data } = await apiClient.post('/service-providers/orders', payload);
+export async function createOrder(order) {
+  const { data } = await apiClient.post('/service-providers/orders', order);
+  return data;
+}
+
+export async function deleteOrder(id) {
+  const { data } = await apiClient.delete(`/service-providers/orders/${id}`);
   return data;
 }

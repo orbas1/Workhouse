@@ -14,3 +14,13 @@ export async function getWebinarOverview() {
   const { data } = await apiClient.get('/webinar-analytics/overview');
   return data;
 }
+
+export async function getCreatorSeries() {
+  const { data } = await apiClient.get('/podcast-analytics/creator/series');
+  return data;
+}
+
+export async function getCreatorWebinars() {
+  const { data } = await apiClient.get('/webinar-analytics/creator/webinars');
+  return data;
+}

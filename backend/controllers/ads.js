@@ -1,25 +1,21 @@
 const service = require('../services/ads');
+const Ads = require('../models/ads');
+const campaignModel = require('../models/campaign');
 
-async function billingHandler(req, res) {
+function billingHandler(req, res) {
   const data = service.getBillingInfo();
   res.json(data);
 }
 
-async function analyticsHandler(req, res) {
+function analyticsHandler(req, res) {
   const data = service.getAnalytics();
   res.json(data);
 }
 
-async function libraryHandler(req, res) {
+function libraryHandler(req, res) {
   const data = service.getAdLibrary();
   res.json(data);
 }
-
-module.exports = {
-  billingHandler,
-  analyticsHandler,
-  libraryHandler
-const Ads = require('../models/ads');
 
 function getAds(req, res) {
   const data = Ads.listAds();
@@ -39,8 +35,26 @@ function updatePreferences(req, res) {
   res.json({ preferences: prefs });
 }
 
+function createCampaign(req, res) {
+  const creator = req.user?.id || 'system';
+  const campaign = campaignModel.createCampaign({ ...req.body, createdBy: creator });
+  res.status(201).json(campaign);
+}
+
+function updateCampaign(req, res) {
+  const updated = campaignModel.updateCampaign(req.params.id, req.body);
+  if (!updated) return res.status(404).json({ error: 'Campaign not found' });
+  res.json(updated);
+}
+
 module.exports = {
+  billingHandler,
+  analyticsHandler,
+  libraryHandler,
   getAds,
   getPreferences,
   updatePreferences,
+  createCampaign,
+  updateCampaign,
 };
+
