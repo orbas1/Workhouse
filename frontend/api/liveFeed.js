@@ -22,11 +22,23 @@
     return res.json();
   }
 
+  async function getStories(){
+    const res = await apiFetch('/api/live-feed/stories');
+    if(!res.ok) throw new Error('Failed to load stories');
+    return res.json();
+  }
+
+  async function getNews(){
+    const res = await apiFetch('/api/live-feed/news');
+    if(!res.ok) throw new Error('Failed to load news');
+    return res.json();
+  }
+
   async function likePost(postId){
     const res = await apiFetch(`/api/live-feed/posts/${postId}/like`, { method: 'POST' });
     if(!res.ok) throw new Error('Failed to like post');
     return res.json();
   }
 
-  global.liveFeedAPI = { getPosts, createPost, getEvents, likePost };
+  global.liveFeedAPI = { getPosts, createPost, getEvents, likePost, getStories, getNews };
 })(window);
