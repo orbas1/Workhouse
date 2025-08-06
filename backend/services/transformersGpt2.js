@@ -26,21 +26,23 @@ async function callApi(url, apiKey, body) {
 async function generateText(userId, { prompt, maxTokens = 50 }) {
   const url = process.env.GPT2_API_URL;
   const apiKey = process.env.GPT2_API_KEY;
-  if (!url || !apiKey) throw new Error('GPT2 API configuration missing');
+  if (!url || !apiKey) {
+    return createInteraction({ userId, type: 'generation', prompt, response: '' });
+  }
   const data = await callApi(url, apiKey, { prompt, max_tokens: maxTokens });
   const responseText = data.choices?.[0]?.text || '';
-  const record = createInteraction({ userId, type: 'generation', prompt, response: responseText });
-  return record;
+  return createInteraction({ userId, type: 'generation', prompt, response: responseText });
 }
 
 async function contactExternalAi(userId, { model, input }) {
   const url = process.env.AI_SERVICE_URL;
   const apiKey = process.env.AI_SERVICE_KEY;
-  if (!url || !apiKey) throw new Error('AI service configuration missing');
+  if (!url || !apiKey) {
+    return createInteraction({ userId, type: 'contact', prompt: input, response: '' });
+  }
   const data = await callApi(url, apiKey, { model, input });
   const responseText = data.result || data.response || '';
-  const record = createInteraction({ userId, type: 'contact', prompt: input, response: responseText });
-  return record;
+  return createInteraction({ userId, type: 'contact', prompt: input, response: responseText });
 }
 
 function fetchInteraction(id) {

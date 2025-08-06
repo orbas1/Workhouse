@@ -1,11 +1,15 @@
 const axios = require('axios');
 
-const client = axios.create({
-  baseURL: 'https://openrouter.ai/api/v1',
-  headers: {
-    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-  },
-});
+let client;
+
+if (process.env.OPENROUTER_API_KEY) {
+  client = axios.create({
+    baseURL: 'https://openrouter.ai/api/v1',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    },
+  });
+}
 
 /**
  * Send a chat completion request to OpenRouter.
@@ -13,6 +17,7 @@ const client = axios.create({
  * @param {string} model Model identifier
  */
 async function generateChatCompletion(messages, model = 'openai/gpt-3.5-turbo') {
+  if (!client) return { choices: [] };
   const response = await client.post('/chat/completions', {
     model,
     messages,
