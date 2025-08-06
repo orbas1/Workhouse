@@ -9,7 +9,7 @@ const flaggedContent = require('../models/flaggedContent');
  */
 function adminDashboardHandler(req, res) {
   const overview = {
-    activeUsers: users.length,
+    activeUsers: users.size,
     flaggedContent: flaggedContent.listFlags('pending').length,
     openTickets: supportTickets
       .findAll()

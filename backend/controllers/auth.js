@@ -41,7 +41,7 @@ async function loginHandler(req, res) {
 }
 
 async function resetPasswordHandler(req, res) {
-  const { username, password } = req.body;
+  const { username, password } = req.validatedBody;
   try {
     await resetPassword(username, password);
     res.json({ message: 'Password updated' });
