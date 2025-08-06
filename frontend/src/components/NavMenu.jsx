@@ -1,8 +1,8 @@
 import React from 'react';
 import { Flex, Heading, Spacer, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/NavMenu.css';
 import { useAuth } from '../context/AuthContext.jsx';
+import '../styles/NavMenu.css';
 
 function NavMenu() {
   const navigate = useNavigate();
@@ -20,6 +20,8 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
         Profile
       </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts/new')}>
+        New Contract
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
         Services
       </Button>
@@ -30,6 +32,15 @@ function NavMenu() {
       </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
         Services
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>
+        Tasks
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/notifications')}>
+        Notifications
+      </Button>
+      <Button variant="outline" color="white" onClick={handleLogout}>
+        Logout
       </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/articles')}>
         Blog
