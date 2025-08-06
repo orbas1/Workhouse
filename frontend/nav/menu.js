@@ -31,6 +31,9 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/messages')}>
         Messages
       </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/settings')}>
+        Settings
+      </Button>
       <Button variant="outline" color="white" onClick={handleLogout}>
         Logout
       </Button>
@@ -50,13 +53,16 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/calendar')}>Calendar</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/gigs/search')}>Discover Gigs</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/jobs')}>Jobs</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/stats')}>Stats</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/proposals-invoices')}>
         Proposals & Invoices
       </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/orders')}>Orders</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/creator/dashboard')}>Creator</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts')}>Contracts</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/classroom/WorkhouseClassroom')}>Classroom</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/courses')}>Courses</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/blog')}>Blog</Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );
