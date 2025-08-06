@@ -8,6 +8,7 @@ const n8nRoutes = require('./routes/n8n');
 const tasksRoutes = require('./routes/tasks');
 const adminAuthRoutes = require('./routes/adminAuth');
 const adminDashboardRoutes = require('./routes/adminDashboard');
+const searchRoutes = require('./routes/search');
 const api = require("./api");
 const { initDb } = require('./utils/db');
 const logger = require('./utils/logger');
@@ -26,6 +27,7 @@ app.use('/n8n', n8nRoutes);
 app.use('/tasks', tasksRoutes);
 app.use('/admin', adminAuthRoutes);
 app.use('/admin', adminDashboardRoutes);
+app.use('/search', searchRoutes);
 
 // 404 handler
 app.use((req, res, next) => {

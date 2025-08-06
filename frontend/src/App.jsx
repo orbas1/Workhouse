@@ -7,6 +7,7 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import KlEditionPage from './pages/KlEditionPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
+import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 
 function Protected({ children }) {
@@ -53,6 +54,14 @@ export default function App() {
                 element={
                   <Protected>
                     <KlEditionPage />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <Protected>
+                    <GlobalSearchPage />
                   </Protected>
                 }
               />
