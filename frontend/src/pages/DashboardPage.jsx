@@ -46,6 +46,8 @@ export default function DashboardPage() {
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
         View Live Feed
       </Button>
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/connections')}>
+        Manage Connections
       <Button mb={4} colorScheme="purple" onClick={() => navigate('/sim-dashboard')}>
         Startup/Investor/Mentor Hub
       <Button mb={4} colorScheme="purple" onClick={() => navigate('/startups/analytics')}>
