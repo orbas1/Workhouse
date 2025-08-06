@@ -72,6 +72,20 @@ function getSession(sessionId) {
   return sessions.get(sessionId);
 }
 
+function getSessionAnalytics(sessionId) {
+  const session = sessions.get(sessionId);
+  if (!session) return null;
+  const contactCount = contactExchanges.filter(
+    (c) => c.sessionId === sessionId
+  ).length;
+  return {
+    sessionId,
+    participants: session.participants.length,
+    contactExchanges: contactCount,
+    active: !session.endedAt,
+  };
+}
+
 module.exports = {
   createSession,
   endSession,
@@ -80,4 +94,5 @@ module.exports = {
   createLanguageRoom,
   getHistory,
   getSession,
+  getSessionAnalytics,
 };
