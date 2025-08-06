@@ -99,6 +99,11 @@ function CreatorDashboard() {
           </Box>
         ))}
       </SimpleGrid>
+      <Box mt={6}>
+        <Button colorScheme="teal" onClick={() => window.location.href='/content/manage'}>
+          Manage Content
+        </Button>
+      </Box>
     </Box>
   );
 }

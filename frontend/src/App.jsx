@@ -46,6 +46,7 @@ import ContentLibraryPage from './pages/ContentLibraryPage.jsx';
 import ContentDetailPage from './pages/ContentDetailPage.jsx';
 import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
 import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
+import ContentManagerPage from './pages/ContentManagerPage.jsx';
 import AffiliateManagementPage from './pages/AffiliateManagementPage.jsx';
 import AdsDashboardPage from './pages/AdsDashboardPage.jsx';
 import SharedUserInteractionPage from './pages/SharedUserInteractionPage.jsx';
@@ -208,7 +209,7 @@ export default function App() {
     // Media & Advertising
     { path: '/creator/dashboard', element: <PlaceholderPage title="Creator Dashboard" />, protected: true },
     { path: '/creator/analytics', element: <CreatorAnalyticsPage />, protected: true },
-    { path: '/content/manage', element: <PlaceholderPage title="Content Creation & Management" />, protected: true },
+    { path: '/content/manage', element: <ContentManagerPage />, protected: true },
     { path: '/content-library', element: <ContentLibraryPage />, protected: true },
     { path: '/content-library/:type/:id', element: <ContentDetailPage />, protected: true },
     { path: '/content-library/:type/:id/play', element: <LivePlaybackPage />, protected: true },
