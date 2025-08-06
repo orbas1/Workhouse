@@ -6,6 +6,7 @@ const {
   getSeriesOverview,
   getEpisodeDetails,
   recordListen,
+  getCreatorSeries,
 } = require('../services/podcastAnalytics');
 const logger = require('../utils/logger');
 
@@ -94,6 +95,13 @@ async function recordListenHandler(req, res) {
       podcastId: req.params.podcastId,
     });
     res.status(err.status || 500).json({ error: err.message });
+async function creatorSeriesHandler(req, res) {
+  try {
+    const data = await getCreatorSeries(req.user.id);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to retrieve creator series', { error: err.message });
+    res.status(500).json({ error: 'Failed to retrieve creator series' });
   }
 }
 
@@ -105,4 +113,5 @@ module.exports = {
   seriesOverviewHandler,
   episodeDetailsHandler,
   recordListenHandler,
+  creatorSeriesHandler,
 };
