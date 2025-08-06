@@ -16,6 +16,21 @@ async function listOpportunities(filters = {}, { page = 1, limit = 10 } = {}) {
   }
   if (filters.commitmentTime) results = results.filter(o => o.commitmentTime === filters.commitmentTime);
   if (filters.urgency) results = results.filter(o => o.urgency === filters.urgency);
+  if (filters.category) results = results.filter(o => o.category === filters.category);
+  if (filters.duration) results = results.filter(o => o.duration === filters.duration);
+  if (filters.experienceLevel) results = results.filter(o => o.experienceLevel === filters.experienceLevel);
+  if (filters.status) results = results.filter(o => o.status === filters.status);
+  if (filters.keyword) {
+    const kw = String(filters.keyword).toLowerCase();
+    results = results.filter(o =>
+      o.title.toLowerCase().includes(kw) ||
+      o.description.toLowerCase().includes(kw)
+    );
+  }
+  if (filters.compensationMin)
+    results = results.filter(o => o.compensation >= Number(filters.compensationMin));
+  if (filters.compensationMax)
+    results = results.filter(o => o.compensation <= Number(filters.compensationMax));
   if (filters.status) results = results.filter(o => o.status === filters.status);
   const total = results.length;
   const start = (page - 1) * limit;

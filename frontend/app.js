@@ -25,6 +25,7 @@ function App() {
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/opportunities" element={<Protected><OpportunitySearchPage /></Protected>} />
             <Route path="/connections" element={<Protected><ConnectionManagementPage /></Protected>} />
             <Route path="/sessions" element={<Protected><NetworkingSessions /></Protected>} />
             <Route path="/volunteering" element={<Protected><VolunteeringDashboard /></Protected>} />
@@ -72,6 +73,7 @@ function App() {
         </Routes>
       </BrowserRouter>
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
+        <Route path="/opportunities" element={<Protected><OpportunitySearchPage /></Protected>} />
         <Route path="/ads" element={<Protected><BillingAnalyticsAdLibraryPage /></Protected>} />
         <Route path="/sessions" element={<Protected><NetworkingSessions /></Protected>} />
         <Route path="/startups/profile-plan" element={<Protected><StartupProfilePlanPage /></Protected>} />
