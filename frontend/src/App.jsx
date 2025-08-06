@@ -67,6 +67,10 @@ export default function App() {
                 <Route
                   path="/contracts/new"
                   element={<Protected><ContractFormPage /></Protected>}
+                />
+                <Route
+                  path="/contracts/new"
+                  element={<Protected><ContractFormPage /></Protected>}
                   element={
                     <Protected>
                       <ContractFormPage />
