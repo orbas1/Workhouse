@@ -1,22 +1,18 @@
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+let s3 = null;
+let uploadObject = async () => Promise.resolve();
 
-const s3 = new S3Client({ region: process.env.AWS_REGION });
-
-/**
- * Upload a file to S3.
- * @param {string} bucket
- * @param {string} key
- * @param {Buffer|Uint8Array|string} body
- * @param {Object} [options]
- */
-async function uploadObject(bucket, key, body, options = {}) {
-  const command = new PutObjectCommand({
-    Bucket: bucket,
-    Key: key,
-    Body: body,
-    ...options,
-  });
-  return s3.send(command);
+if (process.env.AWS_REGION) {
+  const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+  s3 = new S3Client({ region: process.env.AWS_REGION });
+  uploadObject = async (bucket, key, body, options = {}) => {
+    const command = new PutObjectCommand({
+      Bucket: bucket,
+      Key: key,
+      Body: body,
+      ...options,
+    });
+    return s3.send(command);
+  };
 }
 
 module.exports = {
