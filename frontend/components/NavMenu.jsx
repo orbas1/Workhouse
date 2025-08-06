@@ -10,6 +10,7 @@ export default function NavMenu() {
         <Link as={RouterLink} to="/jobs">Job Posts</Link>
         <Link as={RouterLink} to="/proposals-invoices">Proposals & Invoices</Link>
         <Link as={RouterLink} to="/payments">Payments</Link>
+        <Link as={RouterLink} to="/billing">Billing</Link>
         <Link as={RouterLink} to="/education">Education</Link>
         <Link as={RouterLink} to="/education/courses">Courses</Link>
       </HStack>

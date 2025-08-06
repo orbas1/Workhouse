@@ -1,6 +1,7 @@
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import BillingSubscription from './pages/BillingSubscription';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
-            <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
+           <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
+            <Route path="/billing" element={<Protected><BillingSubscription /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
@@ -46,6 +48,7 @@ function App() {
         <Route path="/gigs" element={<Protected><GigsDashboard /></Protected>} />
         <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
         <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
+        <Route path="/billing" element={<Protected><BillingSubscription /></Protected>} />
         <Route path="/education" element={<Protected><EducationDashboard /></Protected>} />
         <Route path="/education/courses" element={<Protected><CourseModuleManagement /></Protected>} />
         <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
