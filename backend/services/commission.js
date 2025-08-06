@@ -6,6 +6,7 @@ const {
   addCommission,
   getCommissionsByAffiliate,
   addRateHistory,
+  commissions,
 } = require('../models/commission');
 
 function getCommissionRates() {
@@ -55,6 +56,18 @@ function adjustRateForPerformance(tier, rate) {
   return updateCommissionRate(tier, rate, 'performance-adjust');
 }
 
+function getLeaderboard(limit = 10) {
+  const totals = new Map();
+  for (const commission of commissions.values()) {
+    const current = totals.get(commission.affiliateId) || 0;
+    totals.set(commission.affiliateId, current + commission.amount);
+  }
+  return Array.from(totals.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([affiliateId, total]) => ({ affiliateId, total }));
+}
+
 module.exports = {
   getCommissionRates,
   updateCommissionRate,
@@ -63,4 +76,5 @@ module.exports = {
   getCommissionHistory,
   calculateCommission,
   adjustRateForPerformance,
+  getLeaderboard,
 };
