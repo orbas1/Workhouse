@@ -3,6 +3,7 @@ const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import InSessionNetworking from './pages/InSessionNetworking.jsx';
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import FileResourceManagement from './pages/FileResourceManagement.jsx';
 import SettingsPage from './pages/SettingsPage';
 import BillingSubscription from './pages/BillingSubscription';
 import AdminDashboard from './pages/AdminDashboard';
@@ -21,6 +22,8 @@ function App() {
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
+            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
            <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
             <Route path="/billing" element={<Protected><BillingSubscription /></Protected>} />
@@ -31,6 +34,7 @@ function App() {
             <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
+            <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
             <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
             <Route path="/admin" element={<Protected><AdminDashboard /></Protected>} />
           </Routes>
@@ -72,6 +76,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
         <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
         <Route path="/stats" element={<Protected><StatsAnalyticsPage /></Protected>} />
         <Route path="/blog" element={<Protected><BlogHome /></Protected>} />

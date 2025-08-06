@@ -158,6 +158,10 @@ async function getFile(fileId) {
   return model.getFileById(fileId);
 }
 
+async function listFiles(projectId) {
+  return model.listFilesByProject(projectId);
+}
+
 async function setupWorkflow(data) {
   const workflow = model.setupWorkflow(data);
   logger.info('Workflow setup', { workflowId: workflow.id, projectId: data.projectId });
@@ -209,6 +213,7 @@ module.exports = {
   getReports,
   uploadFile,
   getFile,
+  listFiles,
   setupWorkflow,
   getSpreadsheet,
   createTextDocument,

@@ -139,6 +139,8 @@ function HomeDashboard() {
     <Button colorScheme="teal" onClick={() => window.location.href = '/education/courses'}>
       Courses
     </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/workspace/files'}>
+      Files
     <Button colorScheme="teal" onClick={() => window.location.href = '/stats'}>
       Analytics
 
