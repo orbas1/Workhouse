@@ -55,6 +55,7 @@ export const menu = [
       { label: 'Content Library', path: '/content-library' },
       { label: 'Stats', path: '/stats' },
       { label: 'Startup Profile', path: '/startups/profile-plan' },
+      { label: 'Ecosystem Dashboard', path: '/sim-dashboard' },
       { label: 'Financial & Media Setup', path: '/setup/financial-media' },
       { label: 'Onboarding Documents', path: '/onboarding/documents' }
     ]
@@ -87,7 +88,6 @@ export const menu = [
       { label: 'Admin Analytics', path: '/admin/analytics' },
       { label: 'Admin Settings', path: '/admin/system-settings' },
       { label: 'Affiliates', path: '/affiliates' },
-      { label: 'Sim Dashboard', path: '/sim-dashboard' },
       { label: 'Install Wizard', path: '/install' }
     ]
   }
