@@ -5,4 +5,5 @@ set -euo pipefail
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Run the database setup using dotenv and existing backend script
-node -r "$dir/backend/node_modules/dotenv/config" "$dir/backend/scripts/dbSetup.js" "$@"
+# Rely on Node's module resolution for dotenv rather than hardcoding paths
+node -r dotenv/config "$dir/backend/scripts/dbSetup.js" "$@"

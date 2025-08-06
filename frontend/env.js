@@ -1,4 +1,10 @@
-const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+const apiBase =
+  window.API_BASE_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  '/api';
+
+// expose the resolved base URL globally for legacy scripts
+window.API_BASE_URL = apiBase;
 
 window.env = {
   API_BASE_URL: apiBase,

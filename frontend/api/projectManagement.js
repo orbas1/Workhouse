@@ -1,19 +1,4 @@
-const API_BASE_URL = window.API_BASE_URL || '/api';
-
-async function apiFetch(path, options = {}) {
-  const token = localStorage.getItem('token');
-  const headers = {
-    ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    ...options.headers,
-  };
-  const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
-  if (!res.ok) {
-    const message = await res.text();
-    throw new Error(message || 'Request failed');
-  }
-  return res.json();
-}
+import apiFetch from '../utils/api.js';
 
 export function fetchProjects() {
   return apiFetch('/workspace/projects');
@@ -40,7 +25,6 @@ export function deleteProject(projectId) {
 }
 
 export function listFiles(projectId) {
-  return request(`/project-management/files/project/${projectId}`);
   return apiFetch(`/workspace/files/project/${projectId}`);
 }
 
@@ -54,12 +38,6 @@ export async function uploadFile(projectId, file) {
   });
   const uploadData = await uploadRes.json();
   if (!uploadRes.ok || !uploadData.success) {
-    throw new Error('File upload failed');
-  }
-  const body = { projectId, filename: file.name, url: uploadData.link };
-  return request('/project-management/files/upload', {
-    method: 'POST',
-    body: JSON.stringify(body),
     throw new Error(uploadData.error || 'File upload failed');
   }
 

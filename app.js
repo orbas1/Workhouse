@@ -18,7 +18,10 @@ app.use(apiBase, backend);
 // Expose runtime configuration to the frontend
 app.get('/config.js', (req, res) => {
   res.type('application/javascript');
-  res.send(`window.API_BASE_URL = '${apiBase}';`);
+  res.send(
+    `window.API_BASE_URL='${apiBase}';` +
+    `window.env=Object.assign(window.env||{}, {API_BASE_URL:'${apiBase}'});`
+  );
 });
 
 // Fallback to index.html for any other request (SPA behavior)

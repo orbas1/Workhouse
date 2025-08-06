@@ -1,48 +1,33 @@
-const API_BASE_URL = window.API_BASE_URL || '/api';
-
-async function request(path, options = {}) {
-  const token = localStorage.getItem('token');
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    ...options.headers,
-  };
-  const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
-  if (!res.ok) {
-    const message = await res.text();
-    throw new Error(message || 'Request failed');
-  }
-  return res.json();
-}
+import apiFetch from '../utils/api.js';
 
 export function scheduleInterview(data) {
-  return request('/interviews', {
+  return apiFetch('/interviews', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
 export function getUserInterviews() {
-  return request('/interviews/user');
+  return apiFetch('/interviews/user');
 }
 
 export function getEmployerInterviews() {
-  return request('/interviews/employer');
+  return apiFetch('/interviews/employer');
 }
 
 export function updateInterviewStatus(id, status) {
-  return request(`/interviews/${id}/status`, {
+  return apiFetch(`/interviews/${id}/status`, {
     method: 'PUT',
     body: JSON.stringify({ status }),
   });
 }
 
 export function getInterview(id) {
-  return request(`/interviews/${id}`);
+  return apiFetch(`/interviews/${id}`);
 }
 
 export function addNote(id, text) {
-  return request(`/interviews/${id}/notes`, {
+  return apiFetch(`/interviews/${id}/notes`, {
     method: 'POST',
     body: JSON.stringify({ text }),
   });
