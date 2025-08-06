@@ -243,6 +243,7 @@ import ClassroomPage from './pages/ClassroomPage.jsx';
 import ServiceSearchPage from './pages/ServiceSearchPage.jsx';
 import ServiceDetailPage from './pages/ServiceDetailPage.jsx';
 import { TaskProvider } from './context/TaskContext.jsx';
+import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 
 function App() {
   return (
@@ -312,6 +313,7 @@ function App() {
               <Route path="/services" element={<ServiceSearchPage />} />
               <Route path="/services/:id" element={<ServiceDetailPage />} />
               <Route path="/tasks" element={<TaskDashboardPage />} />
+              <Route path="/admin/analytics" element={<AnalyticsAuditPage />} />
             </Routes>
           </Box>
           <TaskProvider>

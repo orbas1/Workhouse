@@ -4,7 +4,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/NavBar.css';
 
-function NavBar() {
+export default function NavBar() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
@@ -28,6 +28,14 @@ function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
+          <Button as={RouterLink} to="/services" variant="ghost" color="white" mr={2}>
+            Services
+          </Button>
+          <Button as={RouterLink} to="/tasks" variant="ghost" color="white" mr={2}>
+            Tasks
+          </Button>
+          <Button as={RouterLink} to="/admin/analytics" variant="ghost" color="white" mr={2}>
+            Analytics
           <Button as={RouterLink} to="/sim-dashboard" variant="ghost" color="white" mr={2}>
             Dashboard
           <Button as={RouterLink} to="/connections" variant="ghost" color="white" mr={2}>
