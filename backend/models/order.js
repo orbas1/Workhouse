@@ -1,14 +1,15 @@
 const { randomUUID } = require('crypto');
 
-// In-memory storage for service provider orders
+// In-memory storage for orders
 const orders = [];
 
-function createOrder({ buyerId, sellerId, serviceId, status = 'pending', description = '' }) {
+function createOrder({ buyerId, sellerId, serviceId = null, gigId = null, status = 'pending', description = '' }) {
   const order = {
     id: randomUUID(),
     buyerId,
     sellerId,
     serviceId,
+    gigId,
     status,
     description,
     createdAt: new Date(),

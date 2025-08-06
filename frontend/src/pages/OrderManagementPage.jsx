@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Spinner, Select, useDisclosure, Button } from '@chakra-ui/react';
+import { Box, Heading, Spinner, Select, useDisclosure, Button, Stack, Text, Switch } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import '../styles/OrderManagementPage.css';
 import { getOrders } from '../api/orders.js';
@@ -10,6 +10,7 @@ function OrderManagementPage() {
   const [orders, setOrders] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [statusFilter, setStatusFilter] = useState('');
+  const [role, setRole] = useState('buyer');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState(true);
@@ -30,10 +31,15 @@ function OrderManagementPage() {
     if (userId) fetchOrders();
   }, [userId]);
 
+  useEffect(() => {
+    let data = orders;
+    data = role === 'buyer' ? data.filter((o) => o.buyerId === userId) : data.filter((o) => o.sellerId === userId);
+    if (statusFilter) data = data.filter((o) => o.status === statusFilter);
+    setFiltered(data);
+  }, [orders, role, statusFilter, userId]);
+
   const handleFilterChange = (e) => {
-    const value = e.target.value;
-    setStatusFilter(value);
-    setFiltered(value ? orders.filter((o) => o.status === value) : orders);
+    setStatusFilter(e.target.value);
   };
 
   const handleSelect = (order) => {
@@ -49,6 +55,11 @@ function OrderManagementPage() {
       <Button as={RouterLink} to="/payments" colorScheme="teal" mb={4}>
         Make Payment
       </Button>
+      <Stack direction="row" align="center" mb={4}>
+        <Text>Buyer</Text>
+        <Switch colorScheme="teal" isChecked={role === 'seller'} onChange={(e) => setRole(e.target.checked ? 'seller' : 'buyer')} />
+        <Text>Seller</Text>
+      </Stack>
       <Select placeholder="Filter by status" value={statusFilter} onChange={handleFilterChange} mb={4}>
         <option value="pending">Pending</option>
         <option value="in_progress">In Progress</option>

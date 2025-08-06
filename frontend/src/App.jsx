@@ -16,6 +16,7 @@ import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import ServiceSearchPage from './pages/ServiceSearchPage.jsx';
 import GigSearchPage from './pages/GigSearchPage.jsx';
 import GigDetailPage from './pages/GigDetailPage.jsx';
+import GigsDashboardPage from './pages/GigsDashboardPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import TaskSearchPage from './pages/TaskSearchPage.jsx';
@@ -118,7 +119,7 @@ export default function App() {
     { path: '/interviews', element: <VirtualInterview />, protected: true },
     { path: '/interviews/:interviewId', element: <InterviewSession />, protected: true },
     { path: '/job-posts', element: <JobPostManagement />, protected: true },
-    { path: '/gigs', element: <PlaceholderPage title="Gigs Dashboard" />, protected: true },
+    { path: '/gigs', element: <GigsDashboardPage />, protected: true },
     { path: '/gigs/manage', element: <PlaceholderPage title="Gig Creation & Management" />, protected: true },
     { path: '/gigs/search', element: <GigSearchPage />, protected: true },
     { path: '/gigs/:id', element: <GigDetailPage />, protected: true },

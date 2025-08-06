@@ -14,3 +14,8 @@ export async function updateOrder(id, updates) {
   const { data } = await apiClient.put(`/service-providers/orders/${id}`, updates);
   return data;
 }
+
+export async function createOrder(payload) {
+  const { data } = await apiClient.post('/service-providers/orders', payload);
+  return data;
+}
