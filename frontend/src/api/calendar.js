@@ -1,9 +1,16 @@
 import apiClient from '../utils/apiClient.js';
 
-const endpoint = import.meta.env.VITE_CALENDAR_ENDPOINT || '/service-providers/calendar';
+const endpoint =
+  import.meta.env.VITE_CALENDAR_ENDPOINT || '/service-providers/calendar';
 
-export function fetchEvents(userId) {
-  return apiClient.get(endpoint, { params: { userId } }).then((res) => res.data);
+export function fetchEvents(params = {}) {
+  return apiClient.get(endpoint, { params }).then((res) => res.data);
+const endpoint = '/workspace/calendar/events';
+
+export function fetchEvents(projectId) {
+  return apiClient
+    .get(`/workspace/calendar/project/${projectId}`)
+    .then((res) => res.data);
 }
 
 export function createEvent(data) {

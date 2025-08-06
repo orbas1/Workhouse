@@ -1,16 +1,17 @@
-const model = require('../models/ads');
+const adsModel = require('../models/ads');
+const campaignModel = require('../models/campaign');
 const logger = require('../utils/logger');
 
 function getBillingInfo() {
   logger.info('Fetched billing information');
   return {
-    methods: model.getPaymentMethods(),
-    transactions: model.getTransactions()
+    methods: adsModel.getPaymentMethods(),
+    transactions: adsModel.getTransactions(),
   };
 }
 
 function getAnalytics() {
-  const campaigns = model.getCampaigns();
+  const campaigns = campaignModel.listCampaigns();
   const totals = campaigns.reduce((acc, c) => {
     acc.impressions += c.impressions;
     acc.clicks += c.clicks;
@@ -24,7 +25,7 @@ function getAnalytics() {
 
 function getAdLibrary() {
   logger.info('Fetched ad library');
-  return model.getCampaigns();
+  return campaignModel.listCampaigns();
 }
 
 module.exports = {

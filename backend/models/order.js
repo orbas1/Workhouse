@@ -3,7 +3,14 @@ const { randomUUID } = require('crypto');
 // In-memory storage for service provider orders
 const orders = [];
 
-function createOrder({ buyerId, sellerId, serviceId, status = 'pending', description = '' }) {
+function createOrder({
+  buyerId,
+  sellerId,
+  serviceId,
+  status = 'pending',
+  description = '',
+  scheduledDate = new Date(),
+}) {
   const order = {
     id: randomUUID(),
     buyerId,
@@ -11,6 +18,7 @@ function createOrder({ buyerId, sellerId, serviceId, status = 'pending', descrip
     serviceId,
     status,
     description,
+    scheduledDate: new Date(scheduledDate),
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -29,6 +37,9 @@ function getOrderById(id) {
 function updateOrder(id, updates) {
   const order = getOrderById(id);
   if (!order) return null;
+  if (updates.scheduledDate) {
+    updates.scheduledDate = new Date(updates.scheduledDate);
+  }
   Object.assign(order, updates, { updatedAt: new Date() });
   return order;
 }

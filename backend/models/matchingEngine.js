@@ -1,7 +1,7 @@
 const { randomUUID } = require('crypto');
 
 // In-memory stores for demonstration purposes
-const profiles = new Map(); // userId -> { id, role, skills, interests, industry, location, fundingStage, expertise }
+const profiles = new Map(); // userId -> { id, role, skills, interests, industry, location, fundingStage, expertise, experience, salary }
 const invitations = new Map(); // invitationId -> invitation object
 const matches = [];
 const trialSessions = [];
@@ -15,6 +15,8 @@ function addProfile(profile) {
     location: null,
     fundingStage: null,
     expertise: null,
+    experience: 0,
+    salary: null,
     ...profile,
   };
   profiles.set(record.id, record);
@@ -32,6 +34,8 @@ function searchProfiles({
   location,
   fundingStage,
   expertise,
+  minExperience,
+  maxSalary,
 }) {
   let results = Array.from(profiles.values());
   if (role) results = results.filter((p) => p.role === role);
@@ -41,6 +45,12 @@ function searchProfiles({
   if (expertise) results = results.filter((p) => p.expertise === expertise);
   if (skills.length) {
     results = results.filter((p) => skills.every((s) => p.skills.includes(s)));
+  }
+  if (minExperience !== undefined) {
+    results = results.filter((p) => p.experience >= Number(minExperience));
+  }
+  if (maxSalary !== undefined) {
+    results = results.filter((p) => p.salary !== null && p.salary <= Number(maxSalary));
   }
   return results;
 }
