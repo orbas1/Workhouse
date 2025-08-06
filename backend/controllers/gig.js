@@ -1,4 +1,4 @@
-const { createGig, listGigs, getGig, updateGig, removeGig } = require('../services/gig');
+const { createGig, listGigs, getGig, updateGig, removeGig, searchGigs } = require('../services/gig');
 const { gigSchema } = require('../validation/gig');
 const logger = require('../utils/logger');
 
@@ -56,10 +56,21 @@ async function deleteGigHandler(req, res) {
   res.json({ success: true });
 }
 
+async function searchGigsHandler(req, res) {
+  try {
+    const gigs = await searchGigs(req.query);
+    res.json(gigs);
+  } catch (err) {
+    logger.error('Failed to search gigs', { error: err.message });
+    res.status(500).json({ error: 'Failed to search gigs' });
+  }
+}
+
 module.exports = {
   createGigHandler,
   listGigsHandler,
   getGigHandler,
   updateGigHandler,
   deleteGigHandler,
+  searchGigsHandler,
 };

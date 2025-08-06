@@ -4,6 +4,7 @@ const {
   updateAffiliate,
   recordAffiliateAgreement,
 } = require('../services/affiliate');
+const { getCompetitionsWithProgress } = require('../services/competition');
 const logger = require('../utils/logger');
 
 async function registerAffiliateHandler(req, res) {
@@ -49,9 +50,21 @@ async function updateAgreementHandler(req, res) {
   }
 }
 
+function listCompetitionsHandler(req, res) {
+  try {
+    const affiliateId = req.query.affiliateId || req.user?.id;
+    const comps = getCompetitionsWithProgress(affiliateId);
+    res.json(comps);
+  } catch (err) {
+    logger.error('Failed to load competitions', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   registerAffiliateHandler,
   getAffiliateHandler,
   updateAffiliateHandler,
   updateAgreementHandler,
+  listCompetitionsHandler,
 };
