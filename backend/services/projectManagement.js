@@ -24,6 +24,12 @@ async function deleteProject(projectId) {
   logger.info('Workspace project deleted', { projectId });
 }
 
+async function listProjects(ownerId) {
+  const list = model.listProjects(ownerId);
+  logger.info('Workspace projects retrieved', { ownerId, count: list.length });
+  return list;
+}
+
 async function createTask(data) {
   const task = model.createTask(data);
   logger.info('Task created', { taskId: task.id, projectId: data.projectId });
@@ -193,6 +199,7 @@ module.exports = {
   getProject,
   updateProject,
   deleteProject,
+  listProjects,
   createTask,
   listTasks,
   getTask,

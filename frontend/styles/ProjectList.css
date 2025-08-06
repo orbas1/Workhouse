@@ -1,0 +1,16 @@
+.project-list {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.project-list-item {
+  border: 1px solid #eee;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.project-list-empty {
+  color: #666;
+  font-style: italic;
+}

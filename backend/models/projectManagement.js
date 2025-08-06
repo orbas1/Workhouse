@@ -46,6 +46,10 @@ function updateProject(projectId, data) {
 function deleteProject(projectId) {
   return projects.delete(projectId);
 }
+function listProjects(ownerId) {
+  return Array.from(projects.values()).filter((p) => !ownerId || p.ownerId === ownerId);
+}
+
 
 function createTask({ projectId, title, description = '', dueDate = null, ownerId }) {
   const id = randomUUID();
@@ -76,6 +80,7 @@ function listTasks({ ownerId, assignee } = {}) {
     if (assignee && t.assignee !== assignee) return false;
     return true;
   });
+}
 function listTasksByProject(projectId) {
   return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
 }
@@ -212,6 +217,7 @@ module.exports = {
   getProjectById,
   updateProject,
   deleteProject,
+  listProjects,
   createTask,
   getTaskById,
   listTasks,

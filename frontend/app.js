@@ -3,6 +3,7 @@ const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import InSessionNetworking from './pages/InSessionNetworking.jsx';
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import ProjectManagement from './pages/ProjectManagement';
 import FileResourceManagement from './pages/FileResourceManagement.jsx';
 import SettingsPage from './pages/SettingsPage';
 import BillingSubscription from './pages/BillingSubscription';
@@ -33,6 +34,7 @@ function App() {
             <Route path="/sessions" element={<Protected><SessionManagementPage /></Protected>} />
             <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
+            <Route path="/workspace/projects" element={<Protected><ProjectManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
             <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
             <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
@@ -76,6 +78,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/workspace/projects" element={<Protected><ProjectManagement /></Protected>} />
         <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
         <Route path="/settings" element={<Protected><SettingsPage /></Protected>} />
         <Route path="/stats" element={<Protected><StatsAnalyticsPage /></Protected>} />
