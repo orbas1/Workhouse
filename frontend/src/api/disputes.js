@@ -13,4 +13,6 @@ export async function respondToDispute(disputeId, data) {
 export async function getDispute(disputeId) {
   const { data: dispute } = await apiClient.get(`/disputes/${disputeId}`);
   return dispute;
+export function listDisputes(params = {}) {
+  return apiClient.get('/disputes', { params }).then(res => res.data);
 }

@@ -16,5 +16,16 @@ const {
 router.post('/create', auth, validate(createDisputeSchema), createDisputeHandler);
 router.post('/:disputeId/respond', auth, validate(respondDisputeSchema), respondToDisputeHandler);
 router.get('/:disputeId', auth, validate(disputeIdParamSchema, 'params'), getDisputeHandler);
+const disputeModel = require('../models/dispute');
+
+// List disputes; optionally filter by user
+router.get('/', (req, res) => {
+  const { userId } = req.query;
+  let disputes = disputeModel.findAll();
+  if (userId) {
+    disputes = disputes.filter(d => d.userId === userId);
+  }
+  res.json(disputes);
+});
 
 module.exports = router;
