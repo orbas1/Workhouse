@@ -16,7 +16,6 @@ import {
   Tbody,
   Td
 } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { listDisputes } from '../api/disputes.js';
 import '../styles/DisputeDashboardPage.css';
@@ -44,7 +43,6 @@ function DisputeDashboardPage() {
 
   return (
     <Box className="dispute-dashboard-page" p={4}>
-      <NavMenu />
       <Heading mb={4}>Dispute Dashboard</Heading>
       <ButtonGroup mb={4}>
         <Button colorScheme={mode === 'disputor' ? 'teal' : 'gray'} onClick={() => setMode('disputor')}>

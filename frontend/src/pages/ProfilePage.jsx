@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, VStack, Spinner, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../components/NavBar.jsx';
-import NavMenu from '../components/NavMenu.jsx';
 import ProfileHeader from '../components/ProfileHeader.jsx';
 import AboutSection from '../components/AboutSection.jsx';
 import ProfessionalDetails from '../components/ProfessionalDetails.jsx';
@@ -30,20 +28,16 @@ function ProfilePage() {
   if (!profile) return <Box p={4}>Profile not found.</Box>;
 
   return (
-    <Box className="profile-page-container">
-      <NavBar />
-      <NavMenu />
-      <Box p={4}>
-        <Button className="customize-btn" onClick={() => navigate('/profile/customize')} colorScheme="teal" mb={4}>
-          Customize Profile
-        </Button>
-        <VStack spacing={6} align="stretch">
-          <ProfileHeader profile={profile} />
-          <AboutSection bio={profile.bio} />
-          <ProfessionalDetails skills={profile.skills} />
-          <ActivityFeed activities={profile.activities || []} />
-        </VStack>
-      </Box>
+    <Box className="profile-page-container" p={4}>
+      <Button className="customize-btn" onClick={() => navigate('/profile/customize')} colorScheme="teal" mb={4}>
+        Customize Profile
+      </Button>
+      <VStack spacing={6} align="stretch">
+        <ProfileHeader profile={profile} />
+        <AboutSection bio={profile.bio} />
+        <ProfessionalDetails skills={profile.skills} />
+        <ActivityFeed activities={profile.activities || []} />
+      </VStack>
     </Box>
   );
 }

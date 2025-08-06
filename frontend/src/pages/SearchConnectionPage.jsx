@@ -10,7 +10,6 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu.jsx';
 import '../styles/SearchConnectionPage.css';
 import { searchProfiles, sendConnectionRequest } from '../api/network.js';
 
@@ -53,7 +52,6 @@ function SearchConnectionPage() {
 
   return (
     <Box className="search-connection-page" p={4}>
-      <NavMenu />
       <VStack spacing={6} align="stretch">
         <Heading size="lg" textAlign="center">
           Search & Connect

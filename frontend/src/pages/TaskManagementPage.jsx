@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import NavBar from '../components/NavBar.jsx';
 import TaskForm from '../components/TaskForm.jsx';
 import TaskList from '../components/TaskList.jsx';
 import { useTasks } from '../context/TaskContext.jsx';
@@ -22,7 +21,6 @@ export default function TaskManagementPage() {
 
   return (
     <Box className="task-management-page" p={4}>
-      <NavBar />
       <Heading mb={4}>Task Management</Heading>
       <TaskForm
         projectId={projectId}

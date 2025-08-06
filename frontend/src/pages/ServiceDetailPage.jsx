@@ -8,8 +8,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import NavBar from '../components/NavBar.jsx';
-import NavMenu from '../components/NavMenu.jsx';
 import '../styles/ServiceDetailPage.css';
 import { getService, requestService } from '../api/services.js';
 
@@ -44,10 +42,8 @@ export default function ServiceDetailPage() {
   }
 
   return (
-    <Box className="service-detail-page">
-      <NavBar />
-      <NavMenu />
-      <VStack spacing={4} p={4} align="stretch">
+    <Box className="service-detail-page" p={4}>
+      <VStack spacing={4} align="stretch">
         <Heading>{service.name}</Heading>
         <Image src={service.image} alt={service.name} className="detail-image" />
         <Text>{service.description}</Text>
