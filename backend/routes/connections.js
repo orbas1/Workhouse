@@ -34,6 +34,7 @@ router.get('/:connectionId', auth, getConnectionHandler);
 router.put('/:connectionId', auth, updateConnectionHandler);
 router.delete('/:connectionId', auth, deleteConnectionHandler);
 
+
 // User-scoped routes
 router.get('/user/:userId', auth, connectionController.getConnections);
 router.post('/user/:userId', auth, connectionController.addConnection);
