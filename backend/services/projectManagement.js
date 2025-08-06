@@ -138,6 +138,31 @@ async function scheduleEvent(data) {
   return event;
 }
 
+async function listEvents() {
+  return model.listEvents();
+}
+
+async function listProjectEvents(projectId) {
+  return model.listEventsByProject(projectId);
+}
+
+async function getEvent(eventId) {
+  return model.getEventById(eventId);
+}
+
+async function updateEvent(eventId, data) {
+  const event = model.updateEvent(eventId, data);
+  if (!event) throw new Error('Event not found');
+  logger.info('Calendar event updated', { eventId });
+  return event;
+}
+
+async function deleteEvent(eventId) {
+  const deleted = model.deleteEvent(eventId);
+  if (!deleted) throw new Error('Event not found');
+  logger.info('Calendar event deleted', { eventId });
+}
+
 async function trackBudget(data) {
   const entry = model.trackBudget(data);
   logger.info('Budget entry tracked', { entryId: entry.id, projectId: data.projectId });
@@ -238,6 +263,11 @@ module.exports = {
   createGanttChart,
   getGanttChart,
   scheduleEvent,
+  listEvents,
+  listProjectEvents,
+  getEvent,
+  updateEvent,
+  deleteEvent,
   trackBudget,
   trackObjectives,
   submitReport,

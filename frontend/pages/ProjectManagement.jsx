@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Box, Heading, useToast } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu';
 import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
 import { fetchProjects, createProject, updateProject, deleteProject } from '../api/projectManagement';
@@ -55,13 +54,10 @@ export default function ProjectManagement() {
   };
 
   return (
-    <Box className="project-management">
-      <NavMenu />
-      <Box p={4}>
-        <Heading mb={4}>Project Management</Heading>
-        <ProjectForm onSubmit={handleSubmit} initialData={editing} />
-        <ProjectList projects={projects} onEdit={handleEdit} onDelete={handleDelete} />
-      </Box>
+    <Box className="project-management" p={4}>
+      <Heading mb={4}>Project Management</Heading>
+      <ProjectForm onSubmit={handleSubmit} initialData={editing} />
+      <ProjectList projects={projects} onEdit={handleEdit} onDelete={handleDelete} />
     </Box>
   );
 }

@@ -2,3 +2,26 @@
   background-color: #f7fafc;
 }
 
+.filters-form {
+  max-width: 600px;
+}
+
+.candidate-results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.section {
+  background-color: #ffffff;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.task-item,
+.job-item,
+.headhunter-item {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.5rem 0;
+}
+

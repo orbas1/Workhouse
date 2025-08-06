@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, VStack, HStack, Textarea, Button, Text, Spinner } from '@chakra-ui/react';
+import { Box, Heading, VStack, HStack, Textarea, Button, Text, Spinner, Select } from '@chakra-ui/react';
 import '../styles/LiveFeedPage.css';
 import { getPosts, createPost, likePost, getEvents } from '../api/liveFeed.js';
 
@@ -7,6 +7,7 @@ export default function LiveFeedPage() {
   const [posts, setPosts] = useState([]);
   const [events, setEvents] = useState([]);
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,10 +25,21 @@ export default function LiveFeedPage() {
     load();
   }, []);
 
+  const handleCategoryChange = async (e) => {
+    const value = e.target.value;
+    setCategory(value);
+    try {
+      const filtered = await getPosts(value || undefined);
+      setPosts(filtered);
+    } catch (err) {
+      console.error('Failed to filter posts', err);
+    }
+  };
+
   const handlePost = async () => {
     if (!content.trim()) return;
     try {
-      const newPost = await createPost({ content });
+      const newPost = await createPost({ content, category });
       setPosts([newPost, ...posts]);
       setContent('');
     } catch (err) {
@@ -51,9 +63,18 @@ export default function LiveFeedPage() {
       <Heading mb={4}>Live Feed</Heading>
       <VStack align="stretch" spacing={2} mb={6}>
         <Textarea placeholder="Share an update..." value={content} onChange={(e) => setContent(e.target.value)} />
-        <Button alignSelf="flex-end" colorScheme="teal" onClick={handlePost}>
-          Post
-        </Button>
+        <HStack>
+          <Select placeholder="Select category" value={category} onChange={handleCategoryChange}>
+            <option value="employment">Employment</option>
+            <option value="freelancing">Freelancing</option>
+            <option value="education">Education</option>
+            <option value="networking">Networking</option>
+            <option value="local">Local Services</option>
+          </Select>
+          <Button colorScheme="teal" onClick={handlePost}>
+            Post
+          </Button>
+        </HStack>
       </VStack>
       <HStack align="start" spacing={8} alignItems="flex-start">
         <VStack flex="1" spacing={4} align="stretch">

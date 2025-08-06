@@ -13,11 +13,13 @@ export function AuthProvider({ children }) {
         const data = await fetchMe();
         setUser(data);
         if (data?.id) {
-          localStorage.setItem('userId', data.id);
+          const storage = localStorage.getItem('token') ? localStorage : sessionStorage;
+          storage.setItem('userId', data.id);
         }
       } catch {
         setUser(null);
         localStorage.removeItem('userId');
+        sessionStorage.removeItem('userId');
       } finally {
         setLoading(false);
       }
@@ -27,15 +29,20 @@ export function AuthProvider({ children }) {
 
   async function login(email, password) {
     const data = await apiLogin({ email, password });
+  async function login(username, password, code, remember = true) {
+    const data = await apiLogin({ username, password, code }, remember);
     if (data?.id) {
-      localStorage.setItem('userId', data.id);
+      const storage = remember ? localStorage : sessionStorage;
+      storage.setItem('userId', data.id);
     }
     setUser(data);
   }
 
   function logout() {
     localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     localStorage.removeItem('userId');
+    sessionStorage.removeItem('userId');
     setUser(null);
   }
 

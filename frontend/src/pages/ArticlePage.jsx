@@ -10,6 +10,10 @@ import {
   Button,
   Input,
   Stack,
+  Spinner,
+  Alert,
+  AlertIcon,
+  useToast,
 } from '@chakra-ui/react';
 import { getArticle, listArticles, likeArticle, addComment } from '../api/articles.js';
 import '../styles/ArticlePage.css';
@@ -20,32 +24,66 @@ export default function ArticlePage() {
   const [article, setArticle] = useState(null);
   const [related, setRelated] = useState([]);
   const [comment, setComment] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const toast = useToast();
 
   useEffect(() => {
     async function fetchData() {
-      const articles = await listArticles();
-      setRelated(articles.filter(a => a.id !== articleId).slice(0, 3));
-      if (articleId) {
-        const data = await getArticle(articleId);
-        setArticle(data);
-      } else if (articles.length) {
-        navigate(`/articles/${articles[0].id}`, { replace: true });
+      try {
+        const articles = await listArticles();
+        setRelated(articles.filter(a => a.id !== articleId).slice(0, 3));
+        if (articleId) {
+          const data = await getArticle(articleId);
+          setArticle(data);
+        } else if (articles.length) {
+          navigate(`/articles/${articles[0].id}`, { replace: true });
+        }
+      } catch (err) {
+        setError(err.message || 'Failed to load article');
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
   }, [articleId, navigate]);
 
   async function handleLike() {
-    const res = await likeArticle(articleId);
-    setArticle(prev => ({ ...prev, likes: res.likes }));
+    try {
+      const res = await likeArticle(articleId);
+      setArticle(prev => ({ ...prev, likes: res.likes }));
+    } catch {
+      toast({ status: 'error', title: 'Unable to like article' });
+    }
   }
 
   async function handleAddComment() {
     if (!comment.trim()) return;
-    const newComment = await addComment(articleId, comment.trim());
-    setArticle(prev => ({ ...prev, comments: [...(prev.comments || []), newComment] }));
-    setComment('');
+    try {
+      const newComment = await addComment(articleId, comment.trim());
+      setArticle(prev => ({ ...prev, comments: [...(prev.comments || []), newComment] }));
+      setComment('');
+    } catch {
+      toast({ status: 'error', title: 'Unable to post comment' });
+    }
   }
+
+  if (loading)
+    return (
+      <Box className="article-container" p={4} textAlign="center">
+        <Spinner />
+      </Box>
+    );
+
+  if (error)
+    return (
+      <Box className="article-container" p={4}>
+        <Alert status="error">
+          <AlertIcon />
+          {error}
+        </Alert>
+      </Box>
+    );
 
   if (!article) return null;
 
@@ -83,7 +121,14 @@ export default function ArticlePage() {
         <Heading size="md" mb={4}>Related Posts</Heading>
         <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
           {related.map(r => (
-            <Box key={r.id} p={4} borderWidth="1px" borderRadius="md" onClick={() => navigate(`/articles/${r.id}`)} cursor="pointer">
+            <Box
+              key={r.id}
+              p={4}
+              borderWidth="1px"
+              borderRadius="md"
+              className="related-post"
+              onClick={() => navigate(`/articles/${r.id}`)}
+            >
               <Heading size="sm">{r.title}</Heading>
               <Text fontSize="sm" color="gray.500">
                 {new Date(r.createdAt).toLocaleDateString()}

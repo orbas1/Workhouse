@@ -12,8 +12,10 @@ function createApplication({ opportunityId, userId, message }) {
     userId,
     message,
     status: 'pending',
+    certificateUrl: null,
     createdAt: now,
     updatedAt: now,
+    completedAt: null,
   };
   applications.set(id, application);
   return application;
@@ -31,13 +33,27 @@ function getApplicationsByOpportunity(opportunityId) {
   return Array.from(applications.values()).filter(app => app.opportunityId === opportunityId);
 }
 
-function updateApplicationStatus(id, status) {
+function updateApplicationStatus(id, status, certificateUrl) {
   const application = applications.get(id);
   if (!application) return null;
   application.status = status;
   application.updatedAt = new Date();
+  if (status === 'completed') {
+    application.completedAt = new Date();
+    if (certificateUrl) application.certificateUrl = certificateUrl;
+  }
   applications.set(id, application);
   return application;
+}
+
+function deleteApplication(id) {
+  return applications.delete(id);
+}
+
+function getCompletedApplicationsByUser(userId) {
+  return Array.from(applications.values()).filter(
+    (app) => app.userId === userId && app.status === 'completed'
+  );
 }
 
 module.exports = {
@@ -46,4 +62,6 @@ module.exports = {
   getApplicationsByUser,
   getApplicationsByOpportunity,
   updateApplicationStatus,
+  deleteApplication,
+  getCompletedApplicationsByUser,
 };

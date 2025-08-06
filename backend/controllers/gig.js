@@ -1,4 +1,5 @@
 const { createGig, listGigs, getGig, updateGig, removeGig, searchGigs } = require('../services/gig');
+const Order = require('../models/order');
 const { gigSchema } = require('../validation/gig');
 const logger = require('../utils/logger');
 
@@ -66,6 +67,29 @@ async function searchGigsHandler(req, res) {
   }
 }
 
+async function createGigOrderHandler(req, res) {
+  const { gigId } = req.params;
+  const buyerId = req.user?.id || req.user?.username || 'anonymous';
+  const { description = '' } = req.body;
+  try {
+    const gig = await getGig(gigId);
+    if (!gig) {
+      return res.status(404).json({ error: 'Gig not found' });
+    }
+    const order = Order.createOrder({
+      buyerId,
+      sellerId: gig.ownerId,
+      gigId,
+      status: 'pending',
+      description,
+    });
+    res.status(201).json(order);
+  } catch (err) {
+    logger.error('Failed to create gig order', { error: err.message });
+    res.status(500).json({ error: 'Failed to create gig order' });
+  }
+}
+
 module.exports = {
   createGigHandler,
   listGigsHandler,
@@ -73,4 +97,5 @@ module.exports = {
   updateGigHandler,
   deleteGigHandler,
   searchGigsHandler,
+  createGigOrderHandler,
 };

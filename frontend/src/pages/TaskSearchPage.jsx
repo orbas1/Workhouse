@@ -10,6 +10,7 @@ import {
   Button,
   Text,
   useDisclosure,
+  useToast,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -34,14 +35,19 @@ export default function TaskSearchPage() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const fetchTasks = async () => {
-    const params = { ...filters };
-    Object.keys(params).forEach((k) => {
-      if (!params[k]) delete params[k];
-    });
-    const data = await getTasks(params);
-    setTasks(data);
+    try {
+      const params = { ...filters };
+      Object.keys(params).forEach((k) => {
+        if (!params[k]) delete params[k];
+      });
+      const data = await getTasks(params);
+      setTasks(Array.isArray(data) ? data : []);
+    } catch (err) {
+      toast({ title: 'Failed to load tasks', status: 'error' });
+    }
   };
 
   useEffect(() => {
@@ -49,9 +55,13 @@ export default function TaskSearchPage() {
   }, []);
 
   const handleSelect = async (task) => {
-    const data = await getTask(task.id);
-    setSelectedTask(data);
-    onOpen();
+    try {
+      const data = await getTask(task.id);
+      setSelectedTask(data);
+      onOpen();
+    } catch (err) {
+      toast({ title: 'Failed to fetch task details', status: 'error' });
+    }
   };
 
   return (
@@ -110,9 +120,13 @@ export default function TaskSearchPage() {
       </Stack>
 
       <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={4}>
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onSelect={() => handleSelect(task)} />
-        ))}
+        {tasks.length === 0 ? (
+          <Text>No tasks found</Text>
+        ) : (
+          tasks.map((task) => (
+            <TaskCard key={task.id} task={task} onSelect={() => handleSelect(task)} />
+          ))
+        )}
       </Grid>
 
       <Modal isOpen={isOpen} onClose={onClose} size="lg">
