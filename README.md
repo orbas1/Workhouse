@@ -1,5 +1,14 @@
 # Workhouse
 
+
+This repository hosts the core code for the platform.
+
+## Directories
+
+- `backend` – server-side code.
+- `frontend` – web client.
+- `mobile` – Flutter shell apps for professionals and general users.
+
 ## Overview
 Workhouse is an ambitious full‑stack web platform that unifies tools for employment, freelancing, education, collaboration and media. The application bundles job boards, gig and service marketplaces, course management, project workspaces, live content and more into a single experience.
 
@@ -64,4 +73,5 @@ Detailed endpoint and UI design notes live in:
 
 ## Contributing
 Contributions are welcome! Fork the repository, create a branch and open a pull request.
+
 
