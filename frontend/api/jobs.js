@@ -16,25 +16,25 @@ async function request(path, options = {}) {
 }
 
 export function fetchJobs(agencyId) {
-  return request(`/${agencyId}/jobs`);
+  return request(`/agency/${agencyId}/jobs`);
 }
 
 export function createJob(agencyId, data) {
-  return request(`/${agencyId}/jobs/create`, {
+  return request(`/agency/${agencyId}/jobs/create`, {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
 export function updateJob(agencyId, jobId, data) {
-  return request(`/${agencyId}/jobs/update/${jobId}`, {
+  return request(`/agency/${agencyId}/jobs/update/${jobId}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
 }
 
 export function deleteJob(agencyId, jobId) {
-  return request(`/${agencyId}/jobs/delete/${jobId}`, {
+  return request(`/agency/${agencyId}/jobs/delete/${jobId}`, {
     method: 'DELETE',
   });
 }
@@ -42,13 +42,13 @@ export function deleteJob(agencyId, jobId) {
   const baseUrl = (global.env && global.env.API_BASE_URL) || '';
 
   async function listJobs(){
-    const res = await fetch(`${baseUrl}/jobs`);
+    const res = await fetch(`${baseUrl}/agency/jobs`);
     if(!res.ok) throw new Error('Failed to fetch jobs');
     return res.json();
   }
 
   async function getJob(jobId){
-    const res = await fetch(`${baseUrl}/jobs/${jobId}`);
+    const res = await fetch(`${baseUrl}/agency/jobs/${jobId}`);
     if(!res.ok) throw new Error('Failed to fetch job');
     return res.json();
   }

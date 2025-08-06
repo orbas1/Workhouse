@@ -25,6 +25,7 @@ export const menu = [
       { label: 'Headhunter Dashboard', path: '/headhunter/dashboard' },
       { label: 'Interview', path: '/interviews' },
       { label: 'Job Posts', path: '/job-posts' },
+      { label: 'Jobs', path: '/jobs' },
       { label: 'Volunteering', path: '/volunteering' },
       { label: 'Gigs', path: '/gigs' },
       { label: 'Manage Gigs', path: '/gigs/manage' },
