@@ -1,3 +1,8 @@
+import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import NavMenu from '../components/NavMenu.jsx';
+import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { ChakraProvider, Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -19,6 +24,9 @@ export default function Dashboard() {
       <NavMenu />
       <Box p={4} className="dashboard">
         <Heading mb={4}>Dashboard</Heading>
+        <Link as={RouterLink} to="/ads" color="blue.500">
+          View Sponsored Content
+        </Link>
         <Tabs variant="enclosed">
           <TabList>
             <Tab>Client</Tab>
@@ -41,6 +49,21 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/ads/create" mt={4} colorScheme="blue">
+          Create Ad
+        </Button>
+        <Button mt={4} as={RouterLink} to="/creator/analytics" colorScheme="teal">
+          Creator Analytics
+        </Button>
+        <Button as={RouterLink} to="/content-library" mt={4} colorScheme="teal">
+          Content Library
+        </Button>
+        <Button mt={4} as={RouterLink} to="/networking/session/1">
+          Join Networking Session
+        </Button>
+        <Button as={RouterLink} to="/networking" mt={4} colorScheme="purple">
+          Networking
+        </Button>
         <Button as={RouterLink} to="/proposals-invoices" mt={4} colorScheme="teal">
           Manage Proposals & Invoices
         </Button>

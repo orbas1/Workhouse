@@ -23,6 +23,13 @@ function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
+          <Button as={RouterLink} to="/sim-dashboard" variant="ghost" color="white" mr={2}>
+            Dashboard
+          <Button as={RouterLink} to="/connections" variant="ghost" color="white" mr={2}>
+            Connections
+          </Button>
+          <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
+            Orders
           <Button as={RouterLink} to="/freelancers" variant="ghost" color="white" mr={2}>
             Freelancers
           <Button as={RouterLink} to="/classroom/WorkhouseClassroom" variant="ghost" color="white" mr={2}>
@@ -45,6 +52,7 @@ function NavBar() {
     </Flex>
   );
 }
+
 import { Flex } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { Flex, Heading, Spacer, Button } from '@chakra-ui/react';
@@ -56,6 +64,15 @@ function NavBar() {
     <Flex className="nav-bar" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
+        <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
+          Profile
+        </Button>
+        <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
+          Orders
+        </Button>
+        <Button as={RouterLink} to="/creator/analytics" variant="ghost" color="white">
+          Analytics
+        </Button>
       <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
         Profile
       </Button>
