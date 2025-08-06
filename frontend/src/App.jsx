@@ -208,7 +208,7 @@ export default function App() {
     { path: '/disputes/new', element: <DisputeFormPage />, protected: true },
     { path: '/disputes/:disputeId/respond', element: <DisputeFormPage />, protected: true },
     { path: '/disputes/:disputeId?', element: <DisputeManagementPage />, protected: true },
-    { path: '/support', element: <SupportDisputePage />, protected: true },
+    { path: '/admin/support', element: <SupportDisputePage />, admin: true },
     { path: '/admin', element: <AdminDashboard />, admin: true },
     { path: '/admin/analytics', element: <AnalyticsAuditPage />, admin: true },
     { path: '/admin/system-settings', element: <SystemSettingsEmployeeManagement />, admin: true },
