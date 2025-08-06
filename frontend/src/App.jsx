@@ -8,6 +8,8 @@ import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
+import SearchConnectionPage from './pages/SearchConnectionPage.jsx';
+import StartupProfilePlanPage from './pages/StartupProfilePlanPage.jsx';
 import NotificationSettingsPage from './pages/NotificationSettingsPage.jsx';
 import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
@@ -184,7 +186,8 @@ export default function App() {
     { path: '/analytics', element: <AnalyticsAuditPage />, protected: true },
 
     // Startup Ecosystem
-    { path: '/startups/profile-plan', element: <PlaceholderPage title="Startup Profile & Plan" />, protected: true },
+    { path: '/startups/profile-plan', element: <StartupProfilePlanPage />, protected: true },
+    { path: '/startups/search', element: <SearchConnectionPage />, protected: true },
 
     // Workspace & Projects
     { path: '/workspace', element: <WorkspaceDashboard />, protected: true },
