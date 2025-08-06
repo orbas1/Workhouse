@@ -47,6 +47,7 @@ export const menu = [
       { label: 'Experience', path: '/experience' },
       { label: 'Calendar', path: '/calendar' },
       { label: 'Ads & Billing', path: '/ads' },
+      { label: 'Ad Interactions', path: '/ads/interactions' },
       { label: 'Create Ad', path: '/ads/create' },
       { label: 'Analytics', path: '/analytics' },
       { label: 'Creator Dashboard', path: '/creator/dashboard' },

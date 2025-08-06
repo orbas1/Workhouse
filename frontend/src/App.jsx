@@ -43,6 +43,7 @@ import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
 import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import AffiliateManagementPage from './pages/AffiliateManagementPage.jsx';
 import AdsDashboardPage from './pages/AdsDashboardPage.jsx';
+import SharedUserInteractionPage from './pages/SharedUserInteractionPage.jsx';
 import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
@@ -132,6 +133,7 @@ export default function App() {
     { path: '/orders', element: <OrderManagementPage />, protected: true },
     { path: '/payments', element: <PaymentPage />, protected: true },
     { path: '/ads', element: <AdsDashboardPage />, protected: true },
+    { path: '/ads/interactions', element: <SharedUserInteractionPage />, protected: true },
     { path: '/ads/create', element: <AdCreateEdit />, protected: true },
     { path: '/ads/:adId/edit', element: <AdCreateEdit />, protected: true },
 
