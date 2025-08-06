@@ -36,6 +36,8 @@ export default function Dashboard() {
       <NavMenu />
       <Box p={4} className="dashboard">
         <Heading mb={4}>Dashboard</Heading>
+        <Button as={RouterLink} to="/opportunities" colorScheme="teal">
+          Manage Opportunities
         <WorkspaceSummary data={overview} />
         <Button as={RouterLink} to="/workspace" mt={6} colorScheme="teal">
           Open Workspace
