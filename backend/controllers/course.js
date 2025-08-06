@@ -7,6 +7,9 @@ const {
   submitFeedback,
   getCoursesByCategory,
   getCoursesByInstructor,
+  addModule,
+  updateModule,
+  deleteModule,
 } = require('../services/course');
 const logger = require('../utils/logger');
 
@@ -96,6 +99,39 @@ async function getCoursesByInstructorHandler(req, res) {
   }
 }
 
+async function addModuleHandler(req, res) {
+  const { courseId } = req.params;
+  try {
+    const module = await addModule(courseId, req.body);
+    res.status(201).json(module);
+  } catch (err) {
+    logger.error('Failed to add module', { error: err.message, courseId });
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function updateModuleHandler(req, res) {
+  const { courseId, moduleId } = req.params;
+  try {
+    const module = await updateModule(courseId, moduleId, req.body);
+    res.json(module);
+  } catch (err) {
+    logger.error('Failed to update module', { error: err.message, courseId, moduleId });
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function deleteModuleHandler(req, res) {
+  const { courseId, moduleId } = req.params;
+  try {
+    await deleteModule(courseId, moduleId);
+    res.json({ success: true });
+  } catch (err) {
+    logger.error('Failed to delete module', { error: err.message, courseId, moduleId });
+    res.status(404).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createCourseHandler,
   updateCourseHandler,
@@ -105,4 +141,7 @@ module.exports = {
   submitFeedbackHandler,
   getCoursesByCategoryHandler,
   getCoursesByInstructorHandler,
+  addModuleHandler,
+  updateModuleHandler,
+  deleteModuleHandler,
 };

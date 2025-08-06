@@ -1,8 +1,12 @@
 const resourceModel = require('../models/resource');
 const logger = require('../utils/logger');
 
-async function listServices() {
-  return resourceModel.listServices();
+async function listServices(filters = {}) {
+  return resourceModel.listServices(filters);
+}
+
+async function getServiceById(id) {
+  return resourceModel.getServiceById(id);
 }
 
 async function requestService(userId, data) {
@@ -53,6 +57,7 @@ async function listMentors() {
 
 module.exports = {
   listServices,
+  getServiceById,
   requestService,
   getResourcesByType,
   getLegalResources,
