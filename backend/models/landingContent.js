@@ -50,6 +50,24 @@ const badges = [
   }
 ];
 
+const testimonials = [
+  {
+    id: 't1',
+    name: 'Jane Doe',
+    quote: 'Workhouse helped me land my dream role.'
+  },
+  {
+    id: 't2',
+    name: 'John Smith',
+    quote: 'The integrated tools keep my workflow simple.'
+  },
+  {
+    id: 't3',
+    name: 'Alex Johnson',
+    quote: 'A must-have platform for any professional.'
+  }
+];
+
 function listFeatures() {
   return features;
 }
@@ -62,4 +80,8 @@ function listBadges() {
   return badges;
 }
 
-module.exports = { listFeatures, listPartners, listBadges };
+function listTestimonials() {
+  return testimonials;
+}
+
+module.exports = { listFeatures, listPartners, listBadges, listTestimonials };

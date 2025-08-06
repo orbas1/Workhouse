@@ -1,4 +1,6 @@
-const API = import.meta && import.meta.env && import.meta.env.VITE_WORLD_TIME_API ? import.meta.env.VITE_WORLD_TIME_API : 'https://worldtimeapi.org/api';
+const API = import.meta && import.meta.env && import.meta.env.VITE_WORLD_TIME_API
+  ? import.meta.env.VITE_WORLD_TIME_API
+  : '/worldtime';
 
 export async function fetchTimezones() {
   const res = await fetch(`${API}/timezone`);

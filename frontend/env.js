@@ -1,24 +1,18 @@
+const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+
 window.env = {
-  API_BASE_URL: 'http://localhost:5000',
-  AVATAR_API: 'https://api.dicebear.com/7.x/avataaars/svg',
-  WORLD_TIME_API: 'https://worldtimeapi.org/api',
-  JITSI_DOMAIN: 'https://meet.jit.si',
-  ADVICE_API: 'https://api.adviceslip.com/advice',
-  CLASSROOM_DEFAULT_ROOM: 'WorkhouseClassroom',
-  ADS_PLACEHOLDER_API: 'https://picsum.photos/seed',
-  CLASSROOM_DEFAULT_ROOM: 'WorkhouseClassroom'
-  AVATAR_API: 'https://api.dicebear.com/7.x/avataaars/svg'
-  WORLD_TIME_API: 'https://worldtimeapi.org/api'
-  JITSI_DOMAIN: 'https://meet.jit.si'
-  INDUSTRIES_API: 'https://raw.githubusercontent.com/dariusk/corpora/master/data/humans/occupations.json',
-  CURRENCY_API: 'https://api.exchangerate.host/latest'
-  AVATAR_API: 'https://api.dicebear.com/7.x/avataaars/svg',
-  WORLD_TIME_API: 'https://worldtimeapi.org/api',
-  JITSI_DOMAIN: 'https://meet.jit.si',
-  GIG_PLACEHOLDER_URL: 'https://source.unsplash.com/random/300x200?freelance&sig=',
-  PROJECTS_API: '/workspace/projects'
-  FILE_IO_API: 'https://file.io'
-  BLOG_IMAGE_API: 'https://source.unsplash.com/random/600x400?blog&sig='
-  ANALYTICS_ENDPOINT: '/analytics/content/performance',
-  AUDIT_RESULTS_ENDPOINT: '/security/compliance/audit-results'
+  API_BASE_URL: apiBase,
+  AVATAR_API: import.meta.env.VITE_AVATAR_API,
+  JITSI_DOMAIN: import.meta.env.VITE_JITSI_DOMAIN,
+  CLASSROOM_DEFAULT_ROOM: import.meta.env.VITE_CLASSROOM_DEFAULT_ROOM,
+  ADVICE_API: apiBase + (import.meta.env.VITE_ADVICE_API || '/advice'),
+  WORLD_TIME_API: apiBase + (import.meta.env.VITE_WORLD_TIME_API || '/worldtime'),
+  INDUSTRIES_API: apiBase + (import.meta.env.VITE_INDUSTRIES_API || '/industries'),
+  CURRENCY_API: apiBase + (import.meta.env.VITE_CURRENCY_API || '/currency'),
+  BLOG_IMAGE_API: apiBase + (import.meta.env.VITE_BLOG_IMAGE_API || '/blog/images'),
+  ADS_PLACEHOLDER_API: apiBase + (import.meta.env.VITE_ADS_PLACEHOLDER_API || '/ads/placeholder'),
+  GIG_PLACEHOLDER_URL: apiBase + (import.meta.env.VITE_GIG_PLACEHOLDER_URL || '/gigs/placeholder'),
+  FILE_IO_API: apiBase + (import.meta.env.VITE_FILE_IO_API || '/files'),
+  ANALYTICS_ENDPOINT: import.meta.env.VITE_ANALYTICS_ENDPOINT,
+  AUDIT_RESULTS_ENDPOINT: import.meta.env.VITE_AUDIT_RESULTS_ENDPOINT,
 };

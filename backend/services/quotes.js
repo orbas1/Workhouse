@@ -1,9 +1,12 @@
-const axios = require('axios');
+const quotes = [
+  { content: 'Stay hungry, stay foolish.', author: 'Steve Jobs' },
+  { content: 'Life is what happens when you\u2019re busy making other plans.', author: 'John Lennon' },
+  { content: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' }
+];
 
 async function fetchRandomQuote() {
-  const url = process.env.EXTERNAL_QUOTE_API;
-  const res = await axios.get(url);
-  return { content: res.data.content, author: res.data.author };
+  const index = Math.floor(Math.random() * quotes.length);
+  return quotes[index];
 }
 
 module.exports = { fetchRandomQuote };

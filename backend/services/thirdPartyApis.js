@@ -1,61 +1,35 @@
-const axios = require('axios');
-
-// The following functions demonstrate integrations with a variety of free third-party
-// services. They act as lightweight wrappers around publicly accessible APIs so
-// the rest of the application can experiment with different platform features
-// without vendor lock-in.
+// Internal stubs replacing previous external demo integrations.
 
 async function getVrCapabilities() {
-  // Placeholder for a virtual reality compatibility check. In practice this could
-  // call a WebXR or similar API. JSONPlaceholder is used purely for demonstration.
-  const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
-  return data;
+  return { supported: false };
 }
 
 async function verifyIdentity() {
-  // Uses the free Random User API to mock identity verification.
-  const { data } = await axios.get('https://randomuser.me/api/');
-  return data;
+  return { verified: false };
 }
 
 async function getVisionOsSample() {
-  // Placeholder endpoint for Vision OS related data.
-  const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos/2');
-  return data;
+  return { sample: true };
 }
 
 async function getCloudflareTrace() {
-  // Cloudflare provides a free trace endpoint useful for diagnostics.
-  const { data } = await axios.get('https://www.cloudflare.com/cdn-cgi/trace');
-  return data;
+  return { trace: 'local' };
 }
 
-async function fetchFromCdn(packageName = 'axios@latest') {
-  // Retrieve a package directly from the jsDelivr free CDN.
-  const url = `https://cdn.jsdelivr.net/npm/${packageName}`;
-  const { data } = await axios.get(url);
-  return data;
+async function fetchFromCdn(packageName = '') {
+  return { package: packageName };
 }
 
-async function fetchCached(url = 'https://example.com') {
-  // AllOrigins offers a free caching proxy for public requests.
-  const endpoint = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-  const { data } = await axios.get(endpoint);
-  return data;
+async function fetchCached(url = '') {
+  return { url };
 }
-
-const MIXCLOUD_API = process.env.MIXCLOUD_API || 'https://api.mixcloud.com';
 
 async function getPodcastSample() {
-  // Mixcloud exposes a free API with podcast and music information.
-  const { data } = await axios.get(`${MIXCLOUD_API}/popular/`);
-  return data;
+  return [];
 }
 
 async function getVoiceChatSample() {
-  // Placeholder for a voice chat API. Replace with a WebRTC service such as Jitsi.
-  const { data } = await axios.get('https://jsonplaceholder.typicode.com/todos/3');
-  return data;
+  return { connected: false };
 }
 
 module.exports = {
