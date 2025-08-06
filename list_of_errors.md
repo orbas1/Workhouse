@@ -64,15 +64,6 @@ Resolved by cleaning up `frontend/index.html` and removing legacy script tags th
 
 Resolved.
 
-## Stage 8: Frontend script references (6)
-
-- `<script src="utils/auth.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/auth.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/profile.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/ProfileHeader.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/AboutSection.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/ProfessionalDetails.js"> in "/index.html" can't be bundled without type="module" attribute`
-
 ## Stage 9: Frontend script references (7)
 
 - `<script src="components/ActivityFeed.js"> in "/index.html" can't be bundled without type="module" attribute`
