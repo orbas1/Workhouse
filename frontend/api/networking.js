@@ -20,10 +20,12 @@ export function fetchNetworkingEvents() {
   return request('/events/networking');
 }
 
+export function fetchHostedNetworkingEvents() {
+  return request('/events/networking/host');
+}
+
 export function attendNetworkingEvent(eventId) {
   return request(`/events/networking/attend/${eventId}`, { method: 'POST' });
-}
-  return res.json().catch(() => ({}));
 }
 
 export function startVideo(sessionId, data = {}) {
@@ -58,13 +60,3 @@ export function getNextOneMinuteMatch(eventId) {
 export function getSessionMetrics(sessionId) {
   return request(`/communication/analytics/${sessionId}`);
 }
-(function(global){
-  async function getNetworkingDashboard() {
-    const res = await apiFetch('/events/networking');
-    if (!res.ok) {
-      throw new Error('Failed to load networking data');
-    }
-    return res.json();
-  }
-  global.networkingAPI = { getNetworkingDashboard };
-})(window);

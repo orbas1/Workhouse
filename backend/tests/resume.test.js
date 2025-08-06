@@ -8,4 +8,10 @@ describe('resume routes', () => {
     expect(content).toMatch(/express\.Router\(/);
     expect(content).toMatch(/module\.exports\s*=\s*router/);
   });
+
+  test('should include CV analysis route', () => {
+    const filePath = path.join(__dirname, '../routes/resume.js');
+    const content = fs.readFileSync(filePath, 'utf8');
+    expect(content).toContain("router.post('/cv/analyze'");
+  });
 });

@@ -1,5 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, SimpleGrid, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  List,
+  ListItem,
+  Stack,
+  Button
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { getSimDashboard } from '../api/simDashboard.js';
 import '../styles/SimDashboard.css';
 
@@ -31,21 +48,48 @@ export default function SimDashboardPage() {
   return (
     <Box className="sim-dashboard" p={4}>
       <Heading mb={6}>Ecosystem Dashboard</Heading>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-        {roles.map(({ key, title }) => (
-          <Box key={key} className="sim-card">
-            <Heading size="md" mb={2}>{title}</Heading>
-            <Stat>
-              <StatLabel>Total</StatLabel>
-              <StatNumber>{stats[key].total}</StatNumber>
-            </Stat>
-            <Stat>
-              <StatLabel>Active</StatLabel>
-              <StatNumber>{stats[key].active}</StatNumber>
-            </Stat>
-          </Box>
-        ))}
-      </SimpleGrid>
+      <Tabs variant="enclosed">
+        <TabList>
+          {roles.map(({ key, title }) => (
+            <Tab key={key}>{title}</Tab>
+          ))}
+        </TabList>
+        <TabPanels>
+          {roles.map(({ key }) => (
+            <TabPanel key={key}>
+              <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mb={4}>
+                <Stat>
+                  <StatLabel>Total</StatLabel>
+                  <StatNumber>{stats[key].stats.total}</StatNumber>
+                </Stat>
+                <Stat>
+                  <StatLabel>Active</StatLabel>
+                  <StatNumber>{stats[key].stats.active}</StatNumber>
+                </Stat>
+              </SimpleGrid>
+              <Heading size="sm" mt={4} mb={2}>Notifications</Heading>
+              <List spacing={2} mb={4} className="sim-notifications">
+                {stats[key].notifications.map((note, idx) => (
+                  <ListItem key={idx}>{note}</ListItem>
+                ))}
+              </List>
+              <Heading size="sm" mb={2}>Quick Actions</Heading>
+              <Stack direction={{ base: 'column', md: 'row' }} spacing={2}>
+                {stats[key].actions.map((action) => (
+                  <Button
+                    key={action.path}
+                    as={RouterLink}
+                    to={action.path}
+                    colorScheme="teal"
+                  >
+                    {action.label}
+                  </Button>
+                ))}
+              </Stack>
+            </TabPanel>
+          ))}
+        </TabPanels>
+      </Tabs>
     </Box>
   );
 }

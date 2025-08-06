@@ -7,5 +7,6 @@ describe('billing routes', () => {
     const content = fs.readFileSync(filePath, 'utf8');
     expect(content).toMatch(/express\.Router\(/);
     expect(content).toMatch(/module\.exports\s*=\s*router/);
+    expect(content).toMatch(/\/transactions\/:transactionId\/invoice/);
   });
 });
