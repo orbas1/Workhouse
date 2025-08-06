@@ -7,11 +7,12 @@ function HomeDashboard() {
   const [affiliate, setAffiliate] = useState(null);
 
   useEffect(() => {
+    if (!user) return;
     dashboardAPI
-      .getAffiliateDashboard(1)
+      .getAffiliateDashboard(user.id)
       .then(setAffiliate)
       .catch(err => console.error('Failed to load affiliate dashboard', err));
-  }, []);
+  }, [user]);
 
   if (!user) return <p>Loading...</p>;
 
