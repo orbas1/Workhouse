@@ -15,19 +15,20 @@ async function updateContent(id, data) {
   return model.update(id, data);
 }
 
+async function updateContentStatus(id, status) {
+  logger.info('Updating content status', { id, status });
+  return model.updateStatus(id, status);
+}
+
 async function deleteContent(id) {
   logger.info('Removing content', { id });
   return model.remove(id);
 }
 
-module.exports = { createContent, listContent, updateContent, deleteContent };
-
-async function updateContentStatus(id, status) {
-  return model.updateStatus(id, status);
-}
-
-async function deleteContent(id) {
-  return model.remove(id);
-}
-
-module.exports = { createContent, listContent, updateContentStatus, deleteContent };
+module.exports = {
+  createContent,
+  listContent,
+  updateContent,
+  updateContentStatus,
+  deleteContent,
+};

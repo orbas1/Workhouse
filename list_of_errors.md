@@ -31,14 +31,10 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 vite v5.4.19 building for production...
 ```
 
-## Stage 3: Frontend script references (1)
 
-- `<script src="/config.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="context/AuthContext.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="nav/menu.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/FeatureCard.js"> in "/index.html" can't be bundled without type="module" attribute`
+## Stage 3: Frontend script references (1) – Fixed
+
+Resolved by cleaning up `frontend/index.html` and removing legacy script tags that were not using the `type="module"` attribute.
 
 ## Stage 4: Frontend script references (2)
 

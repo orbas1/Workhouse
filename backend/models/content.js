@@ -27,10 +27,11 @@ function create(data) {
 }
 
 function list(type) {
-  if (type) {
-    return items.filter((i) => i.type === type);
-  }
-  return items;
+  return type ? items.filter((i) => i.type === type) : items;
+}
+
+function findById(id) {
+  return items.find((i) => i.id === id);
 }
 
 function update(id, data) {
@@ -38,8 +39,6 @@ function update(id, data) {
   if (idx === -1) return null;
   items[idx] = { ...items[idx], ...data };
   return items[idx];
-function findById(id) {
-  return items.find((i) => i.id === id);
 }
 
 function updateStatus(id, status) {
