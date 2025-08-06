@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "test": "vitest run"
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.0",

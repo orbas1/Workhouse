@@ -5,7 +5,7 @@ const {
   getHandler,
   deleteHandler,
 } = require('../controllers/agency');
-const { authenticate } = require('../middleware/auth');
+const auth = require('../middleware/auth');
 const {
   validateAgencyRegistration,
   validateAgencyUpdate,
@@ -14,15 +14,15 @@ const {
 const router = express.Router();
 
 // POST /agency/register
-router.post('/register', authenticate, validateAgencyRegistration, registerHandler);
+router.post('/register', auth, validateAgencyRegistration, registerHandler);
 
 // PUT /agency/update/:agencyId
-router.put('/update/:agencyId', authenticate, validateAgencyUpdate, updateHandler);
+router.put('/update/:agencyId', auth, validateAgencyUpdate, updateHandler);
 
 // GET /agency/:agencyId
-router.get('/:agencyId', authenticate, getHandler);
+router.get('/:agencyId', auth, getHandler);
 
 // DELETE /agency/:agencyId
-router.delete('/:agencyId', authenticate, deleteHandler);
+router.delete('/:agencyId', auth, deleteHandler);
 
 module.exports = router;
