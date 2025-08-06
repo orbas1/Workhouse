@@ -7,8 +7,13 @@ CREATE TABLE gigs (
   category VARCHAR(50) NOT NULL,
   tags TEXT[],
   price NUMERIC(10,2) NOT NULL,
+  thumbnail VARCHAR(255),
+  rating NUMERIC(2,1) DEFAULT 0,
   status VARCHAR(20) NOT NULL DEFAULT 'active',
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL
 
 );
+
+CREATE INDEX IF NOT EXISTS idx_gigs_category ON gigs(category);
+CREATE INDEX IF NOT EXISTS idx_gigs_price ON gigs(price);

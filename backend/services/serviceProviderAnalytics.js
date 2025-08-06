@@ -6,6 +6,16 @@ function getAnalytics(providerId) {
   return model.computeAnalytics(providerId);
 }
 
+function createService(providerId, data) {
+  logger.info('Creating service', { providerId });
+  return model.createService(providerId, data);
+}
+
+function updateService(providerId, serviceId, data) {
+  logger.info('Updating service', { providerId, serviceId });
+  return model.updateService(providerId, serviceId, data);
+}
+
 function updatePricing(providerId, serviceId, price) {
   logger.info('Updating pricing', { providerId, serviceId, price });
   return model.updateServicePricing(providerId, serviceId, price);
@@ -53,6 +63,8 @@ function initiateChat(clientId, data) {
 
 module.exports = {
   getAnalytics,
+  createService,
+  updateService,
   updatePricing,
   setAvailability,
   createBooking,

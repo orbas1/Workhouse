@@ -39,6 +39,22 @@ const chatInitSchema = Joi.object({
   message: Joi.string().max(1024).required(),
 });
 
+const serviceCreationSchema = Joi.object({
+  title: Joi.string().max(255).required(),
+  description: Joi.string().max(2048).required(),
+  price: Joi.number().positive().required(),
+  tags: Joi.array().items(Joi.string()).default([]),
+  category: Joi.string().max(255).optional(),
+});
+
+const serviceUpdateSchema = Joi.object({
+  title: Joi.string().max(255).optional(),
+  description: Joi.string().max(2048).optional(),
+  price: Joi.number().positive().optional(),
+  tags: Joi.array().items(Joi.string()).optional(),
+  category: Joi.string().max(255).optional(),
+});
+
 module.exports = {
   pricingUpdateSchema,
   availabilitySchema,
@@ -47,4 +63,6 @@ module.exports = {
   testimonialSchema,
   customizationSchema,
   chatInitSchema,
+  serviceCreationSchema,
+  serviceUpdateSchema,
 };

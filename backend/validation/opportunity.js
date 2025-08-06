@@ -9,6 +9,7 @@ const opportunityQuerySchema = Joi.object({
   remote: Joi.boolean().optional(),
   commitmentTime: Joi.string().optional(),
   urgency: Joi.string().valid('low', 'medium', 'high').optional(),
+  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
   page: Joi.number().integer().min(1).default(1),
   limit: Joi.number().integer().min(1).max(100).default(10),
 });
@@ -23,10 +24,11 @@ const createOpportunitySchema = Joi.object({
   requirements: Joi.string().allow('').optional(),
   multimedia: Joi.array().items(Joi.string().uri()).optional(),
   isFeatured: Joi.boolean().optional(),
+  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
 });
 
 const updateOpportunitySchema = createOpportunitySchema.fork(
-  ['title', 'description', 'location', 'remote', 'commitmentTime', 'urgency', 'requirements', 'multimedia', 'isFeatured'],
+  ['title', 'description', 'location', 'remote', 'commitmentTime', 'urgency', 'requirements', 'multimedia', 'isFeatured', 'status'],
   (schema) => schema.optional()
 );
 
