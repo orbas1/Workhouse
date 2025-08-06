@@ -64,6 +64,8 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/progress" mt={4} colorScheme="teal">
+          View Progress
         <Button as={RouterLink} to="/ads/create" mt={4} colorScheme="blue">
           Create Ad
         </Button>

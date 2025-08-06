@@ -31,6 +31,17 @@ const skillUpdateSchema = Joi.object({
   level: Joi.string().valid('beginner', 'intermediate', 'advanced'),
 }).min(1);
 
+const taskSchema = Joi.object({
+  userId: Joi.string().required(),
+  title: Joi.string().max(255).required(),
+  summary: Joi.string().allow('', null),
+  completedAt: Joi.date().optional(),
+  feedback: Joi.object({
+    rating: Joi.number().min(1).max(5),
+    comment: Joi.string().allow('', null),
+  }).optional(),
+});
+
 module.exports = {
   userIdParamSchema,
   skillIdParamSchema,
@@ -38,4 +49,5 @@ module.exports = {
   customAlertSchema,
   skillSchema,
   skillUpdateSchema,
+  taskSchema,
 };
