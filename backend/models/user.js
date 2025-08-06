@@ -6,6 +6,16 @@ const { randomUUID } = require('crypto');
 // profile information.
 const users = new Map();
 
+// Define the supported roles within the system. Providers can register
+// as individual professionals offering services or as businesses that
+// manage multiple providers.
+const ROLES = {
+  USER: 'user',
+  PROFESSIONAL: 'professional',
+  BUSINESS: 'business',
+  ADMIN: 'admin',
+};
+
 /**
  * Find a user by username.
  * @param {string} username
@@ -30,13 +40,14 @@ function findUser(username) {
  * }} param0
  * @returns {object} The created user record
  */
-function addUser({ username, password, role = 'user', fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
+function addUser({ username, password, role = ROLES.USER, fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
+  const normalizedRole = Object.values(ROLES).includes(role) ? role : ROLES.USER;
   const user = {
     id: randomUUID(),
     username,
     email: email || username,
     password,
-    role,
+    role: normalizedRole,
     fullName,
     phone,
     location,
@@ -60,4 +71,4 @@ function updatePassword(username, password) {
   return true;
 }
 
-module.exports = { users, findUser, addUser, updatePassword };
+module.exports = { users, ROLES, findUser, addUser, updatePassword };

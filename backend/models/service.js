@@ -1,4 +1,5 @@
 const { randomUUID } = require('crypto');
+const Business = require('./business');
 
 // In-memory service store. In a production system this would be a database
 // table with proper indexing and persistence. For demonstration purposes we
@@ -42,11 +43,19 @@ function createService({
   status = 'active',
   category = '',
   tags = [],
+  businessId = null,
+  providerIds = [],
+  commissionSplit = null,
+  serviceArea = [],
 }) {
   const now = new Date();
   const service = {
     id: randomUUID(),
     sellerId,
+    businessId,
+    providerIds,
+    commissionSplit,
+    serviceArea,
     name: title,
     description,
     price,
@@ -59,6 +68,9 @@ function createService({
     updatedAt: now,
   };
   services.push(service);
+  if (businessId) {
+    Business.assignService(businessId, service.id);
+  }
   return service;
 }
 
@@ -99,6 +111,9 @@ function updateService(id, updates) {
     delete data.title;
   }
   Object.assign(service, data, { updatedAt: now });
+  if (data.businessId) {
+    Business.assignService(data.businessId, service.id);
+  }
   return service;
 }
 
