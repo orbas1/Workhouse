@@ -27,6 +27,7 @@ export const menu = [
       { label: 'Opportunity Management', path: '/opportunities/manage' },
       { label: 'Volunteer Opportunities', path: '/volunteer/opportunities' },
       { label: 'Volunteer Tracking', path: '/volunteer-applications' },
+      { label: 'Progress', path: '/progress' },
       { label: 'Workspace', path: '/workspace' },
       { label: 'Workspace Projects', path: '/workspace/projects' },
       { label: 'Workspace Files', path: '/workspace/files' },
