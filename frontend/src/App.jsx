@@ -25,6 +25,7 @@ import TaskWorkflowPage from './pages/TaskWorkflowPage.jsx';
 import ExperienceDashboardPage from './pages/ExperienceDashboardPage.jsx';
 import OpportunityManagementPage from './pages/OpportunityManagementPage.jsx';
 import VolunteerTrackingPage from './pages/VolunteerTrackingPage.jsx';
+import OpportunitySearchPage from './pages/OpportunitySearchPage.jsx';
 import ClassroomPage from './pages/ClassroomPage.jsx';
 import ScheduleCalendarPage from './pages/ScheduleCalendarPage.jsx';
 import EducationSchedulePage from './pages/EducationSchedulePage.jsx';
@@ -161,6 +162,7 @@ export default function App() {
     { path: '/tasks/schedule', element: <TaskSchedulePage />, protected: true },
     { path: '/tasks-workflow', element: <TaskWorkflowPage />, protected: true },
     { path: '/experience', element: <ExperienceDashboardPage />, protected: true },
+    { path: '/opportunities', element: <OpportunitySearchPage />, protected: true },
     { path: '/opportunities/manage', element: <OpportunityManagementPage />, protected: true },
     { path: '/volunteer-applications', element: <VolunteerTrackingPage />, protected: true },
 
