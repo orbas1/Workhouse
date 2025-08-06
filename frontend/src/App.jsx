@@ -76,6 +76,7 @@ import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
 import { TaskProvider } from './context/TaskContext.jsx';
 import { AffiliateProvider } from './context/AffiliateContext.jsx';
+import ChatWidget from './components/ChatWidget.jsx';
 
 function Protected({ children }) {
   const { user, loading } = useAuth();
@@ -233,6 +234,7 @@ export default function App() {
                     })}
                   </Routes>
                 </Box>
+                <ChatWidget />
               </AffiliateProvider>
             </TaskProvider>
           </ProfileProvider>
