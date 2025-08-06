@@ -59,6 +59,7 @@ export const menu = [
       { label: 'Content Library', path: '/content-library' },
       { label: 'Stats', path: '/stats' },
       { label: 'Startup Profile', path: '/startups/profile-plan' },
+      { label: 'Ecosystem Dashboard', path: '/sim-dashboard' },
       { label: 'Startup Analytics', path: '/startups/analytics' },
       { label: 'Startup Search', path: '/startups/search' },
       { label: 'Financial & Media Setup', path: '/setup/financial-media' },
@@ -96,7 +97,6 @@ export const menu = [
       { label: 'Admin Settings', path: '/admin/system-settings' },
             { label: 'Support & Disputes', path: '/admin/support' },
       { label: 'Affiliates', path: '/affiliates' },
-      { label: 'Sim Dashboard', path: '/sim-dashboard' },
       { label: 'Install Wizard', path: '/install' }
     ]
   }
