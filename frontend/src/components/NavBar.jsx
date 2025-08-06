@@ -28,6 +28,8 @@ export default function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
+          <Button as={RouterLink} to="/ads" variant="ghost" color="white" mr={2}>
+            Ads
           <Button as={RouterLink} to="/live" variant="ghost" color="white" mr={2}>
             Live
           <Button as={RouterLink} to="/tasks" variant="ghost" color="white" mr={2}>
@@ -66,6 +68,7 @@ export default function NavBar() {
     </Flex>
   );
 }
+
 
 
 import { Flex } from '@chakra-ui/react';
