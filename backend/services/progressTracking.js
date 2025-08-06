@@ -63,6 +63,16 @@ async function updateSkill(skillId, updates) {
   return skill;
 }
 
+async function listTasks(userId) {
+  return progressModel.listTasks(userId);
+}
+
+async function addTask(data) {
+  const task = progressModel.addTask(data);
+  logger.info('Task recorded', { userId: data.userId, taskId: task.id });
+  return task;
+}
+
 module.exports = {
   getDashboard,
   logAchievement,
@@ -74,4 +84,6 @@ module.exports = {
   addSkill,
   updateSkill,
   getSkillById,
+  listTasks,
+  addTask,
 };

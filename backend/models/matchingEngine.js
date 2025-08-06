@@ -1,13 +1,22 @@
 const { randomUUID } = require('crypto');
 
 // In-memory stores for demonstration purposes
-const profiles = new Map(); // userId -> { id, role, skills, interests }
+const profiles = new Map(); // userId -> { id, role, skills, interests, industry, location, fundingStage, expertise }
 const invitations = new Map(); // invitationId -> invitation object
 const matches = [];
 const trialSessions = [];
 
 function addProfile(profile) {
-  const record = { id: randomUUID(), skills: [], interests: [], ...profile };
+  const record = {
+    id: randomUUID(),
+    skills: [],
+    interests: [],
+    industry: null,
+    location: null,
+    fundingStage: null,
+    expertise: null,
+    ...profile,
+  };
   profiles.set(record.id, record);
   return record;
 }
@@ -16,9 +25,20 @@ function getProfile(userId) {
   return profiles.get(userId);
 }
 
-function searchProfiles({ role, skills = [] }) {
+function searchProfiles({
+  role,
+  skills = [],
+  industry,
+  location,
+  fundingStage,
+  expertise,
+}) {
   let results = Array.from(profiles.values());
   if (role) results = results.filter((p) => p.role === role);
+  if (industry) results = results.filter((p) => p.industry === industry);
+  if (location) results = results.filter((p) => p.location === location);
+  if (fundingStage) results = results.filter((p) => p.fundingStage === fundingStage);
+  if (expertise) results = results.filter((p) => p.expertise === expertise);
   if (skills.length) {
     results = results.filter((p) => skills.every((s) => p.skills.includes(s)));
   }

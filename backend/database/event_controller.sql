@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS events_general (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE INDEX IF NOT EXISTS events_general_type_idx ON events_general(type);
+
 CREATE TABLE IF NOT EXISTS event_attendees (
   id UUID PRIMARY KEY,
   event_id UUID REFERENCES events_general(id) ON DELETE CASCADE,

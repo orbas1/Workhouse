@@ -9,6 +9,8 @@ const {
   addSkill,
   updateSkill,
   getSkillById,
+  listTasks,
+  addTask,
 } = require('../services/progressTracking');
 const logger = require('../utils/logger');
 
@@ -98,6 +100,27 @@ async function addSkillHandler(req, res) {
   }
 }
 
+async function getTasksHandler(req, res) {
+  const { userId } = req.params;
+  try {
+    const data = await listTasks(userId);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to list tasks', { error: err.message, userId });
+    res.status(500).json({ error: 'Failed to list tasks' });
+  }
+}
+
+async function addTaskHandler(req, res) {
+  try {
+    const task = await addTask(req.body);
+    res.status(201).json(task);
+  } catch (err) {
+    logger.error('Failed to add task', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 async function updateSkillHandler(req, res) {
   const { skillId } = req.params;
   try {
@@ -127,4 +150,6 @@ module.exports = {
   getTimelineHandler,
   addSkillHandler,
   updateSkillHandler,
+  getTasksHandler,
+  addTaskHandler,
 };

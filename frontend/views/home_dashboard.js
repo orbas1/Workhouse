@@ -88,6 +88,13 @@ function HomeDashboard() {
         <Button colorScheme="teal" onClick={() => window.location.href = '/profile'}>
           View Profile
         </Button>
+        <Button colorScheme="purple" onClick={() => window.location.href = '/ads'}>
+          Ads & Billing
+        <Button colorScheme="purple" onClick={() => window.location.href = '/volunteering'}>
+          Volunteering
+        <Button colorScheme="purple" onClick={() => window.location.href = '/networking'}>
+          Networking Dashboard
+        </Button>
       </Flex>
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
@@ -95,12 +102,16 @@ function HomeDashboard() {
       <Button mt={2} colorScheme="green" onClick={() => window.location.href = '/onboarding/documents'}>
         Upload CV & Cover Letter
       </Button>
+              
+      <Button mt={2} colorScheme='purple' onClick={() => window.location.href = '/startups/profile-plan'}>Manage Startup Profile</Button>
     </Box>
   </Box>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
         Manage Applications
+      </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
         Manage Gigs
+      </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
         Gigs Dashboard
         <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
@@ -112,6 +123,57 @@ function HomeDashboard() {
       </Box>
       <ChatWidget />
       </>
+      <Button ml={2} colorScheme="purple" onClick={() => window.location.href = '/content/manage'}>
+        Manage Content
+      </Button>
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
+      </Button>
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/volunteer/opportunities'}>
+        Volunteer Opportunities
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/sessions'}>
+        Manage Sessions
+      </Button>
+      <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
+        Browse Jobs
+      </Button>
+      <Button ml={2} colorScheme="purple" onClick={() => window.location.href = '/analytics'}>
+        Engagement Analytics
+      <Button colorScheme="purple" ml={2} onClick={() => window.location.href = '/creator/dashboard'}>
+        Creator Dashboard
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/freelancers'}>
+        Search Freelancers
+      </Button>
+    </Box>
+    <ChatWidget />
+    </>
+  <Flex mt={4} gap={2} wrap="wrap">
+    <Button colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
+      Manage Applications
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
+      Manage Gigs
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
+      Gigs Dashboard
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/jobs'}>
+      Browse Jobs
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/education/courses'}>
+      Courses
+    </Button>
+    <Button colorScheme="teal" onClick={() => window.location.href = '/workspace/files'}>
+      Files
+    <Button colorScheme="teal" onClick={() => window.location.href = '/stats'}>
+      Analytics
+
+    <Button colorScheme="teal" onClick={() => window.location.href = '/blog'}>
+      Blog
+    </Button>
+  </Flex>
+  <ChatWidget />
+  </>
   );
 }
 
