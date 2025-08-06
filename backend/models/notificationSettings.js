@@ -3,7 +3,13 @@ const settingsStore = new Map();
 
 function getSettings(userId) {
   if (!settingsStore.has(userId)) {
-    settingsStore.set(userId, { email: true, sms: false, push: true });
+    settingsStore.set(userId, {
+      email: true,
+      sms: false,
+      push: true,
+      deliveryReceipts: true,
+      readReceipts: true,
+    });
   }
   return settingsStore.get(userId);
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Input, Textarea, Button } from '@chakra-ui/react';
 import '../styles/InvoiceForm.css';
+import { Box, Input, Button } from '@chakra-ui/react';
+import '../../styles/InvoiceForm.css';
 
 export default function InvoiceForm({ onSubmit }) {
   const [amount, setAmount] = useState('');
@@ -24,6 +26,7 @@ export default function InvoiceForm({ onSubmit }) {
         mb={2}
       />
       <Textarea
+      <Input
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
@@ -32,6 +35,7 @@ export default function InvoiceForm({ onSubmit }) {
       <Button type="submit" colorScheme="teal" size="sm">
         Submit Invoice
       </Button>
+      <Button type="submit" colorScheme="teal">Submit Invoice</Button>
     </Box>
   );
 }

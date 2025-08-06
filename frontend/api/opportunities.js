@@ -1,4 +1,3 @@
-const API_BASE_URL = (window.env && window.env.API_BASE_URL) || '';
 const API_BASE_URL = window.API_BASE_URL || '/api';
 
 async function request(path, options = {}) {
@@ -8,81 +7,62 @@ async function request(path, options = {}) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
+
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   const res = await fetch(`${API_BASE_URL}/opportunities${path}`, { ...options, headers });
   if (!res.ok) {
     const message = await res.text();
     throw new Error(message || 'Request failed');
   }
+  if (res.status === 204) return {};
   return res.json();
 }
 
 export function listOpportunities(params = {}) {
-  const url = new URL(`${API_BASE_URL}/opportunities`);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== '') {
-      url.searchParams.append(key, value);
-    }
-  });
-  return request(url.pathname + url.search);
+  const query = new URLSearchParams(params).toString();
+  return request(query ? `?${query}` : '');
 }
 
 export function getOpportunity(id) {
   return request(`/opportunities/${id}`);
 }
 
-window.opportunitiesAPI = { listOpportunities, getOpportunity };
-  if (res.status === 204) return {};
-  return res.json();
-}
-
 export function fetchOpportunities(query = '') {
   const q = query ? `?${query}` : '';
-  return request(q);
+  return request(`/opportunities${q}`);
+  return request(`/${id}`);
 }
 
 export function createOpportunity(data) {
-  return request('', {
+  return request('/opportunities', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
 export function updateOpportunity(id, data) {
-  return request(`/${id}`, {
+  return request(`/opportunities/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
 }
 
 export function deleteOpportunity(id) {
-  return request(`/${id}`, { method: 'DELETE' });
+  return request(`/opportunities/${id}`, { method: 'DELETE' });
 }
 
 export function fetchOpportunityDashboard() {
-  return request('/dashboard');
+  return request('/opportunities/dashboard');
 }
-(function(global){
-  const baseUrl = (global.env && global.env.API_BASE_URL) || '';
 
-  async function listOpportunities(params = {}){
-    const token = localStorage.getItem('token');
-    const query = new URLSearchParams(params).toString();
-    const res = await fetch(`${baseUrl}/opportunities${query ? `?${query}` : ''}`, {
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
-    });
-    if(!res.ok) throw new Error('Failed to fetch opportunities');
-    return res.json();
-  }
+export default {
+  listOpportunities,
+  getOpportunity,
+  fetchOpportunities,
+  createOpportunity,
+  updateOpportunity,
+  deleteOpportunity,
+  fetchOpportunityDashboard,
+};
 
-  async function getOpportunity(id){
-    const token = localStorage.getItem('token');
-    const res = await fetch(`${baseUrl}/opportunities/${id}`, {
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
-    });
-    if(!res.ok) throw new Error('Failed to fetch opportunity');
-    return res.json();
-  }
-
-  global.opportunitiesAPI = { listOpportunities, getOpportunity };
-})(window);
+window.opportunitiesAPI = { listOpportunities, getOpportunity };

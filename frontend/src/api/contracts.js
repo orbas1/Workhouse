@@ -26,11 +26,13 @@ export async function terminateContract(contractId, reason) {
 }
 
 export async function getProposals(contractId) {
+export async function fetchProposals(contractId) {
   const { data } = await apiClient.get(`/contracts/${contractId}/proposals`);
   return data;
 }
 
 export async function getInvoices(contractId) {
+export async function fetchInvoices(contractId) {
   const { data } = await apiClient.get(`/contracts/${contractId}/invoices`);
   return data;
 }

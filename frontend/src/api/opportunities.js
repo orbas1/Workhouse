@@ -5,6 +5,16 @@ export async function getOpportunityDashboard() {
   return res.data;
 }
 
+export async function listOpportunities(params = {}) {
+  const res = await apiClient.get('/opportunities', { params });
+  return res.data;
+}
+
+export async function getOpportunity(id) {
+  const res = await apiClient.get(`/opportunities/${id}`);
+  return res.data;
+}
+
 export async function createOpportunity(data) {
   const res = await apiClient.post('/opportunities', data);
   return res.data;

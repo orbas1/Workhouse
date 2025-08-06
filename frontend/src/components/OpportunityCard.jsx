@@ -1,8 +1,10 @@
 import React from 'react';
 import { Box, Heading, Text, Flex, Badge, Button } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/OpportunityCard.css';
 
 export default function OpportunityCard({ opportunity, onEdit, onDelete, onDuplicate, onStatusChange }) {
+  const navigate = useNavigate();
   return (
     <Box className="opportunity-card" borderWidth="1px" borderRadius="md" p={4} mb={4}>
       <Flex justify="space-between" align="center" mb={2}>
@@ -17,6 +19,13 @@ export default function OpportunityCard({ opportunity, onEdit, onDelete, onDupli
         <Button size="sm" onClick={() => onStatusChange(opportunity, 'closed')}>Close</Button>
         <Button size="sm" onClick={() => onDuplicate(opportunity.id)}>Duplicate</Button>
         <Button size="sm" colorScheme="red" onClick={() => onDelete(opportunity.id)}>Delete</Button>
+        <Button
+          size="sm"
+          colorScheme="teal"
+          onClick={() => navigate(`/volunteer-applications?opportunityId=${opportunity.id}`)}
+        >
+          Applications
+        </Button>
       </Flex>
     </Box>
   );
