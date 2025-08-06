@@ -31,6 +31,7 @@ async function listOpportunities(filters = {}, { page = 1, limit = 10 } = {}) {
     results = results.filter(o => o.compensation >= Number(filters.compensationMin));
   if (filters.compensationMax)
     results = results.filter(o => o.compensation <= Number(filters.compensationMax));
+  if (filters.status) results = results.filter(o => o.status === filters.status);
   const total = results.length;
   const start = (page - 1) * limit;
   const opportunities = results.slice(start, start + limit);

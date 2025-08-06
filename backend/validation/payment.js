@@ -16,7 +16,13 @@ const adjustSchema = Joi.object({
   reason: Joi.string().max(255).optional(),
 });
 
+const initiateSchema = Joi.object({
+  amount: Joi.number().positive().required(),
+  method: Joi.string().valid('card', 'bank').required(),
+});
+
 module.exports = {
   distributeSchema,
   adjustSchema,
+  initiateSchema,
 };

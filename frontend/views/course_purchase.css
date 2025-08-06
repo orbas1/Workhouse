@@ -1,0 +1,8 @@
+.course-purchase-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.course-purchase-page .course-details {
+  background: #fff;
+}

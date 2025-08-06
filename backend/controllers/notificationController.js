@@ -1,4 +1,4 @@
-const { sendRateChangeNotification } = require('../services/notificationService');
+const { sendRateChangeNotification, listNotifications } = require('../services/notificationService');
 
 /**
  * Controller to handle commission rate change notifications.
@@ -14,6 +14,18 @@ async function notifyRateChange(req, res) {
   }
 }
 
+function getNotificationsHandler(req, res) {
+  try {
+    const { affiliateId } = req.params;
+    const notifications = listNotifications(affiliateId);
+    res.json(notifications);
+  } catch (err) {
+    console.error('Failed to fetch notifications', err);
+    res.status(500).json({ error: 'Failed to fetch notifications' });
+  }
+}
+
 module.exports = {
   notifyRateChange,
+  getNotificationsHandler,
 };

@@ -1,0 +1,13 @@
+.article-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.comment-section {
+  margin-top: 2rem;
+}

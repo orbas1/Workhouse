@@ -61,6 +61,16 @@ function getQuestions(id) {
   return event ? event.questions : null;
 }
 
+function listByType(type) {
+  return Array.from(events.values()).filter(e => e.type === type);
+function findByHost(hostId) {
+  return Array.from(events.values()).filter((e) => e.hostId === hostId);
+}
+
+function findByAttendee(userId) {
+  return Array.from(events.values()).filter((e) => e.attendees.has(userId));
+}
+
 module.exports = {
   createEvent,
   findById,
@@ -69,4 +79,7 @@ module.exports = {
   getLivestream,
   addQuestion,
   getQuestions,
+  listByType,
+  findByHost,
+  findByAttendee,
 };

@@ -1,0 +1,6 @@
+.session-card {
+  transition: background-color 0.2s ease;
+}
+.session-card:hover {
+  background-color: #f7fafc;
+}

@@ -16,6 +16,7 @@ const opportunityQuerySchema = Joi.object({
   keyword: Joi.string().optional(),
   compensationMin: Joi.number().optional(),
   compensationMax: Joi.number().optional(),
+  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
   page: Joi.number().integer().min(1).default(1),
   limit: Joi.number().integer().min(1).max(100).default(10),
 });
@@ -54,6 +55,11 @@ const updateOpportunitySchema = createOpportunitySchema.fork(
     'experienceLevel',
     'status',
   ],
+  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
+});
+
+const updateOpportunitySchema = createOpportunitySchema.fork(
+  ['title', 'description', 'location', 'remote', 'commitmentTime', 'urgency', 'requirements', 'multimedia', 'isFeatured', 'status'],
   (schema) => schema.optional()
 );
 

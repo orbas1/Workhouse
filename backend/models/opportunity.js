@@ -19,6 +19,7 @@ function create({
   experienceLevel = '',
   status = 'open',
 }) {
+function create({ organizationId, title, description, location = '', remote = false, commitmentTime = '', urgency = 'normal', requirements = '', multimedia = [], isFeatured = false, status = 'open' }) {
   const id = randomUUID();
   const now = new Date();
   const opportunity = {
@@ -32,6 +33,7 @@ function create({
     urgency,
     requirements,
     multimedia,
+    status,
     views: 0,
     applications: 0,
     matches: 0,
