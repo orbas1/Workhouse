@@ -34,31 +34,11 @@ export default function DashboardPage() {
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
         View Live Feed
       </Button>
-      <SimpleGrid columns={[1, 3]} spacing={4}>
+      <Button mb={4} ml={2} colorScheme="teal" onClick={() => navigate('/contracts')}>
+        Manage Contracts
+      </Button>
+      <SimpleGrid columns={[1, 3]} spacing={4} mt={4}>
         {'totalSpend' in data && (
-      <NavBar />
-      <NavMenu />
-      <Box p={4}>
-        <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
-        <Button mb={4} colorScheme="purple" onClick={() => navigate('/install')}>
-          Run Installation Wizard
-        </Button>
-        <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
-          View Live Feed
-        </Button>
-        <SimpleGrid columns={[1, 3]} spacing={4}>
-          {'totalSpend' in data && (
-            <Stat>
-              <StatLabel>Total Spend</StatLabel>
-              <StatNumber>${data.totalSpend}</StatNumber>
-            </Stat>
-          )}
-          {'totalEarnings' in data && (
-            <Stat>
-              <StatLabel>Total Earnings</StatLabel>
-              <StatNumber>${data.totalEarnings}</StatNumber>
-            </Stat>
-          )}
           <Stat>
             <StatLabel>Total Spend</StatLabel>
             <StatNumber>${data.totalSpend}</StatNumber>

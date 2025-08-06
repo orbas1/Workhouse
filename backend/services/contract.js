@@ -52,6 +52,14 @@ async function viewContractInvoices(contractId) {
   return contractModel.getInvoices(contractId);
 }
 
+async function viewWorkSubmissions(contractId) {
+  const contract = contractModel.findById(contractId);
+  if (!contract) {
+    throw new Error('Contract not found');
+  }
+  return contractModel.getWorkSubmissions(contractId);
+}
+
 async function acceptContractProposal(contractId, proposalId) {
   const proposal = contractModel.acceptProposal(contractId, proposalId);
   if (!proposal) {
@@ -127,5 +135,6 @@ module.exports = {
   submitWorkForContract,
   submitInvoiceForContract,
   approveSubmittedWork,
+  viewWorkSubmissions,
 };
 
