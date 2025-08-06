@@ -16,4 +16,22 @@ function list(type) {
   return items;
 }
 
-module.exports = { create, list };
+function findById(id) {
+  return items.find((i) => i.id === id);
+}
+
+function updateStatus(id, status) {
+  const item = findById(id);
+  if (!item) return null;
+  item.status = status;
+  return item;
+}
+
+function remove(id) {
+  const idx = items.findIndex((i) => i.id === id);
+  if (idx === -1) return false;
+  items.splice(idx, 1);
+  return true;
+}
+
+module.exports = { create, list, findById, updateStatus, remove };

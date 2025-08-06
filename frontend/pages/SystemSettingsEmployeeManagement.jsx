@@ -6,16 +6,15 @@ import {
   FormLabel,
   Switch,
   Stack,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Button,
-  Input
+  Spinner,
 } from '@chakra-ui/react';
 import NavMenu from '../components/NavMenu';
+import EmployeeTable from '../components/admin/EmployeeTable';
+import {
+  fetchSystemSettings,
+  updateSystemSettings,
+  listEmployees,
+} from '../api/admin.js';
 import './SystemSettingsEmployeeManagement.css';
 
 export default function SystemSettingsEmployeeManagement() {
@@ -24,28 +23,29 @@ export default function SystemSettingsEmployeeManagement() {
     disputeResolutionEnabled: false,
   });
   const [employees, setEmployees] = useState([]);
-  const [newEmployee, setNewEmployee] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    adminAPI.fetchSystemSettings().then(setSettings).catch(console.error);
-    adminAPI.listEmployees().then(setEmployees).catch(console.error);
-  }, []);
-
-  const toggleSetting = async (key) => {
+  const loadEmployees = async () => {
     try {
-      const updated = await adminAPI.updateSystemSettings({ [key]: !settings[key] });
-      setSettings(updated);
+      const data = await listEmployees();
+      setEmployees(data);
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleAddEmployee = async () => {
-    if (!newEmployee) return;
+  useEffect(() => {
+    fetchSystemSettings().then(setSettings).catch(console.error);
+    loadEmployees();
+  }, []);
+
+  const toggleSetting = async (key) => {
+    const updated = { ...settings, [key]: !settings[key] };
+    setSettings(updated);
     try {
-      const created = await adminAPI.createEmployee({ name: newEmployee });
-      setEmployees((prev) => [...prev, created]);
-      setNewEmployee('');
+      await updateSystemSettings(updated);
     } catch (err) {
       console.error(err);
     }
@@ -57,36 +57,31 @@ export default function SystemSettingsEmployeeManagement() {
       <Heading mb={4}>System Settings</Heading>
       <Stack spacing={4} mb={8}>
         <FormControl display="flex" alignItems="center">
-          <FormLabel htmlFor="liveChat" mb="0">Live Chat</FormLabel>
-          <Switch id="liveChat" isChecked={settings.liveChatEnabled} onChange={() => toggleSetting('liveChatEnabled')} />
+          <FormLabel htmlFor="liveChat" mb="0">
+            Live Chat
+          </FormLabel>
+          <Switch
+            id="liveChat"
+            isChecked={settings.liveChatEnabled}
+            onChange={() => toggleSetting('liveChatEnabled')}
+          />
         </FormControl>
         <FormControl display="flex" alignItems="center">
-          <FormLabel htmlFor="dispute" mb="0">Dispute Resolution</FormLabel>
-          <Switch id="dispute" isChecked={settings.disputeResolutionEnabled} onChange={() => toggleSetting('disputeResolutionEnabled')} />
+          <FormLabel htmlFor="dispute" mb="0">
+            Dispute Resolution
+          </FormLabel>
+          <Switch
+            id="dispute"
+            isChecked={settings.disputeResolutionEnabled}
+            onChange={() => toggleSetting('disputeResolutionEnabled')}
+          />
         </FormControl>
       </Stack>
 
-      <Heading size="md" mb={2}>Employees</Heading>
-      <Stack direction="row" mb={4}>
-        <Input placeholder="Employee name" value={newEmployee} onChange={(e) => setNewEmployee(e.target.value)} />
-        <Button colorScheme="teal" onClick={handleAddEmployee}>Add</Button>
-      </Stack>
-      <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>ID</Th>
-            <Th>Name</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {employees.map(emp => (
-            <Tr key={emp.id}>
-              <Td>{emp.id}</Td>
-              <Td>{emp.name}</Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      <Heading size="md" mb={4}>
+        Employees
+      </Heading>
+      {loading ? <Spinner /> : <EmployeeTable employees={employees} onRefresh={loadEmployees} />}
     </Box>
   );
 }
