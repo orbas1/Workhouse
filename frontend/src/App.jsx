@@ -57,6 +57,8 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+import StatsAnalyticsPage from './pages/StatsAnalyticsPage.jsx';
+import BlogHomePage from './pages/BlogHomePage.jsx';
 import AdminUserContentPage from './pages/AdminUserContentPage.jsx';
 
 import DashboardPage from './pages/DashboardPage.jsx';
@@ -219,8 +221,8 @@ export default function App() {
     // Settings, Billing & Analytics
     { path: '/notifications', element: <NotificationSettingsPage />, protected: true },
     { path: '/settings', element: <SettingsPage />, protected: true },
-    { path: '/stats', element: <PlaceholderPage title="Stats & Analytics" />, protected: true },
-    { path: '/blog', element: <PlaceholderPage title="Blog Homepage" />, protected: true },
+    { path: '/stats', element: <StatsAnalyticsPage />, protected: true },
+    { path: '/blog', element: <BlogHomePage />, protected: true },
     { path: '/articles', element: <ArticlePage /> },
     { path: '/articles/:articleId', element: <ArticlePage /> },
 
