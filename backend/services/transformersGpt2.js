@@ -34,9 +34,9 @@ async function generateText(userId, { prompt, maxTokens = 50 }) {
 }
 
 async function contactExternalAi(userId, { model, input }) {
-  const url = process.env.EXTERNAL_AI_URL;
-  const apiKey = process.env.EXTERNAL_AI_KEY;
-  if (!url || !apiKey) throw new Error('External AI configuration missing');
+  const url = process.env.AI_SERVICE_URL;
+  const apiKey = process.env.AI_SERVICE_KEY;
+  if (!url || !apiKey) throw new Error('AI service configuration missing');
   const data = await callApi(url, apiKey, { model, input });
   const responseText = data.result || data.response || '';
   const record = createInteraction({ userId, type: 'contact', prompt: input, response: responseText });
