@@ -7,6 +7,7 @@ const {
   updateJob,
   deleteJob,
   getJobApplications,
+  updateApplicationProgress,
 } = require('../services/job');
 
 async function acceptJobHandler(req, res) {
@@ -88,6 +89,17 @@ async function getJobApplicationsHandler(req, res) {
   }
 }
 
+async function updateApplicationProgressHandler(req, res) {
+  const { agencyId, jobId, appId } = req.params;
+  try {
+    const application = await updateApplicationProgress(agencyId, jobId, appId, req.body);
+    res.json(application);
+  } catch (err) {
+    logger.error('Failed to update application progress', { error: err.message, jobId, appId });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   acceptJobHandler,
   assignJobHandler,
@@ -96,4 +108,5 @@ module.exports = {
   updateJobHandler,
   deleteJobHandler,
   getJobApplicationsHandler,
+  updateApplicationProgressHandler,
 };

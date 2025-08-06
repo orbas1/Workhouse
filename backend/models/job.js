@@ -30,6 +30,11 @@ function findById(id) {
   return jobs.get(id);
 }
 
+// Alias used by existing middleware
+function findJobById(id) {
+  return findById(id);
+}
+
 function listJobs() {
   return Array.from(jobs.values());
 }
@@ -76,9 +81,34 @@ function assignJob(id, employeeId) {
 function addApplication(jobId, application) {
   const apps = jobApplications.get(jobId);
   if (!apps) return null;
-  const record = { id: randomUUID(), appliedAt: new Date(), ...application };
+  const record = {
+    id: randomUUID(),
+    appliedAt: new Date(),
+    stage: 0,
+    notes: '',
+    feedback: '',
+    ...application,
+  };
   apps.push(record);
   return record;
+}
+
+function updateApplicationProgress(jobId, appId, updates) {
+  const apps = jobApplications.get(jobId);
+  if (!apps) return null;
+  const app = apps.find((a) => a.id === appId);
+  if (!app) return null;
+  if (typeof updates.stage === 'number') {
+    app.stage = updates.stage;
+  }
+  if (typeof updates.notes === 'string') {
+    app.notes = updates.notes;
+  }
+  if (typeof updates.feedback === 'string') {
+    app.feedback = updates.feedback;
+  }
+  app.updatedAt = new Date();
+  return app;
 }
 
 function getApplications(jobId) {
@@ -88,6 +118,7 @@ function getApplications(jobId) {
 module.exports = {
   createJob,
   findById,
+  findJobById,
   listJobs,
   findJobsByAgency,
   updateJob,
@@ -96,4 +127,5 @@ module.exports = {
   assignJob,
   addApplication,
   getApplications,
+  updateApplicationProgress,
 };

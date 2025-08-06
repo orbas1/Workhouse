@@ -54,6 +54,15 @@ async function getJobApplications(agencyId, jobId) {
   return jobModel.getApplications(jobId);
 }
 
+async function updateApplicationProgress(agencyId, jobId, appId, updates) {
+  const job = jobModel.findJobById(jobId);
+  if (!job || job.agencyId !== agencyId) throw new Error('Job not found');
+  const application = jobModel.updateApplicationProgress(jobId, appId, updates);
+  if (!application) throw new Error('Application not found');
+  logger.info('Application progress updated', { jobId, appId, agencyId });
+  return application;
+}
+
 module.exports = {
   acceptJob,
   assignJob,
@@ -62,4 +71,5 @@ module.exports = {
   updateJob,
   deleteJob,
   getJobApplications,
+  updateApplicationProgress,
 };

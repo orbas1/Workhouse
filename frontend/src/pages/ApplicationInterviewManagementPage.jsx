@@ -16,10 +16,15 @@ import {
   Spinner,
   Text,
   Select,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
 } from '@chakra-ui/react';
 import { getUserApplications } from '../api/applications.js';
 import { getUserInterviews, getEmployerInterviews } from '../api/interviews.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import JobApplicationTracker from '../components/JobApplicationTracker.jsx';
 import '../styles/ApplicationInterviewManagementPage.css';
 
 export default function ApplicationInterviewManagementPage() {
@@ -50,6 +55,16 @@ export default function ApplicationInterviewManagementPage() {
   return (
     <Box className="application-interview-management-page" p={4}>
       <Heading size="lg" mb={4}>Applications & Interviews</Heading>
+      <SimpleGrid columns={[1, 2]} spacing={4} mb={4}>
+        <Stat>
+          <StatLabel>Total Applications</StatLabel>
+          <StatNumber>{applications.length}</StatNumber>
+        </Stat>
+        <Stat>
+          <StatLabel>Scheduled Interviews</StatLabel>
+          <StatNumber>{interviews.length}</StatNumber>
+        </Stat>
+      </SimpleGrid>
       <Tabs>
         <TabList>
           <Tab>Applications</Tab>
@@ -83,6 +98,16 @@ export default function ApplicationInterviewManagementPage() {
               </Tbody>
             </Table>
             {!applications.length && <Text mt={4}>No applications yet.</Text>}
+            {applications.map((app) => (
+              <Box key={app.id} mt={6}>
+                <Heading size="sm" mb={2}>{app.jobTitle || app.id}</Heading>
+                <JobApplicationTracker
+                  agencyId={user?.username}
+                  jobId={app.jobId}
+                  application={app}
+                />
+              </Box>
+            ))}
           </TabPanel>
           <TabPanel>
             <Select

@@ -8,4 +8,10 @@ describe('jobs routes', () => {
     expect(content).toMatch(/express\.Router\(/);
     expect(content).toMatch(/module\.exports\s*=\s*router/);
   });
+
+  test('should include application progress route', () => {
+    const filePath = path.join(__dirname, '../routes/jobs.js');
+    const content = fs.readFileSync(filePath, 'utf8');
+    expect(content).toMatch(/applications\/\:appId\/progress/);
+  });
 });
