@@ -20,6 +20,7 @@ export const menu = [
       { label: 'Volunteering', path: '/volunteering' },
       { label: 'Applications & Interviews', path: '/applications-interviews' },
       { label: 'Interview', path: '/interviews' },
+      { label: 'Job Posts', path: '/job-posts' },
       { label: 'Jobs', path: '/jobs' },
       { label: 'Gigs', path: '/gigs' },
       { label: 'Manage Gigs', path: '/gigs/manage' },
