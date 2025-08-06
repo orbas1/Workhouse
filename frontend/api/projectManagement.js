@@ -1,6 +1,6 @@
 const API_BASE_URL = window.API_BASE_URL || '/api';
 
-async function request(path, options = {}) {
+async function apiFetch(path, options = {}) {
   const token = localStorage.getItem('token');
   const headers = {
     ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
@@ -16,36 +16,38 @@ async function request(path, options = {}) {
 }
 
 export function fetchProjects() {
-  return request('/workspace/projects');
+  return apiFetch('/workspace/projects');
 }
 
 export function createProject(data) {
-  return request('/workspace/projects/create', {
+  return apiFetch('/workspace/projects/create', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
 export function updateProject(projectId, data) {
-  return request(`/workspace/projects/update/${projectId}`, {
+  return apiFetch(`/workspace/projects/update/${projectId}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
 }
 
 export function deleteProject(projectId) {
-  return request(`/workspace/projects/delete/${projectId}`, {
+  return apiFetch(`/workspace/projects/delete/${projectId}`, {
     method: 'DELETE',
   });
 }
 
 export function listFiles(projectId) {
   return request(`/project-management/files/project/${projectId}`);
+  return apiFetch(`/workspace/files/project/${projectId}`);
 }
 
 export async function uploadFile(projectId, file) {
   const formData = new FormData();
   formData.append('file', file);
+
   const uploadRes = await fetch(`${window.env.FILE_IO_API}/`, {
     method: 'POST',
     body: formData,
@@ -58,6 +60,16 @@ export async function uploadFile(projectId, file) {
   return request('/project-management/files/upload', {
     method: 'POST',
     body: JSON.stringify(body),
+    throw new Error(uploadData.error || 'File upload failed');
+  }
+
+  return apiFetch('/workspace/files/upload', {
+    method: 'POST',
+    body: JSON.stringify({
+      projectId,
+      filename: file.name,
+      url: uploadData.link,
+    }),
   });
 }
 
@@ -71,3 +83,4 @@ if (typeof window !== 'undefined') {
     uploadFile,
   };
 }
+

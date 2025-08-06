@@ -5,6 +5,7 @@ const {
   getCommentsByDiscussion,
   upvoteComment,
 } = require('../services/community');
+const { checkAccess } = require('../services/communitySubscription');
 const logger = require('../utils/logger');
 
 async function createDiscussionHandler(req, res) {
@@ -19,12 +20,23 @@ async function createDiscussionHandler(req, res) {
 }
 
 async function listDiscussionsHandler(req, res) {
-  const { category } = req.query;
+  const { category, communityId } = req.query;
+  const userId = req.user?.id || req.user?.username;
   try {
-    const discussions = await listDiscussions(category);
+    if (communityId) {
+      const access = await checkAccess(userId, communityId);
+      if (!access.access) {
+        return res.status(403).json({ error: 'Access denied' });
+      }
+    }
+    const discussions = await listDiscussions(category, communityId);
     res.json(discussions);
   } catch (err) {
-    logger.error('Failed to list discussions', { error: err.message, category });
+    logger.error('Failed to list discussions', {
+      error: err.message,
+      category,
+      communityId,
+    });
     res.status(500).json({ error: err.message });
   }
 }
