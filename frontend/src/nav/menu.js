@@ -17,10 +17,12 @@ export const menu = [
     heading: 'Work',
     items: [
       { label: 'Employment', path: '/employment' },
-      { label: 'Volunteering', path: '/volunteering' },
-      { label: 'Applications & Interviews', path: '/applications-interviews' },
-      { label: 'Interview', path: '/interviews' },
       { label: 'Jobs', path: '/jobs' },
+      { label: 'Applications & Interviews', path: '/applications-interviews' },
+      { label: 'Headhunter Dashboard', path: '/headhunter/dashboard' },
+      { label: 'Interview', path: '/interviews' },
+      { label: 'Job Posts', path: '/job-posts' },
+      { label: 'Volunteering', path: '/volunteering' },
       { label: 'Gigs', path: '/gigs' },
       { label: 'Manage Gigs', path: '/gigs/manage' },
       { label: 'Discover Gigs', path: '/gigs/search' },
@@ -86,7 +88,6 @@ export const menu = [
       { label: 'Admin Settings', path: '/admin/system-settings' },
       { label: 'Affiliates', path: '/affiliates' },
       { label: 'Sim Dashboard', path: '/sim-dashboard' },
-      { label: 'Headhunter Dashboard', path: '/headhunter/dashboard' },
       { label: 'Install Wizard', path: '/install' }
     ]
   }
