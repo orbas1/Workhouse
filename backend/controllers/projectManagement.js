@@ -131,6 +131,17 @@ async function assignTaskHandler(req, res) {
   }
 }
 
+async function listTasksHandler(req, res) {
+  const { assignee } = req.query;
+  try {
+    const tasks = await service.listTasksByAssignee(assignee);
+    res.json(tasks);
+  } catch (err) {
+    logger.error('Failed to list tasks', { error: err.message, assignee });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 async function suggestTasksHandler(req, res) {
   const { projectId } = req.body;
   try {
@@ -411,6 +422,7 @@ module.exports = {
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,
+  listTasksHandler,
   suggestTasksHandler,
   suggestBudgetHandler,
   suggestObjectivesHandler,

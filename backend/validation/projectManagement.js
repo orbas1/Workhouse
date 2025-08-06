@@ -54,6 +54,10 @@ const assignTaskSchema = Joi.object({
   assignee: Joi.string().required(),
 });
 
+const listTasksQuerySchema = Joi.object({
+  assignee: Joi.string().required(),
+});
+
 const aiProjectSchema = Joi.object({
   projectId: Joi.string().guid({ version: 'uuidv4' }).required(),
 });
@@ -142,6 +146,7 @@ module.exports = {
   createTaskSchema,
   updateTaskSchema,
   assignTaskSchema,
+  listTasksQuerySchema,
   taskListSchema,
   aiProjectSchema,
   hireSchema,

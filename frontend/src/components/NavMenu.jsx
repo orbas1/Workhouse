@@ -20,6 +20,7 @@ export default function NavMenu() {
       </Heading>
       <Spacer />
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>Tasks</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/experience')}>Experience</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/opportunities')}>Opportunities</Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>

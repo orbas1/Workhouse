@@ -107,6 +107,10 @@ function assignTask(taskId, assignee) {
   return task;
 }
 
+function listTasksByAssignee(assignee) {
+  return Array.from(tasks.values()).filter((task) => task.assignee === assignee);
+}
+
 function hireEmployee({ projectId, userId, role }) {
   const id = randomUUID();
   const hire = { id, projectId, userId, role, hiredAt: new Date() };
@@ -246,6 +250,7 @@ module.exports = {
   updateTask,
   deleteTask,
   assignTask,
+  listTasksByAssignee,
   hireEmployee,
   listEmployees,
   postFeed,
