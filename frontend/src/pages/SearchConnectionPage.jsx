@@ -11,8 +11,10 @@ import {
   useToast,
   Alert,
   AlertIcon,
+  Card,
+  CardBody,
 } from '@chakra-ui/react';
-import '../styles/SearchConnectionPage.css';
+import MentorCard from '../components/MentorCard.jsx';
 import { searchProfiles, sendConnectionRequest } from '../api/network.js';
 
 function SearchConnectionPage() {
@@ -53,7 +55,7 @@ function SearchConnectionPage() {
   }
 
   return (
-    <Box className="search-connection-page" p={4}>
+    <Box p={4}>
       <VStack spacing={6} align="stretch">
         <Heading size="lg" textAlign="center">
           Investment Central
@@ -107,31 +109,27 @@ function SearchConnectionPage() {
           Search
         </Button>
         <SimpleGrid columns={[1, 2, 3]} spacing={4}>
-          {results.map((profile) => (
-            <Box
-              key={profile.id}
-              className="profile-card"
-              borderWidth="1px"
-              borderRadius="md"
-              p={4}
-            >
-              <Heading size="sm">{profile.name || 'Unnamed'}</Heading>
-              {profile.industry && <Text>{profile.industry}</Text>}
-              {profile.location && <Text>{profile.location}</Text>}
-              <Button
-                mt={2}
-                size="sm"
-                colorScheme="teal"
-                onClick={() => handleConnect(profile.id)}
-              >
-                {profile.role === 'mentor'
-                  ? 'Hire as Mentor'
-                  : profile.role === 'startup'
-                  ? 'Promote Startup'
-                  : 'Connect'}
-              </Button>
-            </Box>
-          ))}
+          {results.map((profile) =>
+            profile.role === 'mentor' ? (
+              <MentorCard key={profile.id} mentor={profile} onConnect={handleConnect} />
+            ) : (
+              <Card key={profile.id} variant="outline" borderColor="gray.200">
+                <CardBody>
+                  <Heading size="sm">{profile.name || 'Unnamed'}</Heading>
+                  {profile.industry && <Text>{profile.industry}</Text>}
+                  {profile.location && <Text>{profile.location}</Text>}
+                  <Button
+                    mt={2}
+                    size="sm"
+                    colorScheme="teal"
+                    onClick={() => handleConnect(profile.id)}
+                  >
+                    {profile.role === 'startup' ? 'Promote Startup' : 'Connect'}
+                  </Button>
+                </CardBody>
+              </Card>
+            )
+          )}
         </SimpleGrid>
       </VStack>
     </Box>
