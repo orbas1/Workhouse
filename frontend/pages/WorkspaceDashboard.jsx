@@ -1,5 +1,6 @@
-import { ChakraProvider, Box, Heading, SimpleGrid, Spinner } from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, SimpleGrid, Spinner, Flex, Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import WorkspaceSummary from '../components/WorkspaceSummary';
 import ProjectCard from '../components/ProjectCard';
@@ -41,7 +42,12 @@ export default function WorkspaceDashboard() {
     <ChakraProvider>
       <NavMenu />
       <Box p={4} className="workspace-dashboard">
-        <Heading mb={4}>Workspace Dashboard</Heading>
+        <Flex justify="space-between" align="center" mb={4}>
+          <Heading>Workspace Dashboard</Heading>
+          <Button as={RouterLink} to="/workspace/schedule" colorScheme="teal">
+            Open Calendar
+          </Button>
+        </Flex>
         {loading ? (
           <Spinner />
         ) : (
