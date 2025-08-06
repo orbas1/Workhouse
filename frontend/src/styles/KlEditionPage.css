@@ -1,0 +1,21 @@
+.kl-edition-page {
+  background: #f9f9f9;
+}
+
+.kl-edition-page .chat-message {
+  background-color: #edf2f7;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.kl-edition-page .ide-placeholder {
+  background-color: #1a202c;
+  color: #fff;
+}
+
+.kl-edition-page .ide-iframe,
+.kl-edition-page .workflow-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
