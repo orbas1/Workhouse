@@ -28,6 +28,8 @@ export default function NavBar() {
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
           </Button>
+          <Button as={RouterLink} to="/live" variant="ghost" color="white" mr={2}>
+            Live
           <Button as={RouterLink} to="/tasks" variant="ghost" color="white" mr={2}>
             Tasks
           </Button>

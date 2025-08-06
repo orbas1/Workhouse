@@ -66,6 +66,8 @@ export default function Dashboard() {
           Browse Services
         </Button>
         <Heading>Dashboard</Heading>
+        <Button as={RouterLink} to="/live" mt={4} colorScheme="teal">
+          Go to Live Room
         <Button mt={4} colorScheme="teal" as={RouterLink} to="/content/manage">
           Manage Content
         <Button as={RouterLink} to="/progress" mt={4} colorScheme="teal">

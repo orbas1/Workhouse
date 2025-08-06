@@ -297,6 +297,7 @@ import { ChakraProvider, Box } from '@chakra-ui/react';
 import NavBar from './components/NavBar.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import TaskSchedulePage from './pages/TaskSchedulePage.jsx';
 import ExperienceDashboardPage from './pages/ExperienceDashboardPage.jsx';
 import VolunteerTrackingPage from './pages/VolunteerTrackingPage.jsx';
@@ -376,6 +377,7 @@ function App() {
               <Route path="/" element={<Navigate to="/profile" replace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/profile/customize" element={<ProfileCustomizationPage />} />
+              <Route path="/live" element={<LivePlaybackPage />} />
               <Route path="/tasks" element={<TaskSchedulePage />} />
               <Route path="/experience" element={<ExperienceDashboardPage />} />
               <Route path="/volunteer-applications" element={<VolunteerTrackingPage />} />

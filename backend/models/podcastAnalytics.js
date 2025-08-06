@@ -27,15 +27,16 @@ podcasts.set(samplePodcastId, {
   podcastId: samplePodcastId,
   seriesId: sampleSeriesId,
   ownerId,
+  engagement: {
+    listens: 0,
+    avgListenDuration: 1700,
+    completionRate: 0.75,
+    dropOffRate: 0.2,
+  },
   demographics: {
     ageGroups: { '18-24': 40, '25-34': 35, '35-44': 25 },
     locations: { US: 60, UK: 20, CA: 20 },
     genders: { male: 55, female: 45 },
-  },
-  engagement: {
-    avgListenDuration: 1700,
-    completionRate: 0.75,
-    dropOffRate: 0.2,
   },
 });
 
@@ -111,6 +112,13 @@ function getEpisodeDetails(episodeId) {
   return episodes.get(episodeId);
 }
 
+function recordListen(podcastId) {
+  const podcast = podcasts.get(podcastId);
+  if (!podcast) {
+    return null;
+  }
+  podcast.engagement.listens = (podcast.engagement.listens || 0) + 1;
+  return podcast.engagement.listens;
 function getAllPodcasts() {
   return Array.from(podcasts.values());
 }
@@ -125,5 +133,6 @@ module.exports = {
   getEpisodeDetails,
   getPodcast,
   getEpisode,
+  recordListen,
   getAllPodcasts,
 };

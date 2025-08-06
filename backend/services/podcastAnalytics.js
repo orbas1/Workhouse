@@ -69,6 +69,15 @@ async function getEpisode(episodeId) {
   return podcastModel.getEpisode(episodeId);
 }
 
+async function recordListen(podcastId) {
+  const listens = podcastModel.recordListen(podcastId);
+  if (listens === null) {
+    const error = new Error('Podcast not found');
+    error.status = 404;
+    throw error;
+  }
+  logger.info('Recorded podcast listen', { podcastId, listens });
+  return { listens };
 async function getCreatorSeries(ownerId) {
   logger.info('Fetching creator series', { ownerId });
   return podcastModel.getSeriesByOwner(ownerId);
@@ -83,5 +92,6 @@ module.exports = {
   getEpisodeDetails,
   getPodcast,
   getEpisode,
+  recordListen,
   getCreatorSeries,
 };
