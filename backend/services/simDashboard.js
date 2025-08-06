@@ -1,7 +1,7 @@
-const { getSimStats } = require('../models/simDashboard');
+const { getSimDashboard } = require('../models/simDashboard');
 
 async function fetchSimDashboard() {
-  return getSimStats();
+  return getSimDashboard();
 }
 
 module.exports = { fetchSimDashboard };

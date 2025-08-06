@@ -199,6 +199,30 @@ function scheduleEvent({ projectId, title, date }) {
   return event;
 }
 
+function getEventById(eventId) {
+  return calendarEvents.get(eventId);
+}
+
+function listEvents() {
+  return Array.from(calendarEvents.values());
+}
+
+function listEventsByProject(projectId) {
+  return Array.from(calendarEvents.values()).filter((e) => e.projectId === projectId);
+}
+
+function updateEvent(eventId, data) {
+  const event = calendarEvents.get(eventId);
+  if (!event) return null;
+  Object.assign(event, data, { updatedAt: new Date() });
+  calendarEvents.set(eventId, event);
+  return event;
+}
+
+function deleteEvent(eventId) {
+  return calendarEvents.delete(eventId);
+}
+
 function trackBudget({ projectId, amount, description }) {
   const id = randomUUID();
   const entry = { id, projectId, amount, description, createdAt: new Date() };
@@ -307,6 +331,11 @@ module.exports = {
   createGanttChart,
   getGanttChartById,
   scheduleEvent,
+  getEventById,
+  listEvents,
+  listEventsByProject,
+  updateEvent,
+  deleteEvent,
   trackBudget,
   trackObjective,
   submitReport,

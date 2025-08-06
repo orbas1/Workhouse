@@ -23,6 +23,11 @@ const {
   createGanttChartHandler,
   getGanttChartHandler,
   scheduleEventHandler,
+  listEventsHandler,
+  listProjectEventsHandler,
+  getEventHandler,
+  updateEventHandler,
+  deleteEventHandler,
   trackBudgetHandler,
   trackObjectivesHandler,
   submitReportHandler,
@@ -48,6 +53,7 @@ const {
   feedIdParamSchema,
   chartIdParamSchema,
   fileIdParamSchema,
+  eventIdParamSchema,
   createProjectSchema,
   updateProjectSchema,
   createTaskSchema,
@@ -110,7 +116,12 @@ router.get('/feed/:feedId', auth, validate(feedIdParamSchema, 'params'), getFeed
 // Gantt & Scheduling
 router.post('/gantt-chart/create', auth, validate(ganttChartSchema), createGanttChartHandler);
 router.get('/gantt-chart/:chartId', auth, validate(chartIdParamSchema, 'params'), getGanttChartHandler);
-router.post('/calendar/schedule', auth, validate(scheduleSchema), scheduleEventHandler);
+router.post('/calendar/events', auth, validate(scheduleSchema), scheduleEventHandler);
+router.get('/calendar/events', auth, listEventsHandler);
+router.get('/calendar/events/:eventId', auth, validate(eventIdParamSchema, 'params'), getEventHandler);
+router.put('/calendar/events/:eventId', auth, validate(eventIdParamSchema, 'params'), validate(scheduleSchema), updateEventHandler);
+router.delete('/calendar/events/:eventId', auth, validate(eventIdParamSchema, 'params'), deleteEventHandler);
+router.get('/calendar/project/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, listProjectEventsHandler);
 
 // Tracking
 router.post('/budget/track', auth, validate(budgetTrackSchema), trackBudgetHandler);

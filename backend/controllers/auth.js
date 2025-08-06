@@ -1,6 +1,7 @@
 const { register, login, resetPassword, verifyToken } = require('../services/auth');
 const { createProfile } = require('../services/profile');
 const verifyRecaptcha = require('../utils/verifyRecaptcha');
+const securityService = require('../services/security');
 
 async function registerHandler(req, res) {
   const { username, password, role, fullName, email, phone, location, bio, expertise, recaptchaToken } = req.validatedBody;
@@ -18,8 +19,11 @@ async function registerHandler(req, res) {
 }
 
 async function loginHandler(req, res) {
-  const { username, password } = req.validatedBody;
+  const { username, password, code } = req.validatedBody;
   try {
+    if (code) {
+      securityService.verifyMfa(username, code);
+    }
     const result = await login(username, password);
     res.json(result);
   } catch (err) {
