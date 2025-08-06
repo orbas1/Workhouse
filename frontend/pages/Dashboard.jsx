@@ -1,3 +1,9 @@
+import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import NavMenu from '../components/NavMenu';
+import WorkspaceSummary from '../components/WorkspaceSummary';
+import { fetchWorkspaceOverview } from '../api/workspace';
 import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import NavMenu from '../components/NavMenu.jsx';
@@ -18,12 +24,21 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 
 export default function Dashboard() {
+  const [overview, setOverview] = useState([]);
+
+  useEffect(() => {
+    fetchWorkspaceOverview().then(setOverview).catch(() => {});
+  }, []);
+
   const navigate = useNavigate();
   return (
     <ChakraProvider>
       <NavMenu />
       <Box p={4} className="dashboard">
         <Heading mb={4}>Dashboard</Heading>
+        <WorkspaceSummary data={overview} />
+        <Button as={RouterLink} to="/workspace" mt={6} colorScheme="teal">
+          Open Workspace
         <Link as={RouterLink} to="/ads" color="blue.500">
           View Sponsored Content
         </Link>

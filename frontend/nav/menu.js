@@ -66,6 +66,7 @@ function NavMenu() {
         Proposals & Invoices
       </Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/orders')}>Orders</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/workspace')}>Workspace</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/creator/dashboard')}>Creator</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts')}>Contracts</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/classroom/WorkhouseClassroom')}>Classroom</Button>

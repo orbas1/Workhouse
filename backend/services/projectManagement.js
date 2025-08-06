@@ -194,6 +194,18 @@ async function createTextDocument(data) {
   return doc;
 }
 
+async function listProjects() {
+  return model.listProjects();
+}
+
+async function listTasks(projectId) {
+  return model.listTasksByProject(projectId);
+}
+
+async function getBudgetSummary(projectId) {
+  return model.getBudgetSummary(projectId);
+}
+
 module.exports = {
   createProject,
   getProject,
@@ -229,4 +241,7 @@ module.exports = {
   listWorkflows,
   getSpreadsheet,
   createTextDocument,
+  listProjects,
+  listTasks,
+  getBudgetSummary,
 };

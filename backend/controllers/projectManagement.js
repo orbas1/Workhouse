@@ -366,6 +366,38 @@ async function createTextDocumentHandler(req, res) {
   }
 }
 
+async function listProjectsHandler(req, res) {
+  try {
+    const projects = await service.listProjects();
+    res.json(projects);
+  } catch (err) {
+    logger.error('Failed to list projects', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function listProjectTasksHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const tasks = await service.listTasks(projectId);
+    res.json(tasks);
+  } catch (err) {
+    logger.error('Failed to list project tasks', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function getBudgetHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const summary = await service.getBudgetSummary(projectId);
+    res.json(summary);
+  } catch (err) {
+    logger.error('Failed to get budget summary', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createProjectHandler,
   listProjectsHandler,
@@ -401,4 +433,7 @@ module.exports = {
   listWorkflowsHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
+  listProjectsHandler,
+  listProjectTasksHandler,
+  getBudgetHandler,
 };
