@@ -4,6 +4,7 @@ const cors = require('cors');
 const products = require('./data/products.json');
 const authRoutes = require('./routes/auth');
 const landingRoutes = require('./routes/landing');
+const environmentRoutes = require('./routes/environment');
 const api = require("./api");
 const { initDb } = require('./utils/db');
 const logger = require('./utils/logger');
@@ -18,6 +19,7 @@ app.get('/operations/retail/products', (req, res) => {
 
 app.use('/auth', authRoutes);
 app.use('/landing', landingRoutes);
+app.use('/environment', environmentRoutes);
 
 // 404 handler
 app.use((req, res, next) => {
