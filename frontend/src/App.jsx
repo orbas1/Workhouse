@@ -215,8 +215,7 @@ export default function App() {
     { path: '/workspace', element: <WorkspaceDashboard />, protected: true },
     { path: '/workspace/projects', element: <ProjectManagement />, protected: true },
     { path: '/workspace/files', element: <FileResourceManagement />, protected: true },
-    { path: '/schedule', element: <ScheduleCalendarPage />, protected: true },
-    { path: '/calendar', element: <PlaceholderPage title="Calendar" />, protected: true },
+    { path: '/workspace/schedule', element: <ScheduleCalendarPage />, protected: true },
 
     // Settings, Billing & Analytics
     { path: '/notifications', element: <NotificationSettingsPage />, protected: true },
