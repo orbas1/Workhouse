@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ChakraProvider, Box } from '@chakra-ui/react';
-import NavBar from './components/NavBar.jsx';
-import NavMenu from './components/NavMenu.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
@@ -45,6 +43,9 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+
+import DashboardPage from './pages/DashboardPage.jsx';
+import LiveFeedPage from './pages/LiveFeedPage.jsx';
 import EmploymentDashboardPage from './pages/EmploymentDashboardPage.jsx';
 import ApplicationInterviewManagementPage from './pages/ApplicationInterviewManagementPage.jsx';
 import HeadhunterDashboardPage from './pages/HeadhunterDashboardPage.jsx';
@@ -95,8 +96,8 @@ export default function App() {
     { path: '/setup/financial-media', element: <FinancialMediaSetupPage />, protected: true },
 
     // Core User Hub
-    { path: '/dashboard', element: <PlaceholderPage title="Home Dashboard" />, protected: true },
-    { path: '/feed', element: <PlaceholderPage title="Live Feed" />, protected: true },
+    { path: '/dashboard', element: <DashboardPage />, protected: true },
+    { path: '/feed', element: <LiveFeedPage />, protected: true },
     { path: '/profile', element: <ProfilePage />, protected: true },
     { path: '/profile/customize', element: <ProfileCustomizationPage />, protected: true },
     { path: '/messages', element: <ChatInboxPage />, protected: true },

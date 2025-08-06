@@ -29,7 +29,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(username, password);
-      navigate('/profile');
+      navigate('/dashboard');
     } catch (err) {
       toast({ title: 'Login failed', status: 'error', description: err.message });
     } finally {
