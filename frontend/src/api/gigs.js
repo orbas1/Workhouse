@@ -5,6 +5,16 @@ export async function searchGigs(params = {}) {
   return data;
 }
 
+export async function getMyGigs() {
+  const { data } = await apiClient.get('/gigs/my-gigs');
+  return data;
+}
+
+export async function getAppliedGigs() {
+  const { data } = await apiClient.get('/gigs/applied');
+  return data;
+}
+
 export async function getGig(id) {
   const { data } = await apiClient.get(`/gigs/${id}`);
   return data;

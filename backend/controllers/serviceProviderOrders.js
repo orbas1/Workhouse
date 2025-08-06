@@ -1,6 +1,11 @@
 const Order = require('../models/order');
 
 exports.createOrder = (req, res) => {
+  const { buyerId, sellerId, serviceId, gigId, status, description } = req.body;
+  if (!buyerId || !sellerId || (!serviceId && !gigId)) {
+    return res.status(400).json({ error: 'buyerId, sellerId and serviceId or gigId are required' });
+  }
+  const order = Order.createOrder({ buyerId, sellerId, serviceId, gigId, status, description });
   const { buyerId, sellerId, serviceId, status, description, scheduledDate } = req.body;
   if (!buyerId || !sellerId || !serviceId) {
     return res.status(400).json({ error: 'buyerId, sellerId and serviceId are required' });

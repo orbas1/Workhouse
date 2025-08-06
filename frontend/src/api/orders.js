@@ -15,6 +15,8 @@ export async function updateOrder(id, updates) {
   return data;
 }
 
+export async function createOrder(payload) {
+  const { data } = await apiClient.post('/service-providers/orders', payload);
 export async function createOrder(order) {
   const { data } = await apiClient.post('/service-providers/orders', order);
   return data;
