@@ -31,14 +31,16 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 vite v5.4.19 building for production...
 ```
 
-## Stage 3: Frontend script references (1)
+
 
 - `<script src="/config.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="context/AuthContext.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="nav/menu.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/FeatureCard.js"> in "/index.html" can't be bundled without type="module" attribute`
+
+## Stage 3: Frontend script references (1) – Fixed
+
+Resolved by cleaning up `frontend/index.html` and removing legacy script tags that were not using the `type="module"` attribute.
+
 
 ## Stage 4: Frontend script references (2)
 
@@ -48,15 +50,6 @@ vite v5.4.19 building for production...
 - `<script src="api/landing.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="components/widgets/user_count.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="components/widgets/quote.js"> in "/index.html" can't be bundled without type="module" attribute`
-
-## Stage 5: Frontend script references (3)
-
-- `<script src="views/home_page.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/home_page.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/FeatureCard.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/FileUpload.js"> in "/index.html" can't be bundled without type="module" attribute`
 
 ## Stage 6: Frontend script references (4)
 
@@ -69,28 +62,13 @@ vite v5.4.19 building for production...
 
 ## Stage 7: Frontend script references (5)
 
-- `<script src="views/home_dashboard.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/live_feed.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/signup_userinfo.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/signup_page.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/home_dashboard.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/cv_cover_letter_page.js"> in "/index.html" can't be bundled without type="module" attribute`
-
-## Stage 8: Frontend script references (6)
-
-- `<script src="utils/auth.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/auth.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/profile.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/ProfileHeader.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/AboutSection.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="components/ProfessionalDetails.js"> in "/index.html" can't be bundled without type="module" attribute`
+Resolved.
 
 ## Stage 9: Frontend script references (7)
 
 - `<script src="components/ActivityFeed.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/profile_page.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/profile_customization.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/financial_media_setup.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="utils/date.js"> in "/index.html" can't be bundled without type="module" attribute`
 
@@ -100,7 +78,6 @@ vite v5.4.19 building for production...
 - `<script src="api/resume.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="api/employment.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/profile_customization.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/financial_media_setup.js"> in "/index.html" can't be bundled without type="module" attribute`
 
 ## Stage 11: Frontend script references (9)
@@ -114,12 +91,12 @@ vite v5.4.19 building for production...
 
 ## Stage 12: Frontend script references (10)
 
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/financial_media_setup.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="api/communications.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="components/widgets/chat_widget.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/chat_inbox.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/application_interview_management.js"> in "/index.html" can't be bundled without type="module" attribute`
+
 
 ## Stage 14: Frontend script references (12)
 
