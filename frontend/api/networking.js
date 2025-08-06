@@ -1,4 +1,7 @@
-const API_BASE_URL = window.API_BASE_URL || '/api';
+const API_BASE_URL =
+  (typeof window !== 'undefined' && window.API_BASE_URL) ||
+  import.meta.env.VITE_API_BASE_URL ||
+  '/api';
 
 async function request(path, options = {}) {
   const token = localStorage.getItem('token');
@@ -6,7 +9,6 @@ async function request(path, options = {}) {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
-    ...(options.headers || {}),
   };
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   if (!res.ok) {
@@ -29,18 +31,18 @@ export function attendNetworkingEvent(eventId) {
 }
 
 export function startVideo(sessionId, data = {}) {
-  return request(`/communication/video/start/${sessionId}`, {
+  return request(`/communicationTools/video/start/${sessionId}`, {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
 export function endVideo(sessionId) {
-  return request(`/communication/video/end/${sessionId}`, { method: 'POST' });
+  return request(`/communicationTools/video/end/${sessionId}`, { method: 'POST' });
 }
 
 export function exchangeContact(sessionId, data) {
-  return request(`/communication/contact/exchange/${sessionId}`, {
+  return request(`/communicationTools/contact/exchange/${sessionId}`, {
     method: 'POST',
     body: JSON.stringify(data),
   });
@@ -58,5 +60,6 @@ export function getNextOneMinuteMatch(eventId) {
 }
 
 export function getSessionMetrics(sessionId) {
-  return request(`/communication/analytics/${sessionId}`);
+  return request(`/communicationTools/analytics/${sessionId}`);
 }
+

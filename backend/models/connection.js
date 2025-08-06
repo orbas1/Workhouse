@@ -17,6 +17,7 @@ function addConnection(userId, { name = '', title = '', tags = [], status = 'new
 // In-memory storage for connections
 const connections = new Map();
 
+function createConnection({ ownerId, name, title = '', tags = [], role = '', company = '', status = 'active', notes = '' }) {
 function createConnection({ ownerId, name, role = '', company = '', status = 'active', notes = '', tags = [] }) {
   const id = randomUUID();
   const now = new Date();
@@ -24,10 +25,13 @@ function createConnection({ ownerId, name, role = '', company = '', status = 'ac
     id,
     ownerId,
     name,
+    title,
+    tags,
     role,
     company,
     status,
     notes,
+    activity: [],
     tags,
     lastInteraction: now,
     createdAt: now,
@@ -85,11 +89,25 @@ function removeConnection(id) {
   return connections.delete(id);
 }
 
+// Legacy helpers
+function addConnection(userId, data) {
+  return createConnection({ ownerId: userId, ...data });
+}
+
+function getConnectionsByUser(userId) {
+  return listConnectionsByOwner(userId);
+}
+
+
 module.exports = {
   createConnection,
   listConnectionsByOwner,
   getConnection,
   updateConnection,
   removeConnection,
+  addConnection,
+  getConnectionsByUser,
+  connections,
 };
+
 

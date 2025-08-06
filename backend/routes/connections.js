@@ -22,6 +22,12 @@ const connectionController = require('../controllers/connectionController');
 
 const router = express.Router();
 
+// Legacy user-specific endpoints
+router.get('/user/:userId', auth, connectionController.getConnections);
+router.post('/user/:userId', auth, connectionController.addConnection);
+router.put('/user/:id', auth, connectionController.updateConnection);
+
+// Standard CRUD endpoints
 router.post('/', auth, createConnectionHandler);
 router.get('/', auth, listConnectionsHandler);
 router.get('/:connectionId', auth, getConnectionHandler);
