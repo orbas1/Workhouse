@@ -124,6 +124,7 @@ const adRoutes = require('./routes/ads');
 const applicationRoutes = require('./routes/applications');
 const campaignRoutes = require('./routes/campaigns');
 const projectManagementRoutes = require('./routes/projectManagement');
+const supportRoutes = require('./routes/support');
 const successStoryRoutes = require('./routes/successStories');
 const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
 const adsRoutes = require('./routes/ads');
@@ -269,6 +270,7 @@ app.use('/workspace', projectManagementRoutes);
 app.use('/ads', adsRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
+app.use('/support', supportRoutes);
 app.use('/sim', simDashboardRoutes);
 
 const port = process.env.PORT || 5000;

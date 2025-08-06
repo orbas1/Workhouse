@@ -13,6 +13,7 @@ import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import SupportDisputePage from './pages/SupportDisputePage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
@@ -39,6 +40,143 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter>
           <ProfileProvider>
+            <NavMenu />
+            <Box p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <ProfilePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/profile/customize"
+                  element={
+                    <Protected>
+                      <ProfileCustomizationPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/new"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/:contractId/edit"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/support"
+                  element={
+                    <Protected>
+                      <SupportDisputePage />
+                    </Protected>
+                  }
+                />
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="*" element={<Navigate to="/profile" replace />} />
+              </Routes>
+            </Box>
+          </ProfileProvider>
+        </BrowserRouter>
+      </AuthProvider>
+    <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <ProfileProvider>
+            <NavMenu />
+            <Box p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <ProfilePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/profile/customize"
+                  element={
+                    <Protected>
+                      <ProfileCustomizationPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/new"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/contracts/:contractId/edit"
+                  element={
+                    <Protected>
+                      <ContractFormPage />
+                    </Protected>
+                  }
+                />
+                <Route path="/" element={<Navigate to="/profile" replace />} />
+                <Route path="*" element={<Navigate to="/profile" replace />} />
+              </Routes>
+            </Box>
+          </ProfileProvider>
+        </BrowserRouter>
+      </AuthProvider>
+    <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <ProfileProvider>
+            <NavBar />
+            <NavMenu />
+            <Box p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <ProfilePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/profile/customize"
+                  element={
+                    <Protected>
+                      <ProfileCustomizationPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/services/new"
+                  element={
+                    <Protected>
+                      <ServiceCreationPage />
+                    </Protected>
+                  }
+                />
+                <Route path="*" element={<Navigate to="/login" replace />} />
+              </Routes>
+            </Box>
             <AffiliateProvider>
               <NavBar />
               <Box p={4}>
