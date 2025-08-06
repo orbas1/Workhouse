@@ -84,7 +84,8 @@ export const menu = [
       { label: 'Admin Settings', path: '/admin/system-settings' },
       { label: 'Affiliates', path: '/affiliates' },
       { label: 'Sim Dashboard', path: '/sim-dashboard' },
-      { label: 'Headhunter Dashboard', path: '/headhunter/dashboard' }
+      { label: 'Headhunter Dashboard', path: '/headhunter/dashboard' },
+      { label: 'Install Wizard', path: '/install' }
     ]
   }
 ];

@@ -38,6 +38,7 @@ import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
+import InstallationWizardPage from './pages/InstallationWizardPage.jsx';
 import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
 import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
@@ -90,6 +91,7 @@ export default function App() {
   const routes = [
     // Entry & Authentication
     { path: '/', element: <LandingPage /> },
+    { path: '/install', element: <InstallationWizardPage /> },
     { path: '/login', element: <LoginPage /> },
     { path: '/signup', element: <SignupPage /> },
     { path: '/onboarding/documents', element: <OnboardingDocumentsPage />, protected: true },

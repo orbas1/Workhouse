@@ -36,6 +36,9 @@ export default function DashboardPage() {
       <NavMenu />
       <Box p={4}>
         <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
+        <Button mb={4} colorScheme="purple" onClick={() => navigate('/install')}>
+          Run Installation Wizard
+        </Button>
         <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
           View Live Feed
         </Button>
