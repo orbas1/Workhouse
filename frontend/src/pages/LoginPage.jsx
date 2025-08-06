@@ -11,6 +11,11 @@ import {
   Link,
   Stack,
   useToast,
+  Divider
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
+import { loginWithProvider } from '../api/auth.js';
   Modal,
   ModalOverlay,
   ModalContent,
@@ -27,7 +32,7 @@ import { resetPassword } from '../api/auth.js';
 import '../styles/LoginPage.css';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
   const [remember, setRemember] = useState(true);
@@ -45,6 +50,7 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
     try {
+      await login(email, password);
       await login(username, password, use2FA ? code : undefined, remember);
       navigate('/dashboard');
     } catch (err) {
@@ -71,9 +77,9 @@ export default function LoginPage() {
         <Heading mb={6} textAlign="center">Login</Heading>
         <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
-            <FormControl id="username" isRequired>
+            <FormControl id="email" isRequired>
               <FormLabel>Email</FormLabel>
-              <Input type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
@@ -95,6 +101,13 @@ export default function LoginPage() {
             <Button type="submit" colorScheme="teal" isLoading={loading} loadingText="Logging in">
               Login
             </Button>
+            <Link color="teal.500" href="#">Forgot Password?</Link>
+            <Divider />
+            <Stack spacing={2} className="social-login-buttons">
+              <Button variant="outline" onClick={() => loginWithProvider('google')}>Login with Google</Button>
+              <Button variant="outline" onClick={() => loginWithProvider('linkedin')}>Login with LinkedIn</Button>
+              <Button variant="outline" onClick={() => loginWithProvider('facebook')}>Login with Facebook</Button>
+            </Stack>
             <Link color="teal.500" onClick={onOpen}>Forgot Password?</Link>
             <Link color="teal.500" onClick={() => navigate('/signup')}>Create an account</Link>
           </Stack>
