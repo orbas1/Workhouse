@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Heading, VStack } from '@chakra-ui/react';
 import ClassroomChat from '../components/ClassroomChat.jsx';
+import ClassroomSections from '../components/ClassroomSections.jsx';
+import CourseMaterials from '../components/CourseMaterials.jsx';
+import AssessmentCenter from '../components/AssessmentCenter.jsx';
+import TeacherProfileBanner from '../components/TeacherProfileBanner.jsx';
 import '../styles/ClassroomPage.css';
 
 export default function ClassroomPage() {
@@ -25,6 +29,10 @@ export default function ClassroomPage() {
       <VStack spacing={4} align="stretch">
         <Box id="jitsi-container" className="video-container" />
         <ClassroomChat classroomId={id} />
+        <ClassroomSections />
+        <CourseMaterials />
+        <AssessmentCenter />
+        <TeacherProfileBanner />
       </VStack>
     </Box>
   );
