@@ -45,6 +45,7 @@ import ContractFormPage from './pages/ContractFormPage.jsx';
 import ContentLibraryPage from './pages/ContentLibraryPage.jsx';
 import ContentDetailPage from './pages/ContentDetailPage.jsx';
 import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
+import CreatorDashboardPage from './pages/CreatorDashboardPage.jsx';
 import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import ContentManagerPage from './pages/ContentManagerPage.jsx';
 import AffiliateManagementPage from './pages/AffiliateManagementPage.jsx';
@@ -207,7 +208,7 @@ export default function App() {
     { path: '/session-management', element: <SessionManagementPage />, protected: true },
 
     // Media & Advertising
-    { path: '/creator/dashboard', element: <PlaceholderPage title="Creator Dashboard" />, protected: true },
+    { path: '/creator/dashboard', element: <CreatorDashboardPage />, protected: true },
     { path: '/creator/analytics', element: <CreatorAnalyticsPage />, protected: true },
     { path: '/content/manage', element: <ContentManagerPage />, protected: true },
     { path: '/content-library', element: <ContentLibraryPage />, protected: true },
