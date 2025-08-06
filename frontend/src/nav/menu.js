@@ -9,6 +9,7 @@ export const menu = [
       { label: 'Customize Profile', path: '/profile/customize' },
       { label: 'Connections', path: '/connections' },
       { label: 'Support', path: '/support' },
+      { label: 'Disputes', path: '/disputes' },
       { label: 'Notifications', path: '/notifications' },
       { label: 'Settings', path: '/settings' }
     ]

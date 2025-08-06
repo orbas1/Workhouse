@@ -15,16 +15,24 @@ async function request(path, options = {}) {
   return res.json();
 }
 
-function createDispute(data) {
+export function createDispute(data) {
   return request('/create', { method: 'POST', body: JSON.stringify(data) });
 }
 
-function respondToDispute(disputeId, data) {
+export function respondToDispute(disputeId, data) {
   return request(`/${disputeId}/respond`, { method: 'POST', body: JSON.stringify(data) });
 }
 
-function getDispute(disputeId) {
+export function getDispute(disputeId) {
   return request(`/${disputeId}`);
 }
 
-window.disputesAPI = { createDispute, respondToDispute, getDispute };
+export function listDisputes({ role, userId } = {}) {
+  const params = new URLSearchParams();
+  if (userId) {
+    if (role === 'disputee') params.set('disputeeId', userId);
+    else params.set('userId', userId);
+  }
+  const query = params.toString();
+  return request(query ? `?${query}` : '');
+}
