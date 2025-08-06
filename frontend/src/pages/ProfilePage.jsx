@@ -5,6 +5,7 @@ import ProfileHeader from '../components/ProfileHeader.jsx';
 import AboutSection from '../components/AboutSection.jsx';
 import ProfessionalDetails from '../components/ProfessionalDetails.jsx';
 import ActivityFeed from '../components/ActivityFeed.jsx';
+import StripeConnectButton from '../components/StripeConnectButton.jsx';
 import '../styles/ProfilePage.css';
 import { getUserProfile } from '../api/profile.js';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -29,6 +30,7 @@ function ProfilePage() {
 
   return (
     <Box className="profile-page-container" p={4}>
+      <StripeConnectButton />
       <Button className="customize-btn" onClick={() => navigate('/profile/customize')} colorScheme="teal" mb={4}>
         Customize Profile
       </Button>
