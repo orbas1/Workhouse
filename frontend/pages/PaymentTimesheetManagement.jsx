@@ -1,4 +1,4 @@
-import { ChakraProvider, Box, Heading, useToast } from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, useToast, Spinner, Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import NavMenu from '../components/NavMenu';
 import TimesheetForm from '../components/TimesheetForm';
@@ -6,14 +6,18 @@ import TimesheetTable from '../components/TimesheetTable';
 import PaymentHistory from '../components/PaymentHistory';
 import { fetchPayments } from '../api/payments';
 import { fetchTimesheets, logTimesheet } from '../api/timesheets';
+import { useAuth } from '../src/context/AuthContext.jsx';
 import '../styles/PaymentTimesheetManagement.css';
 
-export default function PaymentTimesheetManagement({ agencyId }) {
+export default function PaymentTimesheetManagement() {
+  const { user, loading } = useAuth();
+  const agencyId = user?.id;
   const [payments, setPayments] = useState([]);
   const [timesheets, setTimesheets] = useState([]);
   const toast = useToast();
 
   const loadData = async () => {
+    if (!agencyId) return;
     try {
       const [p, t] = await Promise.all([
         fetchPayments(agencyId),
@@ -31,6 +35,7 @@ export default function PaymentTimesheetManagement({ agencyId }) {
   }, [agencyId]);
 
   const handleLog = async (form) => {
+    if (!agencyId) return;
     try {
       await logTimesheet(agencyId, form);
       toast({ title: 'Timesheet logged', status: 'success' });
@@ -39,6 +44,16 @@ export default function PaymentTimesheetManagement({ agencyId }) {
       toast({ title: 'Failed to log timesheet', status: 'error' });
     }
   };
+
+  if (loading || !agencyId) {
+    return (
+      <ChakraProvider>
+        <Center h="100vh">
+          <Spinner />
+        </Center>
+      </ChakraProvider>
+    );
+  }
 
   return (
     <ChakraProvider>

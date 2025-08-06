@@ -110,6 +110,10 @@ function getInvoices(contractId) {
   return contractInvoices.get(contractId) || [];
 }
 
+function getWorkSubmissions(contractId) {
+  return workSubmissions.get(contractId) || [];
+}
+
 function addProposal(contractId, { freelancerId, proposalText }) {
   const proposals = contractProposals.get(contractId);
   if (!proposals) return null;
@@ -211,6 +215,7 @@ module.exports = {
   getByFreelancer,
   getProposals,
   getInvoices,
+  getWorkSubmissions,
   addProposal,
   addInvoice,
   acceptProposal,

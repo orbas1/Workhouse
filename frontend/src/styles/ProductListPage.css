@@ -1,0 +1,13 @@
+.product-list-page {
+  width: 100%;
+}
+.product-card {
+  transition: box-shadow 0.2s ease;
+}
+.product-card:hover {
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+.product-image {
+  width: 100%;
+  height: auto;
+}

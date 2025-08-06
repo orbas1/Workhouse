@@ -42,5 +42,22 @@ export async function getMyGigs() {
 
 export async function getAppliedGigs() {
   const { data } = await apiClient.get('/gigs/applied');
+export async function listMyGigs(userId) {
+  const { data } = await apiClient.get('/gigs', { params: { ownerId: userId } });
+  return data;
+}
+
+export async function updateGig(gigId, updates) {
+  const { data } = await apiClient.put(`/gigs/${gigId}`, updates);
+  return data;
+}
+
+export async function toggleFavorite(gigId) {
+  const { data } = await apiClient.post(`/gigs/${gigId}/favorite`);
+  return data;
+}
+
+export async function getRecommendedGigs() {
+  const { data } = await apiClient.get('/gigs/recommended');
   return data;
 }

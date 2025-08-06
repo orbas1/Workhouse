@@ -5,8 +5,13 @@
 
 .course-card {
   background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
-.overview-card {
+.overview-card,
+.engagement-card {
   background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }

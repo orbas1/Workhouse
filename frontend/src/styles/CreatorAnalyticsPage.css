@@ -1,17 +1,20 @@
 .creator-analytics {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.profile-info {
+.profile-section {
   background-color: #f7fafc;
-  padding: 1rem;
   border-radius: 8px;
 }
 
-.analytics-section pre {
-  background-color: #edf2f7;
+.analytics-section {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
+}
+
+.analytics-section canvas {
+  max-width: 100%;
 }

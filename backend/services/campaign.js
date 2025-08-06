@@ -30,8 +30,14 @@ async function listCampaigns(filter = {}) {
   return campaigns;
 }
 
+async function updateCampaign(id, updates) {
+  const campaign = campaignModel.updateCampaign(id, updates);
+  return evaluateStatus(campaign);
+}
+
 module.exports = {
   createCampaign,
   getCampaignById,
   listCampaigns,
+  updateCampaign,
 };

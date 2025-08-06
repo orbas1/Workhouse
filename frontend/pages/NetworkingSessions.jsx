@@ -21,19 +21,36 @@ import {
 } from '@chakra-ui/react';
 import NavMenu from '../components/NavMenu';
 import SessionCard from '../components/SessionCard';
-import { fetchNetworkingEvents, attendNetworkingEvent } from '../api/networking';
+import {
+  fetchNetworkingEvents,
+  fetchHostedNetworkingEvents,
+  attendNetworkingEvent,
+} from '../api/networking';
 import '../styles/NetworkingSessions.css';
 
 export default function NetworkingSessions() {
   const [sessions, setSessions] = useState([]);
+  const [hosted, setHosted] = useState([]);
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    fetchNetworkingEvents().then(setSessions).catch(console.error);
+    Promise.all([
+      fetchNetworkingEvents(),
+      fetchHostedNetworkingEvents(),
+    ])
+      .then(([all, hosted]) => {
+        setSessions(all);
+        setHosted(hosted);
+      })
+      .catch(console.error);
   }, []);
 
   const filtered = sessions.filter(s =>
+    s.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const filteredHosted = hosted.filter(s =>
     s.title.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -66,14 +83,14 @@ export default function NetworkingSessions() {
           <TabPanels>
             <TabPanel>
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
-                {filtered.map(session => (
+                {filtered.map((session) => (
                   <SessionCard key={session.id} session={session} onView={setSelected} />
                 ))}
               </SimpleGrid>
             </TabPanel>
             <TabPanel>
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
-                {filtered.map(session => (
+                {filteredHosted.map((session) => (
                   <SessionCard key={session.id} session={session} onView={setSelected} />
                 ))}
               </SimpleGrid>

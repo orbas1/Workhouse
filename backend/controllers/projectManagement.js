@@ -261,6 +261,61 @@ async function scheduleEventHandler(req, res) {
   }
 }
 
+async function listEventsHandler(req, res) {
+  try {
+    const events = await service.listEvents();
+    res.json(events);
+  } catch (err) {
+    logger.error('Failed to list events', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function listProjectEventsHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const events = await service.listProjectEvents(projectId);
+    res.json(events);
+  } catch (err) {
+    logger.error('Failed to list project events', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function getEventHandler(req, res) {
+  const { eventId } = req.params;
+  try {
+    const event = await service.getEvent(eventId);
+    if (!event) return res.status(404).json({ error: 'Event not found' });
+    res.json(event);
+  } catch (err) {
+    logger.error('Failed to get event', { error: err.message, eventId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function updateEventHandler(req, res) {
+  const { eventId } = req.params;
+  try {
+    const event = await service.updateEvent(eventId, req.body);
+    res.json(event);
+  } catch (err) {
+    logger.error('Failed to update event', { error: err.message, eventId });
+    res.status(400).json({ error: err.message });
+  }
+}
+
+async function deleteEventHandler(req, res) {
+  const { eventId } = req.params;
+  try {
+    await service.deleteEvent(eventId);
+    res.status(204).send();
+  } catch (err) {
+    logger.error('Failed to delete event', { error: err.message, eventId });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 async function trackBudgetHandler(req, res) {
   try {
     const entry = await service.trackBudget(req.body);
@@ -434,6 +489,11 @@ module.exports = {
   createGanttChartHandler,
   getGanttChartHandler,
   scheduleEventHandler,
+  listEventsHandler,
+  listProjectEventsHandler,
+  getEventHandler,
+  updateEventHandler,
+  deleteEventHandler,
   trackBudgetHandler,
   trackObjectivesHandler,
   submitReportHandler,
