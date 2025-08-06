@@ -1,4 +1,4 @@
-const { checkInstallation, runInstallation } = require('../services/install');
+const { checkInstallation, runInstallation, checkDatabase } = require('../services/install');
 const logger = require('../utils/logger');
 
 async function getStatus(req, res) {
@@ -21,4 +21,14 @@ async function install(req, res) {
   }
 }
 
-module.exports = { getStatus, install };
+async function checkDb(req, res) {
+  try {
+    const result = await checkDatabase(req.body.dbConfig || {});
+    res.json(result);
+  } catch (err) {
+    logger.error('Database check failed', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
+module.exports = { getStatus, install, checkDb };
