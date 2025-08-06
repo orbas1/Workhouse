@@ -56,6 +56,8 @@ const updateProfileSchema = Joi.object({
   skills: Joi.array().items(Joi.string()),
   visibility: visibilitySchema,
   theme: themeSchema,
+  fullName: Joi.string(),
+  location: Joi.string(),
 }).min(1);
 
 const portfolioItemSchema = Joi.object({
