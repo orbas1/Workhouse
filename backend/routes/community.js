@@ -21,7 +21,7 @@ const router = express.Router();
 
 router.post('/discussions', auth, validate(createDiscussionSchema), createDiscussionHandler);
 
-router.get('/discussions', validate(listDiscussionQuerySchema, 'query'), listDiscussionsHandler);
+router.get('/discussions', auth, validate(listDiscussionQuerySchema, 'query'), listDiscussionsHandler);
 
 router.get(
   '/discussions/:discussionId/comments',

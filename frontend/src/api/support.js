@@ -1,23 +1,17 @@
-import axios from 'axios';
+import apiClient from '../utils/apiClient.js';
 
-const API_BASE = import.meta.env.VITE_API_URL || '';
-
-export async function fetchTickets() {
-  const res = await axios.get(`${API_BASE}/support/tickets`, { withCredentials: true });
-  return res.data;
+export function fetchTickets(params = {}) {
+  return apiClient.get('/admin/support/tickets', { params }).then(res => res.data);
 }
 
-export async function createTicket(data) {
-  const res = await axios.post(`${API_BASE}/support/tickets`, data, { withCredentials: true });
-  return res.data;
+export function createTicket(data) {
+  return apiClient.post('/support/tickets', data).then(res => res.data);
 }
 
-export async function resolveTicket(id) {
-  const res = await axios.put(`${API_BASE}/support/tickets/${id}/resolve`, {}, { withCredentials: true });
-  return res.data;
+export function resolveTicket(ticketId, solution) {
+  return apiClient.post('/admin/support/resolve', { ticketId, solution }).then(res => res.data);
 }
 
-export async function fetchDisputes() {
-  const res = await axios.get(`${API_BASE}/support/disputes`, { withCredentials: true });
-  return res.data;
+export function fetchDisputes(params = {}) {
+  return apiClient.get('/admin/disputes', { params }).then(res => res.data);
 }
