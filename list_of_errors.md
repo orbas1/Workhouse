@@ -62,12 +62,7 @@ Resolved by cleaning up `frontend/index.html` and removing legacy script tags th
 
 ## Stage 7: Frontend script references (5)
 
-- `<script src="views/home_dashboard.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/live_feed.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/signup_userinfo.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/signup_page.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/home_dashboard.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/cv_cover_letter_page.js"> in "/index.html" can't be bundled without type="module" attribute`
+Resolved.
 
 ## Stage 8: Frontend script references (6)
 
