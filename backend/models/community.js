@@ -3,11 +3,12 @@ const { randomUUID } = require('crypto');
 const discussions = new Map();
 const comments = new Map();
 
-function createDiscussion(userId, { title, content, category }) {
+function createDiscussion(userId, { communityId, title, content, category }) {
   const id = randomUUID();
   const now = new Date();
   const discussion = {
     id,
+    communityId,
     title,
     content,
     category,
@@ -18,8 +19,11 @@ function createDiscussion(userId, { title, content, category }) {
   return discussion;
 }
 
-function getDiscussions(category) {
+function getDiscussions(category, communityId) {
   let result = Array.from(discussions.values());
+  if (communityId) {
+    result = result.filter((d) => d.communityId === communityId);
+  }
   if (category) {
     result = result.filter((d) => d.category === category);
   }

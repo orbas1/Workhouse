@@ -1,4 +1,5 @@
-import { Box, Heading, Text, Badge, VStack } from '@chakra-ui/react';
+import { Box, Heading, Text, Badge, VStack, Link as ChakraLink } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import '../styles/ProjectCard.css';
 
 export default function ProjectCard({ project }) {
@@ -7,14 +8,20 @@ export default function ProjectCard({ project }) {
   const budget = project.budget || { allocatedBudget: 0, totalSpent: 0, remainingBudget: 0 };
 
   return (
-    <Box borderWidth="1px" borderRadius="lg" p={4} className="project-card">
-      <Heading size="md" mb={2}>{project.name}</Heading>
-      <Text mb={2}>{project.description}</Text>
-      <VStack align="start" spacing={1}>
-        <Badge colorScheme="purple">Tasks: {tasksCount}</Badge>
-        <Badge colorScheme="green">Team: {teamCount}</Badge>
-        <Badge colorScheme="blue">Budget: ${budget.totalSpent}/{budget.allocatedBudget}</Badge>
-      </VStack>
-    </Box>
+    <ChakraLink
+      as={RouterLink}
+      to={`/tasks-workflow?projectId=${project.id}`}
+      _hover={{ textDecoration: 'none' }}
+    >
+      <Box borderWidth="1px" borderRadius="lg" p={4} className="project-card">
+        <Heading size="md" mb={2}>{project.name}</Heading>
+        <Text mb={2}>{project.description}</Text>
+        <VStack align="start" spacing={1}>
+          <Badge colorScheme="purple">Tasks: {tasksCount}</Badge>
+          <Badge colorScheme="green">Team: {teamCount}</Badge>
+          <Badge colorScheme="blue">Budget: ${budget.totalSpent}/{budget.allocatedBudget}</Badge>
+        </VStack>
+      </Box>
+    </ChakraLink>
   );
 }
