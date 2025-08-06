@@ -29,6 +29,7 @@ const {
   uploadFileHandler,
   getFileHandler,
   setupWorkflowHandler,
+  listWorkflowsHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
 } = require('../controllers/projectManagement');
@@ -110,6 +111,7 @@ router.get('/reports/:projectId', auth, validate(projectIdParamSchema, 'params')
 router.post('/files/upload', auth, validate(fileUploadSchema), uploadFileHandler);
 router.get('/files/:fileId', auth, validate(fileIdParamSchema, 'params'), getFileHandler);
 router.post('/workflows/setup', auth, validate(workflowSetupSchema), setupWorkflowHandler);
+router.get('/projects/:projectId/workflows', auth, validate(projectIdParamSchema, 'params'), projectExists, listWorkflowsHandler);
 
 // Miscellaneous
 router.get('/spreadsheets/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, getSpreadsheetHandler);

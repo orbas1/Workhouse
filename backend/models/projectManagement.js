@@ -184,6 +184,10 @@ function setupWorkflow({ projectId, steps }) {
   return workflow;
 }
 
+function listWorkflowsByProject(projectId) {
+  return Array.from(workflows.values()).filter((w) => w.projectId === projectId);
+}
+
 function storeSpreadsheet(projectId, url) {
   spreadsheets.set(projectId, { projectId, url });
 }
@@ -225,6 +229,7 @@ module.exports = {
   uploadFile,
   getFileById,
   setupWorkflow,
+  listWorkflowsByProject,
   storeSpreadsheet,
   getSpreadsheet,
   createText,

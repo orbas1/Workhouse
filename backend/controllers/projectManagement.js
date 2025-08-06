@@ -313,6 +313,17 @@ async function setupWorkflowHandler(req, res) {
   }
 }
 
+async function listWorkflowsHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const workflows = await service.listWorkflows(projectId);
+    res.json(workflows);
+  } catch (err) {
+    logger.error('Failed to list workflows', { error: err.message, projectId });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 async function getSpreadsheetHandler(req, res) {
   const { projectId } = req.params;
   try {
@@ -364,6 +375,7 @@ module.exports = {
   uploadFileHandler,
   getFileHandler,
   setupWorkflowHandler,
+  listWorkflowsHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
 };
