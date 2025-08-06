@@ -38,6 +38,9 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services/new')}>
         New Service
       </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/disputes/new')}>
+        Dispute
+      </Button>
       <Button variant="outline" color="white" onClick={handleLogout}>
         Logout
       </Button>
