@@ -6,6 +6,7 @@ const {
   listContracts,
   viewContractProposals,
   viewContractInvoices,
+  viewWorkSubmissions,
   acceptContractProposal,
   terminateContract,
   submitWorkForContract,
@@ -84,6 +85,16 @@ async function viewContractInvoicesHandler(req, res) {
   }
 }
 
+async function viewWorkSubmissionsHandler(req, res) {
+  try {
+    const submissions = await viewWorkSubmissions(req.params.contractId);
+    res.json(submissions);
+  } catch (err) {
+    logger.error('Failed to view contract work submissions', { error: err.message });
+    res.status(404).json({ error: err.message });
+  }
+}
+
 async function acceptContractProposalHandler(req, res) {
   try {
     const contract = await acceptContractProposal(
@@ -148,6 +159,7 @@ module.exports = {
   listContractsHandler,
   viewContractProposalsHandler,
   viewContractInvoicesHandler,
+  viewWorkSubmissionsHandler,
   acceptContractProposalHandler,
   terminateContractHandler,
   submitWorkForContractHandler,

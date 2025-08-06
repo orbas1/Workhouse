@@ -8,4 +8,10 @@ describe('contracts routes', () => {
     expect(content).toMatch(/express\.Router\(/);
     expect(content).toMatch(/module\.exports\s*=\s*router/);
   });
+
+  test('should include work submissions route', () => {
+    const filePath = path.join(__dirname, '../routes/contracts.js');
+    const content = fs.readFileSync(filePath, 'utf8');
+    expect(content).toMatch(/router\.get\('\/:contractId\/work'/);
+  });
 });

@@ -7,6 +7,7 @@ const {
   listContractsHandler,
   viewContractProposalsHandler,
   viewContractInvoicesHandler,
+  viewWorkSubmissionsHandler,
   acceptContractProposalHandler,
   terminateContractHandler,
   submitWorkForContractHandler,
@@ -40,6 +41,7 @@ router.post(
   validate(submitInvoiceSchema),
   submitInvoiceForContractHandler,
 );
+router.get('/:contractId/work', auth, viewWorkSubmissionsHandler);
 router.put('/:contractId/terminate', auth, validate(terminateContractSchema), terminateContractHandler);
 router.post('/:contractId/work/submit', auth, validate(submitWorkSchema), submitWorkForContractHandler);
 router.put('/:contractId/work/approve', auth, validate(approveWorkSchema), approveSubmittedWorkHandler);

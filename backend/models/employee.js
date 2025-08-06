@@ -12,14 +12,14 @@ const trainingAttendance = [];
 const compensationRecords = [];
 const benefitsCatalog = [
   { id: 1, name: 'Health Insurance' },
-  { id: 2, name: 'Retirement Plan' }
+  { id: 2, name: 'Retirement Plan' },
 ];
 const employeeBenefits = [];
 const feedbacks = [];
 const issues = [];
 const policies = [
   { id: 1, title: 'Code of Conduct' },
-  { id: 2, title: 'Privacy Policy' }
+  { id: 2, title: 'Privacy Policy' },
 ];
 const policyAcknowledgements = [];
 const surveys = [];
@@ -48,29 +48,5 @@ module.exports = {
   surveyResults,
   payrollIntegrations,
   safetyReports,
-  healthScreenings
-const { randomUUID } = require('crypto');
-
-const employees = new Map();
-
-function createEmployee({ name, email }) {
-  const id = randomUUID();
-  const employee = {
-    id,
-    name,
-    email,
-    status: 'active',
-    createdAt: new Date(),
-  };
-  employees.set(id, employee);
-  return employee;
-}
-
-function findById(id) {
-  return employees.get(id);
-}
-
-module.exports = {
-  createEmployee,
-  findById,
+  healthScreenings,
 };

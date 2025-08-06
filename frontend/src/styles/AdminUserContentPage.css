@@ -2,3 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
 }
+
+.admin-user-content-page .content-table {
+  margin-top: 1rem;
+}

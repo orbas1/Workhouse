@@ -3,14 +3,19 @@ import { useEffect, useState } from 'react';
 import NavMenu from '../components/NavMenu';
 import JobPostForm from '../components/JobPostForm';
 import JobList from '../components/JobList';
-import { fetchJobs, createJob, deleteJob } from '../api/jobs';
+import { fetchJobs, createJob, deleteJob } from '../src/api/jobs.js';
+import { useAuth } from '../src/context/AuthContext.jsx';
 import '../styles/JobPostManagement.css';
 
-export default function JobPostManagement({ agencyId }) {
+export default function JobPostManagement() {
+  const { user } = useAuth();
+  const agencyId = user?.username;
+  const isEmployer = user?.role === 'employer';
   const [jobs, setJobs] = useState([]);
   const toast = useToast();
 
   const loadJobs = async () => {
+    if (!agencyId) return;
     try {
       const data = await fetchJobs(agencyId);
       setJobs(data);
@@ -24,6 +29,7 @@ export default function JobPostManagement({ agencyId }) {
   }, [agencyId]);
 
   const handleCreate = async (form) => {
+    if (!agencyId) return;
     try {
       await createJob(agencyId, form);
       toast({ title: 'Job created', status: 'success' });
@@ -34,6 +40,7 @@ export default function JobPostManagement({ agencyId }) {
   };
 
   const handleDelete = async (id) => {
+    if (!agencyId) return;
     try {
       await deleteJob(agencyId, id);
       toast({ title: 'Job deleted', status: 'info' });
@@ -48,8 +55,8 @@ export default function JobPostManagement({ agencyId }) {
       <NavMenu />
       <Box className="job-post-management" p={4}>
         <Heading mb={4}>Job Post Management</Heading>
-        <JobPostForm onSubmit={handleCreate} />
-        <JobList jobs={jobs} onDelete={handleDelete} />
+        {isEmployer && <JobPostForm onSubmit={handleCreate} />}
+        <JobList jobs={jobs} onDelete={isEmployer ? handleDelete : undefined} />
       </Box>
     </ChakraProvider>
   );

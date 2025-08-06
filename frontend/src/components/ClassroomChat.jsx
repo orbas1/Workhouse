@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Box, VStack, Input, Button } from '@chakra-ui/react';
+import { Box, VStack, Input, Button, useToast } from '@chakra-ui/react';
 import { getMessages, sendMessage } from '../api/classrooms.js';
+import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/ClassroomChat.css';
 
 export default function ClassroomChat({ classroomId }) {
   const [messages, setMessages] = useState([]);
   const [content, setContent] = useState('');
+  const { user } = useAuth();
+  const toast = useToast();
 
   useEffect(() => {
     async function load() {
       try {
         const msgs = await getMessages(classroomId);
         setMessages(msgs);
-      } catch (err) {
-        console.error(err);
+      } catch {
+        toast({ title: 'Failed to load messages', status: 'error' });
       }
     }
     load();
-  }, [classroomId]);
+  }, [classroomId, toast]);
 
   async function handleSend() {
     if (!content.trim()) return;
     try {
-      const msg = await sendMessage(classroomId, { userId: 'me', content });
+      const msg = await sendMessage(classroomId, { userId: user?.id, content });
       setMessages((m) => [...m, msg]);
       setContent('');
-    } catch (err) {
-      console.error(err);
+    } catch {
+      toast({ title: 'Failed to send message', status: 'error' });
     }
   }
 
