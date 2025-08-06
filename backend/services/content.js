@@ -10,4 +10,12 @@ async function listContent(type) {
   return model.list(type);
 }
 
-module.exports = { createContent, listContent };
+async function updateContentStatus(id, status) {
+  return model.updateStatus(id, status);
+}
+
+async function deleteContent(id) {
+  return model.remove(id);
+}
+
+module.exports = { createContent, listContent, updateContentStatus, deleteContent };
