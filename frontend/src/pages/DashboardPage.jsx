@@ -49,6 +49,12 @@ export default function DashboardPage() {
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/service-orders')}>
         Manage Service Orders
       </Button>
+      <Button mb={4} colorScheme="blue" onClick={() => navigate('/stats')}>
+        View Analytics
+      </Button>
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/blog')}>
+        Visit Blog
+      </Button>
       <SimpleGrid columns={[1, 3]} spacing={4}>
         {'totalSpend' in data && (
           <Stat>
