@@ -140,6 +140,7 @@ const thirdPartyApiRoutes = require('./routes/thirdPartyApis');
 const adsRoutes = require('./routes/ads');
 const userSetupRoutes = require('./routes/userSetup');
 const interviewRoutes = require('./routes/interviews');
+const startupRoutes = require('./routes/startups');
 const settingsRoutes = require('./routes/settings');
 const simDashboardRoutes = require('./routes/simDashboard');
 const app = express();
@@ -293,6 +294,7 @@ app.use('/workspace', projectManagementRoutes);
 app.use('/ads', adsRoutes);
 app.use('/third-party', thirdPartyApiRoutes);
 app.use('/user-setup', userSetupRoutes);
+app.use('/startups', startupRoutes);
 app.use('/support', supportRoutes);
 app.use('/sim', simDashboardRoutes);
 
