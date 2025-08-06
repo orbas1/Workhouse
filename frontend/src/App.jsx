@@ -48,6 +48,7 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+import CourseModuleManagementPage from './pages/CourseModuleManagementPage.jsx';
 
 import DashboardPage from './pages/DashboardPage.jsx';
 import LiveFeedPage from './pages/LiveFeedPage.jsx';
@@ -142,7 +143,7 @@ export default function App() {
     // Education & Services
     { path: '/education', element: <EducationDashboard />, protected: true },
     { path: '/education/schedule', element: <ScheduleCalendarPage />, protected: true },
-    { path: '/education/courses', element: <PlaceholderPage title="Course & Module Management" />, protected: true },
+    { path: '/education/courses', element: <CourseModuleManagementPage />, protected: true },
     { path: '/courses', element: <PlaceholderPage title="Course Purchase & Details" />, protected: true },
     { path: '/classroom/:id', element: <ClassroomPage />, protected: true },
 

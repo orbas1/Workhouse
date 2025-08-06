@@ -8,6 +8,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Button,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -16,6 +17,7 @@ import {
   Progress,
   useToast
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import { fetchEducationOverview } from '../api/education';
 import '../styles/EducationDashboard.css';
@@ -41,6 +43,9 @@ export default function EducationDashboard() {
       <NavMenu />
       <Box className="education-dashboard" p={4}>
         <Heading mb={4}>Education Dashboard</Heading>
+        <Button as={Link} to="/education/courses" colorScheme="teal" mb={4}>
+          Manage Courses
+        </Button>
         <Tabs colorScheme="teal">
           <TabList>
             <Tab>Student</Tab>
