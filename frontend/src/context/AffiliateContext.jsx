@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import {
-  fetchAffiliate,
+  fetchAffiliateDashboard,
   fetchCommissionHistory,
   fetchCommissionRates,
   fetchPayoutHistory,
@@ -24,8 +24,8 @@ export function AffiliateProvider({ children }) {
 
   const loadDashboard = useCallback(async () => {
     if (!user) return;
-    const [affiliate, commissions, ratesData, payoutHist, refs, comps, notes] = await Promise.all([
-      fetchAffiliate(user.id),
+    const [dashboard, commissions, ratesData, payoutHist, refs, comps, notes] = await Promise.all([
+      fetchAffiliateDashboard(user.id),
       fetchCommissionHistory(user.id),
       fetchCommissionRates(),
       fetchPayoutHistory(user.id),
@@ -33,8 +33,13 @@ export function AffiliateProvider({ children }) {
       fetchCompetitions(user.id),
       fetchNotifications(user.id),
     ]);
-    const earnings = commissions.reduce((sum, c) => sum + c.amount, 0);
-    setStats({ affiliate, commissions, earnings, referrals: refs.length });
+    const earnings = dashboard.earnings ?? commissions.reduce((sum, c) => sum + c.amount, 0);
+    setStats({
+      performance: dashboard.performance,
+      earnings,
+      referrals: dashboard.referrals ?? refs.length,
+      commissions,
+    });
     setPayouts(payoutHist);
     setRates(ratesData);
     setCompetitions(comps);

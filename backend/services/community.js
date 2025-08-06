@@ -3,12 +3,18 @@ const logger = require('../utils/logger');
 
 async function createDiscussion(userId, data) {
   const discussion = communityModel.createDiscussion(userId, data);
-  logger.info('Discussion created', { discussionId: discussion.id, userId });
+  logger.info('Discussion created', {
+    discussionId: discussion.id,
+    userId,
+    communityId: data.communityId,
+  });
   return discussion;
 }
 
-async function listDiscussions(category) {
-  return communityModel.getDiscussions(category);
+async function listDiscussions(category, communityId) {
+  const result = communityModel.getDiscussions(category, communityId);
+  logger.info('Discussions fetched', { count: result.length, category, communityId });
+  return result;
 }
 
 async function createComment(userId, data) {

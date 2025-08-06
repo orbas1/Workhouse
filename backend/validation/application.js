@@ -14,7 +14,10 @@ const opportunityIdParamSchema = Joi.object({
 });
 
 const statusUpdateSchema = Joi.object({
-  status: Joi.string().valid('pending', 'accepted', 'rejected').required(),
+  status: Joi.string()
+    .valid('pending', 'accepted', 'rejected', 'completed')
+    .required(),
+  certificateUrl: Joi.string().uri().optional(),
 });
 
 module.exports = {

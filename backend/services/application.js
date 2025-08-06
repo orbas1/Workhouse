@@ -15,8 +15,8 @@ async function listApplicationsForOpportunity(opportunityId) {
   return applicationModel.getApplicationsByOpportunity(opportunityId);
 }
 
-async function updateApplicationStatus(applicationId, status) {
-  const updated = applicationModel.updateApplicationStatus(applicationId, status);
+async function updateApplicationStatus(applicationId, status, certificateUrl) {
+  const updated = applicationModel.updateApplicationStatus(applicationId, status, certificateUrl);
   if (!updated) {
     logger.error('Attempted to update non-existent application', { applicationId });
     return null;
@@ -29,10 +29,26 @@ async function getApplicationById(applicationId) {
   return applicationModel.getApplicationById(applicationId);
 }
 
+async function deleteApplication(applicationId) {
+  const removed = applicationModel.deleteApplication(applicationId);
+  if (removed) {
+    logger.info('Application withdrawn', { applicationId });
+  } else {
+    logger.error('Attempted to withdraw non-existent application', { applicationId });
+  }
+  return removed;
+}
+
+async function listCompletedApplicationsForUser(userId) {
+  return applicationModel.getCompletedApplicationsByUser(userId);
+}
+
 module.exports = {
   applyForOpportunity,
   listApplicationsForUser,
   listApplicationsForOpportunity,
   updateApplicationStatus,
   getApplicationById,
+  deleteApplication,
+  listCompletedApplicationsForUser,
 };
