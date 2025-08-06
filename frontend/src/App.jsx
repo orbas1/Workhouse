@@ -62,6 +62,7 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+import NetworkingDashboardPage from './pages/NetworkingDashboardPage.jsx';
 import CourseModuleManagementPage from './pages/CourseModuleManagementPage.jsx';
 import StatsAnalyticsPage from './pages/StatsAnalyticsPage.jsx';
 import BlogHomePage from './pages/BlogHomePage.jsx';
@@ -206,7 +207,7 @@ export default function App() {
     { path: '/community/:communityId', element: <GatedCommunityPage />, protected: true },
 
     // Networking
-    { path: '/networking', element: <PlaceholderPage title="Networking Dashboard" />, protected: true },
+    { path: '/networking', element: <NetworkingDashboardPage />, protected: true },
     { path: '/sessions', element: <NetworkingSessions />, protected: true },
     { path: '/networking/session/:sessionId', element: <InSessionNetworking />, protected: true },
     { path: '/session-management', element: <SessionManagementPage />, protected: true },

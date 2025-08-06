@@ -10,11 +10,13 @@ async function request(path, options = {}) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
+
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   if (!res.ok) {
     const message = await res.text();
     throw new Error(message || 'Request failed');
   }
+  if (res.status === 204) return {};
   return res.json();
 }
 
@@ -62,4 +64,21 @@ export function getNextOneMinuteMatch(eventId) {
 export function getSessionMetrics(sessionId) {
   return request(`/communicationTools/analytics/${sessionId}`);
 }
+
+export function getNetworkingDashboard() {
+  return request('/events/networking');
+}
+
+export default {
+  fetchNetworkingEvents,
+  attendNetworkingEvent,
+  startVideo,
+  endVideo,
+  exchangeContact,
+  rateMatch,
+  getNextOneMinuteMatch,
+  getSessionMetrics,
+  getNetworkingDashboard,
+};
+
 

@@ -7,6 +7,8 @@ async function request(path, options = {}) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
+
+  const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
   const res = await fetch(`${API_BASE_URL}/opportunities${path}`, { ...options, headers });
   if (!res.ok) {
     const message = await res.text();
@@ -22,29 +24,45 @@ export function listOpportunities(params = {}) {
 }
 
 export function getOpportunity(id) {
+  return request(`/opportunities/${id}`);
+}
+
+export function fetchOpportunities(query = '') {
+  const q = query ? `?${query}` : '';
+  return request(`/opportunities${q}`);
   return request(`/${id}`);
 }
 
 export function createOpportunity(data) {
-  return request('', {
+  return request('/opportunities', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 }
 
 export function updateOpportunity(id, data) {
-  return request(`/${id}`, {
+  return request(`/opportunities/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
 }
 
 export function deleteOpportunity(id) {
-  return request(`/${id}`, { method: 'DELETE' });
+  return request(`/opportunities/${id}`, { method: 'DELETE' });
 }
 
 export function fetchOpportunityDashboard() {
-  return request('/dashboard');
+  return request('/opportunities/dashboard');
 }
+
+export default {
+  listOpportunities,
+  getOpportunity,
+  fetchOpportunities,
+  createOpportunity,
+  updateOpportunity,
+  deleteOpportunity,
+  fetchOpportunityDashboard,
+};
 
 window.opportunitiesAPI = { listOpportunities, getOpportunity };
