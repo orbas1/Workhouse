@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, SimpleGrid, Stat, StatLabel, StatNumber, Spinner, Button, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Spinner,
+  Button
+} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/DashboardPage.css';
 import { getDashboard } from '../api/dashboard.js';
@@ -48,6 +58,44 @@ export default function DashboardPage() {
       <SimpleGrid columns={[1, 3]} spacing={4}>
         {'totalSpend' in data && (
           <Stat borderWidth="1px" borderRadius="md" p={4}>
+      <Button mb={4} colorScheme="purple" onClick={() => navigate('/profile/customize')}>
+        Customize Profile
+      </Button>
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
+        View Live Feed
+      </Button>
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/connections')}>
+        Manage Connections
+      <Button mb={4} colorScheme="purple" onClick={() => navigate('/sim-dashboard')}>
+        Startup/Investor/Mentor Hub
+      <Button mb={4} colorScheme="purple" onClick={() => navigate('/startups/analytics')}>
+        Startup Analytics
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/community')}>
+        My Community
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/notifications')}>
+        Message Notifications
+      </Button>
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/service-orders')}>
+        Manage Service Orders
+      </Button>
+      <Button mb={4} colorScheme="blue" onClick={() => navigate('/billing')}>
+        Billing & Subscription
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/articles')}>
+        Read Blog
+      <Button mb={4} colorScheme="blue" onClick={() => navigate('/stats')}>
+        View Analytics
+      </Button>
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/blog')}>
+        Visit Blog
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/disputes')}>
+        Dispute Dashboard
+      </Button>
+      <Button mb={4} colorScheme="red" onClick={() => navigate('/disputes/new')}>
+        File a Dispute
+      </Button>
+      <SimpleGrid columns={[1, 3]} spacing={4}>
+        {'totalSpend' in data && (
+          <Stat>
             <StatLabel>Total Spend</StatLabel>
             <StatNumber>${data.totalSpend}</StatNumber>
           </Stat>
@@ -70,3 +118,4 @@ export default function DashboardPage() {
     </Box>
   );
 }
+

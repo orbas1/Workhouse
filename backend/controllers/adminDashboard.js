@@ -1,18 +1,22 @@
 const { users } = require('../models/user');
-const { listJobs } = require('../models/job');
-const { searchGigs } = require('../models/gig');
-const { listAll: listContracts } = require('../models/contract');
+const supportTickets = require('../models/supportTicket');
+const disputes = require('../models/dispute');
+const flaggedContent = require('../models/flaggedContent');
 
 /**
  * Provide high level site metrics for the admin dashboard.
- * Requires prior authentication and admin role enforcement in route middleware.
+ * Requires prior authentication and role-based authorization in route middleware.
  */
 function adminDashboardHandler(req, res) {
   const overview = {
-    totalUsers: users.length,
-    totalJobs: listJobs().length,
-    totalGigs: searchGigs({}).length,
-    totalContracts: listContracts().length,
+    activeUsers: users.length,
+    flaggedContent: flaggedContent.listFlags('pending').length,
+    openTickets: supportTickets
+      .findAll()
+      .filter((t) => t.status !== 'resolved').length,
+    activeDisputes: disputes
+      .findAll()
+      .filter((d) => d.status !== 'resolved').length,
   };
   res.json(overview);
 }

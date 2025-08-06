@@ -4,6 +4,8 @@ const {
   listApplicationsForOpportunity,
   updateApplicationStatus,
   getApplicationById,
+  deleteApplication,
+  listCompletedApplicationsForUser,
 } = require('../services/application');
 const logger = require('../utils/logger');
 
@@ -42,9 +44,9 @@ async function getOpportunityApplicationsHandler(req, res) {
 
 async function updateApplicationStatusHandler(req, res) {
   const { applicationId } = req.params;
-  const { status } = req.body;
+  const { status, certificateUrl } = req.body;
   try {
-    const updated = await updateApplicationStatus(applicationId, status);
+    const updated = await updateApplicationStatus(applicationId, status, certificateUrl);
     if (!updated) {
       logger.error('Application not found for status update', { applicationId });
       return res.status(404).json({ error: 'Application not found' });
@@ -56,9 +58,36 @@ async function updateApplicationStatusHandler(req, res) {
   }
 }
 
+async function deleteApplicationHandler(req, res) {
+  const { applicationId } = req.params;
+  try {
+    const removed = await deleteApplication(applicationId);
+    if (!removed) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    res.status(204).send();
+  } catch (err) {
+    logger.error('Failed to delete application', { error: err.message, applicationId });
+    res.status(500).json({ error: 'Unable to delete application' });
+  }
+}
+
+async function getCompletedApplicationsHandler(req, res) {
+  const userId = req.user?.id || req.user?.username;
+  try {
+    const applications = await listCompletedApplicationsForUser(userId);
+    res.json(applications);
+  } catch (err) {
+    logger.error('Failed to fetch completed applications', { error: err.message, userId });
+    res.status(500).json({ error: 'Unable to fetch applications' });
+  }
+}
+
 module.exports = {
   createApplicationHandler,
   getUserApplicationsHandler,
   getOpportunityApplicationsHandler,
   updateApplicationStatusHandler,
+  deleteApplicationHandler,
+  getCompletedApplicationsHandler,
 };

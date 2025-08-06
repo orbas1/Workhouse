@@ -62,7 +62,9 @@ function getQuestions(id) {
 }
 
 function listByType(type) {
-  return Array.from(events.values()).filter(e => e.type === type);
+  return Array.from(events.values()).filter((e) => e.type === type);
+}
+
 function findByHost(hostId) {
   return Array.from(events.values()).filter((e) => e.hostId === hostId);
 }

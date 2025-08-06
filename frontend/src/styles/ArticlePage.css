@@ -11,3 +11,12 @@
 .comment-section {
   margin-top: 2rem;
 }
+
+.related-post {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.related-post:hover {
+  background-color: #f7fafc;
+}
