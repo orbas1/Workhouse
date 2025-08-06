@@ -1,0 +1,15 @@
+.podcast-player {
+  background-color: #f9f9f9;
+}
+
+.podcast-list {
+  cursor: pointer;
+}
+
+.podcast-item:hover {
+  background-color: #e2e8f0;
+}
+
+.podcast-current iframe {
+  border: none;
+}

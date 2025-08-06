@@ -63,6 +63,12 @@ function getQuestions(id) {
 
 function listByType(type) {
   return Array.from(events.values()).filter(e => e.type === type);
+function findByHost(hostId) {
+  return Array.from(events.values()).filter((e) => e.hostId === hostId);
+}
+
+function findByAttendee(userId) {
+  return Array.from(events.values()).filter((e) => e.attendees.has(userId));
 }
 
 module.exports = {
@@ -74,4 +80,6 @@ module.exports = {
   addQuestion,
   getQuestions,
   listByType,
+  findByHost,
+  findByAttendee,
 };

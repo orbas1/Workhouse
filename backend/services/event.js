@@ -60,6 +60,16 @@ async function attendNetworkingEvent(eventId, userId) {
   eventModel.addAttendee(eventId, userId);
   logger.info('User attending networking event', { eventId, userId });
   return { success: true };
+async function listNetworkingEventsForHost(hostId) {
+  return eventModel
+    .findByHost(hostId)
+    .filter((e) => e.type === 'networking');
+}
+
+async function listNetworkingEventsForUser(userId) {
+  return eventModel
+    .findByAttendee(userId)
+    .filter((e) => e.type === 'networking');
 }
 
 async function createWorkshopEvent(data, hostId) {
@@ -99,6 +109,8 @@ module.exports = {
   getNetworkingEvent,
   listNetworkingEvents,
   attendNetworkingEvent,
+  listNetworkingEventsForHost,
+  listNetworkingEventsForUser,
   createWorkshopEvent,
   getWorkshopEvent,
   submitQuestion,

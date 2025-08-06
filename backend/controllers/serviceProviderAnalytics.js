@@ -12,6 +12,30 @@ exports.getAnalytics = (req, res) => {
   }
 };
 
+exports.createService = (req, res) => {
+  try {
+    const created = service.createService(req.user.id, req.validatedBody);
+    res.status(201).json(created);
+  } catch (err) {
+    logger.error('Failed to create service', err);
+    res.status(500).json({ error: 'Unable to create service' });
+  }
+};
+
+exports.updateService = (req, res) => {
+  try {
+    const { serviceId } = req.params;
+    const updated = service.updateService(req.user.id, serviceId, req.validatedBody);
+    if (!updated) {
+      return res.status(404).json({ error: 'Service not found or unauthorized' });
+    }
+    res.json(updated);
+  } catch (err) {
+    logger.error('Failed to update service', err);
+    res.status(500).json({ error: 'Unable to update service' });
+  }
+};
+
 exports.updatePricing = (req, res) => {
   try {
     const { serviceId } = req.params;

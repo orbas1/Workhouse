@@ -44,6 +44,7 @@ router.post('/networking/create', auth, validate(networkingEventSchema), investo
 router.get('/networking', investorEventController.listNetworkingEvents);
 router.get('/networking/:eventId', eventItemExists, investorEventController.getNetworkingEvent);
 router.post('/networking/attend/:eventId', auth, eventItemExists, investorEventController.attendNetworkingEvent);
+router.get('/networking', auth, investorEventController.listNetworkingEvents);
 
 router.post('/workshop/create', auth, validate(workshopEventSchema), investorEventController.createWorkshop);
 router.get('/workshop/:eventId', eventItemExists, investorEventController.getWorkshop);

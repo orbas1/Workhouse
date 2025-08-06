@@ -12,3 +12,13 @@ CREATE TABLE IF NOT EXISTS podcast_analytics (
   engagement JSONB,
   collected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS podcast_playback_events (
+  id SERIAL PRIMARY KEY,
+  podcast_id UUID NOT NULL,
+  user_id UUID NOT NULL,
+  played_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_podcast_playback_podcast_id
+  ON podcast_playback_events (podcast_id);
