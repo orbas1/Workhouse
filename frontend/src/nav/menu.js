@@ -38,6 +38,7 @@ export const menu = [
       { label: 'Workspace Projects', path: '/workspace/projects' },
       { label: 'Workspace Files', path: '/workspace/files' },
       { label: 'Proposals & Invoices', path: '/proposals-invoices' },
+      { label: 'Products', path: '/products' },
       { label: 'Freelancer Search', path: '/freelancers' },
       { label: 'Orders', path: '/orders' },
       { label: 'Payments', path: '/payments' },
