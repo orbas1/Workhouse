@@ -62,9 +62,11 @@ function LandingPage() {
       <Box as="footer" className="landing-footer" py={8} textAlign="center" bg="gray.800" color="white">
         <Stack spacing={2} align="center">
           <Stack direction="row" spacing={4}>
+            <a href="#">Terms &amp; Conditions</a>
             <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Help Center</a>
+            <a href="#">Support Centre</a>
+            <a href="#">About Us</a>
+            <a href="#">For Investors</a>
           </Stack>
           <Text>&copy; {new Date().getFullYear()} Workhouse</Text>
         </Stack>
