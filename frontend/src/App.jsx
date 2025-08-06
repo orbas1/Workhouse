@@ -8,6 +8,8 @@ import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
+import SearchConnectionPage from './pages/SearchConnectionPage.jsx';
+import StartupProfilePlanPage from './pages/StartupProfilePlanPage.jsx';
 import NotificationSettingsPage from './pages/NotificationSettingsPage.jsx';
 import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
@@ -25,6 +27,7 @@ import TaskWorkflowPage from './pages/TaskWorkflowPage.jsx';
 import ExperienceDashboardPage from './pages/ExperienceDashboardPage.jsx';
 import OpportunityManagementPage from './pages/OpportunityManagementPage.jsx';
 import VolunteerTrackingPage from './pages/VolunteerTrackingPage.jsx';
+import OpportunitySearchPage from './pages/OpportunitySearchPage.jsx';
 import ClassroomPage from './pages/ClassroomPage.jsx';
 import ScheduleCalendarPage from './pages/ScheduleCalendarPage.jsx';
 import EducationSchedulePage from './pages/EducationSchedulePage.jsx';
@@ -42,9 +45,11 @@ import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
 import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import AffiliateManagementPage from './pages/AffiliateManagementPage.jsx';
 import AdsDashboardPage from './pages/AdsDashboardPage.jsx';
+import SharedUserInteractionPage from './pages/SharedUserInteractionPage.jsx';
 import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
+import GatedCommunityPage from './pages/GatedCommunityPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import InstallationWizardPage from './pages/InstallationWizardPage.jsx';
 import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
@@ -58,6 +63,7 @@ import LiveFeedPage from './pages/LiveFeedPage.jsx';
 import EmploymentDashboardPage from './pages/EmploymentDashboardPage.jsx';
 import ApplicationInterviewManagementPage from './pages/ApplicationInterviewManagementPage.jsx';
 import HeadhunterDashboardPage from './pages/HeadhunterDashboardPage.jsx';
+import LiveEngagementAnalyticsPage from './pages/LiveEngagementAnalyticsPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -131,6 +137,7 @@ export default function App() {
     { path: '/orders', element: <OrderManagementPage />, protected: true },
     { path: '/payments', element: <PaymentPage />, protected: true },
     { path: '/ads', element: <AdsDashboardPage />, protected: true },
+    { path: '/ads/interactions', element: <SharedUserInteractionPage />, protected: true },
     { path: '/ads/create', element: <AdCreateEdit />, protected: true },
     { path: '/ads/:adId/edit', element: <AdCreateEdit />, protected: true },
 
@@ -161,12 +168,17 @@ export default function App() {
     { path: '/tasks/schedule', element: <TaskSchedulePage />, protected: true },
     { path: '/tasks-workflow', element: <TaskWorkflowPage />, protected: true },
     { path: '/experience', element: <ExperienceDashboardPage />, protected: true },
+    { path: '/opportunities', element: <OpportunitySearchPage />, protected: true },
     { path: '/opportunities/manage', element: <OpportunityManagementPage />, protected: true },
     { path: '/volunteer-applications', element: <VolunteerTrackingPage />, protected: true },
 
     // Volunteering
     { path: '/volunteering', element: <PlaceholderPage title="Volunteering Dashboard" />, protected: true },
     { path: '/volunteer/opportunities', element: <VolunteerOpportunitySearchPage />, protected: true },
+
+    // Community
+    { path: '/community', element: <GatedCommunityPage />, protected: true },
+    { path: '/community/:communityId', element: <GatedCommunityPage />, protected: true },
 
     // Networking
     { path: '/networking', element: <PlaceholderPage title="Networking Dashboard" />, protected: true },
@@ -185,6 +197,9 @@ export default function App() {
 
     // Startup Ecosystem
     { path: '/startups/profile-plan', element: <PlaceholderPage title="Startup Profile & Plan" />, protected: true },
+    { path: '/startups/analytics', element: <LiveEngagementAnalyticsPage />, protected: true },
+    { path: '/startups/profile-plan', element: <StartupProfilePlanPage />, protected: true },
+    { path: '/startups/search', element: <SearchConnectionPage />, protected: true },
 
     // Workspace & Projects
     { path: '/workspace', element: <WorkspaceDashboard />, protected: true },
@@ -206,7 +221,7 @@ export default function App() {
     { path: '/disputes/new', element: <DisputeFormPage />, protected: true },
     { path: '/disputes/:disputeId/respond', element: <DisputeFormPage />, protected: true },
     { path: '/disputes/:disputeId?', element: <DisputeManagementPage />, protected: true },
-    { path: '/support', element: <SupportDisputePage />, protected: true },
+    { path: '/admin/support', element: <SupportDisputePage />, admin: true },
     { path: '/admin', element: <AdminDashboard />, admin: true },
     { path: '/admin/analytics', element: <AnalyticsAuditPage />, admin: true },
     { path: '/admin/system-settings', element: <SystemSettingsEmployeeManagement />, admin: true },

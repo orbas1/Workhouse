@@ -20,9 +20,8 @@ export async function createDispute(data) {
   return dispute;
 }
 
-export async function respondToDispute(disputeId, data) {
-  const { data: dispute } = await apiClient.post(`/disputes/${disputeId}/respond`, data);
-  return dispute;
+export function createDispute(data) {
+  return apiClient.post('/disputes/create', data).then(res => res.data);
 }
 
 export default {
@@ -33,3 +32,14 @@ export default {
   respondToDispute,
 };
 
+export function respondToDispute(disputeId, data) {
+  return apiClient.post(`/disputes/${disputeId}/respond`, data).then(res => res.data);
+}
+
+export function resolveDispute(disputeId, data = {}) {
+  return apiClient.put(`/disputes/${disputeId}/resolve`, data).then(res => res.data);
+}
+
+export function postDisputeMessage(disputeId, message) {
+  return apiClient.post(`/disputes/${disputeId}/messages`, { message }).then(res => res.data);
+}
