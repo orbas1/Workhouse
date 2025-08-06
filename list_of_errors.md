@@ -96,12 +96,7 @@ vite v5.4.19 building for production...
 
 ## Stage 10: Frontend script references (8)
 
-- `<script src="api/profile.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/resume.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/employment.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/profile_customization.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/financial_media_setup.js"> in "/index.html" can't be bundled without type="module" attribute`
+Resolved by removing redundant script tags from `frontend/index.html`.
 
 ## Stage 11: Frontend script references (9)
 
