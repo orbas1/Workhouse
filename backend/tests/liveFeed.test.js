@@ -7,5 +7,8 @@ describe('liveFeed routes', () => {
     const content = fs.readFileSync(filePath, 'utf8');
     expect(content).toMatch(/express\.Router\(/);
     expect(content).toMatch(/module\.exports\s*=\s*router/);
+    expect(content).toMatch(/posts\/:postId\/comments/);
+    expect(content).toMatch(/posts\/:postId\/share/);
+    expect(content).toMatch(/posts\/:postId\/report/);
   });
 });
