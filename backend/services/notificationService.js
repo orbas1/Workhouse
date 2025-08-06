@@ -1,4 +1,4 @@
-const { createNotification } = require('../models/notification');
+const { createNotification, getNotificationsByAffiliate } = require('../models/notification');
 
 /**
  * Send a notification to an affiliate about a commission rate change.
@@ -16,4 +16,5 @@ async function sendRateChangeNotification(affiliateId, oldRate, newRate) {
 
 module.exports = {
   sendRateChangeNotification,
+  listNotifications: getNotificationsByAffiliate,
 };
