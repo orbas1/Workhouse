@@ -31,34 +31,14 @@ export default function DashboardPage() {
   return (
     <Box className="dashboard-page">
       <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
+      <Button mb={4} colorScheme="teal" onClick={() => navigate('/ads')}>
+        Go to Ads Dashboard
+      </Button>
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
         View Live Feed
       </Button>
-      <SimpleGrid columns={[1, 3]} spacing={4}>
+      <SimpleGrid columns={[1, 2, 4]} spacing={4}>
         {'totalSpend' in data && (
-      <NavBar />
-      <NavMenu />
-      <Box p={4}>
-        <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
-        <Button mb={4} colorScheme="purple" onClick={() => navigate('/install')}>
-          Run Installation Wizard
-        </Button>
-        <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
-          View Live Feed
-        </Button>
-        <SimpleGrid columns={[1, 3]} spacing={4}>
-          {'totalSpend' in data && (
-            <Stat>
-              <StatLabel>Total Spend</StatLabel>
-              <StatNumber>${data.totalSpend}</StatNumber>
-            </Stat>
-          )}
-          {'totalEarnings' in data && (
-            <Stat>
-              <StatLabel>Total Earnings</StatLabel>
-              <StatNumber>${data.totalEarnings}</StatNumber>
-            </Stat>
-          )}
           <Stat>
             <StatLabel>Total Spend</StatLabel>
             <StatNumber>${data.totalSpend}</StatNumber>
@@ -82,3 +62,4 @@ export default function DashboardPage() {
     </Box>
   );
 }
+

@@ -43,7 +43,7 @@ export const menu = [
       { label: 'Schedule', path: '/schedule' },
       { label: 'Experience', path: '/experience' },
       { label: 'Calendar', path: '/calendar' },
-      { label: 'Ads & Billing', path: '/ads' },
+      { label: 'Ads Dashboard', path: '/ads' },
       { label: 'Create Ad', path: '/ads/create' },
       { label: 'Analytics', path: '/analytics' },
       { label: 'Creator Dashboard', path: '/creator/dashboard' },
