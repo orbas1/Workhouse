@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, SimpleGrid, Stat, StatLabel, StatNumber, Spinner, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Spinner,
+  HStack,
+  Switch,
+  Text
+} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/DashboardPage.css';
 import { getDashboard } from '../api/dashboard.js';
@@ -16,7 +27,8 @@ export default function DashboardPage() {
       try {
         const dashboard = await getDashboard(user?.role);
         setData(dashboard);
-      } catch {
+      } catch (err) {
+        console.error('Failed to load dashboard', err);
         setData(null);
       } finally {
         setLoading(false);
@@ -25,60 +37,48 @@ export default function DashboardPage() {
     if (user) load();
   }, [user]);
 
-  if (loading) return <Spinner />;
-  if (!data) return <Box p={4}>Unable to load dashboard.</Box>;
+  if (loading) {
+    return (
+      <Box className="dashboard-page" display="flex" alignItems="center" justifyContent="center">
+        <Spinner />
+      </Box>
+    );
+  }
+
+  if (!data) {
+    return <Box p={4}>Unable to load dashboard.</Box>;
+  }
+
+  const stats = [
+    { key: 'totalSpend', label: 'Total Spend', prefix: '$' },
+    { key: 'totalEarnings', label: 'Total Earnings', prefix: '$' },
+    { key: 'activeContracts', label: 'Active Contracts' },
+    { key: 'pendingProposals', label: 'Pending Proposals' }
+  ];
 
   return (
-    <Box className="dashboard-page">
-      <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
-      <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
-        View Live Feed
-      </Button>
-      <SimpleGrid columns={[1, 3]} spacing={4}>
-        {'totalSpend' in data && (
-      <NavBar />
-      <NavMenu />
-      <Box p={4}>
-        <Heading mb={4}>Welcome back, {user?.name || user?.username}</Heading>
-        <Button mb={4} colorScheme="purple" onClick={() => navigate('/install')}>
-          Run Installation Wizard
-        </Button>
-        <Button mb={4} colorScheme="teal" onClick={() => navigate('/feed')}>
-          View Live Feed
-        </Button>
-        <SimpleGrid columns={[1, 3]} spacing={4}>
-          {'totalSpend' in data && (
-            <Stat>
-              <StatLabel>Total Spend</StatLabel>
-              <StatNumber>${data.totalSpend}</StatNumber>
+    <Box className="dashboard-page" p={4}>
+      <HStack justify="space-between" mb={6} align="center">
+        <Heading size="lg">Welcome back, {user?.name || user?.username}</Heading>
+        <HStack>
+          <Text>Feed</Text>
+          <Switch colorScheme="teal" onChange={() => navigate('/feed')} aria-label="Toggle live feed" />
+        </HStack>
+      </HStack>
+      <SimpleGrid columns={[1, 2, 4]} spacing={4}>
+        {stats.map((s) =>
+          s.key in data ? (
+            <Stat key={s.key} p={4} shadow="sm" borderWidth="1px" borderRadius="md" bg="white">
+              <StatLabel>{s.label}</StatLabel>
+              <StatNumber>
+                {s.prefix || ''}
+                {data[s.key]}
+              </StatNumber>
             </Stat>
-          )}
-          {'totalEarnings' in data && (
-            <Stat>
-              <StatLabel>Total Earnings</StatLabel>
-              <StatNumber>${data.totalEarnings}</StatNumber>
-            </Stat>
-          )}
-          <Stat>
-            <StatLabel>Total Spend</StatLabel>
-            <StatNumber>${data.totalSpend}</StatNumber>
-          </Stat>
+          ) : null
         )}
-        {'totalEarnings' in data && (
-          <Stat>
-            <StatLabel>Total Earnings</StatLabel>
-            <StatNumber>${data.totalEarnings}</StatNumber>
-          </Stat>
-        )}
-        <Stat>
-          <StatLabel>Active Contracts</StatLabel>
-          <StatNumber>{data.activeContracts}</StatNumber>
-        </Stat>
-        <Stat>
-          <StatLabel>Pending Proposals</StatLabel>
-          <StatNumber>{data.pendingProposals}</StatNumber>
-        </Stat>
       </SimpleGrid>
     </Box>
   );
 }
+

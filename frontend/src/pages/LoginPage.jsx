@@ -10,14 +10,16 @@ import {
   Input,
   Link,
   Stack,
-  useToast
+  useToast,
+  Divider
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { loginWithProvider } from '../api/auth.js';
 import '../styles/LoginPage.css';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
@@ -28,7 +30,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      await login(username, password);
+      await login(email, password);
       navigate('/dashboard');
     } catch (err) {
       toast({ title: 'Login failed', status: 'error', description: err.message });
@@ -43,9 +45,9 @@ export default function LoginPage() {
         <Heading mb={6} textAlign="center">Login</Heading>
         <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
-            <FormControl id="username" isRequired>
+            <FormControl id="email" isRequired>
               <FormLabel>Email</FormLabel>
-              <Input type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
@@ -56,6 +58,12 @@ export default function LoginPage() {
               Login
             </Button>
             <Link color="teal.500" href="#">Forgot Password?</Link>
+            <Divider />
+            <Stack spacing={2} className="social-login-buttons">
+              <Button variant="outline" onClick={() => loginWithProvider('google')}>Login with Google</Button>
+              <Button variant="outline" onClick={() => loginWithProvider('linkedin')}>Login with LinkedIn</Button>
+              <Button variant="outline" onClick={() => loginWithProvider('facebook')}>Login with Facebook</Button>
+            </Stack>
             <Link color="teal.500" onClick={() => navigate('/signup')}>Create an account</Link>
           </Stack>
         </form>

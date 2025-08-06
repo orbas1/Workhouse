@@ -1,8 +1,4 @@
 .dashboard-page {
-  display: flex;
   min-height: 100vh;
-}
-
-.dashboard-page > .chakra-box {
-  flex: 1;
+  background-color: #f7fafc;
 }
