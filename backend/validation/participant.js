@@ -9,6 +9,12 @@ const registerSchema = Joi.object({
 const preferencesSchema = Joi.object({
   topics: Joi.array().items(Joi.string()).default([]),
   goals: Joi.string().max(500).allow('', null),
+  field: Joi.string().allow('', null),
+  isPaid: Joi.boolean().optional(),
+  employmentType: Joi.string().valid('freelance', 'employment').optional(),
+  offering: Joi.string().allow('', null),
+  looking: Joi.boolean().optional(),
+  autoNotify: Joi.boolean().optional(),
 });
 
 const paymentSchema = Joi.object({

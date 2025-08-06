@@ -12,11 +12,14 @@ const opportunityQuerySchema = Joi.object({
   category: Joi.string().optional(),
   duration: Joi.string().optional(),
   experienceLevel: Joi.string().optional(),
-  status: Joi.string().valid('open', 'closed').optional(),
+  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
   keyword: Joi.string().optional(),
   compensationMin: Joi.number().optional(),
   compensationMax: Joi.number().optional(),
-  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
+  field: Joi.string().optional(),
+  offering: Joi.string().optional(),
+  isPaid: Joi.boolean().optional(),
+  employmentType: Joi.string().valid('freelance', 'employment').optional(),
   page: Joi.number().integer().min(1).default(1),
   limit: Joi.number().integer().min(1).max(100).default(10),
 });
@@ -35,7 +38,11 @@ const createOpportunitySchema = Joi.object({
   duration: Joi.string().allow('').optional(),
   compensation: Joi.number().optional(),
   experienceLevel: Joi.string().allow('').optional(),
-  status: Joi.string().valid('open', 'closed').optional(),
+  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
+  field: Joi.string().allow('').optional(),
+  offering: Joi.string().allow('').optional(),
+  isPaid: Joi.boolean().optional(),
+  employmentType: Joi.string().valid('freelance', 'employment').optional(),
 });
 
 const updateOpportunitySchema = createOpportunitySchema.fork(
@@ -54,13 +61,12 @@ const updateOpportunitySchema = createOpportunitySchema.fork(
     'compensation',
     'experienceLevel',
     'status',
+    'field',
+    'offering',
+    'isPaid',
+    'employmentType',
   ],
-  status: Joi.string().valid('open', 'in_progress', 'closed').optional(),
-});
-
-const updateOpportunitySchema = createOpportunitySchema.fork(
-  ['title', 'description', 'location', 'remote', 'commitmentTime', 'urgency', 'requirements', 'multimedia', 'isFeatured', 'status'],
-  (schema) => schema.optional()
+  schema => schema.optional()
 );
 
 module.exports = {
@@ -69,3 +75,4 @@ module.exports = {
   createOpportunitySchema,
   updateOpportunitySchema,
 };
+
