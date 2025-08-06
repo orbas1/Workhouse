@@ -51,7 +51,8 @@ CREATE TABLE workspace_calendar_events (
   project_id UUID REFERENCES workspace_projects(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   event_date DATE NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE workspace_budget_entries (

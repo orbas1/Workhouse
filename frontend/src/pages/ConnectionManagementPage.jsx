@@ -15,20 +15,19 @@ import '../styles/ConnectionManagementPage.css';
 
 export default function ConnectionManagementPage() {
   const [connections, setConnections] = useState([]);
-  const [form, setForm] = useState({ name: '', title: '', tags: '' });
-  const userId = localStorage.getItem('userId') || 'default-user';
+  const [form, setForm] = useState({ name: '', role: '', tags: '' });
 
   useEffect(() => {
     async function fetchConnections() {
       try {
-        const data = await getConnections(userId);
+        const data = await getConnections();
         setConnections(data);
       } catch (err) {
         console.error('Failed to load connections', err);
       }
     }
     fetchConnections();
-  }, [userId]);
+  }, []);
 
   const handleAdd = async () => {
     if (!form.name) return;
@@ -37,13 +36,13 @@ export default function ConnectionManagementPage() {
         .split(',')
         .map((t) => t.trim())
         .filter((t) => t);
-      const newConn = await addConnection(userId, {
+      const newConn = await addConnection({
         name: form.name,
-        title: form.title,
+        role: form.role,
         tags,
       });
       setConnections((prev) => [...prev, newConn]);
-      setForm({ name: '', title: '', tags: '' });
+      setForm({ name: '', role: '', tags: '' });
     } catch (err) {
       console.error('Failed to add connection', err);
     }
@@ -69,9 +68,9 @@ export default function ConnectionManagementPage() {
           mr={2}
         />
         <Input
-          placeholder="Title"
-          value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
+          placeholder="Role"
+          value={form.role}
+          onChange={(e) => setForm({ ...form, role: e.target.value })}
           mr={2}
         />
         <Input
@@ -90,7 +89,7 @@ export default function ConnectionManagementPage() {
             <Flex justify="space-between" align="center">
               <Box>
                 <Heading size="sm">{conn.name}</Heading>
-                <Text fontSize="sm">{conn.title}</Text>
+                <Text fontSize="sm">{conn.role}</Text>
                 <Flex mt={2} wrap="wrap">
                   {conn.tags &&
                     conn.tags.map((tag) => (

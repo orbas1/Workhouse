@@ -10,6 +10,7 @@ export const menu = [
       { label: 'Connections', path: '/connections' },
       { label: 'Support', path: '/support' },
       { label: 'Disputes', path: '/disputes' },
+      { label: 'File Dispute', path: '/disputes/new' },
       { label: 'Notifications', path: '/notifications' },
       { label: 'Settings', path: '/settings' }
     ]
@@ -27,6 +28,7 @@ export const menu = [
       { label: 'Gigs', path: '/gigs' },
       { label: 'Manage Gigs', path: '/gigs/manage' },
       { label: 'Discover Gigs', path: '/gigs/search' },
+      { label: 'Opportunities', path: '/opportunities' },
       { label: 'Opportunity Management', path: '/opportunities/manage' },
       { label: 'Volunteer Opportunities', path: '/volunteer/opportunities' },
       { label: 'Volunteer Tracking', path: '/volunteer-applications' },
@@ -44,10 +46,10 @@ export const menu = [
       { label: 'Service Orders', path: '/service-orders' },
       { label: 'Tasks', path: '/tasks' },
       { label: 'Tasks Workflow', path: '/tasks-workflow' },
-      { label: 'Schedule', path: '/schedule' },
+      { label: 'Schedule & Calendar', path: '/workspace/schedule' },
       { label: 'Experience', path: '/experience' },
-      { label: 'Calendar', path: '/calendar' },
       { label: 'Ads & Billing', path: '/ads' },
+      { label: 'Ad Interactions', path: '/ads/interactions' },
       { label: 'Create Ad', path: '/ads/create' },
       { label: 'Analytics', path: '/analytics' },
       { label: 'Creator Dashboard', path: '/creator/dashboard' },
@@ -56,6 +58,8 @@ export const menu = [
       { label: 'Content Library', path: '/content-library' },
       { label: 'Stats', path: '/stats' },
       { label: 'Startup Profile', path: '/startups/profile-plan' },
+      { label: 'Startup Analytics', path: '/startups/analytics' },
+      { label: 'Startup Search', path: '/startups/search' },
       { label: 'Financial & Media Setup', path: '/setup/financial-media' },
       { label: 'Onboarding Documents', path: '/onboarding/documents' }
     ]
@@ -77,6 +81,7 @@ export const menu = [
       { label: 'Sessions', path: '/sessions' },
       { label: 'Networking', path: '/networking' },
       { label: 'Networking Session', path: '/networking/session/1' },
+      { label: 'My Community', path: '/community' },
       { label: 'Blog', path: '/blog' },
       { label: 'Articles', path: '/articles' }
     ]
@@ -86,7 +91,9 @@ export const menu = [
     items: [
       { label: 'Admin Dashboard', path: '/admin' },
       { label: 'Admin Analytics', path: '/admin/analytics' },
+      { label: 'User & Content', path: '/admin/users-content' },
       { label: 'Admin Settings', path: '/admin/system-settings' },
+            { label: 'Support & Disputes', path: '/admin/support' },
       { label: 'Affiliates', path: '/affiliates' },
       { label: 'Sim Dashboard', path: '/sim-dashboard' },
       { label: 'Install Wizard', path: '/install' }
