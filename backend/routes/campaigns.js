@@ -3,6 +3,7 @@ const {
   createCampaignHandler,
   listCampaignsHandler,
   getCampaignHandler,
+  updateCampaignHandler,
 } = require('../controllers/campaign');
 const auth = require('../middleware/auth');
 const validate = require('../middleware/validate');
@@ -23,6 +24,14 @@ router.get(
   validate(campaignIdParamSchema, 'params'),
   campaignExists,
   getCampaignHandler
+);
+
+router.put(
+  '/:campaignId',
+  auth,
+  validate(campaignIdParamSchema, 'params'),
+  campaignExists,
+  updateCampaignHandler
 );
 
 module.exports = router;
