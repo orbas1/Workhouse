@@ -19,7 +19,9 @@ async function runMigrations() {
   const dir = path.join(__dirname, '..', 'database');
   const files = fs
     .readdirSync(dir)
-    .filter(f => f.endsWith('.sql'))
+    // `database.sql` is an aggregate file that references the others; we execute
+    // each file individually so skip it to avoid duplicate/erroneous execution.
+    .filter(f => f.endsWith('.sql') && f !== 'database.sql')
     .sort();
 
   if (type === 'mysql') {

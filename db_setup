@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Determine directory of this script
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Run the database setup using dotenv and existing backend script
+node -r "$dir/backend/node_modules/dotenv/config" "$dir/backend/scripts/dbSetup.js" "$@"
