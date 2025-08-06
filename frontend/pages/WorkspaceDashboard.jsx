@@ -1,3 +1,5 @@
+import { Box, Heading, SimpleGrid, Spinner, useToast } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { ChakraProvider, Box, Heading, SimpleGrid, Spinner, Flex, Button } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -11,6 +13,7 @@ export default function WorkspaceDashboard() {
   const [overview, setOverview] = useState([]);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     const load = async () => {
@@ -30,15 +33,30 @@ export default function WorkspaceDashboard() {
         setOverview(ov);
         setProjects(detailed);
       } catch (err) {
-        console.error('Failed to load workspace', err);
+        toast({ title: 'Failed to load workspace', status: 'error' });
       } finally {
         setLoading(false);
       }
     };
     load();
-  }, []);
+  }, [toast]);
 
   return (
+    <Box p={4} className="workspace-dashboard">
+      <Heading mb={4}>Workspace Dashboard</Heading>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <WorkspaceSummary data={overview} />
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={4}>
+            {projects.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </SimpleGrid>
+        </>
+      )}
+    </Box>
     <ChakraProvider>
       <NavMenu />
       <Box p={4} className="workspace-dashboard">

@@ -40,6 +40,7 @@ export function deleteProject(projectId) {
 }
 
 export function listFiles(projectId) {
+  return request(`/project-management/files/project/${projectId}`);
   return apiFetch(`/workspace/files/project/${projectId}`);
 }
 
@@ -53,6 +54,12 @@ export async function uploadFile(projectId, file) {
   });
   const uploadData = await uploadRes.json();
   if (!uploadRes.ok || !uploadData.success) {
+    throw new Error('File upload failed');
+  }
+  const body = { projectId, filename: file.name, url: uploadData.link };
+  return request('/project-management/files/upload', {
+    method: 'POST',
+    body: JSON.stringify(body),
     throw new Error(uploadData.error || 'File upload failed');
   }
 
