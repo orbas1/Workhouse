@@ -56,6 +56,8 @@ export default function DashboardPage() {
       <Button mb={4} colorScheme="teal" onClick={() => navigate('/service-orders')}>
         Manage Service Orders
       </Button>
+      <Button mb={4} colorScheme="orange" onClick={() => navigate('/articles')}>
+        Read Blog
       <Button mb={4} colorScheme="blue" onClick={() => navigate('/stats')}>
         View Analytics
       </Button>
