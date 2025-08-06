@@ -21,24 +21,27 @@ function findUser(username) {
  *   password: string,
  *   role?: string,
  *   fullName?: string,
+ *   email?: string,
  *   phone?: string,
- *   location?: string
+ *   location?: string,
+ *   bio?: string,
+ *   expertise?: string
  * }} param0
  * @returns {object} The created user record
  */
-function addUser({ username, password, role = 'user', fullName = '', phone = '', location = '' }) {
+function addUser({ username, password, role = 'user', fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
   const user = {
     id: randomUUID(),
     username,
-    email: username,
+    email: email || username,
     password,
     role,
     fullName,
     phone,
     location,
+    bio,
+    expertise,
   };
-function addUser({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
-  const user = { id: randomUUID(), username, password, role, fullName, email, phone, location, bio, expertise };
   users.push(user);
   return user;
 }
@@ -57,4 +60,3 @@ function updatePassword(username, password) {
 }
 
 module.exports = { users, findUser, addUser, updatePassword };
-

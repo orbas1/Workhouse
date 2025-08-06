@@ -35,7 +35,7 @@ function listJobs() {
 }
 
 function findJobsByAgency(agencyId) {
-  return Array.from(jobs.values()).filter((job) => job.agencyId === agencyId);
+  return listJobs().filter((job) => job.agencyId === agencyId);
 }
 
 function updateJob(jobId, updates) {
@@ -73,27 +73,6 @@ function assignJob(id, employeeId) {
   return job;
 }
 
-function findJobsByAgency(agencyId) {
-  return Array.from(jobs.values()).filter((job) => job.agencyId === agencyId);
-}
-
-function findJobById(jobId) {
-  return jobs.get(jobId);
-}
-
-function updateJob(jobId, updates) {
-  const job = jobs.get(jobId);
-  if (!job) return null;
-  const updated = { ...job, ...updates, updatedAt: new Date() };
-  jobs.set(jobId, updated);
-  return updated;
-}
-
-function deleteJob(jobId) {
-  jobs.delete(jobId);
-  jobApplications.delete(jobId);
-}
-
 function addApplication(jobId, application) {
   const apps = jobApplications.get(jobId);
   if (!apps) return null;
@@ -109,8 +88,6 @@ function getApplications(jobId) {
 module.exports = {
   createJob,
   findById,
-  acceptJob,
-  assignJob,
   listJobs,
   findJobsByAgency,
   updateJob,
