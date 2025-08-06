@@ -1,0 +1,11 @@
+.freelance-dashboard-page .gigs-table,
+.freelance-dashboard-page .orders-table {
+  width: 100%;
+  background: white;
+  border-radius: 4px;
+}
+
+.freelance-dashboard-page .gigs-table tr:hover,
+.freelance-dashboard-page .orders-table tr:hover {
+  background: rgba(0, 0, 0, 0.03);
+}

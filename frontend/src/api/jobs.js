@@ -17,5 +17,13 @@ export async function updateJob(agencyId, jobId, payload) {
 
 export async function deleteJob(agencyId, jobId) {
   const { data } = await apiClient.delete(`/agency/${agencyId}/jobs/delete/${jobId}`);
+  
+export async function listPublicJobs() {
+  const { data } = await apiClient.get('/jobs');
+  return data;
+}
+
+export async function getPublicJob(jobId) {
+  const { data } = await apiClient.get(`/jobs/${jobId}`);
   return data;
 }

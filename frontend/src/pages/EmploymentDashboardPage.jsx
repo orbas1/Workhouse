@@ -19,20 +19,28 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { getOverview, getJobs, getJob } from '../api/employment.js';
+import { getOverview, getJobs as getEmployerJobs, getJob as getEmployerJob } from '../api/employment.js';
+import { listPublicJobs, getPublicJob } from '../api/jobs.js';
 import '../styles/EmploymentDashboardPage.css';
 
 export default function EmploymentDashboardPage() {
   const [mode, setMode] = useState('seeker');
   const [overview, setOverview] = useState(null);
-  const [jobs, setJobs] = useState([]);
+  const [seekerJobs, setSeekerJobs] = useState([]);
+  const [employerJobs, setEmployerJobs] = useState([]);
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
-        const [ov, js] = await Promise.all([getOverview(), getJobs()]);
+        const [publicJobs, employerList, ov] = await Promise.all([
+          listPublicJobs(),
+          getEmployerJobs(),
+          getOverview(),
+        ]);
+        setSeekerJobs(publicJobs);
+        setEmployerJobs(employerList);
         setOverview(ov);
-        setJobs(js);
       } catch (err) {
         console.error('Failed to load employment data', err);
       }
@@ -41,7 +49,7 @@ export default function EmploymentDashboardPage() {
 
   async function showJob(id) {
     try {
-      const job = await getJob(id);
+      const job = mode === 'seeker' ? await getPublicJob(id) : await getEmployerJob(id);
       setSelected(job);
     } catch (err) {
       console.error('Failed to load job', err);
@@ -78,7 +86,7 @@ export default function EmploymentDashboardPage() {
         <TabPanels>
           <TabPanel>
             <SimpleGrid columns={[1, 2]} spacing={4}>
-              {jobs.map((job) => (
+              {seekerJobs.map((job) => (
                 <Card key={job.id} className="job-card" onClick={() => showJob(job.id)}>
                   <CardBody>
                     <Heading size="md">{job.title}</Heading>
@@ -87,18 +95,17 @@ export default function EmploymentDashboardPage() {
                 </Card>
               ))}
             </SimpleGrid>
-            {selected && (
+            {selected && mode === 'seeker' && (
               <Box mt={6} p={4} borderWidth="1px" borderRadius="md">
                 <Heading size="md" mb={2}>{selected.title}</Heading>
-                <Text>Views: {selected.views}</Text>
-                <Text>Applications: {selected.applications}</Text>
-                <Text>Hires: {selected.hires}</Text>
+                <Text>Description: {selected.description}</Text>
+                {selected.location && <Text>Location: {selected.location}</Text>}
               </Box>
             )}
           </TabPanel>
           <TabPanel>
             <SimpleGrid columns={[1, 2]} spacing={4}>
-              {jobs.map((job) => (
+              {employerJobs.map((job) => (
                 <Card key={job.id} className="job-card" onClick={() => showJob(job.id)}>
                   <CardBody>
                     <Heading size="md">{job.title}</Heading>
@@ -112,6 +119,7 @@ export default function EmploymentDashboardPage() {
               Manage Job Posts
             </Button>
             {selected && (
+            {selected && mode === 'employer' && (
               <Box mt={6} p={4} borderWidth="1px" borderRadius="md">
                 <Heading size="md" mb={2}>{selected.title}</Heading>
                 <Text>Status: {selected.status}</Text>

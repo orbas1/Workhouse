@@ -20,6 +20,10 @@ const fileIdParamSchema = Joi.object({
   fileId: Joi.string().guid({ version: 'uuidv4' }).required(),
 });
 
+const eventIdParamSchema = Joi.object({
+  eventId: Joi.string().guid({ version: 'uuidv4' }).required(),
+});
+
 const createProjectSchema = Joi.object({
   name: Joi.string().min(3).max(255).required(),
   description: Joi.string().max(1000).allow('', null),
@@ -156,6 +160,7 @@ module.exports = {
   feedIdParamSchema,
   chartIdParamSchema,
   fileIdParamSchema,
+  eventIdParamSchema,
   createProjectSchema,
   updateProjectSchema,
   createTaskSchema,
