@@ -147,6 +147,7 @@ const interviewRoutes = require('./routes/interviews');
 const startupRoutes = require('./routes/startups');
 const settingsRoutes = require('./routes/settings');
 const simDashboardRoutes = require('./routes/simDashboard');
+const installRoutes = require('./routes/install');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -158,6 +159,7 @@ app.get('/operations/retail/products', (req, res) => {
 // when integrating the backend.
 app.use('/auth', authRoutes);
 app.use('/landing', landingRoutes);
+app.use('/install', installRoutes);
 app.use('/config', configRoutes);
 app.use('/affiliates', dashboardRoutes);
 app.use('/commissions', commissionRoutes);
