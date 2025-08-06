@@ -46,6 +46,10 @@ function getSession(sessionId) {
   return communicationModel.getSession(sessionId);
 }
 
+function getSessionAnalytics(sessionId) {
+  return communicationModel.getSessionAnalytics(sessionId);
+}
+
 module.exports = {
   startVideo,
   endVideo,
@@ -55,4 +59,5 @@ module.exports = {
   getCommunicationHistory,
   translateMessage,
   getSession,
+  getSessionAnalytics,
 };
