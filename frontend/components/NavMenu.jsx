@@ -19,6 +19,7 @@ export default function NavMenu() {
         <Link as={RouterLink} to="/payments">Payments</Link>
         <Link as={RouterLink} to="/education">Education</Link>
         <Link as={RouterLink} to="/education/courses">Courses</Link>
+        <Link as={RouterLink} to="/admin">Admin</Link>
         <Link as={RouterLink} to="/admin/analytics">Analytics & Audit</Link>
         <Link as={RouterLink} to="/admin/system-settings">Admin Settings</Link>
       </HStack>

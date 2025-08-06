@@ -3,6 +3,7 @@ const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import InSessionNetworking from './pages/InSessionNetworking.jsx';
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import AdminDashboard from './pages/AdminDashboard';
 import SystemSettingsEmployeeManagement from './pages/SystemSettingsEmployeeManagement';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/networking" element={<Protected><NetworkingDashboard /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
+            <Route path="/admin" element={<Protected><AdminDashboard /></Protected>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
@@ -65,6 +67,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/admin" element={<Protected><AdminDashboard /></Protected>} />
         <Route path="/admin/system-settings" element={<Protected><SystemSettingsEmployeeManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
