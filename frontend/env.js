@@ -3,6 +3,7 @@ window.env = {
   AVATAR_API: 'https://api.dicebear.com/7.x/avataaars/svg',
   WORLD_TIME_API: 'https://worldtimeapi.org/api',
   JITSI_DOMAIN: 'https://meet.jit.si',
+  ADVICE_API: 'https://api.adviceslip.com/advice',
   CLASSROOM_DEFAULT_ROOM: 'WorkhouseClassroom',
   ADS_PLACEHOLDER_API: 'https://picsum.photos/seed',
   CLASSROOM_DEFAULT_ROOM: 'WorkhouseClassroom'

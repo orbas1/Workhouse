@@ -1,0 +1,16 @@
+.connection-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.connection-card {
+  margin-bottom: 1rem;
+}
+
+.new-form input {
+  max-width: 200px;
+}
+
+.advice-box {
+  background-color: #f9f9f9;
+}
