@@ -1,13 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Heading, VStack, HStack, Textarea, Button, Text, Spinner, Select } from '@chakra-ui/react';
+import React, { useEffect, useState, useRef } from 'react';
+import {
+  Box,
+  Heading,
+  VStack,
+  HStack,
+  Textarea,
+  Button,
+  Text,
+  Spinner,
+  Select,
+  Input,
+} from '@chakra-ui/react';
 import '../styles/LiveFeedPage.css';
-import { getPosts, createPost, likePost, getEvents } from '../api/liveFeed.js';
+import {
+  getPosts,
+  createPost,
+  likePost,
+  getEvents,
+  commentPost,
+  sharePost,
+  reportPost,
+} from '../api/liveFeed.js';
+import ActionQueue from '../utils/actionQueue.js';
 
 export default function LiveFeedPage() {
+  const queue = useRef(new ActionQueue());
   const [posts, setPosts] = useState([]);
   const [events, setEvents] = useState([]);
   const [content, setContent] = useState('');
-  const [category, setCategory] = useState('');
+  const [postCategory, setPostCategory] = useState('');
+  const [filterCategory, setFilterCategory] = useState('');
+  const [commentInputs, setCommentInputs] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,35 +48,74 @@ export default function LiveFeedPage() {
     load();
   }, []);
 
-  const handleCategoryChange = async (e) => {
-    const value = e.target.value;
-    setCategory(value);
+  const handleFilter = async () => {
     try {
-      const filtered = await getPosts(value || undefined);
+      const filtered = await getPosts(filterCategory || undefined);
       setPosts(filtered);
     } catch (err) {
       console.error('Failed to filter posts', err);
     }
   };
 
-  const handlePost = async () => {
+  const handlePost = () => {
     if (!content.trim()) return;
-    try {
-      const newPost = await createPost({ content, category });
-      setPosts([newPost, ...posts]);
-      setContent('');
-    } catch (err) {
-      console.error('Post failed', err);
-    }
+    queue.current.enqueue(async () => {
+      try {
+        const newPost = await createPost({ content, category: postCategory });
+        setPosts((p) => [newPost, ...p]);
+        setContent('');
+        setPostCategory('');
+      } catch (err) {
+        console.error('Post failed', err);
+      }
+    });
   };
 
-  const handleLike = async (id) => {
-    try {
-      const updated = await likePost(id);
-      setPosts(posts.map((p) => (p.id === id ? updated : p)));
-    } catch (err) {
-      console.error('Like failed', err);
-    }
+  const handleLike = (id) => {
+    queue.current.enqueue(async () => {
+      try {
+        const updated = await likePost(id);
+        setPosts((p) => p.map((post) => (post.id === id ? updated : post)));
+      } catch (err) {
+        console.error('Like failed', err);
+      }
+    });
+  };
+
+  const handleComment = (id) => {
+    const text = commentInputs[id];
+    if (!text || !text.trim()) return;
+    queue.current.enqueue(async () => {
+      try {
+        const updated = await commentPost(id, { content: text });
+        setPosts((p) => p.map((post) => (post.id === id ? updated : post)));
+        setCommentInputs((ci) => ({ ...ci, [id]: '' }));
+      } catch (err) {
+        console.error('Comment failed', err);
+      }
+    });
+  };
+
+  const handleShare = (id) => {
+    queue.current.enqueue(async () => {
+      try {
+        const updated = await sharePost(id);
+        setPosts((p) => p.map((post) => (post.id === id ? updated : post)));
+      } catch (err) {
+        console.error('Share failed', err);
+      }
+    });
+  };
+
+  const handleReport = (id) => {
+    queue.current.enqueue(async () => {
+      try {
+        const updated = await reportPost(id);
+        setPosts((p) => p.map((post) => (post.id === id ? updated : post)));
+      } catch (err) {
+        console.error('Report failed', err);
+      }
+    });
   };
 
   if (loading) return <Spinner />;
@@ -62,14 +124,46 @@ export default function LiveFeedPage() {
     <Box className="live-feed-page" p={4}>
       <Heading mb={4}>Live Feed</Heading>
       <VStack align="stretch" spacing={2} mb={6}>
-        <Textarea placeholder="Share an update..." value={content} onChange={(e) => setContent(e.target.value)} />
         <HStack>
-          <Select placeholder="Select category" value={category} onChange={handleCategoryChange}>
-            <option value="employment">Employment</option>
-            <option value="freelancing">Freelancing</option>
-            <option value="education">Education</option>
+          <Select
+            placeholder="Filter category"
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+          >
+            <option value="gig">Gig</option>
+            <option value="contract">Contract</option>
+            <option value="profile">Profile</option>
+            <option value="course">Course</option>
+            <option value="webinar">Webinar</option>
+            <option value="class">Class</option>
+            <option value="podcast">Podcast</option>
+            <option value="tasks">Task</option>
             <option value="networking">Networking</option>
-            <option value="local">Local Services</option>
+            <option value="general">General</option>
+          </Select>
+          <Button onClick={handleFilter}>Filter</Button>
+        </HStack>
+        <Textarea
+          placeholder="Share an update..."
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <HStack>
+          <Select
+            placeholder="Post category"
+            value={postCategory}
+            onChange={(e) => setPostCategory(e.target.value)}
+          >
+            <option value="gig">Gig</option>
+            <option value="contract">Contract</option>
+            <option value="profile">Profile</option>
+            <option value="course">Course</option>
+            <option value="webinar">Webinar</option>
+            <option value="class">Class</option>
+            <option value="podcast">Podcast</option>
+            <option value="tasks">Task</option>
+            <option value="networking">Networking</option>
+            <option value="general">General</option>
           </Select>
           <Button colorScheme="teal" onClick={handlePost}>
             Post
@@ -80,10 +174,41 @@ export default function LiveFeedPage() {
         <VStack flex="1" spacing={4} align="stretch">
           {posts.map((post) => (
             <Box key={post.id} p={4} borderWidth="1px" borderRadius="md">
+              <Text fontWeight="bold">{post.author}</Text>
+              <Text fontSize="sm" className="post-meta">
+                {new Date(post.createdAt).toLocaleString()}
+              </Text>
               <Text mb={2}>{post.content}</Text>
-              <Button size="sm" onClick={() => handleLike(post.id)}>
-                Like ({post.likes || 0})
-              </Button>
+              <HStack spacing={2} mb={2} className="post-actions">
+                <Button size="sm" onClick={() => handleLike(post.id)}>
+                  Like ({post.likes || 0})
+                </Button>
+                <Button size="sm" onClick={() => handleShare(post.id)}>
+                  Share ({post.shares || 0})
+                </Button>
+                <Button size="sm" onClick={() => handleReport(post.id)}>
+                  Report ({post.reports || 0})
+                </Button>
+              </HStack>
+              {post.comments &&
+                post.comments.map((c) => (
+                  <Text key={c.id} fontSize="sm" className="comment">
+                    <strong>{c.author}:</strong> {c.content}
+                  </Text>
+                ))}
+              <HStack mt={2}>
+                <Input
+                  size="sm"
+                  placeholder="Add comment"
+                  value={commentInputs[post.id] || ''}
+                  onChange={(e) =>
+                    setCommentInputs((ci) => ({ ...ci, [post.id]: e.target.value }))
+                  }
+                />
+                <Button size="sm" onClick={() => handleComment(post.id)}>
+                  Comment
+                </Button>
+              </HStack>
             </Box>
           ))}
         </VStack>

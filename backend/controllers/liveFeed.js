@@ -1,4 +1,12 @@
-const { getPosts, createPost, getEvents, likePost } = require('../services/liveFeed');
+const {
+  getPosts,
+  createPost,
+  getEvents,
+  likePost,
+  commentPost,
+  sharePost,
+  reportPost,
+} = require('../services/liveFeed');
 const logger = require('../utils/logger');
 
 async function listPosts(req, res) {
@@ -31,4 +39,39 @@ async function likePostHandler(req, res) {
   res.json(post);
 }
 
-module.exports = { listPosts, createPostHandler, listEventsHandler, likePostHandler };
+async function commentPostHandler(req, res) {
+  const { postId } = req.params;
+  const post = await commentPost(postId, req.user, req.body);
+  if (!post) {
+    return res.status(404).json({ error: 'Post not found' });
+  }
+  res.json(post);
+}
+
+async function sharePostHandler(req, res) {
+  const { postId } = req.params;
+  const post = await sharePost(postId);
+  if (!post) {
+    return res.status(404).json({ error: 'Post not found' });
+  }
+  res.json(post);
+}
+
+async function reportPostHandler(req, res) {
+  const { postId } = req.params;
+  const post = await reportPost(postId);
+  if (!post) {
+    return res.status(404).json({ error: 'Post not found' });
+  }
+  res.json(post);
+}
+
+module.exports = {
+  listPosts,
+  createPostHandler,
+  listEventsHandler,
+  likePostHandler,
+  commentPostHandler,
+  sharePostHandler,
+  reportPostHandler,
+};

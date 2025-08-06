@@ -20,3 +20,18 @@ export async function likePost(postId) {
   const { data } = await apiClient.post(`/live-feed/posts/${postId}/like`);
   return data;
 }
+
+export async function commentPost(postId, payload) {
+  const { data } = await apiClient.post(`/live-feed/posts/${postId}/comments`, payload);
+  return data;
+}
+
+export async function sharePost(postId) {
+  const { data } = await apiClient.post(`/live-feed/posts/${postId}/share`);
+  return data;
+}
+
+export async function reportPost(postId, payload = {}) {
+  const { data } = await apiClient.post(`/live-feed/posts/${postId}/report`, payload);
+  return data;
+}
