@@ -27,10 +27,8 @@ export function AuthProvider({ children }) {
     loadUser();
   }, []);
 
-  async function login(email, password) {
-    const data = await apiLogin({ email, password });
   async function login(username, password, code, remember = true) {
-    const data = await apiLogin({ username, password, code }, remember);
+    const data = await apiLogin(username, password, code, remember);
     if (data?.id) {
       const storage = remember ? localStorage : sessionStorage;
       storage.setItem('userId', data.id);
