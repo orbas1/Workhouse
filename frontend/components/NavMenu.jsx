@@ -12,6 +12,7 @@ export default function NavMenu() {
         <Link as={RouterLink} to="/payments">Payments</Link>
         <Link as={RouterLink} to="/education">Education</Link>
         <Link as={RouterLink} to="/education/courses">Courses</Link>
+        <Link as={RouterLink} to="/admin">Admin</Link>
       </HStack>
     </Box>
   );
