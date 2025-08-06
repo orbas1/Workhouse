@@ -26,6 +26,9 @@ import OpportunityManagementPage from './pages/OpportunityManagementPage.jsx';
 import VolunteerTrackingPage from './pages/VolunteerTrackingPage.jsx';
 import ClassroomPage from './pages/ClassroomPage.jsx';
 import ScheduleCalendarPage from './pages/ScheduleCalendarPage.jsx';
+import EducationSchedulePage from './pages/EducationSchedulePage.jsx';
+import CourseListPage from './pages/CourseListPage.jsx';
+import CourseDetailPage from './pages/CourseDetailPage.jsx';
 import ArticlePage from './pages/ArticlePage.jsx';
 import DisputeDashboardPage from './pages/DisputeDashboardPage.jsx';
 import DisputeFormPage from './pages/DisputeFormPage.jsx';
@@ -141,9 +144,10 @@ export default function App() {
 
     // Education & Services
     { path: '/education', element: <EducationDashboard />, protected: true },
-    { path: '/education/schedule', element: <ScheduleCalendarPage />, protected: true },
+    { path: '/education/schedule', element: <EducationSchedulePage />, protected: true },
     { path: '/education/courses', element: <PlaceholderPage title="Course & Module Management" />, protected: true },
-    { path: '/courses', element: <PlaceholderPage title="Course Purchase & Details" />, protected: true },
+    { path: '/courses', element: <CourseListPage />, protected: true },
+    { path: '/courses/:courseId', element: <CourseDetailPage />, protected: true },
     { path: '/classroom/:id', element: <ClassroomPage />, protected: true },
 
     // Tasks & Experiences
