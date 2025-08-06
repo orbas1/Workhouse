@@ -25,6 +25,11 @@ function getTransactionsByUser(userId) {
   return transactions.get(userId) || [];
 }
 
+function getTransaction(userId, transactionId) {
+  const list = transactions.get(userId) || [];
+  return list.find((t) => t.id === transactionId) || null;
+}
+
 function createRefundRequest(eventId, { userId, amount, reason = null }) {
   const refund = {
     id: randomUUID(),
@@ -42,5 +47,6 @@ function createRefundRequest(eventId, { userId, amount, reason = null }) {
 module.exports = {
   addTransaction,
   getTransactionsByUser,
+  getTransaction,
   createRefundRequest,
 };

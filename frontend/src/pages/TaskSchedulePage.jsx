@@ -24,6 +24,7 @@ import {
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { getTasks, updateTask } from '../api/tasks.js';
+import { listTasks } from '../api/tasks.js';
 import '../styles/TaskSchedulePage.css';
 
 export default function TaskSchedulePage() {
@@ -40,6 +41,8 @@ export default function TaskSchedulePage() {
       try {
         const data = await getTasks({ assignee: user.id });
         setTasks(Array.isArray(data) ? data : []);
+        const data = await listTasks({ assignee: user.id });
+        setTasks(data);
       } catch (err) {
         toast({ title: 'Failed to load tasks', status: 'error' });
       } finally {
