@@ -9,3 +9,8 @@ export async function runInstallation(payload) {
   const { data } = await apiClient.post('/install', payload);
   return data;
 }
+
+export async function checkDatabaseConnection(dbConfig) {
+  const { data } = await apiClient.post('/install/check-db', { dbConfig });
+  return data;
+}
