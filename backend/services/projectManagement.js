@@ -24,14 +24,30 @@ async function deleteProject(projectId) {
   logger.info('Workspace project deleted', { projectId });
 }
 
+async function listProjects(ownerId) {
+  const list = model.listProjects(ownerId);
+  logger.info('Workspace projects retrieved', { ownerId, count: list.length });
+  return list;
+}
+
 async function createTask(data) {
   const task = model.createTask(data);
   logger.info('Task created', { taskId: task.id, projectId: data.projectId });
   return task;
 }
 
+async function listTasks(filter = {}) {
+  return model.listTasks(filter);
+}
+
 async function getTask(taskId) {
   return model.getTaskById(taskId);
+}
+
+async function listTasks(projectId) {
+  const list = model.listTasksByProject(projectId);
+  logger.info('Tasks retrieved', { projectId, count: list.length });
+  return list;
 }
 
 async function updateTask(taskId, data) {
@@ -56,6 +72,8 @@ async function assignTask(taskId, assignee) {
 
 async function listTasks(filters) {
   return model.listTasks(filters);
+async function listTasksByAssignee(assignee) {
+  return model.listTasksByAssignee(assignee);
 }
 
 async function suggestTasks(projectId) {
@@ -152,10 +170,18 @@ async function getFile(fileId) {
   return model.getFileById(fileId);
 }
 
+async function listFiles(projectId) {
+  return model.listFilesByProject(projectId);
+}
+
 async function setupWorkflow(data) {
   const workflow = model.setupWorkflow(data);
   logger.info('Workflow setup', { workflowId: workflow.id, projectId: data.projectId });
   return workflow;
+}
+
+async function listWorkflows(projectId) {
+  return model.listWorkflowsByProject(projectId);
 }
 
 async function getSpreadsheet(projectId) {
@@ -174,17 +200,33 @@ async function createTextDocument(data) {
   return doc;
 }
 
+async function listProjects() {
+  return model.listProjects();
+}
+
+async function listTasks(projectId) {
+  return model.listTasksByProject(projectId);
+}
+
+async function getBudgetSummary(projectId) {
+  return model.getBudgetSummary(projectId);
+}
+
 module.exports = {
   createProject,
   getProject,
   updateProject,
   deleteProject,
+  listProjects,
   createTask,
+  listTasks,
   getTask,
+  listTasks,
   updateTask,
   deleteTask,
   assignTask,
   listTasks,
+  listTasksByAssignee,
   suggestTasks,
   suggestBudget,
   suggestObjectives,
@@ -202,7 +244,12 @@ module.exports = {
   getReports,
   uploadFile,
   getFile,
+  listFiles,
   setupWorkflow,
+  listWorkflows,
   getSpreadsheet,
   createTextDocument,
+  listProjects,
+  listTasks,
+  getBudgetSummary,
 };

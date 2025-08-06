@@ -12,6 +12,7 @@ const {
   analyzeBehaviorPatterns,
   predictUserBehavior,
   segmentUserBehavior,
+  getCreatorWebinars,
 } = require('../services/webinarAnalytics');
 const logger = require('../utils/logger');
 
@@ -151,6 +152,16 @@ async function segmentUserBehaviorHandler(req, res) {
   }
 }
 
+async function getCreatorWebinarsHandler(req, res) {
+  try {
+    const data = await getCreatorWebinars(req.user.id);
+    res.json(data);
+  } catch (err) {
+    logger.error('Failed to fetch creator webinars', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getWebinarOverviewHandler,
   getWebinarDetailsHandler,
@@ -165,4 +176,5 @@ module.exports = {
   analyzeBehaviorPatternsHandler,
   predictUserBehaviorHandler,
   segmentUserBehaviorHandler,
+  getCreatorWebinarsHandler,
 };

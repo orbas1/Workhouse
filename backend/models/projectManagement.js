@@ -15,7 +15,7 @@ const workflows = new Map();
 const spreadsheets = new Map();
 const textDocs = new Map();
 
-function createProject({ name, description = '', ownerId }) {
+function createProject({ name, description = '', ownerId, budget = 0 }) {
   const id = randomUUID();
   const now = new Date();
   const project = {
@@ -23,6 +23,7 @@ function createProject({ name, description = '', ownerId }) {
     name,
     description,
     ownerId,
+    budget,
     status: 'active',
     createdAt: now,
     updatedAt: now,
@@ -46,8 +47,13 @@ function updateProject(projectId, data) {
 function deleteProject(projectId) {
   return projects.delete(projectId);
 }
+function listProjects(ownerId) {
+  return Array.from(projects.values()).filter((p) => !ownerId || p.ownerId === ownerId);
+}
+
 
 function createTask({ projectId, title, description = '', category = null, location = null, budget = null, dueDate = null }) {
+function createTask({ projectId, title, description = '', dueDate = null, ownerId }) {
   const id = randomUUID();
   const now = new Date();
   const task = {
@@ -61,6 +67,7 @@ function createTask({ projectId, title, description = '', category = null, locat
     dueDate,
     status: 'pending',
     assignee: null,
+    ownerId,
     createdAt: now,
     updatedAt: now,
   };
@@ -70,6 +77,17 @@ function createTask({ projectId, title, description = '', category = null, locat
 
 function getTaskById(taskId) {
   return tasks.get(taskId);
+}
+
+function listTasks({ ownerId, assignee } = {}) {
+  return Array.from(tasks.values()).filter((t) => {
+    if (ownerId && t.ownerId !== ownerId) return false;
+    if (assignee && t.assignee !== assignee) return false;
+    return true;
+  });
+}
+function listTasksByProject(projectId) {
+  return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
 }
 
 function updateTask(taskId, data) {
@@ -137,6 +155,8 @@ function listTasks(filters = {}) {
     }
   }
   return result;
+function listTasksByAssignee(assignee) {
+  return Array.from(tasks.values()).filter((task) => task.assignee === assignee);
 }
 
 function hireEmployee({ projectId, userId, role }) {
@@ -215,11 +235,19 @@ function getFileById(fileId) {
   return files.get(fileId);
 }
 
+function listFilesByProject(projectId) {
+  return Array.from(files.values()).filter((f) => f.projectId === projectId);
+}
+
 function setupWorkflow({ projectId, steps }) {
   const id = randomUUID();
   const workflow = { id, projectId, steps, createdAt: new Date() };
   workflows.set(id, workflow);
   return workflow;
+}
+
+function listWorkflowsByProject(projectId) {
+  return Array.from(workflows.values()).filter((w) => w.projectId === projectId);
 }
 
 function storeSpreadsheet(projectId, url) {
@@ -237,17 +265,41 @@ function createText({ projectId, title = '', content }) {
   return doc;
 }
 
+function listProjects() {
+  return Array.from(projects.values());
+}
+
+function listTasksByProject(projectId) {
+  return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
+}
+
+function getBudgetSummary(projectId) {
+  const project = projects.get(projectId) || {};
+  const allocatedBudget = project.budget || 0;
+  const entries = Array.from(budgetEntries.values()).filter((e) => e.projectId === projectId);
+  const totalSpent = entries.reduce((sum, e) => sum + e.amount, 0);
+  return {
+    allocatedBudget,
+    totalSpent,
+    remainingBudget: allocatedBudget - totalSpent,
+  };
+}
+
 module.exports = {
   createProject,
   getProjectById,
   updateProject,
   deleteProject,
+  listProjects,
   createTask,
   getTaskById,
+  listTasks,
+  listTasksByProject,
   updateTask,
   deleteTask,
   assignTask,
   listTasks,
+  listTasksByAssignee,
   hireEmployee,
   listEmployees,
   postFeed,
@@ -261,8 +313,13 @@ module.exports = {
   getReportsByProject,
   uploadFile,
   getFileById,
+  listFilesByProject,
   setupWorkflow,
+  listWorkflowsByProject,
   storeSpreadsheet,
   getSpreadsheet,
   createText,
+  listProjects,
+  listTasksByProject,
+  getBudgetSummary,
 };
