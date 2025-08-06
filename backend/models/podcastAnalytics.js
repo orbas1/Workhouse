@@ -13,6 +13,8 @@ const sampleEpisodeId = randomUUID();
 seriesStats.set(sampleSeriesId, {
   seriesId: sampleSeriesId,
   ownerId,
+  title: 'Sample Podcast Series',
+  episodes: 1,
   listens: 5000,
   likes: 1200,
   donations: 300,
@@ -101,8 +103,16 @@ function getSeriesOverview(seriesId) {
   return seriesStats.get(seriesId);
 }
 
+function getSeriesByOwner(ownerId) {
+  return Array.from(seriesStats.values()).filter(s => s.ownerId === ownerId);
+}
+
 function getEpisodeDetails(episodeId) {
   return episodes.get(episodeId);
+}
+
+function getAllPodcasts() {
+  return Array.from(podcasts.values());
 }
 
 module.exports = {
@@ -111,7 +121,9 @@ module.exports = {
   getDemographics,
   getEngagement,
   getSeriesOverview,
+  getSeriesByOwner,
   getEpisodeDetails,
   getPodcast,
   getEpisode,
+  getAllPodcasts,
 };

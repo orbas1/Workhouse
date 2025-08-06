@@ -1,0 +1,8 @@
+.schedule-calendar-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.schedule-calendar-page .event-item {
+  padding: 4px 0;
+}
