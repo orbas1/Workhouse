@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Flex, Text, Input, Button } from '@chakra-ui/react';
+import { Box, Flex, Text, Input, Button, IconButton } from '@chakra-ui/react';
+import { ChatIcon } from '@chakra-ui/icons';
 import { fetchConversations, fetchMessages, sendMessage } from '../api/communications.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/ChatWidget.css';
@@ -7,6 +8,10 @@ import '../styles/ChatWidget.css';
 export default function ChatWidget({ defaultOpen = false }) {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const pinned = [
+    { id: 'synthron-ai', label: 'Synthron A.I.', participants: [] },
+    { id: 'support', label: 'Support', participants: [] },
+  ];
   const [conversations, setConversations] = useState([]);
   const [active, setActive] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -24,7 +29,7 @@ export default function ChatWidget({ defaultOpen = false }) {
   async function loadConversations() {
     try {
       const data = await fetchConversations();
-      setConversations(data);
+      setConversations([...pinned, ...data]);
     } catch (err) {
       console.error('Failed to load conversations', err);
     }
@@ -60,9 +65,14 @@ export default function ChatWidget({ defaultOpen = false }) {
 
   if (!isOpen) {
     return (
-      <Box className="chat-widget" onClick={() => setIsOpen(true)}>
-        <Text color="white" fontWeight="bold">Chat</Text>
-      </Box>
+      <IconButton
+        className="chat-widget"
+        icon={<ChatIcon />}
+        aria-label="Open chat"
+        colorScheme="teal"
+        borderRadius="full"
+        onClick={() => setIsOpen(true)}
+      />
     );
   }
 
@@ -81,7 +91,9 @@ export default function ChatWidget({ defaultOpen = false }) {
               className={`conversation-item ${active === c.id ? 'active' : ''}`}
               onClick={() => openConversation(c.id)}
             >
-              <Text noOfLines={1}>{c.participants?.filter(p => p !== user.id).join(', ') || c.id}</Text>
+              <Text noOfLines={1}>
+                {c.label || c.participants?.filter(p => p !== user.id).join(', ') || c.id}
+              </Text>
             </Box>
           ))}
         </Box>

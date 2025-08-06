@@ -16,6 +16,10 @@ import { fetchConversations, fetchMessages, sendMessage } from '../api/communica
 import '../styles/ChatInboxPage.css';
 
 export default function ChatInboxPage() {
+  const pinned = [
+    { id: 'synthron-ai', label: 'Synthron A.I.', participants: [] },
+    { id: 'support', label: 'Support', participants: [] },
+  ];
   const [conversations, setConversations] = useState([]);
   const [activeId, setActiveId] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -26,9 +30,10 @@ export default function ChatInboxPage() {
     (async () => {
       try {
         const data = await fetchConversations();
-        setConversations(data);
-        if (data.length) {
-          selectConversation(data[0].id);
+        const all = [...pinned, ...data];
+        setConversations(all);
+        if (all.length) {
+          selectConversation(all[0].id);
         }
       } catch (err) {
         console.error('Failed to load conversations', err);
@@ -74,8 +79,10 @@ export default function ChatInboxPage() {
                 cursor="pointer"
                 onClick={() => selectConversation(conv.id)}
               >
-                <Text fontWeight="bold">{conv.id}</Text>
-                <Text fontSize="sm">Participants: {conv.participants.join(', ')}</Text>
+                <Text fontWeight="bold">{conv.label || conv.id}</Text>
+                {conv.participants.length > 0 && (
+                  <Text fontSize="sm">Participants: {conv.participants.join(', ')}</Text>
+                )}
               </Box>
             ))
           )}
