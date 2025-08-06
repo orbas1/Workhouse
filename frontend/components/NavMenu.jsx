@@ -8,6 +8,7 @@ export default function NavMenu() {
       <HStack spacing={4}>
         <Link as={RouterLink} to="/dashboard">Client/Freelancer Dashboard</Link>
         <Link as={RouterLink} to="/jobs">Job Posts</Link>
+        <Link as={RouterLink} to="/content/manage">Content</Link>
         <Link as={RouterLink} to="/opportunities">Opportunities</Link>
         <Link as={RouterLink} to="/volunteering">Volunteering</Link>
         <Link as={RouterLink} to="/progress">Progress</Link>
