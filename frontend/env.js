@@ -2,12 +2,14 @@ const apiBase =
   window.API_BASE_URL ||
   import.meta.env.VITE_API_BASE_URL ||
   '/api';
+const appUrl = import.meta.env.VITE_APP_URL || window.location.origin;
 
 // expose the resolved base URL globally for legacy scripts
 window.API_BASE_URL = apiBase;
 
 window.env = {
   API_BASE_URL: apiBase,
+  APP_URL: appUrl,
   AVATAR_API: import.meta.env.VITE_AVATAR_API,
   JITSI_DOMAIN: import.meta.env.VITE_JITSI_DOMAIN,
   JITSI_ROOM_PREFIX: import.meta.env.VITE_JITSI_ROOM_PREFIX,

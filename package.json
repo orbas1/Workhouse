@@ -5,6 +5,7 @@
   "scripts": {
     "test": "npm test --workspaces",
     "start:frontend": "npm run dev --workspace frontend",
-    "start:backend": "npm start --workspace backend"
+    "start:backend": "npm start --workspace backend",
+    "setup": "npm run setup --workspace backend"
   }
 }

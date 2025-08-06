@@ -28,7 +28,10 @@ export default function InstallationWizardPage() {
   const [step, setStep] = useState(0);
   const [dbConfig, setDbConfig] = useState({ host: '', user: '', password: '', name: '' });
   const [admin, setAdmin] = useState({ username: '', email: '', password: '' });
-  const [app, setApp] = useState({ appId: '', appUrl: '' });
+  const defaultUrl = typeof window !== 'undefined' && window.env?.APP_URL
+    ? window.env.APP_URL
+    : window.location.origin;
+  const [app, setApp] = useState({ appId: '', appUrl: defaultUrl });
   const [error, setError] = useState('');
   const [complete, setComplete] = useState(false);
   const [dbCheck, setDbCheck] = useState(null);

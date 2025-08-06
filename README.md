@@ -47,6 +47,10 @@ Workhouse/
    ```bash
    npm install
    ```
+3. **Run the interactive setup wizard** to configure database and URLs:
+   ```bash
+   npm run setup
+   ```
 
 ## Running the App
 ### Development
@@ -60,7 +64,8 @@ Or you can still run the scripts from within each directory:
 cd backend && npm start
 cd frontend && npm run dev
 ```
-Configure `VITE_API_URL` in `.env` to point the frontend to the backend server.
+Configure `VITE_API_URL` and `VITE_APP_URL` in `.env` to point the frontend to
+the backend server and public site address.
 
 ### Production
 Build the frontend and launch the combined server:
