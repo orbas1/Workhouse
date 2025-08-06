@@ -4,15 +4,17 @@ const { findUser } = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
 
+const ADMIN_ROLES = ['superadmin', 'admin', 'finance', 'support', 'management', 'marketing', 'hr'];
+
 /**
- * Handle admin login. Only users with role 'admin' are allowed.
+ * Handle admin login for privileged roles.
  * Expects validatedBody with username and password provided by validation middleware.
  */
 async function adminLoginHandler(req, res) {
   const { username, password } = req.validatedBody;
   try {
     const user = findUser(username);
-    if (!user || user.role !== 'admin') {
+    if (!user || !ADMIN_ROLES.includes(user.role)) {
       throw new Error('Invalid credentials');
     }
     const match = await bcrypt.compare(password, user.password);
@@ -24,7 +26,7 @@ async function adminLoginHandler(req, res) {
       JWT_SECRET,
       { expiresIn: '1h' }
     );
-    res.json({ token });
+    res.json({ token, role: user.role });
   } catch (err) {
     res.status(401).json({ error: err.message });
   }

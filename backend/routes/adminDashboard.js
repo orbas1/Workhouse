@@ -6,6 +6,11 @@ const authorize = require('../middleware/authorize');
 const router = express.Router();
 
 // GET /admin/dashboard
-router.get('/dashboard', auth, authorize('admin', 'moderator', 'support'), adminDashboardHandler);
+router.get(
+  '/dashboard',
+  auth,
+  authorize('superadmin', 'admin', 'finance', 'support', 'management', 'marketing', 'hr'),
+  adminDashboardHandler
+);
 
 module.exports = router;
