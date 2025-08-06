@@ -13,6 +13,7 @@ import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import DisputeFormPage from './pages/DisputeFormPage.jsx';
 import AdminUserContentPage from './pages/AdminUserContentPage.jsx';
 import SupportDisputePage from './pages/SupportDisputePage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
@@ -90,6 +91,22 @@ export default function App() {
                   element={
                     <Protected>
                       <SupportDisputePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/disputes/new"
+                  element={
+                    <Protected>
+                      <DisputeFormPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/disputes/:disputeId/respond"
+                  element={
+                    <Protected>
+                      <DisputeFormPage />
                     </Protected>
                   }
                 />

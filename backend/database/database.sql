@@ -337,9 +337,13 @@ CREATE TABLE IF NOT EXISTS classroom_messages (
 CREATE TABLE IF NOT EXISTS disputes (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL,
+    disputee_id UUID NOT NULL,
     category VARCHAR(100) NOT NULL,
-    status VARCHAR(50) NOT NULL DEFAULT 'open',
     description TEXT,
+    resolution_request TEXT,
+    response_text TEXT,
+    response_resolution VARCHAR(50),
+    status VARCHAR(50) NOT NULL DEFAULT 'open',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     resolved_at TIMESTAMP
 );
