@@ -121,15 +121,6 @@ vite v5.4.19 building for production...
 - `<script src="views/chat_inbox.js"> in "/index.html" can't be bundled without type="module" attribute`
 - `<script src="views/application_interview_management.js"> in "/index.html" can't be bundled without type="module" attribute`
 
-## Stage 13: Frontend script references (11)
-
-- `<script src="views/virtual_interview.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/gigs.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/education.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="api/calendar.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="views/profile_customization.js"> in "/index.html" can't be bundled without type="module" attribute`
-- `<script src="utils/api.js"> in "/index.html" can't be bundled without type="module" attribute`
-
 ## Stage 14: Frontend script references (12)
 
 - `<script src="views/financial_media_setup.js"> in "/index.html" can't be bundled without type="module" attribute`
