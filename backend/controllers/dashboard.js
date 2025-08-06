@@ -1,4 +1,9 @@
-const { getAffiliateDashboard, generateAffiliateReport } = require('../services/dashboard');
+const {
+  getAffiliateDashboard,
+  generateAffiliateReport,
+  getClientDashboard,
+  getFreelancerDashboard,
+} = require('../services/dashboard');
 
 async function dashboardHandler(req, res) {
   const { affiliateId } = req.params;
@@ -22,4 +27,29 @@ async function reportGenerationHandler(req, res) {
   }
 }
 
-module.exports = { dashboardHandler, reportGenerationHandler };
+async function clientDashboardHandler(req, res) {
+  try {
+    const data = getClientDashboard(req.user.id);
+    res.json(data);
+  } catch (err) {
+    console.error('Client dashboard retrieval failed', err);
+    res.status(500).json({ error: 'Unable to load dashboard' });
+  }
+}
+
+async function freelancerDashboardHandler(req, res) {
+  try {
+    const data = getFreelancerDashboard(req.user.id);
+    res.json(data);
+  } catch (err) {
+    console.error('Freelancer dashboard retrieval failed', err);
+    res.status(500).json({ error: 'Unable to load dashboard' });
+  }
+}
+
+module.exports = {
+  dashboardHandler,
+  reportGenerationHandler,
+  clientDashboardHandler,
+  freelancerDashboardHandler,
+};
