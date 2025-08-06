@@ -9,6 +9,8 @@ import {
   Text,
   VStack,
   useToast,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import '../styles/SearchConnectionPage.css';
 import { searchProfiles, sendConnectionRequest } from '../api/network.js';
@@ -54,8 +56,12 @@ function SearchConnectionPage() {
     <Box className="search-connection-page" p={4}>
       <VStack spacing={6} align="stretch">
         <Heading size="lg" textAlign="center">
-          Search & Connect
+          Investment Central
         </Heading>
+        <Alert status="info" borderRadius="md">
+          <AlertIcon />Networking only. No monetary exchange occurs on Workhouse.
+          Connect with mentors or promote your startup to the community.
+        </Alert>
         <SimpleGrid columns={[1, 2, 3]} spacing={4}>
           <Select
             placeholder="Role"
@@ -118,7 +124,11 @@ function SearchConnectionPage() {
                 colorScheme="teal"
                 onClick={() => handleConnect(profile.id)}
               >
-                Connect
+                {profile.role === 'mentor'
+                  ? 'Hire as Mentor'
+                  : profile.role === 'startup'
+                  ? 'Promote Startup'
+                  : 'Connect'}
               </Button>
             </Box>
           ))}
