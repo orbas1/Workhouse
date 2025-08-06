@@ -71,6 +71,7 @@ import WorkspaceDashboard from '../pages/WorkspaceDashboard.jsx';
 import JobPostManagement from '../pages/JobPostManagement.jsx';
 import VirtualInterview from '../pages/VirtualInterview.jsx';
 import InterviewSession from '../pages/InterviewSession.jsx';
+import VolunteerOpportunitySearchPage from './pages/VolunteerOpportunitySearchPage.jsx';
 
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
@@ -158,7 +159,7 @@ export default function App() {
 
     // Volunteering
     { path: '/volunteering', element: <PlaceholderPage title="Volunteering Dashboard" />, protected: true },
-    { path: '/volunteer/opportunities', element: <PlaceholderPage title="Volunteer Opportunities" />, protected: true },
+    { path: '/volunteer/opportunities', element: <VolunteerOpportunitySearchPage />, protected: true },
 
     // Networking
     { path: '/networking', element: <PlaceholderPage title="Networking Dashboard" />, protected: true },
