@@ -1,5 +1,6 @@
 const {
   listServices,
+  getServiceById,
   requestService,
   getResourcesByType,
   getLegalResources,
@@ -12,10 +13,30 @@ const logger = require('../utils/logger');
 
 async function listServicesHandler(req, res) {
   try {
-    const services = await listServices();
+    const filters = {
+      search: req.query.search,
+      category: req.query.category,
+      minPrice: req.query.minPrice ? Number(req.query.minPrice) : undefined,
+      maxPrice: req.query.maxPrice ? Number(req.query.maxPrice) : undefined,
+      location: req.query.location,
+    };
+    const services = await listServices(filters);
     res.json(services);
   } catch (err) {
     logger.error('Failed to list services', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function getServiceHandler(req, res) {
+  try {
+    const service = await getServiceById(req.params.id);
+    if (!service) {
+      return res.status(404).json({ error: 'Service not found' });
+    }
+    res.json(service);
+  } catch (err) {
+    logger.error('Failed to get service', { error: err.message, id: req.params.id });
     res.status(500).json({ error: err.message });
   }
 }
@@ -96,6 +117,7 @@ async function listMentorsHandler(req, res) {
 
 module.exports = {
   listServicesHandler,
+  getServiceHandler,
   requestServiceHandler,
   getResourcesByTypeHandler,
   getLegalResourcesHandler,

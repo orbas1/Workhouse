@@ -6,6 +6,7 @@ const {
   engagementHandler,
   seriesOverviewHandler,
   episodeDetailsHandler,
+  creatorSeriesHandler,
 } = require('../controllers/podcastAnalytics');
 const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
@@ -70,6 +71,13 @@ router.get(
   validate(episodeIdParamSchema, 'params'),
   ownership,
   episodeDetailsHandler
+);
+
+router.get(
+  '/creator/series',
+  auth,
+  authorize('creator'),
+  creatorSeriesHandler
 );
 
 module.exports = router;

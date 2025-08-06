@@ -38,6 +38,7 @@ function GigsDashboard() {
             aria-label="Toggle seller/buyer mode"
           />
           <Text>Seller</Text>
+          <Button size="sm" colorScheme="teal" onClick={() => window.location.href = '/gigs/search'}>Discover</Button>
         </Stack>
       </Flex>
       <Table variant="simple">
