@@ -19,6 +19,11 @@ export default function NavMenu() {
         Workhouse
       </Heading>
       <Spacer />
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
+        Profile
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/connect')}>
+        Connect
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/content/manage')}>Content</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>Profile</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>Tasks</Button>
