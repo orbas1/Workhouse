@@ -13,6 +13,7 @@ const {
   analyzeBehaviorPatternsHandler,
   predictUserBehaviorHandler,
   segmentUserBehaviorHandler,
+  getCreatorWebinarsHandler,
 } = require('../controllers/webinarAnalytics');
 const auth = require('../middleware/auth');
 const authorize = require('../middleware/authorize');
@@ -58,5 +59,6 @@ router.get('/behavior-trends', auth, authorize(['admin', 'analytics-manager']), 
 router.post('/behavior-pattern-analysis', auth, authorize(['admin', 'analytics-manager']), validate(behaviorAnalysisSchema), analyzeBehaviorPatternsHandler);
 router.post('/behavior-prediction', auth, authorize(['admin', 'analytics-manager']), validate(behaviorPredictionSchema), predictUserBehaviorHandler);
 router.post('/behavior-segmentation', auth, authorize(['admin', 'analytics-manager']), validate(behaviorSegmentationSchema), segmentUserBehaviorHandler);
+router.get('/creator/webinars', auth, authorize('creator'), getCreatorWebinarsHandler);
 
 module.exports = router;

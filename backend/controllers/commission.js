@@ -6,6 +6,7 @@ const {
   getCommissionHistory,
   calculateCommission,
   adjustRateForPerformance,
+  getLeaderboard,
 } = require('../services/commission');
 
 async function getRatesHandler(req, res) {
@@ -72,6 +73,15 @@ async function performanceAdjustHandler(req, res) {
   }
 }
 
+async function getLeaderboardHandler(req, res) {
+  try {
+    const data = getLeaderboard();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getRatesHandler,
   updateRatesHandler,
@@ -80,4 +90,5 @@ module.exports = {
   getCommissionHistoryHandler,
   calculateCommissionHandler,
   performanceAdjustHandler,
+  getLeaderboardHandler,
 };

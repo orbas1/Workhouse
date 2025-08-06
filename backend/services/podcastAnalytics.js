@@ -69,6 +69,11 @@ async function getEpisode(episodeId) {
   return podcastModel.getEpisode(episodeId);
 }
 
+async function getCreatorSeries(ownerId) {
+  logger.info('Fetching creator series', { ownerId });
+  return podcastModel.getSeriesByOwner(ownerId);
+}
+
 module.exports = {
   getOverview,
   getEpisodeAnalytics,
@@ -78,4 +83,5 @@ module.exports = {
   getEpisodeDetails,
   getPodcast,
   getEpisode,
+  getCreatorSeries,
 };
