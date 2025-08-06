@@ -54,6 +54,33 @@ async function getCoursesByInstructor(instructorId) {
   return courseModel.findByInstructor(instructorId);
 }
 
+async function addModule(courseId, data) {
+  const module = courseModel.addModule(courseId, data);
+  if (!module) {
+    throw new Error('Course not found');
+  }
+  logger.info('Module added to course', { courseId, moduleId: module.id });
+  return module;
+}
+
+async function updateModule(courseId, moduleId, updates) {
+  const module = courseModel.updateModule(courseId, moduleId, updates);
+  if (!module) {
+    throw new Error('Module not found');
+  }
+  logger.info('Module updated', { courseId, moduleId });
+  return module;
+}
+
+async function deleteModule(courseId, moduleId) {
+  const removed = courseModel.removeModule(courseId, moduleId);
+  if (!removed) {
+    throw new Error('Module not found');
+  }
+  logger.info('Module removed', { courseId, moduleId });
+  return { success: true };
+}
+
 module.exports = {
   createCourse,
   updateCourse,
@@ -63,4 +90,7 @@ module.exports = {
   submitFeedback,
   getCoursesByCategory,
   getCoursesByInstructor,
+  addModule,
+  updateModule,
+  deleteModule,
 };

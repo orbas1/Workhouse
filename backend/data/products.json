@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "name": "Widget Pro",
+    "description": "Advanced widget for professionals",
+    "price": 49.99,
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "id": "2",
+    "name": "Gadget Lite",
+    "description": "Lightweight gadget for everyday use",
+    "price": 19.99,
+    "image": "https://via.placeholder.com/150"
+  }
+]

@@ -38,9 +38,14 @@ function getOrganizationFeedbackByOpportunity(opportunityId) {
   return organizationFeedbacks.filter((f) => f.opportunityId === opportunityId);
 }
 
+function getOrganizationFeedbackByVolunteer(volunteerId) {
+  return organizationFeedbacks.filter((f) => f.volunteerId === volunteerId);
+}
+
 module.exports = {
   addVolunteerFeedback,
   addOrganizationFeedback,
   getVolunteerFeedbackByOpportunity,
   getOrganizationFeedbackByOpportunity,
+  getOrganizationFeedbackByVolunteer,
 };

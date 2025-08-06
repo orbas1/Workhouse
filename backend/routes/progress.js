@@ -4,6 +4,8 @@ const {
   getAlertsHandler,
   createCustomAlertHandler,
   getTimelineHandler,
+  getTasksHandler,
+  addTaskHandler,
 } = require('../controllers/progressTracking');
 const {
   trackProgressHandler,
@@ -18,6 +20,7 @@ const validate = require('../middleware/validate');
 const ensureProgressAccess = require('../middleware/progress');
 const ensureUserProgressAccess = require('../middleware/userProgress');
 const { userIdParamSchema: trackingUserIdParamSchema, customAlertSchema } = require('../validation/progressTracking');
+const { taskSchema } = require('../validation/progressTracking');
 const {
   trackProgressSchema,
   userIdParamSchema,
@@ -32,6 +35,8 @@ router.get('/dashboard/:userId', auth, validate(trackingUserIdParamSchema, 'para
 router.get('/alerts/:userId', auth, validate(trackingUserIdParamSchema, 'params'), ensureProgressAccess, getAlertsHandler);
 router.post('/custom-alerts/create', auth, validate(customAlertSchema), ensureProgressAccess, createCustomAlertHandler);
 router.get('/timeline/:userId', auth, validate(trackingUserIdParamSchema, 'params'), ensureProgressAccess, getTimelineHandler);
+router.get('/tasks/:userId', auth, validate(trackingUserIdParamSchema, 'params'), ensureProgressAccess, getTasksHandler);
+router.post('/tasks/create', auth, validate(taskSchema), ensureProgressAccess, addTaskHandler);
 
 // User progress routes
 router.post('/track', auth, validate(trackProgressSchema), ensureUserProgressAccess, trackProgressHandler);

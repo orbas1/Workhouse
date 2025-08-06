@@ -3,6 +3,8 @@
 CREATE TABLE IF NOT EXISTS webinar_analytics (
   id UUID PRIMARY KEY,
   webinar_id UUID NOT NULL,
+  owner_id UUID NOT NULL,
+  title TEXT,
   overview JSONB,
   engagement JSONB,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
