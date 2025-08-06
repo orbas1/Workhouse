@@ -51,9 +51,14 @@ export default function NavBar() {
           </Button>
         </>
       ) : (
-        <Button variant="outline" color="white" onClick={() => navigate('/login')}>
-          Login
-        </Button>
+        <>
+          <Button mr={2} variant="outline" color="white" onClick={() => navigate('/login')}>
+            Login
+          </Button>
+          <Button color="teal.500" bg="white" onClick={() => navigate('/signup')}>
+            Sign Up
+          </Button>
+        </>
       )}
     </Flex>
   );
