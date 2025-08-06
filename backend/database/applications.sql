@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS applications (
   user_id VARCHAR(255) NOT NULL,
   message TEXT NOT NULL,
   status VARCHAR(20) DEFAULT 'pending',
+  certificate_url TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  completed_at TIMESTAMP
 );
