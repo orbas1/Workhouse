@@ -1,0 +1,8 @@
+.blog-home {
+  width: 100%;
+}
+.featured-grid img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}

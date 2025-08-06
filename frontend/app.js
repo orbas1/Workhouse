@@ -52,6 +52,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/blog" element={<Protected><BlogHome /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
