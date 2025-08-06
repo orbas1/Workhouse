@@ -33,14 +33,12 @@ export default function AdCreateEdit() {
   useEffect(() => {
     if (adId) {
       getAd(groupId, adId)
-        .then((data) =>
-          setValues({
-            title: data.title || '',
-            content: data.content || '',
-            targetUrl: data.targetUrl || '',
-            imageUrl: data.imageUrl || '',
-          })
-        )
+        .then((data) => setValues({
+          title: data.title || '',
+          content: data.content || '',
+          targetUrl: data.targetUrl || '',
+          imageUrl: data.imageUrl || '',
+        }))
         .catch(() => toast({ title: 'Failed to load ad', status: 'error' }));
     }
   }, [adId, groupId, toast]);
