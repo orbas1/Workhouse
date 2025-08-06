@@ -10,15 +10,17 @@ creates an `.env` file, runs database migrations and seeds sample data.
 
 ## Backend setup
 
+From the repository root you can launch the interactive setup wizard:
+
 ```bash
-cd backend
-npm install
 npm run setup
 ```
 
 The wizard will ask for database credentials and then run the migrations and
 seeders. All environment variables are written to `backend/.env` with safe
-placeholders so the server starts even if optional keys are missing.
+placeholders so the server starts even if optional keys are missing. The wizard
+also exposes the frontend under `VITE_APP_URL` so the browser UI can resolve
+the correct site address.
 
 After setup you can start the API with:
 
