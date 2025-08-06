@@ -34,16 +34,9 @@ CREATE TABLE service_bookings (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE portfolio_items (
-  id UUID PRIMARY KEY,
-  provider_id UUID REFERENCES service_providers(id),
-  title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  media_url TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Portfolio items are defined in portfolio.sql
 
-CREATE TABLE testimonials (
+CREATE TABLE provider_testimonials (
   id UUID PRIMARY KEY,
   provider_id UUID REFERENCES service_providers(id),
   client_id UUID NOT NULL,
