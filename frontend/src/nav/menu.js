@@ -39,6 +39,8 @@ export const menu = [
       { label: 'Services', path: '/services' },
       { label: 'New Service', path: '/services/new' },
       { label: 'Tasks', path: '/tasks' },
+      { label: 'Task Search', path: '/tasks/search' },
+      { label: 'Task Schedule', path: '/tasks/schedule' },
       { label: 'Tasks Workflow', path: '/tasks-workflow' },
       { label: 'Schedule', path: '/schedule' },
       { label: 'Experience', path: '/experience' },

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Heading, ButtonGroup, Button, Spinner } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import TaskTable from '../components/TaskTable.jsx';
 import '../styles/TaskDashboardPage.css';
 import { listTasks } from '../api/tasks.js';
@@ -17,7 +18,7 @@ function TaskDashboardPage() {
       setLoading(true);
       try {
         const params = mode === 'creator' ? { ownerId: user.id } : { assignee: user.id };
-        const data = await listTasks(params);
+        const data = await listTasks(undefined, params);
         setTasks(data);
       } catch (err) {
         console.error('Failed to load tasks', err);
@@ -37,6 +38,14 @@ function TaskDashboardPage() {
         </Button>
         <Button colorScheme={mode === 'tasker' ? 'teal' : 'gray'} onClick={() => setMode('tasker')}>
           Tasker
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup mb={4}>
+        <Button as={RouterLink} to="/tasks/search" colorScheme="teal">
+          Search Tasks
+        </Button>
+        <Button as={RouterLink} to="/tasks/schedule" colorScheme="teal">
+          Manage Schedule
         </Button>
       </ButtonGroup>
       {loading ? <Spinner /> : <TaskTable tasks={tasks} />}
