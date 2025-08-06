@@ -13,6 +13,10 @@ import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import TaskWorkflowPage from './pages/TaskWorkflowPage.jsx';
+import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import { ProfileProvider } from './context/ProfileContext.jsx';
+import { TaskProvider } from './context/TaskContext.jsx';
 import NotificationSettingsPage from './pages/NotificationSettingsPage.jsx';
 import ArticlePage from './pages/ArticlePage.jsx';
 import DisputeFormPage from './pages/DisputeFormPage.jsx';
@@ -54,6 +58,26 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter>
           <ProfileProvider>
+            <TaskProvider>
+              <NavMenu />
+              <Box p={4}>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupPage />} />
+                  <Route path="/profile" element={<Protected><ProfilePage /></Protected>} />
+                  <Route path="/profile/customize" element={<Protected><ProfileCustomizationPage /></Protected>} />
+                  <Route path="/contracts/new" element={<Protected><ContractFormPage /></Protected>} />
+                  <Route path="/contracts/:contractId/edit" element={<Protected><ContractFormPage /></Protected>} />
+                  <Route path="/services/new" element={<Protected><ServiceCreationPage /></Protected>} />
+                  <Route path="/tasks-workflow" element={<Protected><TaskWorkflowPage /></Protected>} />
+                  <Route path="/" element={<Navigate to="/profile" replace />} />
+                  <Route path="*" element={<Navigate to="/profile" replace />} />
+                </Routes>
+              </Box>
+            </TaskProvider>
+          </ProfileProvider>
+        </BrowserRouter>
+      </AuthProvider>
             <NavMenu />
             <Box p={4}>
               <Routes>

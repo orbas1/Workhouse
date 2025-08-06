@@ -168,6 +168,10 @@ async function setupWorkflow(data) {
   return workflow;
 }
 
+async function listWorkflows(projectId) {
+  return model.listWorkflowsByProject(projectId);
+}
+
 async function getSpreadsheet(projectId) {
   const sheet = model.getSpreadsheet(projectId);
   if (!sheet) {
@@ -215,6 +219,7 @@ module.exports = {
   getFile,
   listFiles,
   setupWorkflow,
+  listWorkflows,
   getSpreadsheet,
   createTextDocument,
 };
