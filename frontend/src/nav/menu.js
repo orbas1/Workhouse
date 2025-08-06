@@ -10,7 +10,8 @@ export const menu = [
       { label: 'Connections', path: '/connections' },
       { label: 'Support', path: '/support' },
       { label: 'Notifications', path: '/notifications' },
-      { label: 'Settings', path: '/settings' }
+      { label: 'Settings', path: '/settings' },
+      { label: 'Billing & Subscription', path: '/billing' }
     ]
   },
   {
