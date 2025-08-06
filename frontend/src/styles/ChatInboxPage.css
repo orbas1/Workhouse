@@ -1,0 +1,6 @@
+.chat-inbox-page {
+  background: #f4f7f9;
+}
+.chat-inbox-container {
+  height: calc(100vh - 64px);
+}

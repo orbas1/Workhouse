@@ -42,6 +42,8 @@ import SimDashboardPage from './pages/SimDashboardPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
 import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
+import ChatInboxPage from './pages/ChatInboxPage.jsx';
+import JobListingsPage from './pages/JobListingsPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -92,12 +94,12 @@ export default function App() {
     { path: '/feed', element: <PlaceholderPage title="Live Feed" />, protected: true },
     { path: '/profile', element: <ProfilePage />, protected: true },
     { path: '/profile/customize', element: <ProfileCustomizationPage />, protected: true },
-    { path: '/messages', element: <PlaceholderPage title="Chat Inbox" />, protected: true },
+    { path: '/messages', element: <ChatInboxPage />, protected: true },
     { path: '/connections', element: <ConnectionManagementPage />, protected: true },
 
     // Employment & Gigs
     { path: '/employment', element: <PlaceholderPage title="Employment Dashboard" />, protected: true },
-    { path: '/jobs', element: <PlaceholderPage title="Job Listings" />, protected: true },
+    { path: '/jobs', element: <JobListingsPage />, protected: true },
     { path: '/applications-interviews', element: <PlaceholderPage title="Application & Interview Management" />, protected: true },
     { path: '/headhunter/dashboard', element: <PlaceholderPage title="Headhunter Dashboard" />, protected: true },
     { path: '/interview/:id', element: <PlaceholderPage title="Virtual Interview" />, protected: true },
