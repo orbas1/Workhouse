@@ -1,57 +1,31 @@
 import apiClient from '../utils/apiClient.js';
 
-export async function getServices(sellerId) {
-  const { data } = await apiClient.get('/service-providers/services', {
-    params: { sellerId },
-  });
+export async function searchServices(params = {}) {
+  const { data } = await apiClient.get('/marketplace/services', { params });
+  return data;
+}
+
+export async function getService(id) {
+  const { data } = await apiClient.get(`/marketplace/services/${id}`);
+  return data;
+}
+
+export async function getServices({ sellerId } = {}) {
+  const { data } = await apiClient.get('/service-providers/services', { params: { sellerId } });
+  return data;
+}
+
+export async function createService(service) {
+  const { data } = await apiClient.post('/service-providers/services', service);
   return data;
 }
 
 export async function updateService(id, updates) {
   const { data } = await apiClient.put(`/service-providers/services/${id}`, updates);
   return data;
-import axios from 'axios';
-
-const BASE_URL = window.env.API_BASE_URL;
-
-export async function createService(data) {
-  const token = localStorage.getItem('token');
-  const res = await axios.post(`${BASE_URL}/service-providers/services`, data, {
-    headers: { Authorization: `Bearer ${token}` },
-const API_URL = import.meta.env.VITE_API_URL || '';
-
-function authHeader() {
-  const token = localStorage.getItem('token');
-  return token ? { Authorization: `Bearer ${token}` } : {};
-}
-
-export async function searchServices(params = {}) {
-  const res = await axios.get(`${API_URL}/marketplace/services`, {
-    params,
-    headers: authHeader(),
-  });
-  return res.data;
-}
-
-export async function updateService(serviceId, data) {
-  const token = localStorage.getItem('token');
-  const res = await axios.put(`${BASE_URL}/service-providers/services/${serviceId}`, data, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return res.data;
-}
-export async function getService(id) {
-  const res = await axios.get(`${API_URL}/marketplace/services/${id}`, {
-    headers: authHeader(),
-  });
-  return res.data;
 }
 
 export async function requestService(serviceId, description = '') {
-  const res = await axios.post(
-    `${API_URL}/marketplace/services/request`,
-    { serviceId, description },
-    { headers: authHeader() }
-  );
-  return res.data;
+  const { data } = await apiClient.post('/marketplace/services/request', { serviceId, description });
+  return data;
 }
