@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, VStack, Link, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { menu } from '../nav/menu.js';
+import { useAuth } from '../context/AuthContext.jsx';
 
 export default function NavMenu() {
+  const { user } = useAuth();
+  if (!user) return null;
   return (
     <Box as="aside" w="250px" p={4} bg="gray.50" h="100vh" overflowY="auto">
       {menu.map((section) => (
