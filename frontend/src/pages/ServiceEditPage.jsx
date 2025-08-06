@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Heading,
@@ -10,11 +10,12 @@ import {
   Button,
   useToast,
 } from '@chakra-ui/react';
-import { createService } from '../api/services.js';
-import '../styles/ServiceCreationPage.css';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getService, updateService, deleteService } from '../api/services.js';
+import '../styles/ServiceEditPage.css';
 
-export default function ServiceCreationPage() {
+export default function ServiceEditPage() {
+  const { id } = useParams();
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -24,7 +25,25 @@ export default function ServiceCreationPage() {
   });
   const toast = useToast();
   const navigate = useNavigate();
-  const sellerId = localStorage.getItem('userId');
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const svc = await getService(id);
+        setForm({
+          title: svc.name || svc.title || '',
+          description: svc.description || '',
+          price: svc.price?.toString() || '',
+          category: svc.category || '',
+          tags: (svc.tags || []).join(', '),
+        });
+      } catch (err) {
+        console.error('Failed to load service', err);
+        toast({ title: 'Failed to load service', status: 'error' });
+      }
+    }
+    load();
+  }, [id, toast]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +54,6 @@ export default function ServiceCreationPage() {
     e.preventDefault();
     try {
       const payload = {
-        sellerId,
         title: form.title,
         description: form.description,
         price: Number(form.price),
@@ -45,18 +63,29 @@ export default function ServiceCreationPage() {
           .map((t) => t.trim())
           .filter(Boolean),
       };
-      await createService(payload);
-      toast({ title: 'Service created', status: 'success' });
+      await updateService(id, payload);
+      toast({ title: 'Service updated', status: 'success' });
       navigate('/service-orders');
     } catch (err) {
-      console.error(err);
-      toast({ title: 'Failed to create service', status: 'error' });
+      console.error('Failed to update service', err);
+      toast({ title: 'Failed to update service', status: 'error' });
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteService(id);
+      toast({ title: 'Service deleted', status: 'info' });
+      navigate('/service-orders');
+    } catch (err) {
+      console.error('Failed to delete service', err);
+      toast({ title: 'Failed to delete service', status: 'error' });
     }
   };
 
   return (
-    <Box className="service-creation-page" maxW="600px" mx="auto">
-      <Heading mb={6}>Create Service</Heading>
+    <Box className="service-edit-page" maxW="600px" mx="auto">
+      <Heading mb={6}>Edit Service</Heading>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4} align="stretch">
           <FormControl isRequired>
@@ -87,7 +116,10 @@ export default function ServiceCreationPage() {
             <Input name="tags" value={form.tags} onChange={handleChange} />
           </FormControl>
           <Button colorScheme="teal" type="submit">
-            Save Service
+            Save Changes
+          </Button>
+          <Button colorScheme="red" variant="outline" onClick={handleDelete}>
+            Delete Service
           </Button>
         </VStack>
       </form>

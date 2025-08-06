@@ -14,6 +14,7 @@ import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
 import ServiceDetailPage from './pages/ServiceDetailPage.jsx';
 import ServiceOrderManagementPage from './pages/ServiceOrderManagementPage.jsx';
 import ServiceSearchPage from './pages/ServiceSearchPage.jsx';
+import ServiceEditPage from './pages/ServiceEditPage.jsx';
 import GigSearchPage from './pages/GigSearchPage.jsx';
 import GigDetailPage from './pages/GigDetailPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
@@ -138,6 +139,7 @@ export default function App() {
     { path: '/proposals-invoices', element: <ProposalInvoiceManagement />, protected: true },
     { path: '/services', element: <ServiceSearchPage />, protected: true },
     { path: '/services/new', element: <ServiceCreationPage />, protected: true },
+    { path: '/services/:id/edit', element: <ServiceEditPage />, protected: true },
     { path: '/services/:id', element: <ServiceDetailPage />, protected: true },
     { path: '/service-orders', element: <ServiceOrderManagementPage />, protected: true },
     { path: '/payments/timesheets', element: <PaymentTimesheetManagement />, protected: true },
