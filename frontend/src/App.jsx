@@ -13,6 +13,7 @@ import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import ArticlePage from './pages/ArticlePage.jsx';
 import DisputeFormPage from './pages/DisputeFormPage.jsx';
 import AdminUserContentPage from './pages/AdminUserContentPage.jsx';
 import SupportDisputePage from './pages/SupportDisputePage.jsx';
@@ -112,6 +113,8 @@ export default function App() {
                 />
                 <Route path="/" element={<Navigate to="/profile" replace />} />
                 <Route path="*" element={<Navigate to="/profile" replace />} />
+                <Route path="/articles" element={<ArticlePage />} />
+                <Route path="/articles/:articleId" element={<ArticlePage />} />
               </Routes>
             </Box>
           </ProfileProvider>

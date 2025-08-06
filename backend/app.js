@@ -82,6 +82,7 @@ const aiEnhancedLearningRoutes = require('./routes/aiEnhancedLearningDevelopment
 const userFeedbackAdjustmentRoutes = require('./routes/userFeedbackAdjustment');
 const integrationRoutes = require('./routes/integration');
 const sessionRoutes = require('./routes/sessions');
+const articleRoutes = require('./routes/articles');
 const interviewRoutes = require('./routes/interviews');
 const educationScheduleRoutes = require('./routes/educationSchedule');
 const infrastructureOptimizationRoutes = require('./routes/infrastructureOptimization');
@@ -208,6 +209,7 @@ app.use('/webinar-analytics', webinarAnalyticsRoutes);
 app.use('/analytics/workspace', workspaceAnalyticsRoutes);
 app.use('/analytics/live-feed', liveFeedAnalyticsRoutes);
 app.use('/live-feed', liveFeedRoutes);
+app.use('/articles', articleRoutes);
 app.use('/content-library', contentLibraryRoutes);
 app.use('/ml', mlAnalyticsRoutes);
 app.use('/ml', enhancedUserExperienceMLRoutes);
