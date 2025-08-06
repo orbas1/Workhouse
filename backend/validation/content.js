@@ -36,3 +36,11 @@ const updateContentSchema = Joi.object({
 });
 
 module.exports = { createContentSchema, updateContentSchema };
+});
+
+module.exports = { createContentSchema, updateContentSchema };
+const updateContentStatusSchema = Joi.object({
+  status: Joi.string().valid('draft', 'published', 'archived').required(),
+});
+
+module.exports = { createContentSchema, updateContentStatusSchema };

@@ -13,7 +13,7 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext.jsx';
-import { getTasks } from '../api/tasks.js';
+import { listTasks } from '../api/tasks.js';
 import '../styles/TaskSchedulePage.css';
 
 export default function TaskSchedulePage() {
@@ -24,7 +24,7 @@ export default function TaskSchedulePage() {
   useEffect(() => {
     async function load() {
       try {
-        const data = await getTasks(user?.id);
+        const data = await listTasks({ assignee: user.id });
         setTasks(data);
       } catch (err) {
         console.error('Failed to load tasks', err);

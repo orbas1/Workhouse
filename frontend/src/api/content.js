@@ -12,10 +12,19 @@ export async function createContent(payload) {
 
 export async function updateContent(id, payload) {
   const { data } = await apiClient.put(`/content/${id}`, payload);
+export async function listContent() {
+  const { data } = await apiClient.get('/content');
+  return data;
+}
+
+export async function updateContentStatus(id, status) {
+  const { data } = await apiClient.patch(`/content/${id}/status`, { status });
   return data;
 }
 
 export async function deleteContent(id) {
   await apiClient.delete(`/content/${id}`);
   return true;
+  const { data } = await apiClient.delete(`/content/${id}`);
+  return data;
 }

@@ -9,12 +9,15 @@ async function getContentLibrary() {
     title: p.title || 'Podcast',
     description: p.description || '',
     thumbnail: p.thumbnail || null,
+    audioUrl: p.audioUrl || '',
   }));
   const webinars = expertAccessModel.getWebinars().map(w => ({
     id: w.id,
     title: w.title,
     description: w.description || '',
     scheduledAt: w.scheduledAt,
+    videoUrl: w.videoUrl || '',
+    jitsiRoom: w.jitsiRoom || '',
   }));
   return { podcasts, webinars };
 }

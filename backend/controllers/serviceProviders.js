@@ -1,18 +1,34 @@
 const Service = require('../models/service');
 
 exports.createService = (req, res) => {
-  const { sellerId, title, description, price, status } = req.body;
+  const { sellerId, title, description, price, status, category, tags } = req.body;
   if (!sellerId || !title) {
     return res.status(400).json({ error: 'sellerId and title are required' });
   }
-  const service = Service.createService({ sellerId, title, description, price, status });
+  const service = Service.createService({
+    sellerId,
+    title,
+    description,
+    price,
+    status,
+    category,
+    tags,
+  });
   res.status(201).json(service);
 };
 
 exports.listServices = (req, res) => {
-  const { sellerId } = req.query;
-  const data = sellerId ? Service.listServicesBySeller(sellerId) : Service.services;
-  res.json(data);
+  const { sellerId, search, category, minPrice, maxPrice } = req.query;
+  if (sellerId) {
+    return res.json(Service.listServicesBySeller(sellerId));
+  }
+  const filters = {
+    search,
+    category,
+    minPrice: minPrice ? Number(minPrice) : undefined,
+    maxPrice: maxPrice ? Number(maxPrice) : undefined,
+  };
+  res.json(Service.listAllServices(filters));
 };
 
 exports.getServiceById = (req, res) => {

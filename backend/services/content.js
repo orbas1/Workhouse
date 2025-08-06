@@ -21,3 +21,13 @@ async function deleteContent(id) {
 }
 
 module.exports = { createContent, listContent, updateContent, deleteContent };
+
+async function updateContentStatus(id, status) {
+  return model.updateStatus(id, status);
+}
+
+async function deleteContent(id) {
+  return model.remove(id);
+}
+
+module.exports = { createContent, listContent, updateContentStatus, deleteContent };

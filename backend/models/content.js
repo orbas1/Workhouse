@@ -38,6 +38,15 @@ function update(id, data) {
   if (idx === -1) return null;
   items[idx] = { ...items[idx], ...data };
   return items[idx];
+function findById(id) {
+  return items.find((i) => i.id === id);
+}
+
+function updateStatus(id, status) {
+  const item = findById(id);
+  if (!item) return null;
+  item.status = status;
+  return item;
 }
 
 function remove(id) {
@@ -47,4 +56,4 @@ function remove(id) {
   return true;
 }
 
-module.exports = { create, list, update, remove };
+module.exports = { create, list, update, remove, findById, updateStatus };

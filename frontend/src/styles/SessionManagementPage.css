@@ -1,0 +1,8 @@
+.session-management-page .session-table {
+  width: 100%;
+}
+
+.session-management-page .session-table th,
+.session-management-page .session-table td {
+  text-align: left;
+}
