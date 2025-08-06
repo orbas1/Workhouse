@@ -3,7 +3,7 @@ import { useState } from 'react';
 import '../styles/InterviewForm.css';
 
 export default function InterviewForm({ onSchedule }) {
-  const [form, setForm] = useState({ candidate: '', datetime: '' });
+  const [form, setForm] = useState({ candidateEmail: '', scheduledFor: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -13,7 +13,7 @@ export default function InterviewForm({ onSchedule }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSchedule(form);
-    setForm({ candidate: '', datetime: '' });
+    setForm({ candidateEmail: '', scheduledFor: '' });
   };
 
   return (
@@ -21,11 +21,11 @@ export default function InterviewForm({ onSchedule }) {
       <Stack spacing={3}>
         <FormControl isRequired>
           <FormLabel>Candidate Email</FormLabel>
-          <Input name="candidate" value={form.candidate} onChange={handleChange} />
+          <Input name="candidateEmail" value={form.candidateEmail} onChange={handleChange} />
         </FormControl>
         <FormControl isRequired>
           <FormLabel>Date &amp; Time</FormLabel>
-          <Input type="datetime-local" name="datetime" value={form.datetime} onChange={handleChange} />
+          <Input type="datetime-local" name="scheduledFor" value={form.scheduledFor} onChange={handleChange} />
         </FormControl>
         <Button colorScheme="teal" type="submit">Schedule</Button>
       </Stack>

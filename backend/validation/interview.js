@@ -1,9 +1,8 @@
 const Joi = require('joi');
 
 const scheduleInterviewSchema = Joi.object({
-  applicationId: Joi.string().uuid().required(),
-  applicantId: Joi.string().uuid().required(),
-  interviewDate: Joi.date().iso().required(),
+  candidateEmail: Joi.string().email().required(),
+  scheduledFor: Joi.date().iso().required(),
 });
 
 const interviewIdParamSchema = Joi.object({
@@ -12,9 +11,6 @@ const interviewIdParamSchema = Joi.object({
 
 const statusUpdateSchema = Joi.object({
   status: Joi.string().valid('scheduled', 'completed', 'cancelled').required(),
-  interviewerId: Joi.number().required(),
-  candidateId: Joi.number().required(),
-  scheduledFor: Joi.date().iso().required(),
 });
 
 const noteSchema = Joi.object({

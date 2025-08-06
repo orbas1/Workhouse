@@ -68,6 +68,7 @@ import EducationDashboard from '../pages/EducationDashboard.jsx';
 import WorkspaceDashboard from '../pages/WorkspaceDashboard.jsx';
 import JobPostManagement from '../pages/JobPostManagement.jsx';
 import VirtualInterview from '../pages/VirtualInterview.jsx';
+import InterviewSession from '../pages/InterviewSession.jsx';
 
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
@@ -113,6 +114,7 @@ export default function App() {
     { path: '/applications-interviews', element: <ApplicationInterviewManagementPage />, protected: true },
     { path: '/headhunter/dashboard', element: <HeadhunterDashboardPage />, protected: true },
     { path: '/interviews', element: <VirtualInterview />, protected: true },
+    { path: '/interviews/:interviewId', element: <InterviewSession />, protected: true },
     { path: '/job-posts', element: <JobPostManagement />, protected: true },
     { path: '/gigs', element: <PlaceholderPage title="Gigs Dashboard" />, protected: true },
     { path: '/gigs/manage', element: <PlaceholderPage title="Gig Creation & Management" />, protected: true },

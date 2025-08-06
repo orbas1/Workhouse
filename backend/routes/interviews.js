@@ -4,6 +4,8 @@ const {
   getUserInterviewsHandler,
   getEmployerInterviewsHandler,
   updateInterviewStatusHandler,
+  getInterviewHandler,
+  addNoteHandler,
 } = require('../controllers/interview');
 const auth = require('../middleware/auth');
 const requireRole = require('../middleware/requireRole');
@@ -12,6 +14,7 @@ const {
   scheduleInterviewSchema,
   interviewIdParamSchema,
   statusUpdateSchema,
+  noteSchema,
 } = require('../validation/interview');
 
 const router = express.Router();
@@ -25,6 +28,18 @@ router.get('/user', auth, getUserInterviewsHandler);
 // Get interviews for employer
 router.get('/employer', auth, requireRole('employer', 'admin'), getEmployerInterviewsHandler);
 
+// Get single interview
+router.get('/:interviewId', auth, validate(interviewIdParamSchema, 'params'), getInterviewHandler);
+
+// Add note
+router.post(
+  '/:interviewId/notes',
+  auth,
+  validate(interviewIdParamSchema, 'params'),
+  validate(noteSchema),
+  addNoteHandler
+);
+
 // Update interview status
 router.put(
   '/:interviewId/status',
@@ -33,19 +48,6 @@ router.put(
   validate(statusUpdateSchema),
   updateInterviewStatusHandler
 );
-const { authenticate } = require('../middleware/auth');
-const validate = require('../middleware/validate');
-const { scheduleInterviewSchema, noteSchema } = require('../validation/interview');
-const {
-  scheduleInterviewHandler,
-  getInterviewHandler,
-  addNoteHandler,
-} = require('../controllers/interview');
-
-const router = express.Router();
-
-router.post('/schedule', authenticate, validate(scheduleInterviewSchema), scheduleInterviewHandler);
-router.get('/:id', authenticate, getInterviewHandler);
-router.post('/:id/notes', authenticate, validate(noteSchema), addNoteHandler);
 
 module.exports = router;
+
