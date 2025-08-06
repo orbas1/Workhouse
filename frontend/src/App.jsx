@@ -71,6 +71,7 @@ import WorkspaceDashboard from '../pages/WorkspaceDashboard.jsx';
 import JobPostManagement from '../pages/JobPostManagement.jsx';
 import VirtualInterview from '../pages/VirtualInterview.jsx';
 import InterviewSession from '../pages/InterviewSession.jsx';
+import SessionManagementPage from './pages/SessionManagementPage.jsx';
 
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
@@ -164,7 +165,7 @@ export default function App() {
     { path: '/networking', element: <PlaceholderPage title="Networking Dashboard" />, protected: true },
     { path: '/sessions', element: <NetworkingSessions />, protected: true },
     { path: '/networking/session/:sessionId', element: <InSessionNetworking />, protected: true },
-    { path: '/session-management', element: <PlaceholderPage title="Session Management" />, protected: true },
+    { path: '/session-management', element: <SessionManagementPage />, protected: true },
 
     // Media & Advertising
     { path: '/creator/dashboard', element: <PlaceholderPage title="Creator Dashboard" />, protected: true },

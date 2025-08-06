@@ -73,6 +73,7 @@ export const menu = [
       { label: 'Sessions', path: '/sessions' },
       { label: 'Networking', path: '/networking' },
       { label: 'Networking Session', path: '/networking/session/1' },
+      { label: 'Session Management', path: '/session-management' },
       { label: 'Blog', path: '/blog' },
       { label: 'Articles', path: '/articles' }
     ]

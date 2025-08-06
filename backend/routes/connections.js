@@ -7,6 +7,7 @@ const {
   updateConnectionHandler,
   deleteConnectionHandler,
 } = require('../controllers/connection');
+const connectionController = require('../controllers/connectionController');
 
 const router = express.Router();
 
@@ -15,11 +16,9 @@ router.get('/', auth, listConnectionsHandler);
 router.get('/:connectionId', auth, getConnectionHandler);
 router.put('/:connectionId', auth, updateConnectionHandler);
 router.delete('/:connectionId', auth, deleteConnectionHandler);
-const router = express.Router();
-const connectionController = require('../controllers/connectionController');
 
-router.get('/user/:userId', connectionController.getConnections);
-router.post('/user/:userId', connectionController.addConnection);
-router.put('/:id', connectionController.updateConnection);
+// User-scoped routes
+router.get('/user/:userId', auth, connectionController.getConnections);
+router.post('/user/:userId', auth, connectionController.addConnection);
 
 module.exports = router;
