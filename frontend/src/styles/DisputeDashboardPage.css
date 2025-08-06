@@ -1,3 +1,9 @@
 .dispute-dashboard-page {
-  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.dispute-dashboard-page table th,
+.dispute-dashboard-page table td {
+  text-transform: capitalize;
 }

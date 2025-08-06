@@ -14,7 +14,7 @@ import {
 import NavMenu from '../components/NavMenu';
 import '../styles/AdCreateEdit.css';
 import { validateAd } from '../utils/validation';
-import { createAd, getAd, updateAd } from '../src/api/ads.js';
+import { createAd, getAd, updateAd } from '../api/ads.js';
 
 export default function AdCreateEdit() {
   const { adId } = useParams();
@@ -41,7 +41,7 @@ export default function AdCreateEdit() {
         }))
         .catch(() => toast({ title: 'Failed to load ad', status: 'error' }));
     }
-  }, [adId]);
+  }, [adId, groupId, toast]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });

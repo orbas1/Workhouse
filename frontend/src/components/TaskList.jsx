@@ -1,7 +1,13 @@
 import React from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, Button, Badge } from '@chakra-ui/react';
 import { useTasks } from '../context/TaskContext.jsx';
 import '../styles/TaskList.css';
+
+const statusColor = {
+  'pending': 'gray',
+  'in-progress': 'yellow',
+  'completed': 'green'
+};
 
 function TaskList({ onEdit }) {
   const { tasks, removeTask } = useTasks();
@@ -12,6 +18,7 @@ function TaskList({ onEdit }) {
         <Tr>
           <Th>Title</Th>
           <Th>Status</Th>
+          <Th>Assignee</Th>
           <Th>Due Date</Th>
           <Th>Actions</Th>
         </Tr>
@@ -20,7 +27,10 @@ function TaskList({ onEdit }) {
         {tasks.map((task) => (
           <Tr key={task.id}>
             <Td>{task.title}</Td>
-            <Td>{task.status}</Td>
+            <Td>
+              <Badge colorScheme={statusColor[task.status] || 'gray'}>{task.status}</Badge>
+            </Td>
+            <Td>{task.assignee || '-'}</Td>
             <Td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : '-'}</Td>
             <Td>
               <Button size="xs" mr={2} onClick={() => onEdit(task)}>Edit</Button>
