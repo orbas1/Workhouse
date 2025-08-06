@@ -70,6 +70,8 @@ async function assignTask(taskId, assignee) {
   return task;
 }
 
+async function listTasks(filters) {
+  return model.listTasks(filters);
 async function listTasksByAssignee(assignee) {
   return model.listTasksByAssignee(assignee);
 }
@@ -223,6 +225,7 @@ module.exports = {
   updateTask,
   deleteTask,
   assignTask,
+  listTasks,
   listTasksByAssignee,
   suggestTasks,
   suggestBudget,

@@ -15,6 +15,7 @@ export default function NavBar() {
   }
 
   return (
+    <Flex as="nav" className="nav-bar" bg="teal.500" color="white" p={4} align="center">
     <Flex className="nav-bar" bg="teal.500" color="white" p={4} align="center">
       <Heading size="md">Workhouse</Heading>
       <Spacer />
@@ -27,6 +28,9 @@ export default function NavBar() {
           <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
           <Button as={RouterLink} to="/profile" variant="ghost" color="white" mr={2}>
             Profile
+          </Button>
+          <Button as={RouterLink} to="/tasks" variant="ghost" color="white" mr={2}>
+            Tasks
           </Button>
           <Button as={RouterLink} to="/ads" variant="ghost" color="white" mr={2}>
             Ads
@@ -68,6 +72,7 @@ export default function NavBar() {
     </Flex>
   );
 }
+
 
 
 

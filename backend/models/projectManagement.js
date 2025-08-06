@@ -52,6 +52,7 @@ function listProjects(ownerId) {
 }
 
 
+function createTask({ projectId, title, description = '', category = null, location = null, budget = null, dueDate = null }) {
 function createTask({ projectId, title, description = '', dueDate = null, ownerId }) {
   const id = randomUUID();
   const now = new Date();
@@ -60,6 +61,9 @@ function createTask({ projectId, title, description = '', dueDate = null, ownerI
     projectId,
     title,
     description,
+    category,
+    location,
+    budget,
     dueDate,
     status: 'pending',
     assignee: null,
@@ -107,6 +111,50 @@ function assignTask(taskId, assignee) {
   return task;
 }
 
+function listTasks(filters = {}) {
+  let result = Array.from(tasks.values());
+  const { search, category, location, minBudget, maxBudget, deadline, sort } = filters;
+
+  if (search) {
+    const s = search.toLowerCase();
+    result = result.filter(
+      (t) =>
+        t.title.toLowerCase().includes(s) ||
+        (t.description && t.description.toLowerCase().includes(s))
+    );
+  }
+  if (category) {
+    result = result.filter((t) => t.category === category);
+  }
+  if (location) {
+    result = result.filter((t) => t.location === location);
+  }
+  if (minBudget !== undefined) {
+    result = result.filter((t) => typeof t.budget === 'number' && t.budget >= Number(minBudget));
+  }
+  if (maxBudget !== undefined) {
+    result = result.filter((t) => typeof t.budget === 'number' && t.budget <= Number(maxBudget));
+  }
+  if (deadline) {
+    const d = new Date(deadline);
+    result = result.filter((t) => t.dueDate && new Date(t.dueDate) <= d);
+  }
+  if (sort) {
+    switch (sort) {
+      case 'highest':
+        result.sort((a, b) => (b.budget || 0) - (a.budget || 0));
+        break;
+      case 'newest':
+        result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        break;
+      case 'closest':
+        result.sort((a, b) => new Date(a.dueDate || 0) - new Date(b.dueDate || 0));
+        break;
+      default:
+        break;
+    }
+  }
+  return result;
 function listTasksByAssignee(assignee) {
   return Array.from(tasks.values()).filter((task) => task.assignee === assignee);
 }
@@ -250,6 +298,7 @@ module.exports = {
   updateTask,
   deleteTask,
   assignTask,
+  listTasks,
   listTasksByAssignee,
   hireEmployee,
   listEmployees,

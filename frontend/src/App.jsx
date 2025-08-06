@@ -9,6 +9,9 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import ProfileCustomizationPage from './pages/ProfileCustomizationPage.jsx';
+import TaskSearchPage from './pages/TaskSearchPage.jsx';
+import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import { ProfileProvider } from './context/ProfileContext.jsx';
 import AdsDashboardPage from './pages/AdsDashboardPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import OrderManagementPage from './pages/OrderManagementPage.jsx';
@@ -336,10 +339,26 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route
+                  path="/tasks"
+                  element={
+                    <Protected>
+                      <TaskSearchPage />
                   path="/profile"
                   element={
                     <Protected>
                       <ProfilePage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <ProfilePage />
+                  path="/profile/customize"
+                  element={
+                    <Protected>
+                      <ProfileCustomizationPage />
                     </Protected>
                   }
                 />
@@ -351,7 +370,10 @@ function App() {
                     </Protected>
                   }
                 />
-                <Route
+                <Route path="*" element={<Navigate to="/tasks" />} />
+              </Routes>
+            </Box>
+          </BrowserRouter>
                   path="/connections"
                   element={
                     <Protected>

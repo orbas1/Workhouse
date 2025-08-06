@@ -54,6 +54,7 @@ const {
   taskListSchema,
   updateTaskSchema,
   assignTaskSchema,
+  taskQuerySchema,
   listTasksQuerySchema,
   aiProjectSchema,
   hireSchema,
@@ -83,6 +84,7 @@ router.get('/projects/:projectId/budget', auth, validate(projectIdParamSchema, '
 
 // Task routes
 router.post('/tasks/create', auth, validate(createTaskSchema), createTaskHandler);
+router.get('/tasks', auth, validate(taskQuerySchema, 'query'), listTasksHandler);
 router.get('/tasks', auth, validate(taskListSchema, 'query'), listTasksHandler);
 router.get('/tasks/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, getTaskHandler);
 router.get('/projects/:projectId/tasks', auth, validate(projectIdParamSchema, 'params'), projectExists, listTasksHandler);
