@@ -53,6 +53,13 @@ async function getNetworkingEvent(req, res) {
   res.json(event);
 }
 
+async function listNetworkingEvents(req, res) {
+  const userId = req.user.id;
+  const hosted = await eventService.listNetworkingEventsForHost(userId);
+  const attending = await eventService.listNetworkingEventsForUser(userId);
+  res.json({ hosted, attending });
+}
+
 async function createWorkshop(req, res) {
   try {
     const event = await eventService.createWorkshopEvent(req.body, req.user.id);
@@ -91,6 +98,7 @@ module.exports = {
   getPitchLivestream,
   createNetworkingEvent,
   getNetworkingEvent,
+  listNetworkingEvents,
   createWorkshop,
   getWorkshop,
   submitQuestion,
