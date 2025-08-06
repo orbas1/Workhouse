@@ -1,8 +1,6 @@
 import apiClient from '../utils/apiClient.js';
 
-export async function login({ email, password }) {
-  const { data } = await apiClient.post('/auth/login', { email, password });
-export async function login({ username, password, code }, remember = true) {
+export async function login(username, password, code, remember = true) {
   const { data } = await apiClient.post('/auth/login', { username, password, code });
   const { token } = data;
   const storage = remember ? localStorage : sessionStorage;

@@ -15,7 +15,6 @@ import {
   Tr,
   Th,
   Td,
-  Button,
   Button
 } from '@chakra-ui/react';
 import '../../styles/FreelanceDashboardPage.css';
