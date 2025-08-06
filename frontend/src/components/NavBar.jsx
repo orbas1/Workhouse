@@ -89,6 +89,10 @@ function NavBar() {
       <Button as={RouterLink} to="/orders" variant="ghost" color="white" mr={2}>
         Orders
       </Button>
+      <Button as={RouterLink} to="/volunteer-applications" variant="ghost" color="white">
+        Volunteer Tracking
+        Orders
+      </Button>
       <Button as={RouterLink} to="/payments" variant="ghost" color="white">
         Payments
       <Button as={RouterLink} to="/services" variant="ghost" color="white" mr={2}>
