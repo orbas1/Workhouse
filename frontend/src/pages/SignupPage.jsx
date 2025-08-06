@@ -16,6 +16,7 @@ import {
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../api/auth.js';
+import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/SignupPage.css';
 
 export default function SignupPage() {
@@ -34,6 +35,7 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -52,8 +54,9 @@ export default function SignupPage() {
     setLoading(true);
     try {
       await register({ ...form, recaptchaToken });
+      await login(form.username, form.password);
       toast({ title: 'Account created', status: 'success', duration: 3000, isClosable: true });
-      navigate('/login');
+      navigate('/setup/financial-media');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -64,6 +67,7 @@ export default function SignupPage() {
   return (
     <Flex className="signup-page">
       <Box w="lg" p={8} bg="white" boxShadow="md" borderRadius="md">
+        <Text mb={2} textAlign="center">Step 1 of 3</Text>
         <Progress value={33} mb={6} />
         <Heading mb={6} textAlign="center">Create Your Account</Heading>
         <FormControl id="fullName" mb={4} isRequired>

@@ -59,7 +59,13 @@ function CreatorDashboard() {
             <Flex mt={2} gap={2}>
               <Button size="sm" colorScheme="teal">Edit</Button>
               <Button size="sm" colorScheme="blue">Add Episode</Button>
-              <Button size="sm" colorScheme="purple">Stats</Button>
+              <Button
+                size="sm"
+                colorScheme="purple"
+                onClick={() => (window.location.href = `/creator/analytics?seriesId=${s.seriesId}`)}
+              >
+                Stats
+              </Button>
             </Flex>
           </Box>
         ))}
@@ -74,7 +80,13 @@ function CreatorDashboard() {
             <Flex mt={2} gap={2}>
               <Button size="sm" colorScheme="teal">Edit</Button>
               <Button size="sm" colorScheme="blue">Add Webinar</Button>
-              <Button size="sm" colorScheme="purple">Stats</Button>
+              <Button
+                size="sm"
+                colorScheme="purple"
+                onClick={() => (window.location.href = `/creator/analytics?webinarId=${w.webinarId}`)}
+              >
+                Stats
+              </Button>
             </Flex>
           </Box>
         ))}
@@ -87,6 +99,11 @@ function CreatorDashboard() {
           </Box>
         ))}
       </SimpleGrid>
+      <Box mt={6}>
+        <Button colorScheme="teal" onClick={() => window.location.href='/content/manage'}>
+          Manage Content
+        </Button>
+      </Box>
     </Box>
   );
 }

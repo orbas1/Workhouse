@@ -60,6 +60,8 @@ async function attendNetworkingEvent(eventId, userId) {
   eventModel.addAttendee(eventId, userId);
   logger.info('User attending networking event', { eventId, userId });
   return { success: true };
+}
+
 async function listNetworkingEventsForHost(hostId) {
   return eventModel
     .findByHost(hostId)
