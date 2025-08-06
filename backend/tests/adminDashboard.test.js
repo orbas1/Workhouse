@@ -15,7 +15,7 @@ describe('admin dashboard', () => {
   });
 
   test('adminDashboardHandler returns site metrics', () => {
-    users.length = 0;
+    users.clear();
     addUser({ username: 'a', password: 'p', role: 'admin' });
     supportTickets.createTicket({ userId: 'a', subject: 's', message: 'm' });
     flaggedContent.flagContent({ contentId: '1', reporterId: 'a', reason: 'spam' });

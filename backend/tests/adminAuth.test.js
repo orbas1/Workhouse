@@ -13,7 +13,7 @@ describe('admin auth', () => {
   });
 
   test('adminLoginHandler authenticates admin user only', async () => {
-    users.length = 0; // reset in-memory store
+    users.clear(); // reset in-memory store
     const hashed = await bcrypt.hash('secret', 10);
     addUser({ username: 'admin', password: hashed, role: 'admin' });
 

@@ -1,25 +1,31 @@
 const { users } = require('../models/user');
 
 function getUserCount() {
-  return users.length;
+  return users.size;
 }
 
 function listUsers() {
-  return users;
+  return Array.from(users.values());
 }
 
 function updateUserRole(id, role) {
-  const user = users.find((u) => u.id === id);
-  if (!user) return null;
-  user.role = role;
-  return user;
+  for (const user of users.values()) {
+    if (user.id === id) {
+      user.role = role;
+      return user;
+    }
+  }
+  return null;
 }
 
 function deleteUser(id) {
-  const idx = users.findIndex((u) => u.id === id);
-  if (idx === -1) return false;
-  users.splice(idx, 1);
-  return true;
+  for (const [username, user] of users.entries()) {
+    if (user.id === id) {
+      users.delete(username);
+      return true;
+    }
+  }
+  return false;
 }
 
 module.exports = { getUserCount, listUsers, updateUserRole, deleteUser };

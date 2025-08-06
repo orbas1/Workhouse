@@ -1,9 +1,10 @@
 const { randomUUID } = require('crypto');
 
-// In-memory user store. In a real application this would be persisted
-// to a database table. Each user has a UUID identifier, username,
-// hashed password, role and basic profile information.
-const users = [];
+// In-memory user store backed by a Map for O(1) lookups. In a real
+// application this would be persisted to a database table. Each user
+// has a UUID identifier, username, hashed password, role and basic
+// profile information.
+const users = new Map();
 
 /**
  * Find a user by username.
@@ -11,7 +12,7 @@ const users = [];
  * @returns {object|undefined}
  */
 function findUser(username) {
-  return users.find(u => u.username === username);
+  return users.get(username);
 }
 
 /**
@@ -42,7 +43,7 @@ function addUser({ username, password, role = 'user', fullName = '', email = '',
     bio,
     expertise,
   };
-  users.push(user);
+  users.set(username, user);
   return user;
 }
 
@@ -53,7 +54,7 @@ function addUser({ username, password, role = 'user', fullName = '', email = '',
  * @returns {boolean} True if the user was found and updated
  */
 function updatePassword(username, password) {
-  const user = findUser(username);
+  const user = users.get(username);
   if (!user) return false;
   user.password = password;
   return true;
