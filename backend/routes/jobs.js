@@ -8,6 +8,8 @@ const {
   assignmentParamSchema,
   createJobSchema,
   updateJobSchema,
+  applicationProgressSchema,
+  applicationProgressParamSchema,
 } = require('../validation/job');
 const {
   acceptJobHandler,
@@ -17,6 +19,7 @@ const {
   updateJobHandler,
   deleteJobHandler,
   getJobApplicationsHandler,
+  updateApplicationProgressHandler,
 } = require('../controllers/job');
 
 const router = express.Router();
@@ -29,5 +32,13 @@ router.get('/:agencyId/jobs', auth, listJobsHandler);
 router.put('/:agencyId/jobs/update/:jobId', auth, jobOwnership, validate(updateJobSchema), updateJobHandler);
 router.delete('/:agencyId/jobs/delete/:jobId', auth, jobOwnership, deleteJobHandler);
 router.get('/:agencyId/jobs/:jobId/applications', auth, jobOwnership, getJobApplicationsHandler);
+router.put(
+  '/:agencyId/jobs/:jobId/applications/:appId/progress',
+  auth,
+  jobOwnership,
+  validate(applicationProgressParamSchema, 'params'),
+  validate(applicationProgressSchema),
+  updateApplicationProgressHandler,
+);
 
 module.exports = router;

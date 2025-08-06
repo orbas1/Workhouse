@@ -24,9 +24,22 @@ const updateJobSchema = Joi.object({
   status: Joi.string().valid('open', 'closed'),
 }).min(1);
 
+const applicationProgressParamSchema = Joi.object({
+  jobId: Joi.string().guid({ version: 'uuidv4' }).required(),
+  appId: Joi.string().guid({ version: 'uuidv4' }).required(),
+}).unknown(true);
+
+const applicationProgressSchema = Joi.object({
+  stage: Joi.number().integer().min(0).max(6),
+  notes: Joi.string().allow('', null),
+  feedback: Joi.string().allow('', null),
+}).min(1);
+
 module.exports = {
   jobIdParamSchema,
   assignmentParamSchema,
   createJobSchema,
   updateJobSchema,
+  applicationProgressSchema,
+  applicationProgressParamSchema,
 };
