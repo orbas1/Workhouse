@@ -44,3 +44,12 @@ export function removePaymentMethod(id) {
 export function fetchTransactions() {
   return request('/billing/transactions');
 }
+
+export async function downloadInvoice(id) {
+  const token = localStorage.getItem('token');
+  const res = await fetch(`${API_BASE_URL}/billing/transactions/${id}/invoice`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  if (!res.ok) throw new Error('Failed to download invoice');
+  return res.blob();
+}

@@ -5,6 +5,11 @@ export async function fetchAffiliate(id) {
   return res.data;
 }
 
+export async function fetchAffiliateDashboard(id) {
+  const res = await apiClient.get(`/affiliates/dashboard/${id}`);
+  return res.data;
+}
+
 export async function fetchCommissionHistory(id) {
   const res = await apiClient.get(`/commissions/${id}/history`);
   return res.data;

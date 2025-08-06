@@ -15,6 +15,7 @@ import {
   Td,
   Spinner,
   Text,
+  Select,
 } from '@chakra-ui/react';
 import { getUserApplications } from '../api/applications.js';
 import { getUserInterviews, getEmployerInterviews } from '../api/interviews.js';
@@ -26,6 +27,8 @@ export default function ApplicationInterviewManagementPage() {
   const [applications, setApplications] = useState([]);
   const [interviews, setInterviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [appStatus, setAppStatus] = useState('');
+  const [interviewStatus, setInterviewStatus] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -54,6 +57,13 @@ export default function ApplicationInterviewManagementPage() {
         </TabList>
         <TabPanels>
           <TabPanel>
+            <Select
+              placeholder="Filter by status"
+              maxW="200px"
+              mb={4}
+              value={appStatus}
+              onChange={(e) => setAppStatus(e.target.value)}
+            />
             <Table variant="simple">
               <Thead>
                 <Tr>
@@ -62,7 +72,9 @@ export default function ApplicationInterviewManagementPage() {
                 </Tr>
               </Thead>
               <Tbody>
-                {applications.map((app) => (
+                {applications
+                  .filter((a) => !appStatus || a.status === appStatus)
+                  .map((app) => (
                   <Tr key={app.id}>
                     <Td>{app.jobTitle || app.opportunityId}</Td>
                     <Td>{app.status}</Td>
@@ -73,6 +85,13 @@ export default function ApplicationInterviewManagementPage() {
             {!applications.length && <Text mt={4}>No applications yet.</Text>}
           </TabPanel>
           <TabPanel>
+            <Select
+              placeholder="Filter by status"
+              maxW="200px"
+              mb={4}
+              value={interviewStatus}
+              onChange={(e) => setInterviewStatus(e.target.value)}
+            />
             <Table variant="simple">
               <Thead>
                 <Tr>
@@ -82,7 +101,9 @@ export default function ApplicationInterviewManagementPage() {
                 </Tr>
               </Thead>
               <Tbody>
-                {interviews.map((inv) => (
+                {interviews
+                  .filter((i) => !interviewStatus || i.status === interviewStatus)
+                  .map((inv) => (
                   <Tr key={inv.id}>
                     <Td>{inv.applicationId}</Td>
                     <Td>{new Date(inv.interviewDate).toLocaleString()}</Td>

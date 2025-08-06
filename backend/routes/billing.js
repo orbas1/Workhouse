@@ -6,6 +6,7 @@ const {
   addPaymentMethodHandler,
   removePaymentMethodHandler,
   getTransactionsHandler,
+  getInvoiceHandler,
 } = require('../controllers/billing');
 const auth = require('../middleware/auth');
 
@@ -17,5 +18,6 @@ router.get('/payment-methods', auth, listPaymentMethodsHandler);
 router.post('/payment-methods', auth, addPaymentMethodHandler);
 router.delete('/payment-methods/:methodId', auth, removePaymentMethodHandler);
 router.get('/transactions', auth, getTransactionsHandler);
+router.get('/transactions/:transactionId/invoice', auth, getInvoiceHandler);
 
 module.exports = router;

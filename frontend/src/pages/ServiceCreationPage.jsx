@@ -24,6 +24,7 @@ export default function ServiceCreationPage() {
   });
   const toast = useToast();
   const navigate = useNavigate();
+  const sellerId = localStorage.getItem('userId');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +35,7 @@ export default function ServiceCreationPage() {
     e.preventDefault();
     try {
       const payload = {
+        sellerId,
         title: form.title,
         description: form.description,
         price: Number(form.price),
@@ -45,7 +47,7 @@ export default function ServiceCreationPage() {
       };
       await createService(payload);
       toast({ title: 'Service created', status: 'success' });
-      navigate('/profile');
+      navigate('/service-orders');
     } catch (err) {
       console.error(err);
       toast({ title: 'Failed to create service', status: 'error' });

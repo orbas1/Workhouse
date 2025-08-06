@@ -1,3 +1,13 @@
 .service-order-page {
   width: 100%;
 }
+
+.calendar-wrapper {
+  max-width: 350px;
+}
+
+.order-date {
+  background: #3182ce !important;
+  color: #fff !important;
+  border-radius: 50%;
+}

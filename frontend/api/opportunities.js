@@ -9,6 +9,7 @@ async function request(path, options = {}) {
   };
 
   const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+  const res = await fetch(`${API_BASE_URL}/opportunities${path}`, { ...options, headers });
   if (!res.ok) {
     const message = await res.text();
     throw new Error(message || 'Request failed');
@@ -18,13 +19,8 @@ async function request(path, options = {}) {
 }
 
 export function listOpportunities(params = {}) {
-  const url = new URL(`${API_BASE_URL}/opportunities`);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== '') {
-      url.searchParams.append(key, value);
-    }
-  });
-  return request(url.pathname + url.search);
+  const query = new URLSearchParams(params).toString();
+  return request(query ? `?${query}` : '');
 }
 
 export function getOpportunity(id) {
@@ -34,6 +30,7 @@ export function getOpportunity(id) {
 export function fetchOpportunities(query = '') {
   const q = query ? `?${query}` : '';
   return request(`/opportunities${q}`);
+  return request(`/${id}`);
 }
 
 export function createOpportunity(data) {
@@ -68,3 +65,4 @@ export default {
   fetchOpportunityDashboard,
 };
 
+window.opportunitiesAPI = { listOpportunities, getOpportunity };

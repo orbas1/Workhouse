@@ -14,10 +14,12 @@ import {
   Tr,
   Th,
   Tbody,
-  Td
+  Td,
+  Link as ChakraLink
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { listDisputes } from '../api/disputes.js';
+import { Link as RouterLink } from 'react-router-dom';
 import '../styles/DisputeDashboardPage.css';
 
 function DisputeDashboardPage() {
@@ -53,6 +55,15 @@ function DisputeDashboardPage() {
         </Button>
       </ButtonGroup>
 
+      <Button
+        as={RouterLink}
+        to="/disputes/new"
+        colorScheme="teal"
+        mb={4}
+      >
+        File New Dispute
+      </Button>
+
       <SimpleGrid columns={[1, 3]} spacing={4} mb={4}>
         <Stat>
           <StatLabel>Total</StatLabel>
@@ -78,6 +89,7 @@ function DisputeDashboardPage() {
               <Th>Category</Th>
               <Th>Status</Th>
               <Th>Created</Th>
+              <Th>Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -87,6 +99,11 @@ function DisputeDashboardPage() {
                 <Td>{d.category}</Td>
                 <Td>{d.status}</Td>
                 <Td>{new Date(d.createdAt).toLocaleDateString()}</Td>
+                <Td>
+                  <ChakraLink as={RouterLink} color="teal.500" to={`/disputes/${d.id}`}>
+                    View
+                  </ChakraLink>
+                </Td>
               </Tr>
             ))}
           </Tbody>
