@@ -1,7 +1,7 @@
-const { createContent, listContent, updateContent, deleteContent } = require('../services/content');
 const {
   createContent,
   listContent,
+  updateContent,
   updateContentStatus,
   deleteContent,
 } = require('../services/content');
@@ -35,6 +35,9 @@ async function updateContentHandler(req, res) {
   } catch (err) {
     logger.error('Failed to update content', { error: err.message });
     res.status(500).json({ error: 'Failed to update content' });
+  }
+}
+
 async function updateContentStatusHandler(req, res) {
   const { id } = req.params;
   const { status } = req.body;
@@ -52,16 +55,11 @@ async function updateContentStatusHandler(req, res) {
 
 async function deleteContentHandler(req, res) {
   try {
-    const ok = await deleteContent(req.params.id);
-    if (!ok) return res.status(404).json({ error: 'Not found' });
-    res.status(204).send();
-  const { id } = req.params;
-  try {
-    const success = await deleteContent(id);
+    const success = await deleteContent(req.params.id);
     if (!success) {
       return res.status(404).json({ error: 'Content not found' });
     }
-    res.json({ success: true });
+    res.status(204).send();
   } catch (err) {
     logger.error('Failed to delete content', { error: err.message });
     res.status(500).json({ error: 'Failed to delete content' });
@@ -72,9 +70,6 @@ module.exports = {
   createContentHandler,
   listContentHandler,
   updateContentHandler,
-module.exports = {
-  createContentHandler,
-  listContentHandler,
   updateContentStatusHandler,
   deleteContentHandler,
 };
