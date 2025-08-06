@@ -9,9 +9,6 @@ const assignmentParamSchema = Joi.object({
   employeeId: Joi.string().guid({ version: 'uuidv4' }).required(),
 });
 
-module.exports = {
-  jobIdParamSchema,
-  assignmentParamSchema,
 const createJobSchema = Joi.object({
   title: Joi.string().min(3).max(255).required(),
   description: Joi.string().min(10).required(),
@@ -28,6 +25,8 @@ const updateJobSchema = Joi.object({
 }).min(1);
 
 module.exports = {
+  jobIdParamSchema,
+  assignmentParamSchema,
   createJobSchema,
   updateJobSchema,
 };

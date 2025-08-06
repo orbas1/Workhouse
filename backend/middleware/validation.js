@@ -5,6 +5,10 @@ function handleValidationErrors(req, res, next) {
   if (!errors.isEmpty()) {
     console.warn('Validation failed', errors.array());
     return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+}
+
 function validateAgencyRegistration(req, res, next) {
   const { name, services, contactEmail } = req.body;
   const errors = [];
@@ -26,7 +30,9 @@ function validateAgencyRegistration(req, res, next) {
 function validateAgencyUpdate(req, res, next) {
   const { name, services, contactEmail } = req.body;
   if (!name && !services && !contactEmail) {
-    return res.status(400).json({ error: 'At least one field (name, services, contactEmail) must be provided' });
+    return res
+      .status(400)
+      .json({ error: 'At least one field (name, services, contactEmail) must be provided' });
   }
   if (name && typeof name !== 'string') {
     return res.status(400).json({ error: 'name must be a string' });
@@ -40,5 +46,8 @@ function validateAgencyUpdate(req, res, next) {
   next();
 }
 
-module.exports = { handleValidationErrors };
-module.exports = { validateAgencyRegistration, validateAgencyUpdate };
+module.exports = {
+  handleValidationErrors,
+  validateAgencyRegistration,
+  validateAgencyUpdate,
+};
