@@ -1,5 +1,6 @@
 import apiClient from '../utils/apiClient.js';
 
+
 export async function listCourses() {
   const { data } = await apiClient.get('/courses');
   return data;
