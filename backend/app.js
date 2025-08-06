@@ -5,6 +5,7 @@ const products = require('./data/products.json');
 const authRoutes = require('./routes/auth');
 const landingRoutes = require('./routes/landing');
 const n8nRoutes = require('./routes/n8n');
+const tasksRoutes = require('./routes/tasks');
 const api = require("./api");
 const { initDb } = require('./utils/db');
 const logger = require('./utils/logger');
@@ -20,6 +21,7 @@ app.get('/operations/retail/products', (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/landing', landingRoutes);
 app.use('/n8n', n8nRoutes);
+app.use('/tasks', tasksRoutes);
 
 // 404 handler
 app.use((req, res, next) => {
