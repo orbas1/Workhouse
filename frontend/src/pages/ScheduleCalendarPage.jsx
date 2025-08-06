@@ -37,6 +37,9 @@ function ScheduleCalendarPage() {
 
   useEffect(() => {
     if (user) {
+      const params =
+        user.role === 'seller' ? { sellerId: user.id } : { buyerId: user.id };
+      fetchEvents(params).then(setEvents).catch(console.error);
       fetchProjects().then((projs) => {
         setProjects(projs);
         if (projs.length > 0) {
@@ -63,6 +66,11 @@ function ScheduleCalendarPage() {
         title: form.title,
         date: form.startTime || date,
       };
+      if (user.role === 'seller') {
+        payload.sellerId = user.id;
+      } else {
+        payload.buyerId = user.id;
+      }
       const newEvent = await createEvent(payload);
       setEvents((prev) => [...prev, newEvent]);
       setForm({ title: '', startTime: '' });
