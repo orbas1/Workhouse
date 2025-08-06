@@ -50,6 +50,12 @@ export default function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/notifications')}>
         Notifications
       </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/tasks')}>
+        Tasks
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/schedule')}>
+        Schedule
+      </Button>
       <Button variant="outline" color="white" onClick={handleLogout}>
         Logout
       </Button>

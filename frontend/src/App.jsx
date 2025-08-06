@@ -13,6 +13,12 @@ import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
+import TaskManagementPage from './pages/TaskManagementPage.jsx';
+import ScheduleCalendarPage from './pages/ScheduleCalendarPage.jsx';
+import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import { ProfileProvider } from './context/ProfileContext.jsx';
+import { TaskProvider } from './context/TaskContext.jsx';
 import TaskWorkflowPage from './pages/TaskWorkflowPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ProfileProvider } from './context/ProfileContext.jsx';
@@ -67,6 +73,10 @@ export default function App() {
                   <Route path="/profile" element={<Protected><ProfilePage /></Protected>} />
                   <Route path="/profile/customize" element={<Protected><ProfileCustomizationPage /></Protected>} />
                   <Route path="/contracts/new" element={<Protected><ContractFormPage /></Protected>} />
+                  <Route path="/services/new" element={<Protected><ServiceCreationPage /></Protected>} />
+                  <Route path="/tasks" element={<Protected><TaskDashboardPage /></Protected>} />
+                  <Route path="/tasks/manage" element={<Protected><TaskManagementPage /></Protected>} />
+                  <Route path="/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
                   <Route path="/contracts/:contractId/edit" element={<Protected><ContractFormPage /></Protected>} />
                   <Route path="/services/new" element={<Protected><ServiceCreationPage /></Protected>} />
                   <Route path="/tasks-workflow" element={<Protected><TaskWorkflowPage /></Protected>} />
@@ -75,6 +85,9 @@ export default function App() {
                 </Routes>
               </Box>
             </TaskProvider>
+          </ProfileProvider>
+        </BrowserRouter>
+      </AuthProvider>
           </ProfileProvider>
         </BrowserRouter>
       </AuthProvider>
