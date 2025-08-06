@@ -27,6 +27,10 @@ podcasts.set(samplePodcastId, {
   podcastId: samplePodcastId,
   seriesId: sampleSeriesId,
   ownerId,
+  title: 'Sample Podcast',
+  description: 'Introductory episode with insights.',
+  thumbnail: 'https://via.placeholder.com/150',
+  audioUrl: 'https://samplelib.com/lib/preview/mp3/sample-3s.mp3',
   engagement: {
     listens: 0,
     avgListenDuration: 1700,
@@ -119,6 +123,8 @@ function recordListen(podcastId) {
   }
   podcast.engagement.listens = (podcast.engagement.listens || 0) + 1;
   return podcast.engagement.listens;
+}
+
 function getAllPodcasts() {
   return Array.from(podcasts.values());
 }

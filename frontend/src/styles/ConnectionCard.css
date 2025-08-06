@@ -1,0 +1,8 @@
+.connection-card {
+  background-color: white;
+}
+
+.connection-card .notes {
+  white-space: pre-wrap;
+}
+

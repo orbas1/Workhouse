@@ -25,5 +25,24 @@
     return res.json();
   }
 
-  global.contentAPI = { listContent, createContent };
+  async function updateContent(id, data) {
+    const res = await fetch(`${baseUrl}/content/${id}`, {
+      method: 'PUT',
+      headers: headers(),
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error('Failed to update content');
+    return res.json();
+  }
+
+  async function deleteContent(id) {
+    const res = await fetch(`${baseUrl}/content/${id}`, {
+      method: 'DELETE',
+      headers: headers(),
+    });
+    if (!res.ok) throw new Error('Failed to delete content');
+    return true;
+  }
+
+  global.contentAPI = { listContent, createContent, updateContent, deleteContent };
 })(window);
