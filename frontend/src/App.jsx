@@ -43,6 +43,7 @@ import SupportDisputePage from './pages/SupportDisputePage.jsx';
 import ContractManagementPage from './pages/ContractManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ContentLibraryPage from './pages/ContentLibraryPage.jsx';
+import ContentDetailPage from './pages/ContentDetailPage.jsx';
 import CreatorAnalyticsPage from './pages/CreatorAnalyticsPage.jsx';
 import LivePlaybackPage from './pages/LivePlaybackPage.jsx';
 import AffiliateManagementPage from './pages/AffiliateManagementPage.jsx';
@@ -209,6 +210,8 @@ export default function App() {
     { path: '/creator/analytics', element: <CreatorAnalyticsPage />, protected: true },
     { path: '/content/manage', element: <PlaceholderPage title="Content Creation & Management" />, protected: true },
     { path: '/content-library', element: <ContentLibraryPage />, protected: true },
+    { path: '/content-library/:type/:id', element: <ContentDetailPage />, protected: true },
+    { path: '/content-library/:type/:id/play', element: <LivePlaybackPage />, protected: true },
     { path: '/live', element: <LivePlaybackPage />, protected: true },
     { path: '/billing', element: <BillingSubscription />, protected: true },
     { path: '/analytics', element: <AnalyticsAuditPage />, protected: true },
