@@ -7,6 +7,7 @@ const {
   updateGigHandler,
   deleteGigHandler,
   searchGigsHandler,
+  createGigOrderHandler,
 } = require('../controllers/gig');
 const { getMyGigsHandler, getAppliedGigsHandler } = require('../controllers/gigs');
 const auth = require('../middleware/auth');
@@ -19,6 +20,7 @@ router.get('/search', auth, validate(gigSearchSchema, 'query'), searchGigsHandle
 router.get('/my-gigs', auth, getMyGigsHandler);
 router.get('/applied', auth, getAppliedGigsHandler);
 router.get('/:gigId', auth, getGigHandler);
+router.post('/:gigId/order', auth, createGigOrderHandler);
 router.put('/:gigId', auth, updateGigHandler);
 router.delete('/:gigId', auth, deleteGigHandler);
 
