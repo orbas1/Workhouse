@@ -63,6 +63,7 @@ import LiveFeedPage from './pages/LiveFeedPage.jsx';
 import EmploymentDashboardPage from './pages/EmploymentDashboardPage.jsx';
 import ApplicationInterviewManagementPage from './pages/ApplicationInterviewManagementPage.jsx';
 import HeadhunterDashboardPage from './pages/HeadhunterDashboardPage.jsx';
+import LiveEngagementAnalyticsPage from './pages/LiveEngagementAnalyticsPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -195,6 +196,8 @@ export default function App() {
     { path: '/analytics', element: <AnalyticsAuditPage />, protected: true },
 
     // Startup Ecosystem
+    { path: '/startups/profile-plan', element: <PlaceholderPage title="Startup Profile & Plan" />, protected: true },
+    { path: '/startups/analytics', element: <LiveEngagementAnalyticsPage />, protected: true },
     { path: '/startups/profile-plan', element: <StartupProfilePlanPage />, protected: true },
     { path: '/startups/search', element: <SearchConnectionPage />, protected: true },
 

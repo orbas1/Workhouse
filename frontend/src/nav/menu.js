@@ -56,6 +56,7 @@ export const menu = [
       { label: 'Content Library', path: '/content-library' },
       { label: 'Stats', path: '/stats' },
       { label: 'Startup Profile', path: '/startups/profile-plan' },
+      { label: 'Startup Analytics', path: '/startups/analytics' },
       { label: 'Startup Search', path: '/startups/search' },
       { label: 'Financial & Media Setup', path: '/setup/financial-media' },
       { label: 'Onboarding Documents', path: '/onboarding/documents' }
