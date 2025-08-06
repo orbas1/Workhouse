@@ -7,6 +7,7 @@ const {
   getCommissionHistoryHandler,
   calculateCommissionHandler,
   performanceAdjustHandler,
+  getLeaderboardHandler,
 } = require('../controllers/commission');
 const auth = require('../middleware/auth');
 const {
@@ -26,5 +27,6 @@ router.post('/rates/performance-adjust', validateRateUpdate, performanceAdjustHa
 router.post('/record', validateRecordCommission, recordCommissionHandler);
 router.get('/:affiliateId/history', getCommissionHistoryHandler);
 router.post('/calculate', validateCalculateCommission, calculateCommissionHandler);
+router.get('/leaderboard', getLeaderboardHandler);
 
 module.exports = router;
