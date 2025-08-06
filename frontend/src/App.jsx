@@ -45,6 +45,9 @@ import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+import EmploymentDashboardPage from './pages/EmploymentDashboardPage.jsx';
+import ApplicationInterviewManagementPage from './pages/ApplicationInterviewManagementPage.jsx';
+import HeadhunterDashboardPage from './pages/HeadhunterDashboardPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -100,10 +103,10 @@ export default function App() {
     { path: '/connections', element: <ConnectionManagementPage />, protected: true },
 
     // Employment & Gigs
-    { path: '/employment', element: <PlaceholderPage title="Employment Dashboard" />, protected: true },
+    { path: '/employment', element: <EmploymentDashboardPage />, protected: true },
     { path: '/jobs', element: <JobListingsPage />, protected: true },
-    { path: '/applications-interviews', element: <PlaceholderPage title="Application & Interview Management" />, protected: true },
-    { path: '/headhunter/dashboard', element: <PlaceholderPage title="Headhunter Dashboard" />, protected: true },
+    { path: '/applications-interviews', element: <ApplicationInterviewManagementPage />, protected: true },
+    { path: '/headhunter/dashboard', element: <HeadhunterDashboardPage />, protected: true },
     { path: '/interviews', element: <VirtualInterview />, protected: true },
     { path: '/job-posts', element: <JobPostManagement />, protected: true },
     { path: '/gigs', element: <PlaceholderPage title="Gigs Dashboard" />, protected: true },

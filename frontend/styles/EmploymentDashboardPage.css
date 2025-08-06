@@ -1,0 +1,12 @@
+.employment-dashboard-page {
+  background-color: #f7fafc;
+}
+
+.job-card {
+  cursor: pointer;
+}
+
+.job-card:hover {
+  box-shadow: var(--chakra-shadows-md);
+}
+
