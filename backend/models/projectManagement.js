@@ -177,6 +177,10 @@ function getFileById(fileId) {
   return files.get(fileId);
 }
 
+function listFilesByProject(projectId) {
+  return Array.from(files.values()).filter((f) => f.projectId === projectId);
+}
+
 function setupWorkflow({ projectId, steps }) {
   const id = randomUUID();
   const workflow = { id, projectId, steps, createdAt: new Date() };
@@ -224,6 +228,7 @@ module.exports = {
   getReportsByProject,
   uploadFile,
   getFileById,
+  listFilesByProject,
   setupWorkflow,
   storeSpreadsheet,
   getSpreadsheet,

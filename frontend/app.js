@@ -1,6 +1,7 @@
 const { BrowserRouter, Routes, Route, Navigate } = ReactRouterDOM;
 const { ChakraProvider } = ChakraUI;
 import PaymentTimesheetManagement from './pages/PaymentTimesheetManagement';
+import FileResourceManagement from './pages/FileResourceManagement.jsx';
 
 function App() {
   return (
@@ -15,11 +16,12 @@ function App() {
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
             <Route path="/employment" element={<Protected><EmploymentDashboard /></Protected>} />
             <Route path="/messages" element={<Protected><ChatInbox /></Protected>} />
-           <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
+            <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
             <Route path="/payments" element={<Protected><PaymentTimesheetManagement agencyId="default" /></Protected>} />
             <Route path="/applications-interviews" element={<Protected><ApplicationInterviewManagement /></Protected>} />
             <Route path="/proposals-invoices" element={<Protected><ProposalInvoiceManagement /></Protected>} />
             <Route path="/education/schedule" element={<Protected><ScheduleCalendarPage /></Protected>} />
+            <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
@@ -52,6 +54,7 @@ function App() {
         <Route path="/courses" element={<Protected><CoursePurchasePage /></Protected>} />
         <Route path="/calendar" element={<Protected><CalendarPage /></Protected>} />
         <Route path="/gigs/search" element={<Protected><GigSearchPage /></Protected>} />
+        <Route path="/workspace/files" element={<Protected><FileResourceManagement /></Protected>} />
       </Routes>
     </BrowserRouter>
   );
