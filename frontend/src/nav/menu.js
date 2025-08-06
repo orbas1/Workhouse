@@ -12,7 +12,8 @@ export const menu = [
       { label: 'Disputes', path: '/disputes' },
       { label: 'File Dispute', path: '/disputes/new' },
       { label: 'Notifications', path: '/notifications' },
-      { label: 'Settings', path: '/settings' }
+      { label: 'Settings', path: '/settings' },
+      { label: 'Billing & Subscription', path: '/billing' }
     ]
   },
   {
