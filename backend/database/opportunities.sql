@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS opportunities (
   duration VARCHAR(100),
   compensation NUMERIC,
   experience_level VARCHAR(100),
-  status VARCHAR(20) DEFAULT 'open',
   status VARCHAR(50) DEFAULT 'open',
   views INTEGER DEFAULT 0,
   applications INTEGER DEFAULT 0,

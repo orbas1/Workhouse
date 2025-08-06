@@ -26,11 +26,29 @@ async function runMigrations() {
   const client = new Client({ host, user, password, port, database: dbName });
   await client.connect();
 
+  // ensure required extensions
+  await client.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
+
   const dir = path.join(__dirname, '..', 'database');
-  const files = fs.readdirSync(dir).filter(f => f.endsWith('.sql')).sort();
+  const files = fs
+    .readdirSync(dir)
+    .filter(f => f.endsWith('.sql'))
+    .sort();
 
   for (const file of files) {
-    const sql = fs.readFileSync(path.join(dir, file), 'utf8');
+    const filePath = path.join(dir, file);
+    let sql = fs.readFileSync(filePath, 'utf8');
+    // remove psql include commands to avoid errors
+    sql = sql
+      .split('\n')
+      .filter(line => !line.trim().startsWith('\\i'))
+      .join('\n');
+
+    if (!sql.trim()) {
+      console.log(`Skipped ${file}`);
+      continue;
+    }
+
     try {
       await client.query(sql);
       console.log(`Executed ${file}`);

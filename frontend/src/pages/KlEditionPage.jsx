@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Box,
+  Button,
   Flex,
   Heading,
   Tabs,
@@ -9,7 +10,6 @@ import {
   Tab,
   TabPanel,
   Textarea,
-  Button,
 } from '@chakra-ui/react';
 import '../styles/KlEditionPage.css';
 
@@ -24,6 +24,17 @@ export default function KlEditionPage() {
       setMessages([...messages, { role: 'user', content: chat }]);
       setChat('');
     }
+  };
+
+
+  const launchEc3 = () => {
+    // Placeholder for launching an EC3 IDE instance via AWS API
+    console.log('Launch EC3 instance');
+  };
+
+  const launchN8n = () => {
+    // Placeholder for launching n8n workflow instance
+    console.log('Launch n8n instance');
   };
 
   return (
@@ -76,6 +87,21 @@ export default function KlEditionPage() {
                     IDE URL not configured
                   </Flex>
                 )}
+                <Box
+                  className="ide-placeholder"
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  right="0"
+                  bottom="0"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Button colorScheme="purple" onClick={launchEc3}>
+                    Launch IDE Instance
+                  </Button>
+                </Box>
               </Box>
             </Flex>
           </TabPanel>
@@ -88,6 +114,10 @@ export default function KlEditionPage() {
                   n8n URL not configured
                 </Flex>
               )}
+            <Box textAlign="center" p={10} borderWidth="1px" borderRadius="md">
+              <Button colorScheme="blue" onClick={launchN8n}>
+                Launch n8n Workflow
+              </Button>
             </Box>
           </TabPanel>
         </TabPanels>
