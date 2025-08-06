@@ -64,6 +64,12 @@ function ProfilePage() {
       <Button className="customize-btn" onClick={() => navigate('/profile/customize')} colorScheme="teal" mb={4}>
         Customize Profile
       </Button>
+      <Button onClick={() => navigate('/tasks')} colorScheme="teal" mb={4}>
+        Manage Tasks
+      </Button>
+      <Button onClick={() => navigate('/notifications')} colorScheme="teal" mb={4}>
+        Notifications
+      </Button>
       <VStack spacing={6} align="stretch">
         <ProfileHeader profile={profile} />
         <AboutSection bio={profile.bio} />

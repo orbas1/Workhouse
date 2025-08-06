@@ -1,0 +1,13 @@
+.service-search-page .service-card {
+  transition: box-shadow 0.2s ease;
+}
+
+.service-search-page .service-card:hover {
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.service-search-page .service-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
