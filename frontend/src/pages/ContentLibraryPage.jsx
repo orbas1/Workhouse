@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, Input, Select, SimpleGrid, Image, Text, Spinner } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { fetchContentLibrary } from '../api/contentLibrary.js';
 import '../styles/ContentLibraryPage.css';
 
@@ -47,7 +48,15 @@ export default function ContentLibraryPage() {
       </Box>
       <SimpleGrid columns={[1, 2, 3]} spacing={4}>
         {items.map(item => (
-          <Box key={`${item.type}-${item.id}`} className="library-card" borderWidth="1px" borderRadius="md" p={3}>
+          <Box
+            as={RouterLink}
+            to={`/content-library/${item.type}/${item.id}`}
+            key={`${item.type}-${item.id}`}
+            className="library-card"
+            borderWidth="1px"
+            borderRadius="md"
+            p={3}
+          >
             {item.thumbnail && <Image src={item.thumbnail} alt={item.title} className="library-thumb" mb={2} />}
             <Heading size="md">{item.title}</Heading>
             {item.description && <Text fontSize="sm" mt={1}>{item.description}</Text>}

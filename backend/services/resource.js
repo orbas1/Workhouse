@@ -1,17 +1,18 @@
 const resourceModel = require('../models/resource');
+const serviceModel = require('../models/service');
 const logger = require('../utils/logger');
 
 async function listServices(filters = {}) {
-  return resourceModel.listServices(filters);
+  return serviceModel.listAllServices(filters);
 }
 
 async function getServiceById(id) {
-  return resourceModel.getServiceById(id);
+  return serviceModel.getServiceById(id);
 }
 
 async function requestService(userId, data) {
   const { serviceId, description } = data;
-  const request = resourceModel.createServiceRequest(userId, serviceId, description);
+  const request = serviceModel.createServiceRequest(userId, serviceId, description);
   logger.info('Service requested', { requestId: request.id, userId, serviceId });
   return request;
 }

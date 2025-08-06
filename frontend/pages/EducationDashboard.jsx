@@ -8,6 +8,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Button,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -16,8 +17,11 @@ import {
   Progress,
   useToast
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import { fetchEducationOverview } from '../api/education';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link } from '@chakra-ui/react';
 import '../styles/EducationDashboard.css';
 
 export default function EducationDashboard() {
@@ -41,6 +45,9 @@ export default function EducationDashboard() {
       <NavMenu />
       <Box className="education-dashboard" p={4}>
         <Heading mb={4}>Education Dashboard</Heading>
+        <Button as={Link} to="/education/courses" colorScheme="teal" mb={4}>
+          Manage Courses
+        </Button>
         <Tabs colorScheme="teal">
           <TabList>
             <Tab>Student</Tab>
@@ -51,7 +58,9 @@ export default function EducationDashboard() {
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
                 {overview.map((course) => (
                   <Box key={course.id} className="course-card" p={4} borderWidth="1px" borderRadius="md">
-                    <Heading size="md" mb={2}>{course.title}</Heading>
+                    <Heading size="md" mb={2}>
+                      <Link as={RouterLink} to={`/courses/${course.id}`}>{course.title}</Link>
+                    </Heading>
                     <Progress value={course.enrollments ? (course.completions / course.enrollments) * 100 : 0} mb={2} />
                     <Text fontSize="sm">Completions: {course.completions} / {course.enrollments}</Text>
                   </Box>
@@ -62,7 +71,9 @@ export default function EducationDashboard() {
               <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
                 {overview.map((course) => (
                   <Stat key={course.id} className="overview-card" p={4} borderWidth="1px" borderRadius="md">
-                    <StatLabel>{course.title}</StatLabel>
+                    <StatLabel>
+                      <Link as={RouterLink} to={`/courses/${course.id}`}>{course.title}</Link>
+                    </StatLabel>
                     <StatNumber>{course.enrollments} enrolled</StatNumber>
                     <Text>Average Score: {course.averageScore}</Text>
                   </Stat>
