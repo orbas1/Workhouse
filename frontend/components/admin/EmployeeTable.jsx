@@ -1,11 +1,27 @@
 import { useState } from 'react';
 import {
-  Table, Thead, Tbody, Tr, Th, Td,
-  Button, IconButton,
-  useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
-  FormControl, FormLabel, Input
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Button,
+  IconButton,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  FormControl,
+  FormLabel,
+  Input,
 } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { createEmployee, updateEmployee, deleteEmployee } from '../../api/admin.js';
 import './EmployeeTable.css';
 
 export default function EmployeeTable({ employees, onRefresh }) {
@@ -27,16 +43,16 @@ export default function EmployeeTable({ employees, onRefresh }) {
 
   const handleSubmit = async () => {
     if (editingId) {
-      await adminAPI.updateEmployee(editingId, form);
+      await updateEmployee(editingId, form);
     } else {
-      await adminAPI.createEmployee(form);
+      await createEmployee(form);
     }
     onClose();
     onRefresh();
   };
 
   const handleDelete = async (id) => {
-    await adminAPI.deleteEmployee(id);
+    await deleteEmployee(id);
     onRefresh();
   };
 

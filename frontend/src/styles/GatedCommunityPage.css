@@ -1,0 +1,8 @@
+.gated-community {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.gated-community .discussion {
+  background: #fff;
+}

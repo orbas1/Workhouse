@@ -1,4 +1,4 @@
-const { storeCv, generateCv, storeCoverLetter, generateCoverLetter, getResume } = require('../services/resume');
+const { storeCv, generateCv, storeCoverLetter, generateCoverLetter, getResume, analyzeCvText } = require('../services/resume');
 
 async function uploadCv(req, res) {
   try {
@@ -52,4 +52,15 @@ async function fetchResume(req, res) {
   }
 }
 
-module.exports = { uploadCv, createCv, createCoverLetter, uploadCoverLetter, fetchResume };
+async function analyzeCv(req, res) {
+  const { content } = req.body;
+  try {
+    const analysis = await analyzeCvText(content || '');
+    res.json(analysis);
+  } catch (err) {
+    console.error('CV analysis failed', err);
+    res.status(500).json({ error: 'Failed to analyze CV' });
+  }
+}
+
+module.exports = { uploadCv, createCv, createCoverLetter, uploadCoverLetter, fetchResume, analyzeCv };

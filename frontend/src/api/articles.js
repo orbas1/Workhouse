@@ -8,25 +8,45 @@ function authHeader() {
 }
 
 export async function listArticles() {
-  const res = await axios.get(`${API_URL}/articles`, { headers: authHeader() });
-  return res.data;
+  try {
+    const res = await axios.get(`${API_URL}/articles`, { headers: authHeader() });
+    return res.data;
+  } catch (err) {
+    console.error('Failed to fetch articles', err);
+    throw new Error('Unable to fetch articles');
+  }
 }
 
 export async function getArticle(id) {
-  const res = await axios.get(`${API_URL}/articles/${id}`, { headers: authHeader() });
-  return res.data;
+  try {
+    const res = await axios.get(`${API_URL}/articles/${id}`, { headers: authHeader() });
+    return res.data;
+  } catch (err) {
+    console.error('Failed to fetch article', err);
+    throw new Error('Unable to fetch article');
+  }
 }
 
 export async function likeArticle(id) {
-  const res = await axios.post(`${API_URL}/articles/${id}/like`, {}, { headers: authHeader() });
-  return res.data;
+  try {
+    const res = await axios.post(`${API_URL}/articles/${id}/like`, {}, { headers: authHeader() });
+    return res.data;
+  } catch (err) {
+    console.error('Failed to like article', err);
+    throw new Error('Unable to like article');
+  }
 }
 
 export async function addComment(id, content) {
-  const res = await axios.post(
-    `${API_URL}/articles/${id}/comments`,
-    { content },
-    { headers: { ...authHeader(), 'Content-Type': 'application/json' } }
-  );
-  return res.data;
+  try {
+    const res = await axios.post(
+      `${API_URL}/articles/${id}/comments`,
+      { content },
+      { headers: { ...authHeader(), 'Content-Type': 'application/json' } }
+    );
+    return res.data;
+  } catch (err) {
+    console.error('Failed to add comment', err);
+    throw new Error('Unable to add comment');
+  }
 }

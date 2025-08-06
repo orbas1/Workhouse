@@ -3,11 +3,23 @@ const { randomUUID } = require('crypto');
 const startupProfiles = [];
 
 function upsertStartupProfile(userId, data) {
-  let profile = startupProfiles.find(p => p.userId === userId);
+  let profile = startupProfiles.find((p) => p.userId === userId);
   if (!profile) {
     profile = {
       id: randomUUID(),
       userId,
+      businessName: '',
+      tagline: '',
+      category: '',
+      location: '',
+      goals: '',
+      logoUrl: '',
+      pitchDeckUrl: '',
+      introVideoUrl: '',
+      fundingLinks: [],
+      mentorshipNeeds: '',
+      businessPlanUrl: '',
+      planVisibility: 'public',
       planDownloads: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -19,7 +31,7 @@ function upsertStartupProfile(userId, data) {
 }
 
 function getStartupProfile(userId) {
-  return startupProfiles.find(p => p.userId === userId) || null;
+  return startupProfiles.find((p) => p.userId === userId) || null;
 }
 
 module.exports = {

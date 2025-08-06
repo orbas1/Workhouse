@@ -11,48 +11,56 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton
+  ModalCloseButton,
+  useToast
 } from '@chakra-ui/react';
 import { fetchJobPostings, submitJobApplication } from '../api/jobPostings.js';
 import { useProfile } from '../context/ProfileContext.jsx';
+import JobSearchBar from '../components/JobSearchBar.jsx';
 import '../styles/JobListingsPage.css';
 
 export default function JobListingsPage() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
+  const toast = useToast();
   const { profile } = useProfile();
 
   useEffect(() => {
-    (async () => {
-      try {
-        const data = await fetchJobPostings();
-        setJobs(data);
-      } catch (err) {
-        console.error('Failed to load jobs', err);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    handleSearch();
   }, []);
+
+  async function handleSearch(filters = {}) {
+    setLoading(true);
+    try {
+      const data = await fetchJobPostings(filters);
+      setJobs(data);
+    } catch (err) {
+      console.error('Failed to load jobs', err);
+      toast({ title: 'Error loading jobs', status: 'error' });
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function handleApply(job) {
     try {
       await submitJobApplication({ jobId: job.id, applicantName: profile?.name || 'Anonymous' });
-      alert('Application submitted');
+      toast({ title: 'Application submitted', status: 'success' });
       setSelected(null);
     } catch (err) {
       console.error('Failed to apply', err);
-      alert('Failed to apply');
+      toast({ title: 'Failed to apply', status: 'error' });
     }
   }
 
   return (
     <Box className="job-listings-page" p={4}>
       <Heading size="lg" mb={4}>Job Listings</Heading>
+      <JobSearchBar onSearch={handleSearch} />
       {loading ? (
         <Spinner />
-      ) : (
+      ) : jobs.length ? (
         <SimpleGrid columns={[1, 2, 3]} spacing={4}>
           {jobs.map((job) => (
             <Box
@@ -71,6 +79,8 @@ export default function JobListingsPage() {
             </Box>
           ))}
         </SimpleGrid>
+      ) : (
+        <Text mt={4}>No jobs found.</Text>
       )}
 
       <Modal isOpen={!!selected} onClose={() => setSelected(null)}>

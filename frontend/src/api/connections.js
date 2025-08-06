@@ -1,12 +1,12 @@
 import apiClient from '../utils/apiClient.js';
 
-export async function getConnections(userId) {
-  const { data } = await apiClient.get(`/connections/user/${userId}`);
+export async function getConnections() {
+  const { data } = await apiClient.get('/connections');
   return data;
 }
 
-export async function addConnection(userId, connection) {
-  const { data } = await apiClient.post(`/connections/user/${userId}`, connection);
+export async function addConnection(connection) {
+  const { data } = await apiClient.post('/connections', connection);
   return data;
 }
 
