@@ -58,6 +58,7 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts')}>Contracts</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/classroom/WorkhouseClassroom')}>Classroom</Button>
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/courses')}>Courses</Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/blog')}>Blog</Button>
       <Button variant="outline" color="white" onClick={handleLogout}>Logout</Button>
     </Flex>
   );

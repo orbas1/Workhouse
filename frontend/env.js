@@ -13,6 +13,7 @@ window.env = {
   WORLD_TIME_API: 'https://worldtimeapi.org/api',
   JITSI_DOMAIN: 'https://meet.jit.si',
   GIG_PLACEHOLDER_URL: 'https://source.unsplash.com/random/300x200?freelance&sig=',
+  BLOG_IMAGE_API: 'https://source.unsplash.com/random/600x400?blog&sig='
   ANALYTICS_ENDPOINT: '/analytics/content/performance',
   AUDIT_RESULTS_ENDPOINT: '/security/compliance/audit-results'
 };
