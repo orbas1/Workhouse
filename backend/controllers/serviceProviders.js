@@ -1,7 +1,19 @@
 const Service = require('../models/service');
 
 exports.createService = (req, res) => {
-  const { sellerId, title, description, price, status, category, tags } = req.body;
+  const {
+    sellerId,
+    title,
+    description,
+    price,
+    status,
+    category,
+    tags,
+    businessId,
+    providerIds = [],
+    commissionSplit,
+    serviceArea = [],
+  } = req.body;
   if (!sellerId || !title) {
     return res.status(400).json({ error: 'sellerId and title are required' });
   }
@@ -13,6 +25,10 @@ exports.createService = (req, res) => {
     status,
     category,
     tags,
+    businessId,
+    providerIds,
+    commissionSplit,
+    serviceArea,
   });
   res.status(201).json(service);
 };
