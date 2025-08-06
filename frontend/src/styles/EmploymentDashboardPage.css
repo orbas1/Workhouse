@@ -1,0 +1,13 @@
+.employment-dashboard-page {
+  background: #f4f7f9;
+}
+
+.job-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+}
+
+.job-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+

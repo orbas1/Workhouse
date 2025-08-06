@@ -1,0 +1,12 @@
+.headhunter-dashboard-page {
+  background: #f4f7f9;
+}
+
+.headhunter-dashboard-page .chakra-list__item {
+  transition: background 0.2s ease;
+}
+
+.headhunter-dashboard-page .chakra-list__item:hover {
+  background: #f0f4f8;
+}
+
