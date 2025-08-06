@@ -1,0 +1,5 @@
+.gig-detail-page .detail-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
