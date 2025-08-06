@@ -28,6 +28,14 @@ function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
         Profile
       </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>
+        Services
+      </Button>
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/articles')}>
+        Blog
+      <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
+        Profile
+      </Button>
       {user ? (
         <>
           <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
