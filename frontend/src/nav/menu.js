@@ -38,6 +38,7 @@ export const menu = [
       { label: 'New Contract', path: '/contracts/new' },
       { label: 'Services', path: '/services' },
       { label: 'New Service', path: '/services/new' },
+      { label: 'Service Orders', path: '/service-orders' },
       { label: 'Tasks', path: '/tasks' },
       { label: 'Tasks Workflow', path: '/tasks-workflow' },
       { label: 'Schedule', path: '/schedule' },
