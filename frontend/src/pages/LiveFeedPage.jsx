@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, VStack, HStack, Textarea, Button, Text, Spinner } from '@chakra-ui/react';
-import NavBar from '../components/NavBar.jsx';
-import NavMenu from '../components/NavMenu.jsx';
 import '../styles/LiveFeedPage.css';
 import { getPosts, createPost, likePost, getEvents } from '../api/liveFeed.js';
 
@@ -49,38 +47,34 @@ export default function LiveFeedPage() {
   if (loading) return <Spinner />;
 
   return (
-    <Box className="live-feed-page">
-      <NavBar />
-      <NavMenu />
-      <Box p={4} className="feed-content">
-        <Heading mb={4}>Live Feed</Heading>
-        <VStack align="stretch" spacing={2} mb={6}>
-          <Textarea placeholder="Share an update..." value={content} onChange={(e) => setContent(e.target.value)} />
-          <Button alignSelf="flex-end" colorScheme="teal" onClick={handlePost}>
-            Post
-          </Button>
+    <Box className="live-feed-page" p={4}>
+      <Heading mb={4}>Live Feed</Heading>
+      <VStack align="stretch" spacing={2} mb={6}>
+        <Textarea placeholder="Share an update..." value={content} onChange={(e) => setContent(e.target.value)} />
+        <Button alignSelf="flex-end" colorScheme="teal" onClick={handlePost}>
+          Post
+        </Button>
+      </VStack>
+      <HStack align="start" spacing={8} alignItems="flex-start">
+        <VStack flex="1" spacing={4} align="stretch">
+          {posts.map((post) => (
+            <Box key={post.id} p={4} borderWidth="1px" borderRadius="md">
+              <Text mb={2}>{post.content}</Text>
+              <Button size="sm" onClick={() => handleLike(post.id)}>
+                Like ({post.likes || 0})
+              </Button>
+            </Box>
+          ))}
         </VStack>
-        <HStack align="start" spacing={8} alignItems="flex-start">
-          <VStack flex="1" spacing={4} align="stretch">
-            {posts.map((post) => (
-              <Box key={post.id} p={4} borderWidth="1px" borderRadius="md">
-                <Text mb={2}>{post.content}</Text>
-                <Button size="sm" onClick={() => handleLike(post.id)}>
-                  Like ({post.likes || 0})
-                </Button>
-              </Box>
-            ))}
-          </VStack>
-          <VStack w="250px" spacing={4} align="stretch" className="events-sidebar">
-            <Heading size="sm">Live Events</Heading>
-            {events.map((ev, idx) => (
-              <Box key={idx} p={2} borderWidth="1px" borderRadius="md">
-                {ev.title}
-              </Box>
-            ))}
-          </VStack>
-        </HStack>
-      </Box>
+        <VStack w="250px" spacing={4} align="stretch" className="events-sidebar">
+          <Heading size="sm">Live Events</Heading>
+          {events.map((ev, idx) => (
+            <Box key={idx} p={2} borderWidth="1px" borderRadius="md">
+              {ev.title}
+            </Box>
+          ))}
+        </VStack>
+      </HStack>
     </Box>
   );
 }

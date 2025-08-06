@@ -6,7 +6,7 @@ export const menu = [
       { label: 'Messages', path: '/messages' },
       { label: 'Feed', path: '/feed' },
       { label: 'Profile', path: '/profile' },
-      { label: 'Connect', path: '/connect' },
+      { label: 'Customize Profile', path: '/profile/customize' },
       { label: 'Connections', path: '/connections' },
       { label: 'Support', path: '/support' },
       { label: 'Notifications', path: '/notifications' },

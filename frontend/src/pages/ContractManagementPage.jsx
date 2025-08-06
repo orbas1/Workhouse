@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChakraProvider, Box, Heading, Flex } from '@chakra-ui/react';
-import NavBar from '../components/NavBar.jsx';
+import { Box, Heading, Flex } from '@chakra-ui/react';
 import ContractCard from '../components/ContractCard.jsx';
 import ContractDetail from '../components/ContractDetail.jsx';
 import { getContracts, getContract, terminateContract } from '../api/contracts.js';
@@ -43,19 +42,16 @@ export default function ContractManagementPage() {
   }
 
   return (
-    <ChakraProvider>
-      <NavBar />
-      <Flex className="contract-management" p={4} wrap="wrap">
-        <Box flex="1" minW="300px" mr={4}>
-          <Heading size="md" mb={4}>Contracts</Heading>
-          {contracts.map((c) => (
-            <ContractCard key={c.id} contract={c} onSelect={handleSelect} />
-          ))}
-        </Box>
-        <Box flex="2" minW="300px">
-          <ContractDetail contract={selected} onTerminate={handleTerminate} />
-        </Box>
-      </Flex>
-    </ChakraProvider>
+    <Flex className="contract-management" p={4} wrap="wrap">
+      <Box flex="1" minW="300px" mr={4}>
+        <Heading size="md" mb={4}>Contracts</Heading>
+        {contracts.map((c) => (
+          <ContractCard key={c.id} contract={c} onSelect={handleSelect} />
+        ))}
+      </Box>
+      <Box flex="2" minW="300px">
+        <ContractDetail contract={selected} onTerminate={handleTerminate} />
+      </Box>
+    </Flex>
   );
 }

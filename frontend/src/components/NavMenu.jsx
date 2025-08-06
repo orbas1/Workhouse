@@ -3,6 +3,7 @@ import { Box, VStack, Link, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { menu } from '../nav/menu.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import '../styles/NavMenu.css';
 
 export default function NavMenu() {
   const { user } = useAuth();

@@ -14,8 +14,6 @@ import {
   SliderThumb,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../components/NavBar.jsx';
-import NavMenu from '../components/NavMenu.jsx';
 import '../styles/ServiceSearchPage.css';
 import { searchServices } from '../api/services.js';
 
@@ -42,8 +40,6 @@ export default function ServiceSearchPage() {
 
   return (
     <Box className="service-search-page">
-      <NavBar />
-      <NavMenu />
       <Flex className="search-controls" p={4} wrap="wrap" gap={4}>
         <Input
           placeholder="Search services"
