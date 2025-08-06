@@ -88,6 +88,9 @@ function HomeDashboard() {
         <Button colorScheme="teal" onClick={() => window.location.href = '/profile'}>
           View Profile
         </Button>
+        <Button colorScheme="purple" onClick={() => window.location.href = '/networking'}>
+          Networking Dashboard
+        </Button>
       </Flex>
       <Button colorScheme="blue" onClick={() => window.location.href = '/feed'}>
         Go to Live Feed
@@ -99,13 +102,21 @@ function HomeDashboard() {
   </Box>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/applications-interviews'}>
         Manage Applications
+      </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs/manage'}>
         Manage Gigs
+      </Button>
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/gigs'}>
         Gigs Dashboard
+      </Button>
+      <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/sessions'}>
+        Manage Sessions
+      </Button>
       <Button colorScheme="teal" ml={2} onClick={() => window.location.href = '/jobs'}>
         Browse Jobs
       </Button>
+      <Button colorScheme="purple" ml={2} onClick={() => window.location.href = '/creator/dashboard'}>
+        Creator Dashboard
       <Button ml={2} colorScheme="teal" onClick={() => window.location.href = '/freelancers'}>
         Search Freelancers
       </Button>
