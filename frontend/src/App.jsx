@@ -40,11 +40,18 @@ import AnalyticsAuditPage from './pages/AnalyticsAuditPage.jsx';
 import PaymentPage from './pages/PaymentPage.jsx';
 import SimDashboardPage from './pages/SimDashboardPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
+import InstallationWizardPage from './pages/InstallationWizardPage.jsx';
 import FinancialMediaSetupPage from './pages/FinancialMediaSetupPage.jsx';
 import OnboardingDocumentsPage from './pages/OnboardingDocumentsPage.jsx';
 import ChatInboxPage from './pages/ChatInboxPage.jsx';
 import JobListingsPage from './pages/JobListingsPage.jsx';
 import FreelanceDashboardPage from './pages/FreelanceDashboardPage.jsx';
+
+import DashboardPage from './pages/DashboardPage.jsx';
+import LiveFeedPage from './pages/LiveFeedPage.jsx';
+import EmploymentDashboardPage from './pages/EmploymentDashboardPage.jsx';
+import ApplicationInterviewManagementPage from './pages/ApplicationInterviewManagementPage.jsx';
+import HeadhunterDashboardPage from './pages/HeadhunterDashboardPage.jsx';
 
 import AdCreateEdit from '../pages/AdCreateEdit.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
@@ -87,24 +94,25 @@ export default function App() {
   const routes = [
     // Entry & Authentication
     { path: '/', element: <LandingPage /> },
+    { path: '/install', element: <InstallationWizardPage /> },
     { path: '/login', element: <LoginPage /> },
     { path: '/signup', element: <SignupPage /> },
     { path: '/onboarding/documents', element: <OnboardingDocumentsPage />, protected: true },
     { path: '/setup/financial-media', element: <FinancialMediaSetupPage />, protected: true },
 
     // Core User Hub
-    { path: '/dashboard', element: <PlaceholderPage title="Home Dashboard" />, protected: true },
-    { path: '/feed', element: <PlaceholderPage title="Live Feed" />, protected: true },
+    { path: '/dashboard', element: <DashboardPage />, protected: true },
+    { path: '/feed', element: <LiveFeedPage />, protected: true },
     { path: '/profile', element: <ProfilePage />, protected: true },
     { path: '/profile/customize', element: <ProfileCustomizationPage />, protected: true },
     { path: '/messages', element: <ChatInboxPage />, protected: true },
     { path: '/connections', element: <ConnectionManagementPage />, protected: true },
 
     // Employment & Gigs
-    { path: '/employment', element: <PlaceholderPage title="Employment Dashboard" />, protected: true },
+    { path: '/employment', element: <EmploymentDashboardPage />, protected: true },
     { path: '/jobs', element: <JobListingsPage />, protected: true },
-    { path: '/applications-interviews', element: <PlaceholderPage title="Application & Interview Management" />, protected: true },
-    { path: '/headhunter/dashboard', element: <PlaceholderPage title="Headhunter Dashboard" />, protected: true },
+    { path: '/applications-interviews', element: <ApplicationInterviewManagementPage />, protected: true },
+    { path: '/headhunter/dashboard', element: <HeadhunterDashboardPage />, protected: true },
     { path: '/interviews', element: <VirtualInterview />, protected: true },
     { path: '/interviews/:interviewId', element: <InterviewSession />, protected: true },
     { path: '/job-posts', element: <JobPostManagement />, protected: true },

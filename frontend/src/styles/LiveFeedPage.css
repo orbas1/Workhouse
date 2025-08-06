@@ -1,0 +1,12 @@
+.live-feed-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+.live-feed-page .feed-content {
+  flex: 1;
+}
+
+.events-sidebar {
+  max-width: 250px;
+}

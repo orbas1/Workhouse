@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react';
-import NavBar from '../components/NavBar.jsx';
-import NavMenu from '../components/NavMenu.jsx';
 import StatCard from '../components/StatCard.jsx';
 import '../styles/ExperienceDashboardPage.css';
 import { fetchExperienceDashboard } from '../api/experience.js';
@@ -29,8 +27,6 @@ export default function ExperienceDashboardPage() {
 
   return (
     <Box className="experience-dashboard-page" p={4}>
-      <NavBar />
-      <NavMenu />
       <VStack spacing={6} align="stretch">
         <Heading size="lg">Experience Dashboard</Heading>
         <SimpleGrid columns={[1, 2, 3]} spacing={4}>

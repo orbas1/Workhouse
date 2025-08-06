@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Heading, ButtonGroup, Button, Spinner } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu.jsx';
 import TaskTable from '../components/TaskTable.jsx';
 import '../styles/TaskDashboardPage.css';
 import { listTasks } from '../api/tasks.js';
@@ -31,7 +30,6 @@ function TaskDashboardPage() {
 
   return (
     <Box className="task-dashboard-page" p={4}>
-      <NavMenu />
       <Heading mb={4}>Task Dashboard</Heading>
       <ButtonGroup mb={4}>
         <Button colorScheme={mode === 'creator' ? 'teal' : 'gray'} onClick={() => setMode('creator')}>

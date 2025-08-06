@@ -12,8 +12,12 @@ export function AuthProvider({ children }) {
       try {
         const data = await fetchMe();
         setUser(data);
+        if (data?.id) {
+          localStorage.setItem('userId', data.id);
+        }
       } catch {
         setUser(null);
+        localStorage.removeItem('userId');
       } finally {
         setLoading(false);
       }
@@ -23,11 +27,15 @@ export function AuthProvider({ children }) {
 
   async function login(username, password) {
     const data = await apiLogin({ username, password });
+    if (data?.id) {
+      localStorage.setItem('userId', data.id);
+    }
     setUser(data);
   }
 
   function logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     setUser(null);
   }
 

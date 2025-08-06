@@ -15,7 +15,6 @@ import {
   ModalBody,
   useDisclosure
 } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu.jsx';
 import OpportunityCard from '../components/OpportunityCard.jsx';
 import OpportunityForm from '../components/OpportunityForm.jsx';
 import {
@@ -88,7 +87,6 @@ export default function OpportunityManagementPage() {
 
   return (
     <Box className="opportunity-management-page" p={4}>
-      <NavMenu />
       <Heading mb={4}>Opportunity Management</Heading>
       <Button colorScheme="teal" mb={4} onClick={handleCreate}>
         Create New Opportunity

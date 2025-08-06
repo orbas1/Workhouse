@@ -1,19 +1,27 @@
-(function(global){
-  async function searchJobSeekers(query, token){
-    const res = await fetch(`/api/headhunter/search-job-seekers?query=${encodeURIComponent(query)}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    if(!res.ok) throw new Error('Failed to search job seekers');
-    return res.json();
-  }
+const API_BASE_URL = window.API_BASE_URL || '/api';
 
-  async function getRecommendations(token){
-    const res = await fetch('/api/headhunter/recommendations', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    if(!res.ok) throw new Error('Failed to load recommendations');
-    return res.json();
+async function request(path, options = {}) {
+  const token = localStorage.getItem('token');
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...options.headers,
+  };
+  const res = await fetch(`${API_BASE_URL}${path}`, { ...options, headers });
+  if (!res.ok) {
+    const message = await res.text();
+    throw new Error(message || 'Request failed');
   }
+  return res.json();
+}
 
-  global.headhunterAPI = { searchJobSeekers, getRecommendations };
-})(window);
+export function searchJobSeekers(query) {
+  return request(`/headhunter/search-job-seekers?query=${encodeURIComponent(query)}`);
+}
+
+export function getRecommendations() {
+  return request('/headhunter/recommendations');
+}
+
+export default { searchJobSeekers, getRecommendations };
+
