@@ -1,31 +1,31 @@
 const fs = require('fs');
 const path = require('path');
-const mysql = require('mysql2/promise');
+const { execSync } = require('child_process');
 
 async function runMigrations() {
-  const connection = await mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'workhouse',
-    port: process.env.DB_PORT || 3306,
-    multipleStatements: true
-  });
+  const dbName = process.env.DB_NAME || 'workhouse';
+  const psql = (command) => {
+    execSync(`sudo -u postgres psql -d ${dbName} -c "${command}"`, { stdio: 'inherit' });
+  };
+
+  // Ensure required extensions are present
+  psql('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
 
   const dir = path.join(__dirname, '..', 'database');
-  const files = fs.readdirSync(dir).filter(f => f.endsWith('.sql')).sort();
+  const files = fs
+    .readdirSync(dir)
+    .filter(f => f.endsWith('.sql') && f !== 'database.sql')
+    .sort();
 
   for (const file of files) {
-    const sql = fs.readFileSync(path.join(dir, file), 'utf8');
+    const filePath = path.join(dir, file);
     try {
-      await connection.query(sql);
+      execSync(`sudo -u postgres psql -d ${dbName} -f "${filePath}"`, { stdio: 'inherit' });
       console.log(`Executed ${file}`);
     } catch (err) {
-      console.error(`Error executing ${file}: ${err.message}`);
+      console.error(`Error executing ${file}: ${err.stderr?.toString().trim() || err.message}`);
     }
   }
-
-  await connection.end();
 }
 
 runMigrations().catch(err => {
