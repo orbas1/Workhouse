@@ -182,11 +182,19 @@ function getFileById(fileId) {
   return files.get(fileId);
 }
 
+function listFilesByProject(projectId) {
+  return Array.from(files.values()).filter((f) => f.projectId === projectId);
+}
+
 function setupWorkflow({ projectId, steps }) {
   const id = randomUUID();
   const workflow = { id, projectId, steps, createdAt: new Date() };
   workflows.set(id, workflow);
   return workflow;
+}
+
+function listWorkflowsByProject(projectId) {
+  return Array.from(workflows.values()).filter((w) => w.projectId === projectId);
 }
 
 function storeSpreadsheet(projectId, url) {
@@ -230,7 +238,9 @@ module.exports = {
   getReportsByProject,
   uploadFile,
   getFileById,
+  listFilesByProject,
   setupWorkflow,
+  listWorkflowsByProject,
   storeSpreadsheet,
   getSpreadsheet,
   createText,
