@@ -195,6 +195,7 @@ app.use('/ai-analytics', aiAnalyticsRoutes);
 app.use('/classroom-analytics', classroomAnalyticsRoutes);
 app.use('/classroom', classroomMessageRoutes);
 app.use('/analytics/disputes', disputeAnalyticsRoutes);
+app.use('/disputes', disputeRoutes);
 app.use('/disputes', disputesRoutes);
 app.use('/education-analytics', educationAnalyticsRoutes);
 app.use('/financial-analytics', financialAnalyticsRoutes);

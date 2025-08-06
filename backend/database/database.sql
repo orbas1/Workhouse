@@ -348,6 +348,13 @@ CREATE TABLE IF NOT EXISTS disputes (
     resolved_at TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS dispute_messages (
+    id UUID PRIMARY KEY,
+    dispute_id UUID REFERENCES disputes(id),
+    sender_id UUID NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- Education Analytics Module Tables
 

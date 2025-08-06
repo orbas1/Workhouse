@@ -37,6 +37,20 @@ export default function NavMenu() {
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/profile')}>
         Profile
       </Button>
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
+        onClick={() => navigate('/disputes')}
+      >
+        Disputes
+      </Button>
+      <Button
+        variant="ghost"
+        color="white"
+        mr={2}
+        onClick={() => navigate('/contracts/new')}
+      >
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/contracts/new')}>
         New Contract
       <Button variant="ghost" color="white" mr={2} onClick={() => navigate('/services')}>

@@ -13,6 +13,7 @@ import OrderManagementPage from './pages/OrderManagementPage.jsx';
 import ConnectionManagementPage from './pages/ConnectionManagementPage.jsx';
 import ContractFormPage from './pages/ContractFormPage.jsx';
 import ServiceCreationPage from './pages/ServiceCreationPage.jsx';
+import DisputeManagementPage from './pages/DisputeManagementPage.jsx';
 import TaskDashboardPage from './pages/TaskDashboardPage.jsx';
 import TaskManagementPage from './pages/TaskManagementPage.jsx';
 import ScheduleCalendarPage from './pages/ScheduleCalendarPage.jsx';
@@ -154,6 +155,14 @@ export default function App() {
                   element={
                     <Protected>
                       <NotificationSettingsPage />
+                    </Protected>
+                  }
+                />
+                <Route
+                  path="/disputes/:disputeId?"
+                  element={
+                    <Protected>
+                      <DisputeManagementPage />
                     </Protected>
                   }
                 />
