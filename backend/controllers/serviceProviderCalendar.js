@@ -1,11 +1,11 @@
 const CalendarEvent = require('../models/calendarEvent');
 
 exports.createEvent = (req, res) => {
-  const { sellerId, buyerId, serviceId, startTime, endTime, status } = req.body;
+  const { sellerId, buyerId, serviceId, title, startTime, endTime, status } = req.body;
   if (!sellerId || !startTime || !endTime) {
     return res.status(400).json({ error: 'sellerId, startTime, and endTime are required' });
   }
-  const event = CalendarEvent.createEvent({ sellerId, buyerId, serviceId, startTime, endTime, status });
+  const event = CalendarEvent.createEvent({ sellerId, buyerId, serviceId, title, startTime, endTime, status });
   res.status(201).json(event);
 };
 

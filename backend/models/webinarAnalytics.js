@@ -4,10 +4,12 @@ const { randomUUID } = require('crypto');
 const webinarAnalyticsStore = new Map();
 const userBehaviorStore = new Map();
 
-function saveWebinarAnalytics(webinarId, data = {}) {
+function saveWebinarAnalytics(webinarId, data = {}, ownerId) {
   const record = {
     id: randomUUID(),
     webinarId,
+    ownerId,
+    title: data.title || '',
     overview: data.overview || {},
     engagement: data.engagement || {},
     createdAt: new Date(),
@@ -22,6 +24,10 @@ function getWebinarAnalytics(webinarId) {
 
 function getAllWebinarAnalytics() {
   return Array.from(webinarAnalyticsStore.values());
+}
+
+function getWebinarsByOwner(ownerId) {
+  return Array.from(webinarAnalyticsStore.values()).filter(w => w.ownerId === ownerId);
 }
 
 function saveUserBehavior(userId, behavior = {}) {
@@ -47,7 +53,21 @@ module.exports = {
   saveWebinarAnalytics,
   getWebinarAnalytics,
   getAllWebinarAnalytics,
+  getWebinarsByOwner,
   saveUserBehavior,
   getUserBehavior,
   getAllUserBehavior,
 };
+
+// Seed sample webinar analytics
+const ownerId = 'user-123';
+const sampleWebinarId = randomUUID();
+saveWebinarAnalytics(
+  sampleWebinarId,
+  {
+    title: 'Sample Webinar',
+    overview: { attendees: 150, registrations: 200, revenue: 1000 },
+    engagement: { engagementRate: 0.82 },
+  },
+  ownerId
+);

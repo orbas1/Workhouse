@@ -11,6 +11,16 @@ async function createProjectHandler(req, res) {
   }
 }
 
+async function listProjectsHandler(req, res) {
+  try {
+    const projects = await service.listProjects(req.user.id);
+    res.json(projects);
+  } catch (err) {
+    logger.error('Failed to list projects', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 async function getProjectHandler(req, res) {
   const { projectId } = req.params;
   try {
@@ -118,6 +128,17 @@ async function assignTaskHandler(req, res) {
   } catch (err) {
     logger.error('Failed to assign task', { error: err.message, taskId, assignee });
     res.status(404).json({ error: err.message });
+  }
+}
+
+async function listTasksHandler(req, res) {
+  const { assignee } = req.query;
+  try {
+    const tasks = await service.listTasksByAssignee(assignee);
+    res.json(tasks);
+  } catch (err) {
+    logger.error('Failed to list tasks', { error: err.message, assignee });
+    res.status(500).json({ error: err.message });
   }
 }
 
@@ -303,12 +324,34 @@ async function getFileHandler(req, res) {
   }
 }
 
+async function listFilesHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const files = await service.listFiles(projectId);
+    res.json(files);
+  } catch (err) {
+    logger.error('Failed to list files', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 async function setupWorkflowHandler(req, res) {
   try {
     const workflow = await service.setupWorkflow(req.body);
     res.status(201).json(workflow);
   } catch (err) {
     logger.error('Failed to setup workflow', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
+async function listWorkflowsHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const workflows = await service.listWorkflows(projectId);
+    res.json(workflows);
+  } catch (err) {
+    logger.error('Failed to list workflows', { error: err.message, projectId });
     res.status(400).json({ error: err.message });
   }
 }
@@ -334,8 +377,41 @@ async function createTextDocumentHandler(req, res) {
   }
 }
 
+async function listProjectsHandler(req, res) {
+  try {
+    const projects = await service.listProjects();
+    res.json(projects);
+  } catch (err) {
+    logger.error('Failed to list projects', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function listProjectTasksHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const tasks = await service.listTasks(projectId);
+    res.json(tasks);
+  } catch (err) {
+    logger.error('Failed to list project tasks', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function getBudgetHandler(req, res) {
+  const { projectId } = req.params;
+  try {
+    const summary = await service.getBudgetSummary(projectId);
+    res.json(summary);
+  } catch (err) {
+    logger.error('Failed to get budget summary', { error: err.message, projectId });
+    res.status(500).json({ error: err.message });
+  }
+}
+
 module.exports = {
   createProjectHandler,
+  listProjectsHandler,
   getProjectHandler,
   updateProjectHandler,
   deleteProjectHandler,
@@ -346,6 +422,7 @@ module.exports = {
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,
+  listTasksHandler,
   suggestTasksHandler,
   suggestBudgetHandler,
   suggestObjectivesHandler,
@@ -363,7 +440,12 @@ module.exports = {
   getReportsHandler,
   uploadFileHandler,
   getFileHandler,
+  listFilesHandler,
   setupWorkflowHandler,
+  listWorkflowsHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
+  listProjectsHandler,
+  listProjectTasksHandler,
+  getBudgetHandler,
 };

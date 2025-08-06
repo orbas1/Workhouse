@@ -1,14 +1,15 @@
 import apiClient from '../utils/apiClient.js';
 
-export async function listTasks(params = {}) {
-  const { data } = await apiClient.get('/workspace/tasks', { params });
+export async function getTasks(assignee) {
+  const { data } = await apiClient.get('/workspace/tasks', { params: { assignee } });
   return data;
-export function createTask(data) {
-  return apiClient.post('/workspace/tasks/create', data).then(res => res.data);
+export function listTasks(projectId, params = {}) {
+  const url = projectId ? `/workspace/projects/${projectId}/tasks` : '/workspace/tasks';
+  return apiClient.get(url, { params }).then(res => res.data);
 }
 
-export function listTasks(projectId) {
-  return apiClient.get(`/workspace/projects/${projectId}/tasks`).then(res => res.data);
+export function createTask(data) {
+  return apiClient.post('/workspace/tasks/create', data).then(res => res.data);
 }
 
 export function updateTask(taskId, updates) {
