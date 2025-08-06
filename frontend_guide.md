@@ -42,6 +42,59 @@
 
 
 
+## Frontend Routing Logic Map
+
+### Entry & Authentication
+- `Homepage (Stage 1)` → `Sign Up / Login (Stage 2)` → Onboarding steps:
+  - `User Information (Stage 3)`
+  - `Financials & Media Setup (Stage 4)`
+  - `CV & Cover Letter Upload (Stage 5)`
+- After authentication users land on `Home Dashboard (Stage 7)` with access to the `Live Feed (Stage 8)`.
+
+### Core User Hub
+- From the home dashboard users can navigate to:
+  - `Profile (Stage 9)` → `Profile Customization (Stage 10)`
+  - `Pop-Up Chat / Full Inbox (Stage 11)`
+
+### Employment & Gigs
+- `Home Dashboard` → `Employment Dashboard (Stage 12)` → `Job Listings (Stage 13)` → `Application & Interview Management (Stage 14)` → `Headhunter Dashboard (Stage 15)` → `Virtual Interview (Stage 16)` → `Job Post Creation & Management (Stage 17)`
+- `Home Dashboard` → `Gigs Dashboard (Stage 18)` → `Order Management (Stage 19)` → `Gig Creation & Management (Stage 20)` → `Product Page (Stage 21)` → `Payment Page (Stage 22)` → `Gig Search & Discovery (Stage 23)`
+
+### Contracts & Freelancing
+- `Home Dashboard` → `Client & Freelancer Dashboard (Stage 24)` → `Contract Management (Stage 25)` → `Freelancer Search (Stage 26)` → `Proposal & Invoice Management (Stage 27)` → `Payment & Timesheet Management (Stage 28)` → `Contract Creation & Editing (Stage 29)`
+
+### Education & Services
+- `Home Dashboard` → `Education Dashboard (Stage 30)` → `Classroom (Stage 31)` → `Course & Module Management (Stage 32)` → `Schedule & Calendar (Stage 33)` → `Course Purchase & Details (Stage 34)`
+- `Home Dashboard` → `Service Dashboard (Stage 35)` → `Service Creation & Editing (Stage 36)` → `Search & Service Details (Stage 37)` → `Calendar (Stage 38)`
+
+### Tasks & Experiences
+- `Home Dashboard` → `Task Dashboard (Stage 39)` → `Task Creation & Management (Stage 40)` → `Task Search & Details (Stage 41)` → `Task & Schedule Management (Stage 42)`
+- `Home Dashboard` → `Experience Dashboard (Stage 43)` → `Opportunity Management (Stage 44)` → `Opportunity Search & Details (Stage 45)` → `Participant & Provider Progress (Stage 46)`
+
+### Volunteering
+- `Home Dashboard` → `Volunteering Dashboard (Stage 47)` → `Opportunity Search & Details (Stage 48)` → `Application & Volunteer Tracking (Stage 49)` → `Opportunity Management (Stage 50)`
+
+### Networking
+- `Home Dashboard` → `Networking Dashboard (Stage 51)` → `Session Listings & Details (Stage 52)` → `In-Session Networking (Stage 53)` → `Session Management (Stage 54)` → `Profile & Connection Management (Stage 55)`
+
+### Media & Advertising
+- `Home Dashboard` → `Creator Dashboard (Stage 56)` → `Content Creation & Management (Stage 57)` → `Content Library & Details (Stage 58)` → `Live/Playback Room (Stage 59)` → `Creator Profile & Analytics (Stage 60)`
+- `Home Dashboard` → `Ads Dashboard & Campaign Management (Stage 61)` → `Ad Creation & Editing (Stage 62)` → `Billing, Analytics & Ad Library (Stage 63)` → `Shared User Interaction Page (Stage 64)`
+
+### Startup Ecosystem
+- `Home Dashboard` → `Startup, Investor & Mentor Dashboard (Stage 65)` → `Profile & Plan Management (Stage 66)` → `Search & Connection (Stage 67)` → `Connection & Relationship Management (Stage 68)` → `Live Engagement & Analytics (Stage 69)`
+
+### Workspace & Projects
+- `Home Dashboard` → `Workspace Dashboard (Stage 70)` → `Project Creation & Management (Stage 71)` → `Unified Schedule & Calendar (Stage 72)` → `Task & Workflow Management (Stage 73)` → `File & Resource Management (Stage 74)`
+
+### Settings, Billing & Analytics
+- Accessible from navigation: `Settings (Stage 75)` → `Message Notifications & Settings (Stage 76)` → `Billing & Subscription (Stage 77)` → `Stats & Analytics (Stage 78)` → `Blog Homepage & Categories (Stage 79)` → `Article Page (Stage 80)`
+
+### Disputes, Admin & Affiliates
+- `Home Dashboard` → `Dispute Dashboard (Stage 81)` → `Dispute Management (Stage 82)` → `Dispute Creation & Response (Stage 83)`
+- Admin routes: `Admin Dashboard (Stage 84)` → `Support & Dispute Management (Stage 85)` → `User & Content Management (Stage 86)` → `Analytics & Audit (Stage 87)` → `System Settings & Employee Management (Stage 88)` → `Affiliate Management (Stage 89)`
+
+
 Home page, Registration & Login
 
 1.1. Homepage Before Login - Main Landing Page Design
