@@ -2,6 +2,8 @@ const {
   distributePayments,
   getAgencyPayments,
   adjustPayment,
+  initiatePayment,
+  getPaymentStatus,
 } = require('../services/payment');
 const logger = require('../utils/logger');
 
@@ -39,8 +41,34 @@ async function adjustPaymentHandler(req, res) {
   }
 }
 
+async function initiatePaymentHandler(req, res) {
+  const userId = req.user && req.user.id;
+  const { amount, method } = req.body;
+  try {
+    const payment = await initiatePayment(userId, amount, method);
+    res.status(201).json(payment);
+  } catch (err) {
+    logger.error('Failed to initiate payment', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
+async function getPaymentStatusHandler(req, res) {
+  const { paymentId } = req.params;
+  try {
+    const payment = await getPaymentStatus(paymentId);
+    if (!payment) return res.status(404).json({ error: 'Payment not found' });
+    res.json(payment);
+  } catch (err) {
+    logger.error('Failed to retrieve payment status', { error: err.message });
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   distributePaymentsHandler,
   getPaymentsHandler,
   adjustPaymentHandler,
+  initiatePaymentHandler,
+  getPaymentStatusHandler,
 };

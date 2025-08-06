@@ -1,8 +1,10 @@
 (function(global){
+  function authHeaders(token){
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+  }
+
   async function listGigs(token){
-    const res = await fetch('/api/gigs', {
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
-    });
+    const res = await fetch('/api/gigs', { headers: authHeaders(token) });
     if(!res.ok) throw new Error('Failed to fetch gigs');
     return res.json();
   }
@@ -10,10 +12,7 @@
   async function createGig(data, token){
     const res = await fetch('/api/gigs', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-      },
+      headers: { 'Content-Type': 'application/json', ...authHeaders(token) },
       body: JSON.stringify(data)
     });
     if(!res.ok) throw new Error('Failed to create gig');
@@ -23,10 +22,7 @@
   async function updateGig(gigId, data, token){
     const res = await fetch(`/api/gigs/${gigId}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-      },
+      headers: { 'Content-Type': 'application/json', ...authHeaders(token) },
       body: JSON.stringify(data)
     });
     if(!res.ok) throw new Error('Failed to update gig');
@@ -36,13 +32,12 @@
   async function deleteGig(gigId, token){
     const res = await fetch(`/api/gigs/${gigId}`, {
       method: 'DELETE',
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+      headers: authHeaders(token)
     });
     if(!res.ok) throw new Error('Failed to delete gig');
     return res.json();
   }
 
-  global.gigsAPI = { listGigs, createGig, updateGig, deleteGig };
   async function getMyGigs(){
     const res = await apiFetch('/api/gigs/my-gigs');
     if(!res.ok) throw new Error('Failed to load gigs');
@@ -55,5 +50,12 @@
     return res.json();
   }
 
-  global.gigsAPI = { getMyGigs, getAppliedGigs };
+  async function searchGigs(params){
+    const query = new URLSearchParams(params).toString();
+    const res = await apiFetch(`/api/gigs/search?${query}`);
+    if(!res.ok) throw new Error('Failed to search gigs');
+    return res.json();
+  }
+
+  global.gigsAPI = { listGigs, createGig, updateGig, deleteGig, getMyGigs, getAppliedGigs, searchGigs };
 })(window);

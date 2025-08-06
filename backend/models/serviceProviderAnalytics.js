@@ -12,6 +12,30 @@ function findServiceById(id) {
   return services.find(s => s.id === id);
 }
 
+function createService(providerId, { title, description, tags = [], category, price }) {
+  const now = new Date();
+  const service = {
+    id: randomUUID(),
+    providerId,
+    title,
+    description,
+    tags,
+    category,
+    price,
+    createdAt: now,
+    updatedAt: now,
+  };
+  services.push(service);
+  return service;
+}
+
+function updateService(providerId, serviceId, data) {
+  const service = services.find(s => s.id === serviceId && s.providerId === providerId);
+  if (!service) return null;
+  Object.assign(service, data, { updatedAt: new Date() });
+  return service;
+}
+
 function updateServicePricing(providerId, serviceId, price) {
   const service = services.find(s => s.id === serviceId && s.providerId === providerId);
   if (!service) return null;
@@ -116,6 +140,8 @@ module.exports = {
   testimonials,
   customizationRequests,
   chatSessions,
+  createService,
+  updateService,
   findServiceById,
   updateServicePricing,
   addAvailability,
