@@ -39,24 +39,21 @@ Workhouse/
 ```
 
 ## Getting Started
-1. **Clone the repository** and create an environment file:
-   ```bash
-   cp .env.example .env
-   ```
-2. **Install dependencies** for both services:
-   ```bash
-   npm install
-   ```
-3. **Run the interactive setup wizard** to configure database and URLs:
+1. **Run the setup script** to install dependencies and prepare the database:
    ```bash
    npm run setup
    ```
-4. **Populate sample data** (optional):
+   This command copies `.env.example` to `.env` if needed, installs packages and runs database migrations with sample data.
+2. **Start the services**:
    ```bash
-   npm run db:seed --workspace backend  # load demo users, products and profiles
-   # later you can remove them with
-   npm run db:clear --workspace backend
+   npm start          # start API on port 5000
+   npm run start:frontend  # launch React dev server
    ```
+
+For custom configuration through interactive prompts, run:
+```bash
+npm run setup:wizard
+```
 
 ## Running the App
 ### Development
