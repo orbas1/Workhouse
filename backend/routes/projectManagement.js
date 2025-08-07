@@ -11,7 +11,6 @@ const {
   updateTaskHandler,
   deleteTaskHandler,
   assignTaskHandler,
-  listTasksHandler,
   suggestTasksHandler,
   suggestBudgetHandler,
   suggestObjectivesHandler,
@@ -39,7 +38,6 @@ const {
   listWorkflowsHandler,
   getSpreadsheetHandler,
   createTextDocumentHandler,
-  listProjectsHandler,
   listProjectTasksHandler,
   getBudgetHandler,
 } = require('../controllers/projectManagement');
@@ -57,11 +55,9 @@ const {
   createProjectSchema,
   updateProjectSchema,
   createTaskSchema,
-  taskListSchema,
   updateTaskSchema,
   assignTaskSchema,
   taskQuerySchema,
-  listTasksQuerySchema,
   aiProjectSchema,
   hireSchema,
   feedPostSchema,
@@ -81,7 +77,6 @@ const router = express.Router();
 // Project routes
 router.get('/projects', auth, listProjectsHandler);
 router.post('/projects/create', auth, validate(createProjectSchema), createProjectHandler);
-router.get('/projects', auth, listProjectsHandler);
 router.get('/projects/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, getProjectHandler);
 router.put('/projects/update/:projectId', auth, validate(projectIdParamSchema, 'params'), validate(updateProjectSchema), projectExists, updateProjectHandler);
 router.delete('/projects/delete/:projectId', auth, validate(projectIdParamSchema, 'params'), projectExists, deleteProjectHandler);
@@ -91,13 +86,10 @@ router.get('/projects/:projectId/budget', auth, validate(projectIdParamSchema, '
 // Task routes
 router.post('/tasks/create', auth, validate(createTaskSchema), createTaskHandler);
 router.get('/tasks', auth, validate(taskQuerySchema, 'query'), listTasksHandler);
-router.get('/tasks', auth, validate(taskListSchema, 'query'), listTasksHandler);
 router.get('/tasks/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, getTaskHandler);
-router.get('/projects/:projectId/tasks', auth, validate(projectIdParamSchema, 'params'), projectExists, listTasksHandler);
 router.put('/tasks/update/:taskId', auth, validate(taskIdParamSchema, 'params'), validate(updateTaskSchema), taskExists, updateTaskHandler);
 router.delete('/tasks/delete/:taskId', auth, validate(taskIdParamSchema, 'params'), taskExists, deleteTaskHandler);
 router.post('/tasks/assign', auth, validate(assignTaskSchema), assignTaskHandler);
-router.get('/tasks', auth, validate(listTasksQuerySchema, 'query'), listTasksHandler);
 
 // AI routes
 router.post('/ai/tasks/suggest', auth, validate(aiProjectSchema), suggestTasksHandler);
