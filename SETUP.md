@@ -19,9 +19,10 @@ npm run setup
 
 The wizard will show the current configuration from `backend/.env`, logging it
 to `backend/scripts/setup.log`. You can keep the existing values or enter new
-ones for the site name, site URL and database credentials. When finished, the
-wizard runs migrations and seeders, then exposes the frontend under
-`VITE_APP_URL` so the browser UI can resolve the correct site address.
+ones for the site name, site URL, database credentials, and optional Google and
+Firebase settings. When finished, the wizard runs migrations and seeders, then
+exposes the frontend under `VITE_APP_URL` so the browser UI can resolve the
+correct site address.
 
 After setup you can start the API with:
 

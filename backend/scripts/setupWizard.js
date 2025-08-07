@@ -7,6 +7,12 @@ const envPath = path.join(__dirname, '..', '.env');
 const logPath = path.join(__dirname, 'setup.log');
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
+function log(message) {
+  const line = `[${new Date().toISOString()}] ${message}`;
+  console.log(line);
+  fs.appendFileSync(logPath, line + '\n');
+}
+
 // Load existing configuration if present
 let current = {};
 if (fs.existsSync(envPath)) {
@@ -15,10 +21,10 @@ if (fs.existsSync(envPath)) {
     const [k, v] = line.split('=');
     if (k) current[k.trim()] = v ? v.replace(/^"|"$/g, '').trim() : '';
   }
-  console.log('Current configuration:');
-  Object.entries(current).forEach(([k, v]) => console.log(`${k}=${v}`));
+  log('Current configuration:');
+  Object.entries(current).forEach(([k, v]) => log(`${k}=${v}`));
 } else {
-  console.log('No existing .env found. Using defaults.');
+  log('No existing .env found. Using defaults.');
 }
 
 // Launch default browser to show the UI once setup completes
@@ -31,7 +37,7 @@ function openBrowser(url) {
   try {
     execSync(`${start} ${url}`);
   } catch (err) {
-    console.error('Failed to open browser:', err.message);
+    log(`Failed to open browser: ${err.message}`);
   }
 }
 
@@ -57,10 +63,15 @@ const questions = [
     default: current.SSL_KEY || '/path/to/key.pem',
     when: a => a.ENABLE_SSL && a.ENABLE_SSL.toLowerCase().startsWith('y'),
   },
+  { key: 'GOOGLE_CLIENT_ID', question: 'Google OAuth Client ID', default: current.GOOGLE_CLIENT_ID || '' },
+  { key: 'GOOGLE_CLIENT_SECRET', question: 'Google OAuth Client Secret', default: current.GOOGLE_CLIENT_SECRET || '' },
+  { key: 'GOOGLE_REDIRECT_URI', question: 'Google OAuth Redirect URI', default: current.GOOGLE_REDIRECT_URI || 'http://localhost:5173/oauth2callback' },
+  { key: 'FIREBASE_PROJECT_ID', question: 'Firebase project ID', default: current.FIREBASE_PROJECT_ID || '' },
+  { key: 'FIREBASE_CLIENT_EMAIL', question: 'Firebase client email', default: current.FIREBASE_CLIENT_EMAIL || '' },
+  { key: 'FIREBASE_PRIVATE_KEY', question: 'Firebase private key', default: current.FIREBASE_PRIVATE_KEY || '' },
 ];
 
 const answers = {};
-
 function ask(index = 0) {
   if (index === questions.length) {
     const content =
@@ -70,26 +81,32 @@ function ask(index = 0) {
         .join('\n') +
       `\nVITE_APP_URL=${JSON.stringify(answers.SITE_URL)}\n`;
     fs.writeFileSync(envPath, content);
-    fs.appendFileSync(logPath, `${new Date().toISOString()}\n${content}\n`);
-    console.log(`Created ${envPath}`);
-    try {
-      execSync('node scripts/dbSetup.js', { stdio: 'inherit' });
-      execSync('node scripts/seedData.js', { stdio: 'inherit' });
-      // run backend in background with pm2
+    log(`Created ${envPath}`);
+    fs.appendFileSync(logPath, content + '\n');
+
+    const steps = [
+      { label: 'Running database migrations', cmd: 'node scripts/dbSetup.js' },
+      { label: 'Seeding database', cmd: 'node scripts/seedData.js' },
+      {
+        label: 'Starting backend with pm2',
+        cmd: 'npx pm2 start app.js --name workhouse',
+        options: { cwd: path.join(__dirname, '..') },
+      },
+      { label: 'Checking pm2 status', cmd: 'npx pm2 status workhouse' },
+    ];
+
+    steps.forEach((step, i) => {
+      log(`Step ${i + 1}/${steps.length}: ${step.label}`);
       try {
-        execSync('npx pm2 start app.js --name workhouse', {
-          cwd: path.join(__dirname, '..'),
-          stdio: 'inherit',
-        });
-        execSync('npx pm2 status workhouse', { stdio: 'inherit' });
-      } catch (pm2Err) {
-        console.error('pm2 start failed:', pm2Err.message);
+        execSync(step.cmd, { stdio: 'inherit', ...(step.options || {}) });
+      } catch (err) {
+        log(`${step.label} failed: ${err.message}`);
       }
-      // open frontend for convenience
-      openBrowser(answers.SITE_URL);
-    } catch (err) {
-      console.error('Setup scripts failed:', err.message);
-    }
+    });
+
+    log(`Opening browser at ${answers.SITE_URL}`);
+    openBrowser(answers.SITE_URL);
+    log('Setup complete');
     rl.close();
     return;
   }
@@ -99,12 +116,14 @@ function ask(index = 0) {
     return;
   }
   if (q.key === 'DB_PORT') {
-    q.default = answers.DB_TYPE === 'mysql' ? '3306' : (current.DB_PORT || '5432');
+    q.default = answers.DB_TYPE === 'mysql' ? '3306' : current.DB_PORT || '5432';
   }
-  rl.question(`${q.question} (${q.default}): `, answer => {
+  rl.question(`(${index + 1}/${questions.length}) ${q.question} (${q.default}): `, answer => {
     answers[q.key] = answer || q.default;
+    log(`Set ${q.key}`);
     ask(index + 1);
   });
 }
 
+log('Starting setup wizard');
 ask();
