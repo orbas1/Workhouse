@@ -10,6 +10,7 @@ import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import LiveFeedPage from './pages/LiveFeedPage.jsx';
+import AdminSystemSettingsPage from './pages/AdminSystemSettingsPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import Layout from './components/Layout.jsx';
 
@@ -85,6 +86,16 @@ export default function App() {
                 <Protected>
                   <Layout>
                     <LiveFeedPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/admin/system-settings"
+              element={
+                <Protected>
+                  <Layout>
+                    <AdminSystemSettingsPage />
                   </Layout>
                 </Protected>
               }
