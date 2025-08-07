@@ -1,4 +1,14 @@
 .installation-wizard {
   max-width: 600px;
   margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.installation-wizard .chakra-form-control + .chakra-form-control {
+  margin-top: 1rem;
+}
+
+.installation-wizard pre {
+  white-space: pre-wrap;
 }

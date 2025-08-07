@@ -77,7 +77,8 @@ export default function InstallationWizardPage() {
   const validateStep = () => {
     switch (step) {
       case 0:
-        return permissions?.ok;
+        // allow moving past the permissions check once it has completed
+        return permissions !== null;
       case 1:
         return site.name && site.url;
       case 2:
@@ -144,15 +145,25 @@ export default function InstallationWizardPage() {
           <>
             {permissions ? (
               <>
+                {!permissions.ok && (
+                  <Alert status="warning" mb={4}>
+                    <AlertIcon />
+                    Some paths are not writable. Adjust file permissions before continuing.
+                  </Alert>
+                )}
                 <Text mb={2}>Ensure these paths are writable:</Text>
-                <List spacing={2}>
-                  {permissions.details?.map((p, idx) => (
-                    <ListItem key={idx} color={p.writable ? 'green.600' : 'red.600'}>
-                      <ListIcon as={p.writable ? CheckCircleIcon : WarningIcon} />
-                      {p.path}
-                    </ListItem>
-                  ))}
-                </List>
+                {permissions.details && permissions.details.length > 0 ? (
+                  <List spacing={2}>
+                    {permissions.details.map((p, idx) => (
+                      <ListItem key={idx} color={p.writable ? 'green.600' : 'red.600'}>
+                        <ListIcon as={p.writable ? CheckCircleIcon : WarningIcon} />
+                        {p.path}
+                      </ListItem>
+                    ))}
+                  </List>
+                ) : (
+                  <Text>No permission details available.</Text>
+                )}
               </>
             ) : (
               <Text>Checking permissions...</Text>
@@ -310,7 +321,7 @@ export default function InstallationWizardPage() {
         <Button onClick={handleBack} isDisabled={step === 0} colorScheme="blue" variant="outline">
           Back
         </Button>
-        <Button colorScheme="blue" onClick={handleNext}>
+        <Button colorScheme="blue" onClick={handleNext} isDisabled={!validateStep()}>
           {step < 3 ? 'Next' : step === 3 ? 'Finish' : 'Go to site'}
         </Button>
       </Flex>
