@@ -51,6 +51,12 @@ Workhouse/
    ```bash
    npm run setup
    ```
+4. **Populate sample data** (optional):
+   ```bash
+   npm run db:seed --workspace backend  # load demo users, products and profiles
+   # later you can remove them with
+   npm run db:clear --workspace backend
+   ```
 
 ## Running the App
 ### Development
