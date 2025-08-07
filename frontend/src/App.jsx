@@ -11,6 +11,7 @@ import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import LiveFeedPage from './pages/LiveFeedPage.jsx';
+import AdminSystemSettingsPage from './pages/AdminSystemSettingsPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import NavMenu from './components/NavMenu.jsx';
 import { InstallProvider, useInstall } from './context/InstallContext.jsx';
@@ -34,6 +35,83 @@ export default function App() {
     <ChakraProvider>
       <AuthProvider>
         <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route
+              path="/dashboard"
+              element={
+                <Protected>
+                  <Layout>
+                    <DashboardPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Protected>
+                  <Layout>
+                    <ProfilePage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <Protected>
+                  <Layout>
+                    <SettingsDashboardPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/kl"
+              element={
+                <Protected>
+                  <Layout>
+                    <KlEditionPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <Protected>
+                  <Layout>
+                    <GlobalSearchPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/feed"
+              element={
+                <Protected>
+                  <Layout>
+                    <LiveFeedPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/admin/system-settings"
+              element={
+                <Protected>
+                  <Layout>
+                    <AdminSystemSettingsPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
           <Flex>
             <NavMenu />
             <Box flex="1" p={4}>

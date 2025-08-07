@@ -16,6 +16,8 @@ const adminAuthRoutes = require('./routes/adminAuth');
 const dashboardRoutes = require('./routes/dashboard');
 const adminDashboardRoutes = require('./routes/adminDashboard');
 const searchRoutes = require('./routes/search');
+const systemSettingsRoutes = require('./routes/systemSettings');
+const employeeRoutes = require('./routes/employee');
 const api = require("./api");
 const { initDb } = require('./utils/db');
 const logger = require('./utils/logger');
@@ -50,6 +52,8 @@ app.use('/n8n', n8nRoutes);
 app.use('/tasks', tasksRoutes);
 app.use('/admin', adminAuthRoutes);
 app.use('/admin', adminDashboardRoutes);
+app.use('/admin', systemSettingsRoutes);
+app.use('/hr', employeeRoutes);
 app.use('/search', searchRoutes);
 app.use('/dashboard', dashboardRoutes);
 
