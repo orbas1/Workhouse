@@ -3,6 +3,8 @@ const { addUser, findUser } = require('../models/user');
 const logger = require('../utils/logger');
 const mysql = require('mysql2/promise');
 const { Client } = require('pg');
+const fs = require('fs/promises');
+const path = require('path');
 
 async function checkInstallation() {
   return getStatus();
@@ -43,7 +45,7 @@ async function checkDatabase(dbConfig = {}) {
   }
 }
 
-async function runInstallation({ dbConfig = {}, admin = {}, app = {} }) {
+async function runInstallation({ dbConfig = {}, admin = {}, app = {}, site = {} }) {
   const status = getStatus();
   if (status.installed) {
     throw new Error('Application is already installed');
@@ -66,9 +68,28 @@ async function runInstallation({ dbConfig = {}, admin = {}, app = {} }) {
     appId: app.appId || 'workhouse',
     appUrl: app.appUrl || '',
     dbConfig,
+    site,
   });
   logger.info('Installation completed', { adminId: adminUser.id });
   return { installation: record, admin: adminUser };
 }
+async function checkPermissions() {
+  const paths = [
+    path.join(__dirname, '../data'),
+    path.join(__dirname, '../logs'),
+  ];
+  const details = await Promise.all(
+    paths.map(async p => {
+      try {
+        await fs.access(p, fs.constants.W_OK);
+        return { path: p, writable: true };
+      } catch {
+        return { path: p, writable: false };
+      }
+    })
+  );
+  const ok = details.every(d => d.writable);
+  return { ok, details };
+}
 
-module.exports = { checkInstallation, runInstallation, checkDatabase };
+module.exports = { checkInstallation, runInstallation, checkDatabase, checkPermissions };
