@@ -70,7 +70,7 @@ export default function DashboardPage() {
       </SimpleGrid>
       <SimpleGrid columns={[1, 2, 4]} spacing={4}>
         {stats.map((s) =>
-          s.key in data ? (
+          data && typeof data === 'object' && s.key in data ? (
             <Stat key={s.key} p={4} shadow="sm" borderWidth="1px" borderRadius="md" bg="white">
               <StatLabel>{s.label}</StatLabel>
               <StatNumber>
