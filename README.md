@@ -38,24 +38,30 @@ Workhouse/
 └── .env.example # Example environment configuration
 ```
 
+## Prerequisites
+- Node.js v16+ and npm
+- PostgreSQL database
+- Copy `.env.example` to `.env` and update environment variables
+
 ## Getting Started
-1. **Clone the repository** and create an environment file:
-   ```bash
-   cp .env.example .env
-   ```
-2. **Install dependencies** for both services:
-   ```bash
-   npm install
-   ```
-3. **Run the interactive setup wizard** to configure database and URLs:
+1. **Configure the database**
+   - Install PostgreSQL and ensure it is running.
+   - Copy `.env.example` to `.env` and update the `DB_*` variables to match your database credentials.
+2. **Run the setup script** to install dependencies and prepare the database:
    ```bash
    npm run setup
    ```
-4. **Populate sample data** (optional):
+   The script installs packages, runs database migrations using the configured credentials and seeds sample data.
+3. **(Optional) Use the installation wizard**
+   - For an interactive walkthrough that helps configure environment variables and database settings run:
+     ```bash
+     npm run setup:wizard
+     ```
+   - The wizard guides you through initial configuration and then executes the same steps as `npm run setup`.
+4. **Start the services**:
    ```bash
-   npm run db:seed --workspace backend  # load demo users, products and profiles
-   # later you can remove them with
-   npm run db:clear --workspace backend
+   npm start          # start API on port 5000
+   npm run start:frontend  # launch React dev server
    ```
 
 ## Running the App
@@ -80,6 +86,26 @@ cd frontend && npm run build
 cd .. && node app.js               # serves static frontend and mounts /api routes
 ```
 `API_BASE_URL` in `.env` controls the path where the backend is mounted when using `app.js`.
+
+## PM2 Process Management
+
+### Development
+Use PM2 to keep both services running in the background during development:
+
+```bash
+npm run setup
+pm2 start npm --name workhouse-backend --workspace backend -- run start
+pm2 start npm --name workhouse-frontend --workspace frontend -- run dev
+```
+
+### Production
+Build the frontend and serve it with PM2:
+
+```bash
+npm run build --workspace frontend
+pm2 start "serve -s dist" --name workhouse-frontend
+pm2 start backend/app.js --name workhouse-backend
+```
 
 ## Vercel Deployment
 The repository includes a `vercel.json` configuration that builds the React frontend and packages the Express backend as a serverless function. To deploy:

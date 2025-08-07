@@ -1,9 +1,12 @@
+require('dotenv').config();
 const path = require('path');
 
 // Reuse Express from the backend dependencies to avoid duplicating
 // installations at the repository root.
 const express = require('./backend/node_modules/express');
 const backend = require('./backend/app');
+const { initDb } = require('./backend/utils/db');
+const { getStatus } = require('./backend/models/installation');
 
 const app = express();
 
@@ -31,8 +34,17 @@ app.use((req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-if (require.main === module) {
+
+async function start() {
+  const status = getStatus();
+  if (status.installed) {
+    await initDb();
+  }
   app.listen(port, () => console.log(`Server running on port ${port}`));
+}
+
+if (require.main === module) {
+  start();
 }
 
 module.exports = app;

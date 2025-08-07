@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const { adminLoginHandler } = require('../controllers/adminAuth');
-const { users, addUser } = require('../models/user');
+const { clearUsers, addUser } = require('../models/user');
 
 describe('admin auth', () => {
   test('route defines an Express router', () => {
@@ -13,9 +13,9 @@ describe('admin auth', () => {
   });
 
   test('adminLoginHandler authenticates admin user only', async () => {
-    users.clear(); // reset in-memory store
+    await clearUsers();
     const hashed = await bcrypt.hash('secret', 10);
-    addUser({ username: 'admin', password: hashed, role: 'admin' });
+    await addUser({ username: 'admin', password: hashed, role: 'admin' });
 
     const req = { validatedBody: { username: 'admin', password: 'secret' } };
     const res = { json: jest.fn(), status: jest.fn().mockReturnThis() };

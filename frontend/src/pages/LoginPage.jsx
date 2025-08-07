@@ -10,7 +10,6 @@ import {
   Input,
   Link,
   Stack,
-  useToast,
   Divider,
   Modal,
   ModalOverlay,
@@ -20,11 +19,12 @@ import {
   ModalFooter,
   ModalCloseButton,
   useDisclosure,
-  Text
+  Text,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { loginWithProvider, resetPassword } from '../api/auth.js';
+import sanitizeInput from '../utils/sanitize.js';
 import '../styles/LoginPage.css';
 
 export default function LoginPage() {
@@ -37,7 +37,6 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [newPassword, setNewPassword] = useState('');
-  const toast = useToast();
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -46,7 +45,12 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
     try {
-      await login(email, password, use2FA ? code : undefined, remember);
+      await login(
+        sanitizeInput(email),
+        sanitizeInput(password),
+        use2FA ? sanitizeInput(code) : undefined,
+        remember
+      );
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);
@@ -57,12 +61,12 @@ export default function LoginPage() {
 
   async function handleReset() {
     try {
-      await resetPassword(email, newPassword);
-      toast({ title: 'Password updated', status: 'success', duration: 3000, isClosable: true });
+      await resetPassword(sanitizeInput(email), sanitizeInput(newPassword));
+      alert('Password updated');
       setNewPassword('');
       onClose();
     } catch (err) {
-      toast({ title: err.message, status: 'error', duration: 3000, isClosable: true });
+      alert(err.message);
     }
   }
 

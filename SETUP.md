@@ -9,34 +9,50 @@ data.
 - Node.js 18+
 - PostgreSQL server
 
-## Backend setup
+## Browser-based setup
 
-From the repository root you can launch the interactive setup wizard:
+1. From the repository root start the server:
 
-```bash
-npm run setup
-```
+   ```bash
+   npm start
+   ```
 
-The wizard will show the current configuration from `backend/.env`, logging it
-to `backend/scripts/setup.log`. You can keep the existing values or enter new
-ones for the site name, site URL and database credentials. When finished, the
-wizard runs migrations and seeders, then exposes the frontend under
-`VITE_APP_URL` so the browser UI can resolve the correct site address.
+2. Open [http://localhost:3000/install](http://localhost:3000/install) in your browser.
+3. Follow the wizard to verify permissions, enter site details, configure the database and create the first admin user.
+4. When the wizard finishes it runs database migrations, seeds data and redirects to the dashboard.
 
-After setup you can start the API with:
+## Quick setup script
+
+1. Ensure PostgreSQL is installed and running.
+2. Copy `.env.example` to `.env` and update the `DB_*` values to match your local database credentials.
+3. From the repository root run:
+
+   ```bash
+   npm run setup
+   ```
+
+The script installs dependencies, runs migrations using the configured credentials and seeds the database with sample data. If `.env` is missing it will be created from `.env.example`.
+
+After setup you can start the API and frontend:
 
 ```bash
 npm start
-```
-
-The frontend dev server can be launched with:
-
-```bash
 npm run start:frontend
 ```
 
 For deployment behind Apache, the `frontend/.htaccess` file rewrites requests to
 `index.html` so the Vite single-page app loads correctly.
+
+## Interactive setup (optional)
+
+To customize environment variables or skip seeding, launch the interactive wizard:
+
+```bash
+npm run setup:wizard
+```
+
+The wizard shows existing values from `backend/.env` and logs to `backend/scripts/setup.log`. After answering prompts it can
+run migrations, seed data and start the backend with pm2.
 
 ## Environment variables
 

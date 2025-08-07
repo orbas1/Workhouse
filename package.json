@@ -4,9 +4,10 @@
   "workspaces": ["frontend", "backend"],
   "scripts": {
     "test": "npm test --workspaces",
-    "start": "npm start --workspace backend",
+    "start": "node app.js",
     "start:frontend": "npm run dev --workspace frontend",
     "start:backend": "npm start --workspace backend",
-    "setup": "npm run setup --workspace backend"
+    "setup": "node scripts/setup.js",
+    "setup:wizard": "npm run setup --workspace backend"
   }
 }

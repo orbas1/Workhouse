@@ -8,6 +8,7 @@ import {
   Heading,
   HStack,
   Input,
+  Select,
   Text,
   Textarea,
   Progress,
@@ -28,7 +29,8 @@ export default function SignupPage() {
     bio: '',
     expertise: '',
     username: '',
-    password: ''
+    password: '',
+    role: 'buyer'
   });
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [error, setError] = useState('');
@@ -89,6 +91,13 @@ export default function SignupPage() {
         <FormControl id="password" mb={4} isRequired>
           <FormLabel>Password</FormLabel>
           <Input type="password" name="password" value={form.password} onChange={handleChange} />
+        </FormControl>
+        <FormControl id="role" mb={4} isRequired>
+          <FormLabel>Account Type</FormLabel>
+          <Select name="role" value={form.role} onChange={handleChange}>
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+          </Select>
         </FormControl>
         <FormControl id="location" mb={4} isRequired>
           <FormLabel>Location</FormLabel>

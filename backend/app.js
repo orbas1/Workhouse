@@ -1,12 +1,19 @@
 require('./config/env');
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const xss = require('xss-clean');
+const hpp = require('hpp');
 const products = require('./data/products.json');
+const installRoutes = require('./routes/install');
+const requireInstallation = require('./middleware/requireInstallation');
 const authRoutes = require('./routes/auth');
 const landingRoutes = require('./routes/landing');
 const n8nRoutes = require('./routes/n8n');
 const tasksRoutes = require('./routes/tasks');
 const adminAuthRoutes = require('./routes/adminAuth');
+const dashboardRoutes = require('./routes/dashboard');
 const adminDashboardRoutes = require('./routes/adminDashboard');
 const searchRoutes = require('./routes/search');
 const api = require("./api");
@@ -15,7 +22,23 @@ const logger = require('./utils/logger');
 
 const app = express();
 app.use(cors());
+app.use(helmet());
+app.use(xss());
+app.use(hpp());
 app.use(express.json());
+
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
+
+app.use('/install', installRoutes);
+app.use(requireInstallation);
+
 
 app.get('/operations/retail/products', (req, res) => {
   res.json(products);
@@ -28,6 +51,7 @@ app.use('/tasks', tasksRoutes);
 app.use('/admin', adminAuthRoutes);
 app.use('/admin', adminDashboardRoutes);
 app.use('/search', searchRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 // 404 handler
 app.use((req, res, next) => {

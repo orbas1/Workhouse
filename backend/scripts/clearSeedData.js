@@ -1,54 +1,72 @@
+require('../config/env');
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { Client } = require('pg');
 
-function escape(str) {
-  return str.replace(/'/g, "''");
+function getClient() {
+  const database = process.env.DB_NAME || 'workhouse';
+  const host = process.env.DB_HOST || '127.0.0.1';
+  const user = process.env.DB_USER || 'postgres';
+  const password = process.env.DB_PASSWORD || '';
+  const port = process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432;
+  return new Client({ host, user, password, port, database });
 }
 
-async function clearUsers() {
+async function clearUsers(client) {
   const dataPath = path.join(__dirname, '..', 'data', 'users.json');
   if (!fs.existsSync(dataPath)) return;
   const users = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const dbName = process.env.DB_NAME || 'workhouse';
 
   for (const u of users) {
-    const query = `DELETE FROM users WHERE id='${escape(u.id)}';`;
-    execSync(`echo "${query}" | sudo -u postgres psql -d ${dbName}`, { stdio: 'inherit' });
+    await client.query('DELETE FROM users WHERE id=$1', [u.id]);
   }
   console.log('Cleared users');
 }
 
-async function clearProducts() {
+async function clearProducts(client) {
   const dataPath = path.join(__dirname, '..', 'data', 'products.json');
   if (!fs.existsSync(dataPath)) return;
   const products = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const dbName = process.env.DB_NAME || 'workhouse';
 
   for (const p of products) {
-    const query = `DELETE FROM products WHERE id='${escape(p.id)}';`;
-    execSync(`echo "${query}" | sudo -u postgres psql -d ${dbName}`, { stdio: 'inherit' });
+    await client.query('DELETE FROM products WHERE id=$1', [p.id]);
   }
   console.log('Cleared products');
 }
 
-async function clearProfiles() {
+async function clearProfiles(client) {
   const dataPath = path.join(__dirname, '..', 'data', 'profiles.json');
   if (!fs.existsSync(dataPath)) return;
   const profiles = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const dbName = process.env.DB_NAME || 'workhouse';
 
   for (const p of profiles) {
-    const query = `DELETE FROM profiles WHERE id='${escape(p.id)}';`;
-    execSync(`echo "${query}" | sudo -u postgres psql -d ${dbName}`, { stdio: 'inherit' });
+    await client.query('DELETE FROM profiles WHERE id=$1', [p.id]);
   }
   console.log('Cleared profiles');
 }
 
+async function clearLiveFeedPosts(client) {
+  const dataPath = path.join(__dirname, '..', 'data', 'liveFeedPosts.json');
+  if (!fs.existsSync(dataPath)) return;
+  const posts = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+  for (const p of posts) {
+    await client.query('DELETE FROM live_feed_posts WHERE id=$1', [p.id]);
+  }
+  console.log('Cleared live feed posts');
+}
+
 async function run() {
-  await clearUsers();
-  await clearProducts();
-  await clearProfiles();
+  const client = getClient();
+  await client.connect();
+  try {
+    await clearUsers(client);
+    await clearProducts(client);
+    await clearProfiles(client);
+    await clearLiveFeedPosts(client);
+  } finally {
+    await client.end();
+  }
 }
 
 run().catch(err => {

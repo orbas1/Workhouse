@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY,
   username VARCHAR(255) UNIQUE NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
-  role VARCHAR(50) DEFAULT 'user',
+  -- Supported roles: super_admin, admin, buyer, seller
+  role VARCHAR(50) DEFAULT 'buyer' CHECK (role IN ('super_admin','admin','buyer','seller')),
   full_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   phone VARCHAR(20) NOT NULL,
@@ -13,4 +14,6 @@ CREATE TABLE IF NOT EXISTS users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 

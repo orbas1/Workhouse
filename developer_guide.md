@@ -8,11 +8,11 @@ This document explains how to get a local development environment running and ou
 - A running database as configured in `.env`
 
 ## Installation
-1. Clone the repository and install dependencies:
+1. Run the setup script to install dependencies and create the `.env` file:
    ```bash
-   npm install
+   npm run setup
    ```
-2. Copy `.env.example` to `.env` and adjust values for your setup.
+   Adjust values in `.env` as needed after the script completes.
 
 ## Working with Workspaces
 The project uses npm workspaces. Commands can target a workspace:

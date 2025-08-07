@@ -1,21 +1,26 @@
 import React from 'react';
 import {
   Flex,
-  Heading,
+  Image,
   Spacer,
   Button,
   Input,
   InputGroup,
   InputLeftElement,
   IconButton,
-  Avatar
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 } from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
+import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/NavBar.css';
+import logo from '../assets/workhouse.svg';
 
-export default function NavBar() {
+export default function NavBar({ onMenuOpen }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -25,10 +30,16 @@ export default function NavBar() {
   };
 
   return (
-    <Flex as="header" bg="teal.500" color="white" p={4} align="center">
-      <Heading size="md" cursor="pointer" onClick={() => navigate('/')}> 
-        Workhouse
-      </Heading>
+    <Flex as="header" bg="blue.600" color="white" p={4} align="center" boxShadow="sm">
+      <IconButton
+        display={{ base: 'inline-flex', md: 'none' }}
+        onClick={onMenuOpen}
+        mr={2}
+        icon={<HamburgerIcon />}
+        variant="ghost"
+        aria-label="Open navigation"
+      />
+      <Image src={logo} alt="Workhouse logo" h="32px" cursor="pointer" onClick={() => navigate('/')}/>
       <Spacer />
       <InputGroup maxW="400px" mr={4}>
         <InputLeftElement pointerEvents="none">
@@ -37,19 +48,20 @@ export default function NavBar() {
         <Input type="text" placeholder="Search" bg="white" color="black" />
       </InputGroup>
       {user ? (
-        <>
-          <IconButton
+        <Menu>
+          <MenuButton
+            as={IconButton}
             mr={2}
             variant="ghost"
             color="white"
             icon={<Avatar size="sm" name={user.name || 'Account'} />}
-            onClick={() => navigate('/profile')}
             aria-label="Account"
           />
-          <Button variant="outline" color="white" onClick={handleLogout}>
-            Logout
-          </Button>
-        </>
+          <MenuList color="black">
+            <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </MenuList>
+        </Menu>
       ) : (
         <>
           <Button mr={2} variant="outline" color="white" onClick={() => navigate('/login')}>

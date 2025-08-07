@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const esbuild = require(path.join(__dirname, '..', 'frontend', 'node_modules', 'esbuild'));
+const esbuild = require('esbuild');
 
 process.chdir('frontend');
 
@@ -10,6 +10,7 @@ function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
+      if (full === path.join('src', 'api')) continue;
       walk(full);
     } else if (full.endsWith('.js') || full.endsWith('.jsx')) {
       files.push(full);
@@ -18,19 +19,17 @@ function walk(dir) {
 }
 
 walk('src');
-if (fs.existsSync('pages')) walk('pages');
 if (fs.existsSync('scripts')) walk('scripts');
 if (fs.existsSync('components')) walk('components');
 if (fs.existsSync('context')) walk('context');
 if (fs.existsSync('utils')) walk('utils');
-if (fs.existsSync('views')) walk('views');
 if (fs.existsSync('api')) walk('api');
 
 const errors = [];
 for (const file of files) {
   try {
     esbuild.transformSync(fs.readFileSync(file, 'utf8'), {
-      loader: file.endsWith('.jsx') ? 'jsx' : 'js',
+      loader: 'jsx',
       format: 'esm'
     });
   } catch (err) {

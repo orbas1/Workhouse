@@ -14,3 +14,8 @@ export async function checkDatabaseConnection(dbConfig) {
   const { data } = await apiClient.post('/install/check-db', { dbConfig });
   return data;
 }
+
+export async function checkPermissions() {
+  const { data } = await apiClient.get('/install/permissions');
+  return data;
+}

@@ -12,13 +12,13 @@ const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
  * @param {object} [extra={}] Additional fields like fullName, phone, location
  * @returns {Promise<{id: string, username: string, role: string, fullName?: string, phone?: string, location?: string}>}
  */
-async function register({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
-  const existing = findUser(username);
+async function register({ username, password, role = 'buyer', fullName, email, phone, location, bio, expertise }) {
+  const existing = await findUser(username);
   if (existing) {
     throw new Error('User already exists');
   }
   const hashed = await bcrypt.hash(password, 10);
-  const user = addUser({
+  const user = await addUser({
     username,
     password: hashed,
     role,
@@ -29,17 +29,7 @@ async function register({ username, password, role = 'user', fullName, email, ph
     bio,
     expertise,
   });
-  return {
-    id: user.id,
-    username: user.username,
-    role: user.role,
-    fullName: user.fullName,
-    email: user.email,
-    phone: user.phone,
-    location: user.location,
-    bio: user.bio,
-    expertise: user.expertise,
-  };
+  return user;
 }
 
 /**
@@ -49,16 +39,16 @@ async function register({ username, password, role = 'user', fullName, email, ph
  * @returns {Promise<{token: string}>}
  */
 async function login(username, password) {
-  const user = findUser(username);
+  const user = await findUser(username);
   if (!user) {
     throw new Error('Invalid credentials');
   }
-  const match = await bcrypt.compare(password, user.password);
+  const match = await bcrypt.compare(password, user.password_hash);
   if (!match) {
     throw new Error('Invalid credentials');
   }
   const token = jwt.sign(
-    { id: user.id, username: user.username, role: user.role, fullName: user.fullName, email: user.email },
+    { id: user.id, username: user.username, role: user.role, fullName: user.full_name, email: user.email },
     JWT_SECRET,
     { expiresIn: '1h' }
   );
@@ -72,12 +62,12 @@ async function login(username, password) {
  * @returns {Promise<void>}
  */
 async function resetPassword(username, newPassword) {
-  const user = findUser(username);
+  const user = await findUser(username);
   if (!user) {
     throw new Error('User not found');
   }
   const hashed = await bcrypt.hash(newPassword, 10);
-  updatePassword(username, hashed);
+  await updatePassword(username, hashed);
 }
 
 /**

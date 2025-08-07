@@ -72,6 +72,7 @@ const taskQuerySchema = Joi.object({
   maxBudget: Joi.number().positive(),
   deadline: Joi.date().iso(),
   sort: Joi.string().valid('closest', 'highest', 'newest'),
+});
 
 const listTasksQuerySchema = Joi.object({
   assignee: Joi.string().required(),

@@ -14,18 +14,24 @@
     "n8n:setup": "node scripts/setupN8n.js"
   },
   "dependencies": {
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.19.2",
-    "joi": "^17.12.0",
-    "bcryptjs": "^2.4.3",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "firebase-admin": "^13.4.0",
+    "googleapis": "^155.0.0",
+    "joi": "^18.0.0",
     "jsonwebtoken": "^9.0.2",
-    "pdfkit": "^0.15.0",
-    "express-validator": "^6.15.0",
-    "multer": "^1.4.5-lts.1",
-    "axios": "^1.7.2",
-    "mysql2": "^3.9.2",
-    "pg": "^8.11.3"
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.3",
+    "pdfkit": "^0.17.1",
+    "pg": "^8.16.3",
+    "helmet": "^8.1.0",
+    "express-rate-limit": "^8.0.1",
+    "xss-clean": "^0.1.4",
+    "hpp": "^0.2.3"
   },
   "devDependencies": {
     "jest": "^30.0.5"

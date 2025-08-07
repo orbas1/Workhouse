@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+  <rect width="120" height="40" fill="#1A202C"/>
+  <polygon points="10,30 25,10 40,30" fill="#4FD1C5"/>
+  <text x="50" y="28" font-family="Arial, sans-serif" font-size="18" fill="#ffffff">Workhouse</text>
+</svg>
