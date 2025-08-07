@@ -10,6 +10,7 @@
     "setup": "node scripts/setupWizard.js",
     "db:migrate": "node scripts/dbSetup.js",
     "db:seed": "node scripts/seedData.js",
+    "db:clear": "node scripts/clearSeedData.js",
     "n8n:setup": "node scripts/setupN8n.js"
   },
   "dependencies": {
