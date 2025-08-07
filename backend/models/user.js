@@ -1,74 +1,93 @@
 const { randomUUID } = require('crypto');
+const { query } = require('../utils/db');
 
-// In-memory user store backed by a Map for O(1) lookups. In a real
-// application this would be persisted to a database table. Each user
-// has a UUID identifier, username, hashed password, role and basic
-// profile information.
-const users = new Map();
+// Fallback in-memory store for environments without a database
+const memoryUsers = new Map();
 
-// Define the supported roles within the system. Providers can register
-// as individual professionals offering services or as businesses that
-// manage multiple providers.
+// Role constants used throughout the application
 const ROLES = {
-  USER: 'user',
-  PROFESSIONAL: 'professional',
-  BUSINESS: 'business',
+  SUPER_ADMIN: 'super_admin',
   ADMIN: 'admin',
+  BUYER: 'buyer',
+  SELLER: 'seller',
 };
 
 /**
- * Find a user by username.
+ * Fetch a user record by username.
  * @param {string} username
- * @returns {object|undefined}
+ * @returns {Promise<object|undefined>}
  */
-function findUser(username) {
-  return users.get(username);
+async function findUser(username) {
+  try {
+    const rows = await query('SELECT * FROM users WHERE username = ?', [username]);
+    if (rows[0]) return rows[0];
+  } catch {
+    // ignore and fall back to memory store
+  }
+  return memoryUsers.get(username);
 }
 
 /**
- * Add a new user to the store.
- * @param {{
- *   username: string,
- *   password: string,
- *   role?: string,
- *   fullName?: string,
- *   email?: string,
- *   phone?: string,
- *   location?: string,
- *   bio?: string,
- *   expertise?: string
- * }} param0
- * @returns {object} The created user record
+ * Insert a new user into the database.
+ * @param {object} param0
+ * @returns {Promise<object>} Created user
  */
-function addUser({ username, password, role = ROLES.USER, fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
-  const normalizedRole = Object.values(ROLES).includes(role) ? role : ROLES.USER;
-  const user = {
-    id: randomUUID(),
+async function addUser({ username, password, role = ROLES.BUYER, fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
+  const id = randomUUID();
+  try {
+    await query(
+      'INSERT INTO users (id, username, password_hash, role, full_name, email, phone, location, bio, expertise) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [id, username, password, role, fullName, email, phone, location, bio, expertise]
+    );
+  } catch {
+    // ignore DB errors, operate purely in memory
+  }
+  memoryUsers.set(username, {
+    id,
     username,
-    email: email || username,
-    password,
-    role: normalizedRole,
-    fullName,
+    password_hash: password,
+    role,
+    full_name: fullName,
+    email,
     phone,
     location,
     bio,
     expertise,
-  };
-  users.set(username, user);
-  return user;
+  });
+  return { id, username, role, fullName, email, phone, location, bio, expertise };
 }
 
 /**
  * Update an existing user's password.
  * @param {string} username
- * @param {string} password
- * @returns {boolean} True if the user was found and updated
+ * @param {string} password Hashed password
+ * @returns {Promise<boolean>}
  */
-function updatePassword(username, password) {
-  const user = users.get(username);
-  if (!user) return false;
-  user.password = password;
+async function updatePassword(username, password) {
+  try {
+    await query('UPDATE users SET password_hash = ? WHERE username = ?', [password, username]);
+  } catch {
+    const user = memoryUsers.get(username);
+    if (user) user.password_hash = password;
+  }
   return true;
 }
 
-module.exports = { users, ROLES, findUser, addUser, updatePassword };
+async function countUsers() {
+  try {
+    const rows = await query('SELECT COUNT(*) AS count FROM users');
+    return Number(rows[0]?.count || 0);
+  } catch {
+    return memoryUsers.size;
+  }
+}
+
+async function clearUsers() {
+  try {
+    await query('DELETE FROM users');
+  } catch {
+    memoryUsers.clear();
+  }
+}
+
+module.exports = { ROLES, findUser, addUser, updatePassword, countUsers, clearUsers };

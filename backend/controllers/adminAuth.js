@@ -4,7 +4,7 @@ const { findUser } = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
 
-const ADMIN_ROLES = ['superadmin', 'admin', 'finance', 'support', 'management', 'marketing', 'hr'];
+const ADMIN_ROLES = ['super_admin', 'admin', 'finance', 'support', 'management', 'marketing', 'hr'];
 
 /**
  * Handle admin login for privileged roles.
@@ -13,11 +13,11 @@ const ADMIN_ROLES = ['superadmin', 'admin', 'finance', 'support', 'management', 
 async function adminLoginHandler(req, res) {
   const { username, password } = req.validatedBody;
   try {
-    const user = findUser(username);
+    const user = await findUser(username);
     if (!user || !ADMIN_ROLES.includes(user.role)) {
       throw new Error('Invalid credentials');
     }
-    const match = await bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password_hash);
     if (!match) {
       throw new Error('Invalid credentials');
     }

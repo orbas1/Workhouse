@@ -5,6 +5,7 @@ const path = require('path');
 // installations at the repository root.
 const express = require('./backend/node_modules/express');
 const backend = require('./backend/app');
+const { initDb } = require('./backend/utils/db');
 
 const app = express();
 
@@ -32,8 +33,14 @@ app.use((req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-if (require.main === module) {
+
+async function start() {
+  await initDb();
   app.listen(port, () => console.log(`Server running on port ${port}`));
+}
+
+if (require.main === module) {
+  start();
 }
 
 module.exports = app;
