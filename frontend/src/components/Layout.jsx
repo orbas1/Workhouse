@@ -10,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import NavBar from './NavBar.jsx';
 import NavMenu from './NavMenu.jsx';
-import '../styles/Layout.css';
 
 export default function Layout({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
