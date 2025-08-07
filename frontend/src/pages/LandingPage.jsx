@@ -37,17 +37,19 @@ export default function LandingPage() {
       <HStack as="header" className="landing-header" justify="space-between" align="center" p={4} boxShadow="sm" position="sticky" top="0" bg="white" zIndex="1000">
         <Heading size="md">Workhouse</Heading>
         <HStack spacing={4}>
+          <Button variant="ghost" as="a" href="#features">Features</Button>
+          <Button variant="ghost" as="a" href="#enterprise">Enterprise</Button>
           <Button variant="ghost" onClick={() => navigate('/login')}>Login</Button>
           <Button colorScheme="teal" onClick={() => navigate('/signup')}>Sign Up</Button>
         </HStack>
       </HStack>
       <Box as="main">
         <Flex className="hero" direction="column" align="center" justify="center" textAlign="center" p={8}>
-          <Heading mb={4}>Revolutionize Your Recruitment &amp; Gig Management</Heading>
-          <Text mb={6}>AI-powered platform connecting talent, employers, and service providers.</Text>
+          <Heading mb={4}>Enterprise-Grade Recruitment &amp; Gig Management</Heading>
+          <Text mb={6}>AI-powered platform connecting talent, employers, and service providers at scale.</Text>
           <Button colorScheme="teal" size="lg" onClick={() => navigate('/signup')}>Get Started</Button>
         </Flex>
-        <Box py={16} px={8}>
+        <Box id="features" py={16} px={8}>
           <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={6}>
             {features.map((f) => (
               <Box key={f.id} borderWidth="1px" borderRadius="lg" p={6} textAlign="center" bg="white" className="feature-card">
@@ -75,6 +77,24 @@ export default function LandingPage() {
               <Image key={p.id} src={p.logo} alt={p.name} h="50px" />
             ))}
           </HStack>
+        </Box>
+        <Box id="enterprise" className="enterprise-section" py={16} px={8} textAlign="center">
+          <Heading size="lg" mb={8}>Enterprise-Ready Solutions</Heading>
+          <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={6}>
+            <Box className="enterprise-card" borderWidth="1px" borderRadius="lg" p={6} bg="white">
+              <Heading size="md" mb={2}>Scalable Infrastructure</Heading>
+              <Text fontSize="sm" color="gray.600">Handle growth with a platform built for millions.</Text>
+            </Box>
+            <Box className="enterprise-card" borderWidth="1px" borderRadius="lg" p={6} bg="white">
+              <Heading size="md" mb={2}>Security &amp; Compliance</Heading>
+              <Text fontSize="sm" color="gray.600">Enterprise-grade security and compliance standards.</Text>
+            </Box>
+            <Box className="enterprise-card" borderWidth="1px" borderRadius="lg" p={6} bg="white">
+              <Heading size="md" mb={2}>Dedicated Support</Heading>
+              <Text fontSize="sm" color="gray.600">Our experts are available 24/7 for your business.</Text>
+            </Box>
+          </Grid>
+          <Button as="a" href="mailto:sales@workhouse.com" colorScheme="teal" size="lg" mt={8}>Contact Sales</Button>
         </Box>
         <Box py={16} px={8} textAlign="center">
           <Heading mb={4}>Ready to Join?</Heading>
