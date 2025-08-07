@@ -39,12 +39,15 @@ Workhouse/
 ```
 
 ## Getting Started
-1. **Run the setup script** to install dependencies and prepare the database:
+1. **Configure the database**
+   - Install PostgreSQL and ensure it is running.
+   - Copy `.env.example` to `.env` and update the `DB_*` variables to match your database credentials.
+2. **Run the setup script** to install dependencies and prepare the database:
    ```bash
    npm run setup
    ```
-   This command copies `.env.example` to `.env` if needed, installs packages and runs database migrations with sample data.
-2. **Start the services**:
+   The script installs packages, runs database migrations using the configured credentials and seeds sample data.
+3. **Start the services**:
    ```bash
    npm start          # start API on port 5000
    npm run start:frontend  # launch React dev server

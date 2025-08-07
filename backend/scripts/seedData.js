@@ -5,11 +5,21 @@ const { Client } = require('pg');
 const bcrypt = require('bcryptjs');
 
 function getClient() {
+  const connectionString = process.env.DATABASE_URL;
+  if (connectionString) {
+    return new Client({ connectionString });
+  }
+
   const database = process.env.DB_NAME || 'workhouse';
   const host = process.env.DB_HOST || '127.0.0.1';
-  const user = process.env.DB_USER || 'postgres';
+  const user = process.env.DB_USER;
   const password = process.env.DB_PASSWORD || '';
   const port = process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432;
+
+  if (!user) {
+    throw new Error('DB_USER is not defined in environment');
+  }
+
   return new Client({ host, user, password, port, database });
 }
 
@@ -37,9 +47,11 @@ async function seedUsers(client) {
   const dataPath = path.join(__dirname, '..', 'data', 'users.json');
   if (!fs.existsSync(dataPath)) return;
   const users = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  const VALID_ROLES = ['super_admin', 'admin', 'buyer', 'seller'];
 
   for (const u of users) {
     const hash = bcrypt.hashSync(u.password, 10);
+    const role = VALID_ROLES.includes(u.role) ? u.role : 'buyer';
     await client.query(
       `INSERT INTO users (id, username, password_hash, role, full_name, email, phone, location, bio, expertise)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -57,7 +69,7 @@ async function seedUsers(client) {
         u.id,
         u.username,
         hash,
-        u.role,
+        role,
         u.full_name,
         u.email,
         u.phone,
@@ -120,9 +132,15 @@ async function run() {
   const client = getClient();
   await client.connect();
   try {
+    await client.query('BEGIN');
     await seedUsers(client);
     await seedProducts(client);
     await seedProfiles(client);
+    await client.query('COMMIT');
+    console.log('Seeding complete');
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
   } finally {
     await client.end();
   }
