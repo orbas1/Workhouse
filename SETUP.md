@@ -9,43 +9,36 @@ data.
 - Node.js 18+
 - PostgreSQL server
 
-## Backend setup
+## Quick setup
 
-From the repository root you can launch the interactive setup wizard:
+From the repository root run:
 
 ```bash
 npm run setup
 ```
 
-The wizard shows any existing values from `backend/.env` and logs all activity
-to `backend/scripts/setup.log`. You can keep the defaults or supply new values
-for the site name, URL, database settings, and optional Google/Firebase
-credentials. After the questions are complete the wizard proceeds through
-several stages:
+This script copies `.env.example` to `.env` if missing, installs all dependencies and runs database migrations with seed data.
 
-1. **Run database migrations**
-2. **Seed sample data**
-3. **Start the backend with pm2**
-4. **Check pm2 status**
-
-For each stage you are prompted to continue or skip by entering `n`. When all
-stages finish the script opens the configured site URL in your browser so the
-frontend can resolve the correct address via `VITE_APP_URL`.
-
-After setup you can start the API with:
+After setup you can start the API and frontend:
 
 ```bash
 npm start
-```
-
-The frontend dev server can be launched with:
-
-```bash
 npm run start:frontend
 ```
 
 For deployment behind Apache, the `frontend/.htaccess` file rewrites requests to
 `index.html` so the Vite single-page app loads correctly.
+
+## Interactive setup (optional)
+
+To customize environment variables or skip seeding, launch the interactive wizard:
+
+```bash
+npm run setup:wizard
+```
+
+The wizard shows existing values from `backend/.env` and logs to `backend/scripts/setup.log`. After answering prompts it can
+run migrations, seed data and start the backend with pm2.
 
 ## Environment variables
 
