@@ -11,13 +11,15 @@ data.
 
 ## Quick setup
 
-From the repository root run:
+1. Ensure PostgreSQL is installed and running.
+2. Copy `.env.example` to `.env` and update the `DB_*` values to match your local database credentials.
+3. From the repository root run:
 
 ```bash
 npm run setup
 ```
 
-This script copies `.env.example` to `.env` if missing, installs all dependencies and runs database migrations with seed data.
+The script installs dependencies, runs migrations using the configured credentials and seeds the database with sample data. If `.env` is missing it will be created from `.env.example`.
 
 After setup you can start the API and frontend:
 

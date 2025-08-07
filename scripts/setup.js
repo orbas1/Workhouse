@@ -27,11 +27,20 @@ if (!fs.existsSync(backendEnv)) {
   console.log('Created backend/.env from .env');
 }
 
+// Basic check to ensure database credentials are present
+const requiredEnv = ['DB_HOST', 'DB_PORT', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
+for (const key of requiredEnv) {
+  if (!process.env[key]) {
+    console.error(`Missing ${key} in .env. Please configure database credentials before running setup.`);
+    process.exit(1);
+  }
+}
+
 console.log('Installing dependencies...');
 run('npm install');
 
 console.log('Running database migrations...');
-run('npm run db:migrate --workspace backend');
+run('./db_setup');
 
 console.log('Seeding sample data...');
 run('npm run db:seed --workspace backend');
