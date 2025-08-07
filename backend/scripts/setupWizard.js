@@ -44,6 +44,19 @@ const questions = [
   { key: 'DB_USER', question: 'Database user', default: current.DB_USER || 'workhouse' },
   { key: 'DB_PASSWORD', question: 'Database password', default: current.DB_PASSWORD || 'workhouse' },
   { key: 'DB_NAME', question: 'Database name', default: current.DB_NAME || 'workhouse' },
+  { key: 'ENABLE_SSL', question: 'Enable HTTPS? (y/N)', default: current.ENABLE_SSL || 'n' },
+  {
+    key: 'SSL_CERT',
+    question: 'Path to SSL certificate',
+    default: current.SSL_CERT || '/path/to/cert.pem',
+    when: a => a.ENABLE_SSL && a.ENABLE_SSL.toLowerCase().startsWith('y'),
+  },
+  {
+    key: 'SSL_KEY',
+    question: 'Path to SSL key',
+    default: current.SSL_KEY || '/path/to/key.pem',
+    when: a => a.ENABLE_SSL && a.ENABLE_SSL.toLowerCase().startsWith('y'),
+  },
 ];
 
 const answers = {};
@@ -51,7 +64,10 @@ const answers = {};
 function ask(index = 0) {
   if (index === questions.length) {
     const content =
-      questions.map(q => `${q.key}=${JSON.stringify(answers[q.key])}`).join('\n') +
+      questions
+        .filter(q => !q.when || q.when(answers))
+        .map(q => `${q.key}=${JSON.stringify(answers[q.key])}`)
+        .join('\n') +
       `\nVITE_APP_URL=${JSON.stringify(answers.SITE_URL)}\n`;
     fs.writeFileSync(envPath, content);
     fs.appendFileSync(logPath, `${new Date().toISOString()}\n${content}\n`);
@@ -59,6 +75,16 @@ function ask(index = 0) {
     try {
       execSync('node scripts/dbSetup.js', { stdio: 'inherit' });
       execSync('node scripts/seedData.js', { stdio: 'inherit' });
+      // run backend in background with pm2
+      try {
+        execSync('npx pm2 start app.js --name workhouse', {
+          cwd: path.join(__dirname, '..'),
+          stdio: 'inherit',
+        });
+        execSync('npx pm2 status workhouse', { stdio: 'inherit' });
+      } catch (pm2Err) {
+        console.error('pm2 start failed:', pm2Err.message);
+      }
       // open frontend for convenience
       openBrowser(answers.SITE_URL);
     } catch (err) {
@@ -68,6 +94,10 @@ function ask(index = 0) {
     return;
   }
   const q = questions[index];
+  if (q.when && !q.when(answers)) {
+    ask(index + 1);
+    return;
+  }
   if (q.key === 'DB_PORT') {
     q.default = answers.DB_TYPE === 'mysql' ? '3306' : (current.DB_PORT || '5432');
   }
