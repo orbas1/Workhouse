@@ -10,7 +10,6 @@ import {
   Input,
   Link,
   Stack,
-  useToast,
   Divider,
   Modal,
   ModalOverlay,
@@ -38,7 +37,6 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [newPassword, setNewPassword] = useState('');
-  const toast = useToast();
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -64,11 +62,11 @@ export default function LoginPage() {
   async function handleReset() {
     try {
       await resetPassword(sanitizeInput(email), sanitizeInput(newPassword));
-      toast({ title: 'Password updated', status: 'success', duration: 3000, isClosable: true });
+      alert('Password updated');
       setNewPassword('');
       onClose();
     } catch (err) {
-      toast({ title: err.message, status: 'error', duration: 3000, isClosable: true });
+      alert(err.message);
     }
   }
 

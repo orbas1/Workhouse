@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
@@ -21,7 +21,7 @@ function Protected({ children }) {
 
 export default function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider value={defaultSystem}>
       <AuthProvider>
         <BrowserRouter>
           <Routes>
