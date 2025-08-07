@@ -1,12 +1,19 @@
-import { Box, Heading } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu.jsx';
+import { Heading } from '@chakra-ui/react';
+import DashboardLayout from '../components/DashboardLayout.jsx';
+import TicketTable from '../components/admin/TicketTable.jsx';
 
 export default function SupportDashboard() {
+  const tickets = [
+    { id: 1, subject: 'Login issue', userId: 'alice', status: 'open' },
+    { id: 2, subject: 'Payment missing', userId: 'bob', status: 'resolved' },
+  ];
+
   return (
-    <Box p={4}>
-      <NavMenu />
-      <Heading mb={4}>Support Dashboard</Heading>
-      {/* TODO: Add chat, tickets, dispute handling, and help centre management */}
-    </Box>
+    <DashboardLayout title="Support Dashboard" requiredRole="support">
+      <Heading size="md" mb={2}>
+        Recent Tickets
+      </Heading>
+      <TicketTable items={tickets} />
+    </DashboardLayout>
   );
 }
