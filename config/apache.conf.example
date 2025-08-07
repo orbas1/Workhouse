@@ -1,8 +1,17 @@
 <VirtualHost *:80>
     ServerName example.com
+
+    DocumentRoot /var/www/workhouse/public
+    <Directory /var/www/workhouse/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
     ProxyPreserveHost On
-    ProxyPass / http://localhost:3000/
-    ProxyPassReverse / http://localhost:3000/
+    ProxyPass /api http://localhost:3001/
+    ProxyPassReverse /api http://localhost:3001/
+
     ErrorLog ${APACHE_LOG_DIR}/workhouse-error.log
     CustomLog ${APACHE_LOG_DIR}/workhouse-access.log combined
 </VirtualHost>

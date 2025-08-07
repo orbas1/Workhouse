@@ -37,7 +37,24 @@ data.
    ```
 
 5. Configure your web server. Example configs are provided in `config/nginx.conf.example` and `config/apache.conf.example`.
-   For Apache the existing `frontend/.htaccess` rewrites requests to `index.html` so the Vite single-page app loads correctly.
+
+   ### Apache
+
+   The sample `apache.conf.example` forwards `/api` requests to the Node backend
+   and serves the built frontend from the `public/` directory. Enable the proxy
+   modules and copy the config into place:
+
+   ```bash
+   sudo a2enmod proxy proxy_http rewrite
+   sudo cp config/apache.conf.example /etc/apache2/sites-available/workhouse.conf
+   sudo mkdir -p /var/www/workhouse/public
+   # copy frontend build output into /var/www/workhouse/public
+   sudo a2ensite workhouse
+   sudo systemctl reload apache2
+   ```
+
+   The `public/.htaccess` file rewrites requests to `index.html` so the Vite
+   single-page app loads correctly.
 
 ## Scripted setup (optional)
 
