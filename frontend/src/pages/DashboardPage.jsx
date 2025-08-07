@@ -63,6 +63,7 @@ export default function DashboardPage() {
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4} mb={6}>
         <Box p={4} borderWidth="1px" borderRadius="md" bg="white">
           <Heading size="md">Welcome, {user?.name || user?.username}</Heading>
+          <Text mt={1}>Role: {user?.role}</Text>
           <Text mt={2}>Glad to have you here.</Text>
         </Box>
         <WeatherWidget />

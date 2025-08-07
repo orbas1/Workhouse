@@ -1,4 +1,4 @@
-const { users } = require('../models/user');
+const { countUsers } = require('../models/user');
 const supportTickets = require('../models/supportTicket');
 const disputes = require('../models/dispute');
 const flaggedContent = require('../models/flaggedContent');
@@ -7,9 +7,9 @@ const flaggedContent = require('../models/flaggedContent');
  * Provide high level site metrics for the admin dashboard.
  * Requires prior authentication and role-based authorization in route middleware.
  */
-function adminDashboardHandler(req, res) {
+async function adminDashboardHandler(req, res) {
   const overview = {
-    activeUsers: users.size,
+    activeUsers: await countUsers(),
     flaggedContent: flaggedContent.listFlags('pending').length,
     openTickets: supportTickets
       .findAll()

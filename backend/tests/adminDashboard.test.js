@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { adminDashboardHandler } = require('../controllers/adminDashboard');
-const { users, addUser } = require('../models/user');
+const { clearUsers, addUser } = require('../models/user');
 const supportTickets = require('../models/supportTicket');
 const disputes = require('../models/dispute');
 const flaggedContent = require('../models/flaggedContent');
@@ -14,16 +14,16 @@ describe('admin dashboard', () => {
     expect(content).toMatch(/module\.exports\s*=\s*router/);
   });
 
-  test('adminDashboardHandler returns site metrics', () => {
-    users.clear();
-    addUser({ username: 'a', password: 'p', role: 'admin' });
+  test('adminDashboardHandler returns site metrics', async () => {
+    await clearUsers();
+    await addUser({ username: 'a', password: 'p', role: 'admin' });
     supportTickets.createTicket({ userId: 'a', subject: 's', message: 'm' });
     flaggedContent.flagContent({ contentId: '1', reporterId: 'a', reason: 'spam' });
     disputes.createDispute({ userId: 'a', disputeeId: 'b', category: 'test' });
 
     const req = {};
     const res = { json: jest.fn() };
-    adminDashboardHandler(req, res);
+    await adminDashboardHandler(req, res);
     const payload = res.json.mock.calls[0][0];
     expect(payload.activeUsers).toBeGreaterThanOrEqual(1);
     expect(payload.flaggedContent).toBeGreaterThanOrEqual(1);

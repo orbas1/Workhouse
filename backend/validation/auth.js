@@ -3,7 +3,7 @@ const Joi = require('joi');
 const registerSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),
   password: Joi.string().min(6).required(),
-  role: Joi.string().optional(),
+  role: Joi.string().valid('super_admin','admin','buyer','seller').default('buyer'),
   fullName: Joi.string().max(255).allow('', null),
   email: Joi.string().email().allow('', null),
   phone: Joi.string().max(20).allow('', null),
