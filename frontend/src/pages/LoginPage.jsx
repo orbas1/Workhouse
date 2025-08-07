@@ -20,7 +20,7 @@ import {
   ModalFooter,
   ModalCloseButton,
   useDisclosure,
-  Text
+  Text,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
