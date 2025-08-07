@@ -45,6 +45,17 @@ async function clearProfiles(client) {
   console.log('Cleared profiles');
 }
 
+async function clearLiveFeedPosts(client) {
+  const dataPath = path.join(__dirname, '..', 'data', 'liveFeedPosts.json');
+  if (!fs.existsSync(dataPath)) return;
+  const posts = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+  for (const p of posts) {
+    await client.query('DELETE FROM live_feed_posts WHERE id=$1', [p.id]);
+  }
+  console.log('Cleared live feed posts');
+}
+
 async function run() {
   const client = getClient();
   await client.connect();
@@ -52,6 +63,7 @@ async function run() {
     await clearUsers(client);
     await clearProducts(client);
     await clearProfiles(client);
+    await clearLiveFeedPosts(client);
   } finally {
     await client.end();
   }

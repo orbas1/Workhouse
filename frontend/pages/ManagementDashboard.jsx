@@ -26,7 +26,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import NavMenu from '../components/NavMenu.jsx';
+import DashboardLayout from '../components/DashboardLayout.jsx';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -66,9 +66,7 @@ export default function ManagementDashboard() {
   };
 
   return (
-    <Box p={4}>
-      <NavMenu />
-      <Heading mb={4}>Management Dashboard</Heading>
+    <DashboardLayout title="Management Dashboard" requiredRole="management">
       <SimpleGrid columns={[1, 2, 4]} spacing={4} mb={8}>
         <Stat>
           <StatLabel>Active Projects</StatLabel>
@@ -121,6 +119,6 @@ export default function ManagementDashboard() {
           </Tbody>
         </Table>
       </Box>
-    </Box>
+    </DashboardLayout>
   );
 }

@@ -22,6 +22,7 @@ import {
   List,
   ListItem,
   ListIcon,
+  Select,
 } from '@chakra-ui/react';
 import { CheckCircleIcon, WarningIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +38,7 @@ import '../styles/InstallationWizardPage.css';
 export default function InstallationWizardPage() {
   const [status, setStatus] = useState(null);
   const [step, setStep] = useState(0);
-  const [dbConfig, setDbConfig] = useState({ host: '', user: '', password: '', name: '' });
+  const [dbConfig, setDbConfig] = useState({ type: 'postgres', host: '', port: '', user: '', password: '', name: '' });
   const [admin, setAdmin] = useState({ username: '', email: '', password: '' });
   const defaultUrl = typeof window !== 'undefined' && window.env?.APP_URL
     ? window.env.APP_URL
@@ -172,8 +173,19 @@ export default function InstallationWizardPage() {
         return (
           <>
             <FormControl isRequired>
+              <FormLabel>Database Type</FormLabel>
+              <Select value={dbConfig.type} onChange={e => setDbConfig({ ...dbConfig, type: e.target.value })}>
+                <option value="postgres">PostgreSQL</option>
+                <option value="mysql">MySQL</option>
+              </Select>
+            </FormControl>
+            <FormControl isRequired>
               <FormLabel>Database Host</FormLabel>
               <Input value={dbConfig.host} onChange={e => setDbConfig({ ...dbConfig, host: e.target.value })} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Database Port</FormLabel>
+              <Input value={dbConfig.port} onChange={e => setDbConfig({ ...dbConfig, port: e.target.value })} />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Database User</FormLabel>
