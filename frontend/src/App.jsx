@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ChakraProvider, Box, Flex } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
@@ -11,6 +12,7 @@ import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import LiveFeedPage from './pages/LiveFeedPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import NavMenu from './components/NavMenu.jsx';
 import { InstallProvider, useInstall } from './context/InstallContext.jsx';
 import Layout from './components/Layout.jsx';
 import InstallationWizardPage from './pages/InstallationWizardPage.jsx';
@@ -30,6 +32,15 @@ function RequireInstall({ children }) {
 export default function App() {
   return (
     <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Flex>
+            <NavMenu />
+            <Box flex="1" p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/landing" element={<LandingPage />} />
       <InstallProvider>
         <AuthProvider>
           <BrowserRouter>
@@ -132,6 +143,12 @@ export default function App() {
                   </RequireInstall>
                 }
               />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Box>
+          </Flex>
+        </BrowserRouter>
+      </AuthProvider>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>

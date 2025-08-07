@@ -10,6 +10,22 @@ export default function NavMenu() {
   const { user } = useAuth();
   const { installed } = useInstall();
   if (!user) return null;
+
+  return (
+    <Box
+      as="aside"
+      className="nav-menu"
+      w="250px"
+      p={4}
+      bg="gray.50"
+      h="100vh"
+      overflowY="auto"
+      borderRight="1px solid"
+      borderColor="gray.200"
+    >
+      {menu.map((section) => (
+        <Box key={section.heading} mb={4}>
+          <Text fontWeight="bold" mb={2} className="nav-menu-heading">
   const filteredMenu = installed
     ? menu.map(section => ({
         ...section,
