@@ -10,6 +10,7 @@ function getSettingsByUserId(userId) {
       notifications: { jobUpdates: true, messages: true },
       language: 'en',
       region: 'UTC',
+      accountLevel: 'enterprise',
     }
   );
 }

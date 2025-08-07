@@ -25,6 +25,7 @@ export default function SettingsPage() {
     profileVisibility: 'public',
     language: 'en',
     region: 'UTC',
+    accountLevel: 'enterprise',
     notifications: { jobUpdates: true, messages: true },
   });
   const [timezones, setTimezones] = useState([]);
@@ -116,6 +117,14 @@ export default function SettingsPage() {
                     {tz}
                   </option>
                 ))}
+              </Select>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Account Level</FormLabel>
+              <Select name="accountLevel" value={form.accountLevel} onChange={handleChange}>
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+                <option value="enterprise">Enterprise</option>
               </Select>
             </FormControl>
             <FormControl display="flex" alignItems="center">
