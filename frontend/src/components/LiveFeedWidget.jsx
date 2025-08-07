@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, VStack, Text, Spinner } from '@chakra-ui/react';
 import { getPosts } from '../api/liveFeed.js';
-
-const demoPosts = [
-  { id: 1, author: 'Alice', content: 'First post!' },
-  { id: 2, author: 'Bob', content: 'Another update' },
-  { id: 3, author: 'Eve', content: 'Hello world' }
-];
+import sanitizeInput from '../utils/sanitize.js';
+import '../styles/LiveFeedWidget.css';
 
 export default function LiveFeedWidget() {
-  const [posts, setPosts] = useState(demoPosts);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     async function load() {
@@ -20,7 +17,8 @@ export default function LiveFeedWidget() {
           setPosts(data.slice(0, 3));
         }
       } catch (err) {
-        // ignore errors and fall back to demo data
+        console.error('Failed to load live feed', err);
+        setError('Unable to load feed');
       } finally {
         setLoading(false);
       }
@@ -30,22 +28,41 @@ export default function LiveFeedWidget() {
 
   if (loading) {
     return (
-      <Box p={4} borderWidth="1px" borderRadius="md" bg="white" textAlign="center">
+      <Box
+        className="live-feed-widget"
+        p={4}
+        borderWidth="1px"
+        borderRadius="md"
+        bg="white"
+        textAlign="center"
+      >
         <Spinner />
       </Box>
     );
   }
 
   return (
-    <Box p={4} borderWidth="1px" borderRadius="md" bg="white">
-      <Heading size="sm" mb={2}>Live Feed</Heading>
-      <VStack align="stretch" spacing={1}>
-        {posts.map((p) => (
-          <Text key={p.id} fontSize="sm">
-            <strong>{p.author}:</strong> {p.content}
-          </Text>
-        ))}
-      </VStack>
+    <Box className="live-feed-widget" p={4} borderWidth="1px" borderRadius="md" bg="white">
+      <Heading size="sm" mb={2}>
+        Live Feed
+      </Heading>
+      {error ? (
+        <Text fontSize="sm" color="red.500">
+          {error}
+        </Text>
+      ) : posts.length ? (
+        <VStack align="stretch" spacing={1}>
+          {posts.map((p) => (
+            <Text key={p.id} fontSize="sm">
+              <strong>{sanitizeInput(p.author)}:</strong> {sanitizeInput(p.content)}
+            </Text>
+          ))}
+        </VStack>
+      ) : (
+        <Text fontSize="sm" color="gray.500">
+          No activity yet.
+        </Text>
+      )}
     </Box>
   );
 }
