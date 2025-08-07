@@ -38,6 +38,11 @@ Workhouse/
 └── .env.example # Example environment configuration
 ```
 
+## Prerequisites
+- Node.js v16+ and npm
+- PostgreSQL database
+- Copy `.env.example` to `.env` and update environment variables
+
 ## Getting Started
 1. **Configure the database**
    - Install PostgreSQL and ensure it is running.
