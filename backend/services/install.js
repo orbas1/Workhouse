@@ -46,6 +46,7 @@ async function checkDatabase(dbConfig = {}) {
   }
 }
 
+
 async function writeEnvFile({ dbConfig = {}, site = {} }) {
   const envPath = path.join(__dirname, '../.env');
   const content = [
