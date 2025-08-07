@@ -10,12 +10,12 @@ import {
   IconButton,
   Avatar
 } from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
+import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/NavBar.css';
 
-export default function NavBar() {
+export default function NavBar({ onMenuOpen }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -26,9 +26,15 @@ export default function NavBar() {
 
   return (
     <Flex as="header" bg="teal.500" color="white" p={4} align="center">
-      <Heading size="md" cursor="pointer" onClick={() => navigate('/')}> 
-        Workhouse
-      </Heading>
+      <IconButton
+        display={{ base: 'inline-flex', md: 'none' }}
+        onClick={onMenuOpen}
+        mr={2}
+        icon={<HamburgerIcon />}
+        variant="ghost"
+        aria-label="Open navigation"
+      />
+      <Heading size="md" cursor="pointer" onClick={() => navigate('/')}>Workhouse</Heading>
       <Spacer />
       <InputGroup maxW="400px" mr={4}>
         <InputLeftElement pointerEvents="none">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ChakraProvider, Box } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
@@ -10,6 +10,7 @@ import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import Layout from './components/Layout.jsx';
 
 function Protected({ children }) {
   const { user, loading } = useAuth();
@@ -22,54 +23,62 @@ export default function App() {
     <ChakraProvider>
       <AuthProvider>
         <BrowserRouter>
-          <Box p={4}>
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/landing" element={<LandingPage />} />
-              <Route
-                path="/"
-                element={
-                  <Protected>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route
+              path="/"
+              element={
+                <Protected>
+                  <Layout>
                     <DashboardPage />
-                  </Protected>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <Protected>
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Protected>
+                  <Layout>
                     <ProfilePage />
-                  </Protected>
-                }
-              />
-              <Route
-                path="/settings"
-                element={
-                  <Protected>
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <Protected>
+                  <Layout>
                     <SettingsDashboardPage />
-                  </Protected>
-                }
-              />
-              <Route
-                path="/kl"
-                element={
-                  <Protected>
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/kl"
+              element={
+                <Protected>
+                  <Layout>
                     <KlEditionPage />
-                  </Protected>
-                }
-              />
-              <Route
-                path="/search"
-                element={
-                  <Protected>
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <Protected>
+                  <Layout>
                     <GlobalSearchPage />
-                  </Protected>
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Box>
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </BrowserRouter>
       </AuthProvider>
     </ChakraProvider>
