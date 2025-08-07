@@ -1,12 +1,25 @@
-import { Box, Heading, SimpleGrid, Spinner, useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { ChakraProvider, Box, Heading, SimpleGrid, Spinner, Flex, Button } from '@chakra-ui/react';
+import {
+  ChakraProvider,
+  Box,
+  Heading,
+  SimpleGrid,
+  Spinner,
+  useToast,
+  Flex,
+  Button,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import WorkspaceSummary from '../components/WorkspaceSummary';
 import ProjectCard from '../components/ProjectCard';
-import { fetchWorkspaceOverview, fetchProjects, fetchProjectTasks, fetchProjectBudget, fetchProjectTeam } from '../api/workspace';
+import {
+  fetchWorkspaceOverview,
+  fetchProjects,
+  fetchProjectTasks,
+  fetchProjectBudget,
+  fetchProjectTeam,
+} from '../api/workspace';
 import '../styles/WorkspaceDashboard.css';
 
 export default function WorkspaceDashboard() {
@@ -41,22 +54,15 @@ export default function WorkspaceDashboard() {
     load();
   }, [toast]);
 
+  const stats = {
+    activeUsers: overview.reduce((sum, o) => sum + (o.activeUsers || 0), 0),
+    projects: projects.length,
+    tasks: projects.reduce((sum, p) => sum + (p.tasks?.length || 0), 0),
+    team: projects.reduce((sum, p) => sum + (p.team?.length || 0), 0),
+    budget: projects.reduce((sum, p) => sum + (p.budget?.totalSpent || 0), 0),
+  };
+
   return (
-    <Box p={4} className="workspace-dashboard">
-      <Heading mb={4}>Workspace Dashboard</Heading>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <WorkspaceSummary data={overview} />
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={4}>
-            {projects.map((p) => (
-              <ProjectCard key={p.id} project={p} />
-            ))}
-          </SimpleGrid>
-        </>
-      )}
-    </Box>
     <ChakraProvider>
       <NavMenu />
       <Box p={4} className="workspace-dashboard">
@@ -70,7 +76,7 @@ export default function WorkspaceDashboard() {
           <Spinner />
         ) : (
           <>
-            <WorkspaceSummary data={overview} />
+            <WorkspaceSummary stats={stats} />
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={4}>
               {projects.map((p) => (
                 <ProjectCard key={p.id} project={p} />
@@ -82,3 +88,4 @@ export default function WorkspaceDashboard() {
     </ChakraProvider>
   );
 }
+
