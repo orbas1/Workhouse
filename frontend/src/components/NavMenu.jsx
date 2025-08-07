@@ -3,11 +3,19 @@ import { Box, VStack, Link, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { menu } from '../nav/menu.js';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useInstall } from '../context/InstallContext.jsx';
 import '../styles/NavMenu.css';
 
 export default function NavMenu() {
   const { user } = useAuth();
+  const { installed } = useInstall();
   if (!user) return null;
+  const filteredMenu = installed
+    ? menu.map(section => ({
+        ...section,
+        items: section.items.filter(item => item.path !== '/install')
+      }))
+    : menu;
   return (
     <Box
       as="aside"
@@ -18,7 +26,7 @@ export default function NavMenu() {
       h="100vh"
       overflowY="auto"
     >
-      {menu.map((section) => (
+      {filteredMenu.map((section) => (
         <Box key={section.heading} mb={4}>
           <Text fontWeight="bold" mb={2} color="blue.600">
             {section.heading}
