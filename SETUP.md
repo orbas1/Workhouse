@@ -17,17 +17,26 @@ From the repository root you can launch the interactive setup wizard:
 npm run setup
 ```
 
-The wizard will ask for PostgreSQL credentials and then run the migrations and
-seeders. All environment variables are written to `backend/.env` with safe
-placeholders so the server starts even if optional keys are missing. The wizard
-also exposes the frontend under `VITE_APP_URL` so the browser UI can resolve
-the correct site address.
+The wizard will show the current configuration from `backend/.env`, logging it
+to `backend/scripts/setup.log`. You can keep the existing values or enter new
+ones for the site name, site URL and database credentials. When finished, the
+wizard runs migrations and seeders, then exposes the frontend under
+`VITE_APP_URL` so the browser UI can resolve the correct site address.
 
 After setup you can start the API with:
 
 ```bash
 npm start
 ```
+
+The frontend dev server can be launched with:
+
+```bash
+npm run start:frontend
+```
+
+For deployment behind Apache, the `frontend/.htaccess` file rewrites requests to
+`index.html` so the Vite single-page app loads correctly.
 
 ## Environment variables
 
