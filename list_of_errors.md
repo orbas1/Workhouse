@@ -226,3 +226,41 @@ Unexpected "}"
     at Readable.push (node:internal/streams/readable:392:5)
     at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
 ```
+
+## Stage 26: Database seeding script
+
+```
+sudo: unknown user postgres
+sudo: error initializing audit plugin sudoers_audit
+Seeding failed: Error: Command failed: echo "INSERT INTO users (id, username, password_hash, role, full_name, email, phone, location, bio, expertise) VALUES ('11111111-1111-1111-1111-111111111111', 'demoUser', '$2a$10$umi25tEHue/EOawsbCuDkuP35NZWozN9yXSVRSxiP01R7m.oBjH7.', 'user', 'Demo User', 'demo@example.com', '1234567890', 'Demo City', 'Example bio', 'Testing') ON CONFLICT (id) DO UPDATE SET username = EXCLUDED.username, password_hash = EXCLUDED.password_hash, role = EXCLUDED.role, full_name = EXCLUDED.full_name, email = EXCLUDED.email, phone = EXCLUDED.phone, location = EXCLUDED.location, bio = EXCLUDED.bio, expertise = EXCLUDED.expertise;" | sudo -u postgres psql -d workhouse
+```
+
+## Stage 27: Database connection
+
+```
+Seeding failed: AggregateError [ECONNREFUSED]:
+    at internalConnectMultiple (node:net:1122:18)
+    at afterConnectMultiple (node:net:1689:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:5432
+        at createConnectionError (node:net:1652:14)
+        at afterConnectMultiple (node:net:1682:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 5432
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:5432
+        at createConnectionError (node:net:1652:14)
+        at afterConnectMultiple (node:net:1682:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 5432
+    }
+  ]
+}
+```
