@@ -12,6 +12,7 @@ const updateSettingsSchema = Joi.object({
   profileVisibility: Joi.string().valid('public', 'private', 'restricted'),
   language: Joi.string().allow(''),
   region: Joi.string().allow(''),
+  accountLevel: Joi.string().valid('free', 'pro', 'enterprise'),
   notifications: notificationSchema,
 });
 
