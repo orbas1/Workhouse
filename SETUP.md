@@ -8,59 +8,48 @@ data.
 
 - Node.js 18+
 - PostgreSQL server
+- A registered domain if deploying publicly
 
 ## Browser-based setup
 
-1. From the repository root start the server:
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the server and open the installer:
 
    ```bash
    npm start
    ```
 
-2. Once the server is running, visit the web-based installer at
-   [http://localhost:3000/install](http://localhost:3000/install).
-3. The wizard walks you through verifying file permissions, entering site
-   details, configuring the database and creating the first administrative
-   account.
-4. After the final step the wizard applies database migrations, seeds sample
-   data and redirects you to the landing page. Use the admin credentials you
-   just created to log in.
+   Navigate to [http://localhost:3000/install](http://localhost:3000/install) or replace `localhost` with your domain.
 
-## Quick setup script
+3. The wizard verifies file permissions, collects site name and URL, configures the database and creates the first administrator.
+   When finished it writes `.env`, runs migrations, seeds sample data and presents Apache/Nginx configuration snippets for your domain.
 
-1. Ensure PostgreSQL is installed and running.
-2. Copy `.env.example` to `.env` and update the `DB_*` values to match your local database credentials.
-3. From the repository root run:
+4. Build production assets and restart the app:
 
    ```bash
-   npm run setup
+   npm run build --workspace frontend
+   node app.js
    ```
 
-The script installs dependencies, runs migrations using the configured credentials and seeds the database with sample data. If `.env` is missing it will be created from `.env.example`.
+5. Configure your web server. Example configs are provided in `config/nginx.conf.example` and `config/apache.conf.example`.
+   For Apache the existing `frontend/.htaccess` rewrites requests to `index.html` so the Vite single-page app loads correctly.
 
-After setup you can start the API and frontend:
+## Scripted setup (optional)
 
-```bash
-npm start
-npm run start:frontend
-```
-
-For deployment behind Apache, the `frontend/.htaccess` file rewrites requests to
-`index.html` so the Vite single-page app loads correctly.
-
-## Interactive setup (optional)
-
-To customize environment variables or skip seeding, launch the interactive wizard:
+For automated deployments the setup script performs the same steps without using the browser UI:
 
 ```bash
-npm run setup:wizard
+npm run setup
 ```
 
-The wizard shows existing values from `backend/.env` and logs to `backend/scripts/setup.log`. After answering prompts it can
-run migrations, seed data and start the backend with pm2.
+It installs dependencies, runs migrations and seeds the database using values from `.env`.
 
 ## Environment variables
 
 A full list of variables with placeholder values can be found in
-`.env.example`. Update them in `backend/.env` as needed before deploying to a
-VPS.
+`.env.example`. Update them in `backend/.env` as needed before deploying to a VPS.

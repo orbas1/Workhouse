@@ -97,15 +97,17 @@ export default function InstallationWizardPage() {
     }
     if (step < 3) {
       setStep(step + 1);
-    } else {
+    } else if (step === 3) {
       try {
         await runInstallation({ dbConfig, admin, site });
         await refresh();
-        navigate('/');
+        setStep(4);
       } catch (e) {
         const msg = e.response?.data?.error || e.message;
         setError(msg);
       }
+    } else {
+      navigate('/');
     }
   };
 
@@ -132,6 +134,7 @@ export default function InstallationWizardPage() {
     { title: 'Site' },
     { title: 'Database' },
     { title: 'Admin' },
+    { title: 'Server' },
   ];
 
   const renderStep = () => {
@@ -227,6 +230,45 @@ export default function InstallationWizardPage() {
             </FormControl>
           </>
         );
+      case 4: {
+        const port = window.location.port || '3000';
+        let domain = site.url;
+        try {
+          domain = new URL(site.url).hostname;
+        } catch (e) {
+          // ignore
+        }
+        return (
+          <>
+            <Text mb={2}>Installation complete! Configure your web server using the examples below.</Text>
+            <Text fontWeight="bold" mt={2}>Nginx</Text>
+            <Box as="pre" bg="gray.50" p={4} fontSize="sm" overflowX="auto">
+              {`server {
+  listen 80;
+  server_name ${domain};
+
+  location / {
+    proxy_pass http://localhost:${port};
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}`}
+            </Box>
+            <Text fontWeight="bold" mt={4}>Apache</Text>
+            <Box as="pre" bg="gray.50" p={4} fontSize="sm" overflowX="auto">
+              {`<VirtualHost *:80>
+  ServerName ${domain}
+  ProxyPreserveHost On
+  ProxyPass / http://localhost:${port}/
+  ProxyPassReverse / http://localhost:${port}/
+</VirtualHost>`}
+            </Box>
+            <Text mt={4} fontSize="sm">Sample configs are also available in <code>config/</code> for later reference.</Text>
+          </>
+        );
+      }
       default:
         return null;
     }
@@ -269,7 +311,7 @@ export default function InstallationWizardPage() {
           Back
         </Button>
         <Button colorScheme="blue" onClick={handleNext}>
-          {step < 3 ? 'Next' : 'Finish'}
+          {step < 3 ? 'Next' : step === 3 ? 'Finish' : 'Go to site'}
         </Button>
       </Flex>
     </Box>
