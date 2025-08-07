@@ -8,7 +8,6 @@ import { ChakraProvider, Box, Heading, Button } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import NavMenu from '../components/NavMenu';
-import WorkspaceSummary from '../components/WorkspaceSummary';
 import { fetchWorkspaceOverview } from '../api/workspace';
 import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -47,7 +46,6 @@ export default function Dashboard() {
         <Button colorScheme="teal" onClick={() => (window.location.href = '/ads')}>Manage Ads</Button>
         <Button as={RouterLink} to="/opportunities" colorScheme="teal">
           Manage Opportunities
-        <WorkspaceSummary data={overview} />
         <Button as={RouterLink} to="/workspace" mt={6} colorScheme="teal">
           Open Workspace
         <Link as={RouterLink} to="/ads" color="blue.500">
