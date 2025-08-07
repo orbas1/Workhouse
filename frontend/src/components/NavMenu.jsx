@@ -8,8 +8,15 @@ import '../styles/NavMenu.css';
 
 export default function NavMenu() {
   const { user } = useAuth();
-  const { installed } = useInstall();
+  const { installed } = useInstall() || {};
   if (!user) return null;
+
+  const filteredMenu = installed
+    ? menu.map((section) => ({
+        ...section,
+        items: section.items.filter((item) => item.path !== '/install'),
+      }))
+    : menu;
 
   return (
     <Box
@@ -23,28 +30,9 @@ export default function NavMenu() {
       borderRight="1px solid"
       borderColor="gray.200"
     >
-      {menu.map((section) => (
-        <Box key={section.heading} mb={4}>
-          <Text fontWeight="bold" mb={2} className="nav-menu-heading">
-  const filteredMenu = installed
-    ? menu.map(section => ({
-        ...section,
-        items: section.items.filter(item => item.path !== '/install')
-      }))
-    : menu;
-  return (
-    <Box
-      as="aside"
-      w="250px"
-      p={4}
-      bgGradient="linear(to-b, white, blue.100)"
-      color="blue.900"
-      h="100vh"
-      overflowY="auto"
-    >
       {filteredMenu.map((section) => (
         <Box key={section.heading} mb={4}>
-          <Text fontWeight="bold" mb={2} color="blue.600">
+          <Text fontWeight="bold" mb={2} className="nav-menu-heading">
             {section.heading}
           </Text>
           <VStack align="stretch" spacing={1}>
@@ -56,7 +44,7 @@ export default function NavMenu() {
                 px={2}
                 py={1}
                 borderRadius="md"
-                _hover={{ textDecoration: 'none', bg: 'blue.50' }}
+                _hover={{ textDecoration: 'none', bg: 'gray.100' }}
               >
                 {item.label}
               </Link>

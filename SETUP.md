@@ -17,9 +17,14 @@ data.
    npm start
    ```
 
-2. Open [http://localhost:3000/install](http://localhost:3000/install) in your browser.
-3. Follow the wizard to verify permissions, enter site details, configure the database and create the first admin user.
-4. When the wizard finishes it runs database migrations, seeds data and redirects to the dashboard.
+2. Once the server is running, visit the web-based installer at
+   [http://localhost:3000/install](http://localhost:3000/install).
+3. The wizard walks you through verifying file permissions, entering site
+   details, configuring the database and creating the first administrative
+   account.
+4. After the final step the wizard applies database migrations, seeds sample
+   data and redirects you to the landing page. Use the admin credentials you
+   just created to log in.
 
 ## Quick setup script
 
