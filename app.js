@@ -11,9 +11,9 @@ const { getStatus } = require('./backend/models/installation');
 
 const app = express();
 
-// Serve the frontend static assets
-const frontendPath = path.join(__dirname, 'frontend');
-app.use(express.static(frontendPath));
+// Serve static assets from the public directory
+const publicPath = path.join(__dirname, 'public');
+app.use(express.static(publicPath));
 
 // Delegate API requests to the backend using a configurable base path
 const apiBase = process.env.API_BASE_URL || '/api';
@@ -31,7 +31,7 @@ app.get('/config.js', (req, res) => {
 // Fallback to index.html for any other request (SPA behavior)
 // Catch-all handler: send back index.html for any unmatched routes
 app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 const port = process.env.PORT || 3000;

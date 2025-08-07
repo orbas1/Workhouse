@@ -6,11 +6,20 @@
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
+
+        <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule ^ index.html [L]
+        </IfModule>
     </Directory>
 
     ProxyPreserveHost On
     ProxyPass /api http://localhost:3001/
     ProxyPassReverse /api http://localhost:3001/
+
+    ErrorDocument 404 /index.html
 
     ErrorLog ${APACHE_LOG_DIR}/workhouse-error.log
     CustomLog ${APACHE_LOG_DIR}/workhouse-access.log combined
