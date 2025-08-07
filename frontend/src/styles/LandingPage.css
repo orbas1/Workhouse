@@ -11,7 +11,8 @@
 }
 
 .hero {
-  background-image: url('https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1350&q=80');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
   background-position: center;
   color: white;
@@ -26,7 +27,24 @@
   color: #ffffff;
 }
 
+.feature-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
 .feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.enterprise-section {
+  background-color: #f7fafc;
+}
+
+.enterprise-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.enterprise-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
