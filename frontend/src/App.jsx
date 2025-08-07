@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
+import argonTheme from '../argonTheme.js';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
@@ -29,7 +30,7 @@ function RequireInstall({ children }) {
 
 export default function App() {
   return (
-    <ChakraProvider value={defaultSystem}>
+    <ChakraProvider theme={argonTheme}>
       <InstallProvider>
         <AuthProvider>
           <BrowserRouter>

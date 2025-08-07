@@ -1,6 +1,5 @@
 import { Box, SimpleGrid, Stat, StatLabel, StatNumber, Spinner, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import './ClientDashboard.css';
 import '../../api/dashboard';
 
 export default function ClientDashboard() {
@@ -21,17 +20,17 @@ export default function ClientDashboard() {
   if (!data) return <Text>Unable to load dashboard.</Text>;
 
   return (
-    <Box className="client-dashboard">
-      <SimpleGrid columns={[1, 3]} spacing={4}>
-        <Stat className="stat-card">
+    <Box className="client-dashboard" p={6}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
+        <Stat>
           <StatLabel>Active Contracts</StatLabel>
           <StatNumber>{data.activeContracts}</StatNumber>
         </Stat>
-        <Stat className="stat-card">
+        <Stat>
           <StatLabel>Pending Proposals</StatLabel>
           <StatNumber>{data.pendingProposals}</StatNumber>
         </Stat>
-        <Stat className="stat-card">
+        <Stat>
           <StatLabel>Total Spend</StatLabel>
           <StatNumber>${data.totalSpend}</StatNumber>
         </Stat>
