@@ -17,7 +17,6 @@ import {
 import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import '../styles/NavBar.css';
 import logo from '../assets/workhouse.svg';
 
 export default function NavBar({ onMenuOpen }) {
@@ -30,7 +29,7 @@ export default function NavBar({ onMenuOpen }) {
   };
 
   return (
-    <Flex as="header" bg="blue.600" color="white" p={4} align="center" boxShadow="sm">
+    <Flex as="header" bg="brand.500" color="white" p={4} align="center" boxShadow="sm">
       <IconButton
         display={{ base: 'inline-flex', md: 'none' }}
         onClick={onMenuOpen}

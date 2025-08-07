@@ -45,6 +45,7 @@ export default function NavMenu() {
                 py={1}
                 borderRadius="md"
                 _hover={{ textDecoration: 'none', bg: 'gray.100' }}
+                _activeLink={{ bg: 'brand.50', color: 'brand.800', fontWeight: 'semibold' }}
               >
                 {item.label}
               </Link>
