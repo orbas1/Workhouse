@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { describe, it, expect } from 'vitest';
 import NavMenu from '../src/components/NavMenu.jsx';
 import { AuthContext } from '../src/context/AuthContext.jsx';
+import { InstallContext } from '../src/context/InstallContext.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('NavMenu', () => {
@@ -10,7 +11,9 @@ describe('NavMenu', () => {
     render(
       <BrowserRouter>
         <AuthContext.Provider value={{ user: { id: 1 }, loading: false }}>
-          <NavMenu />
+          <InstallContext.Provider value={{ installed: true }}>
+            <NavMenu />
+          </InstallContext.Provider>
         </AuthContext.Provider>
       </BrowserRouter>
     );
@@ -21,7 +24,9 @@ describe('NavMenu', () => {
     const { container } = render(
       <BrowserRouter>
         <AuthContext.Provider value={{ user: null, loading: false }}>
-          <NavMenu />
+          <InstallContext.Provider value={{ installed: true }}>
+            <NavMenu />
+          </InstallContext.Provider>
         </AuthContext.Provider>
       </BrowserRouter>
     );

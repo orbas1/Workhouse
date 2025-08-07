@@ -1,9 +1,10 @@
 require('dotenv').config();
 const path = require('path');
 
-// Reuse Express from the backend dependencies to avoid duplicating
-// installations at the repository root.
-const express = require('./backend/node_modules/express');
+// Use the root-level Express installation, which is hoisted by the
+// workspace setup. Requiring it directly ensures the server starts even
+// when backend dependencies aren't duplicated under `backend/node_modules`.
+const express = require('express');
 const backend = require('./backend/app');
 const { initDb } = require('./backend/utils/db');
 const { getStatus } = require('./backend/models/installation');

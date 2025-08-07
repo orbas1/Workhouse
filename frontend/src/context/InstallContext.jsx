@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getInstallStatus } from '../api/install.js';
 
-const InstallContext = createContext(null);
+export const InstallContext = createContext(null);
 
 export function InstallProvider({ children }) {
   const [installed, setInstalled] = useState(null);
