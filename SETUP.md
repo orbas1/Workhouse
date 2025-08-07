@@ -17,12 +17,20 @@ From the repository root you can launch the interactive setup wizard:
 npm run setup
 ```
 
-The wizard will show the current configuration from `backend/.env`, logging it
-to `backend/scripts/setup.log`. You can keep the existing values or enter new
-ones for the site name, site URL, database credentials, and optional Google and
-Firebase settings. When finished, the wizard runs migrations and seeders, then
-exposes the frontend under `VITE_APP_URL` so the browser UI can resolve the
-correct site address.
+The wizard shows any existing values from `backend/.env` and logs all activity
+to `backend/scripts/setup.log`. You can keep the defaults or supply new values
+for the site name, URL, database settings, and optional Google/Firebase
+credentials. After the questions are complete the wizard proceeds through
+several stages:
+
+1. **Run database migrations**
+2. **Seed sample data**
+3. **Start the backend with pm2**
+4. **Check pm2 status**
+
+For each stage you are prompted to continue or skip by entering `n`. When all
+stages finish the script opens the configured site URL in your browser so the
+frontend can resolve the correct address via `VITE_APP_URL`.
 
 After setup you can start the API with:
 
