@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
-const { execSync } = require('child_process');
+const { execSync, spawn } = require('child_process');
 
 const envPath = path.join(__dirname, '..', '.env');
 const logPath = path.join(__dirname, 'setup.log');
@@ -35,7 +35,11 @@ function openBrowser(url) {
     ? 'start'
     : 'xdg-open';
   try {
-    execSync(`${start} ${url}`);
+    const child = spawn(start, [url], {
+      stdio: 'ignore',
+      detached: true,
+    });
+    child.unref();
   } catch (err) {
     log(`Failed to open browser: ${err.message}`);
   }
@@ -108,6 +112,7 @@ function ask(index = 0) {
     openBrowser(answers.SITE_URL);
     log('Setup complete');
     rl.close();
+    process.exit(0);
     return;
   }
   const q = questions[index];
