@@ -20,12 +20,13 @@ function getStatus() {
   return readInstallFile();
 }
 
-function saveInstallation({ appId, appUrl, dbConfig }) {
+function saveInstallation({ appId, appUrl, dbConfig, site }) {
   const record = {
     installed: true,
     appId,
     appUrl,
     dbConfig,
+    site,
     installedAt: new Date().toISOString(),
   };
   writeInstallFile(record);

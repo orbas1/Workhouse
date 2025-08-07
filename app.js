@@ -6,6 +6,7 @@ const path = require('path');
 const express = require('./backend/node_modules/express');
 const backend = require('./backend/app');
 const { initDb } = require('./backend/utils/db');
+const { getStatus } = require('./backend/models/installation');
 
 const app = express();
 
@@ -35,7 +36,10 @@ app.use((req, res) => {
 const port = process.env.PORT || 3000;
 
 async function start() {
-  await initDb();
+  const status = getStatus();
+  if (status.installed) {
+    await initDb();
+  }
   app.listen(port, () => console.log(`Server running on port ${port}`));
 }
 

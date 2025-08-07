@@ -1,4 +1,4 @@
-const { checkInstallation, runInstallation, checkDatabase } = require('../services/install');
+const { checkInstallation, runInstallation, checkDatabase, checkPermissions } = require('../services/install');
 const logger = require('../utils/logger');
 
 async function getStatus(req, res) {
@@ -31,4 +31,14 @@ async function checkDb(req, res) {
   }
 }
 
-module.exports = { getStatus, install, checkDb };
+async function permissions(req, res) {
+  try {
+    const result = await checkPermissions();
+    res.json(result);
+  } catch (err) {
+    logger.error('Permission check failed', { error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+}
+
+module.exports = { getStatus, install, checkDb, permissions };

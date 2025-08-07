@@ -36,15 +36,15 @@ async function createTask(data) {
   return task;
 }
 
-async function listTasks(filter = {}) {
-  return model.listTasks(filter);
+async function listTasks(filters = {}) {
+  return model.listTasks(filters);
 }
 
 async function getTask(taskId) {
   return model.getTaskById(taskId);
 }
 
-async function listTasks(projectId) {
+async function listProjectTasks(projectId) {
   const list = model.listTasksByProject(projectId);
   logger.info('Tasks retrieved', { projectId, count: list.length });
   return list;
@@ -69,9 +69,6 @@ async function assignTask(taskId, assignee) {
   logger.info('Task assigned', { taskId, assignee });
   return task;
 }
-
-async function listTasks(filters) {
-  return model.listTasks(filters);
 async function listTasksByAssignee(assignee) {
   return model.listTasksByAssignee(assignee);
 }
@@ -225,14 +222,6 @@ async function createTextDocument(data) {
   return doc;
 }
 
-async function listProjects() {
-  return model.listProjects();
-}
-
-async function listTasks(projectId) {
-  return model.listTasksByProject(projectId);
-}
-
 async function getBudgetSummary(projectId) {
   return model.getBudgetSummary(projectId);
 }
@@ -246,11 +235,10 @@ module.exports = {
   createTask,
   listTasks,
   getTask,
-  listTasks,
+  listProjectTasks,
   updateTask,
   deleteTask,
   assignTask,
-  listTasks,
   listTasksByAssignee,
   suggestTasks,
   suggestBudget,
@@ -279,7 +267,5 @@ module.exports = {
   listWorkflows,
   getSpreadsheet,
   createTextDocument,
-  listProjects,
-  listTasks,
   getBudgetSummary,
 };

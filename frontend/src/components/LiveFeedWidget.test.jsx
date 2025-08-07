@@ -2,7 +2,7 @@ import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import LiveFeedWidget from './LiveFeedWidget.jsx';
 import * as api from '../api/liveFeed.js';
 
@@ -13,7 +13,7 @@ describe('LiveFeedWidget', () => {
     ]);
 
     render(
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider>
         <LiveFeedWidget />
       </ChakraProvider>
     );

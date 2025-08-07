@@ -52,8 +52,16 @@ function listProjects(ownerId) {
 }
 
 
-function createTask({ projectId, title, description = '', category = null, location = null, budget = null, dueDate = null }) {
-function createTask({ projectId, title, description = '', dueDate = null, ownerId }) {
+function createTask({
+  projectId,
+  title,
+  description = '',
+  category = null,
+  location = null,
+  budget = null,
+  dueDate = null,
+  ownerId,
+}) {
   const id = randomUUID();
   const now = new Date();
   const task = {
@@ -77,14 +85,6 @@ function createTask({ projectId, title, description = '', dueDate = null, ownerI
 
 function getTaskById(taskId) {
   return tasks.get(taskId);
-}
-
-function listTasks({ ownerId, assignee } = {}) {
-  return Array.from(tasks.values()).filter((t) => {
-    if (ownerId && t.ownerId !== ownerId) return false;
-    if (assignee && t.assignee !== assignee) return false;
-    return true;
-  });
 }
 function listTasksByProject(projectId) {
   return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
@@ -113,7 +113,24 @@ function assignTask(taskId, assignee) {
 
 function listTasks(filters = {}) {
   let result = Array.from(tasks.values());
-  const { search, category, location, minBudget, maxBudget, deadline, sort } = filters;
+  const {
+    ownerId,
+    assignee,
+    search,
+    category,
+    location,
+    minBudget,
+    maxBudget,
+    deadline,
+    sort,
+  } = filters;
+
+  if (ownerId) {
+    result = result.filter((t) => t.ownerId === ownerId);
+  }
+  if (assignee) {
+    result = result.filter((t) => t.assignee === assignee);
+  }
 
   if (search) {
     const s = search.toLowerCase();
@@ -155,6 +172,8 @@ function listTasks(filters = {}) {
     }
   }
   return result;
+}
+
 function listTasksByAssignee(assignee) {
   return Array.from(tasks.values()).filter((task) => task.assignee === assignee);
 }
@@ -293,10 +312,6 @@ function listProjects() {
   return Array.from(projects.values());
 }
 
-function listTasksByProject(projectId) {
-  return Array.from(tasks.values()).filter((t) => t.projectId === projectId);
-}
-
 function getBudgetSummary(projectId) {
   const project = projects.get(projectId) || {};
   const allocatedBudget = project.budget || 0;
@@ -322,7 +337,6 @@ module.exports = {
   updateTask,
   deleteTask,
   assignTask,
-  listTasks,
   listTasksByAssignee,
   hireEmployee,
   listEmployees,
@@ -348,7 +362,5 @@ module.exports = {
   storeSpreadsheet,
   getSpreadsheet,
   createText,
-  listProjects,
-  listTasksByProject,
   getBudgetSummary,
 };
