@@ -25,6 +25,14 @@ function seedTrends() {
 
 seedTrends();
 
+// Seed a default model performance for demonstration
+addModelPerformance('recommendation', {
+  accuracy: 0.95,
+  precision: 0.92,
+  recall: 0.9,
+  f1Score: 0.91,
+});
+
 function addModelUpdate(modelName, data) {
   const model = models.get(modelName) || { name: modelName, updates: [], performance: [] };
   const update = { id: randomUUID(), data, timestamp: new Date() };

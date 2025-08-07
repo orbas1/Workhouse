@@ -9,6 +9,7 @@ const tasksRoutes = require('./routes/tasks');
 const adminAuthRoutes = require('./routes/adminAuth');
 const adminDashboardRoutes = require('./routes/adminDashboard');
 const searchRoutes = require('./routes/search');
+const machineLearningRoutes = require('./routes/machineLearning');
 const api = require("./api");
 const { initDb } = require('./utils/db');
 const logger = require('./utils/logger');
@@ -28,6 +29,7 @@ app.use('/tasks', tasksRoutes);
 app.use('/admin', adminAuthRoutes);
 app.use('/admin', adminDashboardRoutes);
 app.use('/search', searchRoutes);
+app.use('/ml', machineLearningRoutes);
 
 // 404 handler
 app.use((req, res, next) => {

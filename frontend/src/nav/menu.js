@@ -68,6 +68,7 @@ export const menu = [
       { label: 'Content', path: '/content/manage' },
       { label: 'Content Library', path: '/content-library' },
       { label: 'Stats', path: '/stats' },
+      { label: 'Model Performance', path: '/ml/performance' },
       { label: 'Startup Profile', path: '/startups/profile-plan' },
       { label: 'Ecosystem Dashboard', path: '/sim-dashboard' },
       { label: 'Startup Analytics', path: '/startups/analytics' },

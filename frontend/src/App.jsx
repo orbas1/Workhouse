@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
+import ModelPerformancePage from './pages/ModelPerformancePage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 
 function Protected({ children }) {
@@ -32,6 +33,14 @@ export default function App() {
                 element={
                   <Protected>
                     <DashboardPage />
+                  </Protected>
+                }
+              />
+              <Route
+                path="/ml/performance"
+                element={
+                  <Protected>
+                    <ModelPerformancePage />
                   </Protected>
                 }
               />
