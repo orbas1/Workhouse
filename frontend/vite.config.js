@@ -11,8 +11,10 @@ export default defineConfig(({ mode }) => {
       __APP_URL__: JSON.stringify(env.VITE_APP_URL),
     },
     server: {
-      host: '0.0.0.0',
+      host: true,
       port: 5173,
+      strictPort: true,
+      cors: true,
       proxy: {
         '/api': {
           target: env.VITE_API_PROXY_TARGET || 'http://localhost:8000',

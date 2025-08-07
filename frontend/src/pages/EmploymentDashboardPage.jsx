@@ -18,7 +18,6 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { getOverview, getJobs, getJob } from '../api/employment.js';
 import { getOverview, getJobs as getEmployerJobs, getJob as getEmployerJob } from '../api/employment.js';
 import { listPublicJobs, getPublicJob } from '../api/jobs.js';
 import '../styles/EmploymentDashboardPage.css';
@@ -118,7 +117,6 @@ export default function EmploymentDashboardPage() {
             <Button as={Link} to="/job-posts" colorScheme="teal" mt={4}>
               Manage Job Posts
             </Button>
-            {selected && (
             {selected && mode === 'employer' && (
               <Box mt={6} p={4} borderWidth="1px" borderRadius="md">
                 <Heading size="md" mb={2}>{selected.title}</Heading>
