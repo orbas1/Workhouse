@@ -8,12 +8,25 @@
     "location": "Demo City",
     "avatar_url": "https://via.placeholder.com/150",
     "bio": "Experienced developer",
-    "contact": { "email": "demo@example.com" },
-    "preferences": { "theme": "dark" },
-    "skills": ["javascript", "node.js"],
-    "portfolio": { "website": "https://demo.dev" },
-    "visibility": { "profile": "public" },
-    "theme": { "color": "blue" }
+    "contact": {
+      "email": "demo@example.com"
+    },
+    "preferences": {
+      "theme": "dark"
+    },
+    "skills": [
+      "javascript",
+      "node.js"
+    ],
+    "portfolio": {
+      "website": "https://demo.dev"
+    },
+    "visibility": {
+      "profile": "public"
+    },
+    "theme": {
+      "color": "blue"
+    }
   },
   {
     "id": "44444444-4444-4444-4444-444444444444",
@@ -24,11 +37,111 @@
     "location": "Admin City",
     "avatar_url": "https://via.placeholder.com/150",
     "bio": "Aspiring administrator",
-    "contact": { "email": "admin@example.com" },
-    "preferences": { "theme": "light" },
-    "skills": ["management", "planning"],
-    "portfolio": { "website": "https://admin.example.com" },
-    "visibility": { "profile": "private" },
-    "theme": { "color": "green" }
+    "contact": {
+      "email": "admin@example.com"
+    },
+    "preferences": {
+      "theme": "light"
+    },
+    "skills": [
+      "management",
+      "planning"
+    ],
+    "portfolio": {
+      "website": "https://admin.example.com"
+    },
+    "visibility": {
+      "profile": "private"
+    },
+    "theme": {
+      "color": "green"
+    }
+  },
+  {
+    "id": "55555555-5555-5555-5555-555555555557",
+    "user_id": "33333333-3333-3333-3333-333333333334",
+    "role": "mentor",
+    "full_name": "Eve Example",
+    "title": "Frontend Developer",
+    "location": "Eden",
+    "avatar_url": "https://via.placeholder.com/150",
+    "bio": "React expert",
+    "contact": {
+      "email": "eve@example.com"
+    },
+    "preferences": {
+      "theme": "light"
+    },
+    "skills": [
+      "react",
+      "css"
+    ],
+    "portfolio": {
+      "website": "https://eve.dev"
+    },
+    "visibility": {
+      "profile": "public"
+    },
+    "theme": {
+      "color": "pink"
+    }
+  },
+  {
+    "id": "66666666-6666-6666-6666-666666666667",
+    "user_id": "44444444-4444-4444-4444-444444444445",
+    "role": "mentee",
+    "full_name": "Frank Freelancer",
+    "title": "Backend Engineer",
+    "location": "Remote",
+    "avatar_url": "https://via.placeholder.com/150",
+    "bio": "Node.js contractor",
+    "contact": {
+      "email": "frank@example.com"
+    },
+    "preferences": {
+      "theme": "dark"
+    },
+    "skills": [
+      "node.js",
+      "express"
+    ],
+    "portfolio": {
+      "website": "https://frank.dev"
+    },
+    "visibility": {
+      "profile": "public"
+    },
+    "theme": {
+      "color": "gray"
+    }
+  },
+  {
+    "id": "77777777-7777-7777-7777-777777777778",
+    "user_id": "55555555-5555-5555-5555-555555555556",
+    "role": "mentor",
+    "full_name": "Grace Hopper",
+    "title": "Computer Scientist",
+    "location": "Arlington",
+    "avatar_url": "https://via.placeholder.com/150",
+    "bio": "Pioneer programmer",
+    "contact": {
+      "email": "grace@example.com"
+    },
+    "preferences": {
+      "theme": "classic"
+    },
+    "skills": [
+      "cobol",
+      "leadership"
+    ],
+    "portfolio": {
+      "website": "https://grace.dev"
+    },
+    "visibility": {
+      "profile": "public"
+    },
+    "theme": {
+      "color": "navy"
+    }
   }
 ]

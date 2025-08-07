@@ -47,7 +47,7 @@ async function seedUsers(client) {
   const dataPath = path.join(__dirname, '..', 'data', 'users.json');
   if (!fs.existsSync(dataPath)) return;
   const users = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const VALID_ROLES = ['super_admin', 'admin', 'buyer', 'seller'];
+  const VALID_ROLES = ['super_admin', 'admin', 'buyer', 'seller', 'user'];
 
   for (const u of users) {
     const hash = bcrypt.hashSync(u.password, 10);
@@ -128,6 +128,34 @@ async function seedProfiles(client) {
   console.log('Seeded profiles');
 }
 
+async function seedLiveFeedPosts(client) {
+  const dataPath = path.join(__dirname, '..', 'data', 'liveFeedPosts.json');
+  if (!fs.existsSync(dataPath)) return;
+  const posts = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+  for (const p of posts) {
+    await client.query(
+      `INSERT INTO live_feed_posts (id, author, content, category, created_at, likes)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       ON CONFLICT (id) DO UPDATE SET
+         author = EXCLUDED.author,
+         content = EXCLUDED.content,
+         category = EXCLUDED.category,
+         created_at = EXCLUDED.created_at,
+         likes = EXCLUDED.likes`,
+      [
+        p.id,
+        p.author,
+        p.content,
+        p.category,
+        p.createdAt ? new Date(p.createdAt) : new Date(),
+        p.likes || 0,
+      ]
+    );
+  }
+  console.log('Seeded live feed posts');
+}
+
 async function run() {
   const client = getClient();
   await client.connect();
@@ -136,6 +164,7 @@ async function run() {
     await seedUsers(client);
     await seedProducts(client);
     await seedProfiles(client);
+    await seedLiveFeedPosts(client);
     await client.query('COMMIT');
     console.log('Seeding complete');
   } catch (err) {

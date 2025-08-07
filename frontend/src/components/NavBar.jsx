@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Flex,
-  Heading,
+  Image,
   Spacer,
   Button,
   Input,
@@ -18,6 +18,7 @@ import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import '../styles/NavBar.css';
+import logo from '../assets/workhouse.svg';
 
 export default function NavBar({ onMenuOpen }) {
   const { user, logout } = useAuth();
@@ -38,7 +39,7 @@ export default function NavBar({ onMenuOpen }) {
         variant="ghost"
         aria-label="Open navigation"
       />
-      <Heading size="md" cursor="pointer" onClick={() => navigate('/')}>Workhouse</Heading>
+      <Image src={logo} alt="Workhouse logo" h="32px" cursor="pointer" onClick={() => navigate('/')}/>
       <Spacer />
       <InputGroup maxW="400px" mr={4}>
         <InputLeftElement pointerEvents="none">
