@@ -8,11 +8,22 @@ import '../styles/NavMenu.css';
 export default function NavMenu() {
   const { user } = useAuth();
   if (!user) return null;
+
   return (
-    <Box as="aside" w="250px" p={4} bg="gray.50" h="100vh" overflowY="auto">
+    <Box
+      as="aside"
+      className="nav-menu"
+      w="250px"
+      p={4}
+      bg="gray.50"
+      h="100vh"
+      overflowY="auto"
+      borderRight="1px solid"
+      borderColor="gray.200"
+    >
       {menu.map((section) => (
         <Box key={section.heading} mb={4}>
-          <Text fontWeight="bold" mb={2}>
+          <Text fontWeight="bold" mb={2} className="nav-menu-heading">
             {section.heading}
           </Text>
           <VStack align="stretch" spacing={1}>

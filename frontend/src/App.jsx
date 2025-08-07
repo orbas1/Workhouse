@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ChakraProvider, Box } from '@chakra-ui/react';
+import { ChakraProvider, Box, Flex } from '@chakra-ui/react';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
@@ -10,6 +10,7 @@ import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import NavMenu from './components/NavMenu.jsx';
 
 function Protected({ children }) {
   const { user, loading } = useAuth();
@@ -22,11 +23,13 @@ export default function App() {
     <ChakraProvider>
       <AuthProvider>
         <BrowserRouter>
-          <Box p={4}>
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/landing" element={<LandingPage />} />
+          <Flex>
+            <NavMenu />
+            <Box flex="1" p={4}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+                <Route path="/landing" element={<LandingPage />} />
               <Route
                 path="/"
                 element={
@@ -67,9 +70,10 @@ export default function App() {
                   </Protected>
                 }
               />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Box>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Box>
+          </Flex>
         </BrowserRouter>
       </AuthProvider>
     </ChakraProvider>
