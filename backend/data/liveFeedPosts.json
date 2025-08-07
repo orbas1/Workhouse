@@ -1,7 +1,7 @@
 [
   {
     "id": "55555555-5555-5555-5555-555555555555",
-    "author": "DemoUser",
+    "author": "standard_user",
     "content": "Excited to join Workhouse!",
     "category": "general",
     "createdAt": "2024-01-01T10:00:00Z",
@@ -12,7 +12,7 @@
   },
   {
     "id": "66666666-6666-6666-6666-666666666666",
-    "author": "Alice",
+    "author": "pro_account",
     "content": "Offering web development services.",
     "category": "gig",
     "createdAt": "2024-01-02T12:00:00Z",
@@ -23,7 +23,7 @@
   },
   {
     "id": "77777777-7777-7777-7777-777777777777",
-    "author": "Bob",
+    "author": "admin_account",
     "content": "Looking for a designer for my startup.",
     "category": "project",
     "createdAt": "2024-01-03T09:30:00Z",
@@ -34,7 +34,7 @@
   },
   {
     "id": "88888888-8888-8888-8888-888888888888",
-    "author": "Carol",
+    "author": "support_staff",
     "content": "Just published a new article on UX.",
     "category": "article",
     "createdAt": "2024-01-04T14:15:00Z",
@@ -45,7 +45,7 @@
   },
   {
     "id": "99999999-9999-9999-9999-999999999999",
-    "author": "Dave",
+    "author": "super_admin",
     "content": "Hosting a webinar on Node.js this Friday.",
     "category": "webinar",
     "createdAt": "2024-01-05T16:45:00Z",

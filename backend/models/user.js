@@ -8,8 +8,9 @@ const memoryUsers = new Map();
 const ROLES = {
   SUPER_ADMIN: 'super_admin',
   ADMIN: 'admin',
-  BUYER: 'buyer',
-  SELLER: 'seller',
+  SUPPORT: 'support',
+  PROFESSIONAL: 'professional',
+  USER: 'user',
 };
 
 /**
@@ -32,7 +33,7 @@ async function findUser(username) {
  * @param {object} param0
  * @returns {Promise<object>} Created user
  */
-async function addUser({ username, password, role = ROLES.BUYER, fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
+async function addUser({ username, password, role = ROLES.USER, fullName = '', email = '', phone = '', location = '', bio = '', expertise = '' }) {
   const id = randomUUID();
   try {
     await query(

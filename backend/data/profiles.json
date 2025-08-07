@@ -2,146 +2,81 @@
   {
     "id": "33333333-3333-3333-3333-333333333333",
     "user_id": "11111111-1111-1111-1111-111111111111",
-    "role": "mentor",
-    "full_name": "Demo User",
-    "title": "Developer",
-    "location": "Demo City",
+    "role": "user",
+    "full_name": "Standard User",
+    "title": "Member",
+    "location": "Generic City",
     "avatar_url": "https://via.placeholder.com/150",
-    "bio": "Experienced developer",
-    "contact": {
-      "email": "demo@example.com"
-    },
-    "preferences": {
-      "theme": "dark"
-    },
-    "skills": [
-      "javascript",
-      "node.js"
-    ],
-    "portfolio": {
-      "website": "https://demo.dev"
-    },
-    "visibility": {
-      "profile": "public"
-    },
-    "theme": {
-      "color": "blue"
-    }
+    "bio": "Example end user profile",
+    "contact": { "email": "standard@example.com" },
+    "preferences": { "theme": "light" },
+    "skills": ["communication"],
+    "portfolio": { "website": "https://example.com" },
+    "visibility": { "profile": "public" },
+    "theme": { "color": "blue" }
   },
   {
     "id": "44444444-4444-4444-4444-444444444444",
     "user_id": "22222222-2222-2222-2222-222222222222",
-    "role": "mentee",
-    "full_name": "Admin User",
+    "role": "admin",
+    "full_name": "System Admin",
     "title": "Administrator",
     "location": "Admin City",
     "avatar_url": "https://via.placeholder.com/150",
-    "bio": "Aspiring administrator",
-    "contact": {
-      "email": "admin@example.com"
-    },
-    "preferences": {
-      "theme": "light"
-    },
-    "skills": [
-      "management",
-      "planning"
-    ],
-    "portfolio": {
-      "website": "https://admin.example.com"
-    },
-    "visibility": {
-      "profile": "private"
-    },
-    "theme": {
-      "color": "green"
-    }
+    "bio": "Oversees platform operations",
+    "contact": { "email": "admin@example.com" },
+    "preferences": { "theme": "dark" },
+    "skills": ["management", "planning"],
+    "portfolio": { "website": "https://admin.example.com" },
+    "visibility": { "profile": "private" },
+    "theme": { "color": "green" }
   },
   {
     "id": "55555555-5555-5555-5555-555555555557",
     "user_id": "33333333-3333-3333-3333-333333333334",
-    "role": "mentor",
-    "full_name": "Eve Example",
+    "role": "professional",
+    "full_name": "Pro Example",
     "title": "Frontend Developer",
     "location": "Eden",
     "avatar_url": "https://via.placeholder.com/150",
     "bio": "React expert",
-    "contact": {
-      "email": "eve@example.com"
-    },
-    "preferences": {
-      "theme": "light"
-    },
-    "skills": [
-      "react",
-      "css"
-    ],
-    "portfolio": {
-      "website": "https://eve.dev"
-    },
-    "visibility": {
-      "profile": "public"
-    },
-    "theme": {
-      "color": "pink"
-    }
+    "contact": { "email": "pro@example.com" },
+    "preferences": { "theme": "light" },
+    "skills": ["react", "css"],
+    "portfolio": { "website": "https://pro.example" },
+    "visibility": { "profile": "public" },
+    "theme": { "color": "pink" }
   },
   {
     "id": "66666666-6666-6666-6666-666666666667",
     "user_id": "44444444-4444-4444-4444-444444444445",
-    "role": "mentee",
-    "full_name": "Frank Freelancer",
-    "title": "Backend Engineer",
+    "role": "support",
+    "full_name": "Support Staff",
+    "title": "Support Agent",
     "location": "Remote",
     "avatar_url": "https://via.placeholder.com/150",
-    "bio": "Node.js contractor",
-    "contact": {
-      "email": "frank@example.com"
-    },
-    "preferences": {
-      "theme": "dark"
-    },
-    "skills": [
-      "node.js",
-      "express"
-    ],
-    "portfolio": {
-      "website": "https://frank.dev"
-    },
-    "visibility": {
-      "profile": "public"
-    },
-    "theme": {
-      "color": "gray"
-    }
+    "bio": "Helps users with issues",
+    "contact": { "email": "support@example.com" },
+    "preferences": { "theme": "dark" },
+    "skills": ["communication", "troubleshooting"],
+    "portfolio": { "website": "https://support.example" },
+    "visibility": { "profile": "public" },
+    "theme": { "color": "gray" }
   },
   {
     "id": "77777777-7777-7777-7777-777777777778",
     "user_id": "55555555-5555-5555-5555-555555555556",
-    "role": "mentor",
-    "full_name": "Grace Hopper",
-    "title": "Computer Scientist",
-    "location": "Arlington",
+    "role": "super_admin",
+    "full_name": "Super Admin",
+    "title": "Platform Owner",
+    "location": "Headquarters",
     "avatar_url": "https://via.placeholder.com/150",
-    "bio": "Pioneer programmer",
-    "contact": {
-      "email": "grace@example.com"
-    },
-    "preferences": {
-      "theme": "classic"
-    },
-    "skills": [
-      "cobol",
-      "leadership"
-    ],
-    "portfolio": {
-      "website": "https://grace.dev"
-    },
-    "visibility": {
-      "profile": "public"
-    },
-    "theme": {
-      "color": "navy"
-    }
+    "bio": "Primary platform administrator",
+    "contact": { "email": "super@example.com" },
+    "preferences": { "theme": "classic" },
+    "skills": ["operations", "leadership"],
+    "portfolio": { "website": "https://super.example" },
+    "visibility": { "profile": "public" },
+    "theme": { "color": "navy" }
   }
 ]

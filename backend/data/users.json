@@ -1,35 +1,35 @@
 [
   {
     "id": "11111111-1111-1111-1111-111111111111",
-    "username": "demoUser",
+    "username": "standard_user",
     "password": "password123",
     "role": "user",
-    "full_name": "Demo User",
-    "email": "demo@example.com",
+    "full_name": "Standard User",
+    "email": "standard@example.com",
     "phone": "1234567890",
-    "location": "Demo City",
-    "bio": "Example bio",
-    "expertise": "Testing"
+    "location": "Generic City",
+    "bio": "Sample end user account",
+    "expertise": "Community"
   },
   {
     "id": "22222222-2222-2222-2222-222222222222",
-    "username": "adminUser",
+    "username": "admin_account",
     "password": "adminpass",
     "role": "admin",
-    "full_name": "Admin User",
+    "full_name": "System Admin",
     "email": "admin@example.com",
     "phone": "9876543210",
     "location": "Admin City",
-    "bio": "Administrator",
-    "expertise": "Administration"
+    "bio": "Administrator account",
+    "expertise": "Management"
   },
   {
     "id": "33333333-3333-3333-3333-333333333334",
-    "username": "eveUser",
-    "password": "evepass",
-    "role": "buyer",
-    "full_name": "Eve Example",
-    "email": "eve@example.com",
+    "username": "pro_account",
+    "password": "propass",
+    "role": "professional",
+    "full_name": "Pro Example",
+    "email": "pro@example.com",
     "phone": "5550001111",
     "location": "Eden",
     "bio": "Frontend specialist",
@@ -37,26 +37,26 @@
   },
   {
     "id": "44444444-4444-4444-4444-444444444445",
-    "username": "frankUser",
-    "password": "frankpass",
-    "role": "seller",
-    "full_name": "Frank Freelancer",
-    "email": "frank@example.com",
+    "username": "support_staff",
+    "password": "supportpass",
+    "role": "support",
+    "full_name": "Support Staff",
+    "email": "support@example.com",
     "phone": "5552223333",
     "location": "Remote",
-    "bio": "Backend guru",
-    "expertise": "Node.js"
+    "bio": "Customer support agent",
+    "expertise": "Service"
   },
   {
     "id": "55555555-5555-5555-5555-555555555556",
-    "username": "graceUser",
-    "password": "gracepass",
-    "role": "buyer",
-    "full_name": "Grace Hopper",
-    "email": "grace@example.com",
+    "username": "super_admin",
+    "password": "superpass",
+    "role": "super_admin",
+    "full_name": "Super Admin",
+    "email": "super@example.com",
     "phone": "5554445555",
-    "location": "Arlington",
-    "bio": "Computer pioneer",
-    "expertise": "COBOL"
+    "location": "Headquarters",
+    "bio": "Primary platform administrator",
+    "expertise": "Operations"
   }
 ]

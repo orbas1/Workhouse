@@ -12,7 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'devsecret';
  * @param {object} [extra={}] Additional fields like fullName, phone, location
  * @returns {Promise<{id: string, username: string, role: string, fullName?: string, phone?: string, location?: string}>}
  */
-async function register({ username, password, role = 'buyer', fullName, email, phone, location, bio, expertise }) {
+async function register({ username, password, role = 'user', fullName, email, phone, location, bio, expertise }) {
   const existing = await findUser(username);
   if (existing) {
     throw new Error('User already exists');

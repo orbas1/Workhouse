@@ -47,11 +47,11 @@ async function seedUsers(client) {
   const dataPath = path.join(__dirname, '..', 'data', 'users.json');
   if (!fs.existsSync(dataPath)) return;
   const users = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-  const VALID_ROLES = ['super_admin', 'admin', 'buyer', 'seller', 'user'];
+  const VALID_ROLES = ['super_admin', 'admin', 'support', 'professional', 'user'];
 
   for (const u of users) {
     const hash = bcrypt.hashSync(u.password, 10);
-    const role = VALID_ROLES.includes(u.role) ? u.role : 'buyer';
+    const role = VALID_ROLES.includes(u.role) ? u.role : 'user';
     await client.query(
       `INSERT INTO users (id, username, password_hash, role, full_name, email, phone, location, bio, expertise)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
