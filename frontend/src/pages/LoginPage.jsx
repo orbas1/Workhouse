@@ -25,6 +25,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { loginWithProvider, resetPassword } from '../api/auth.js';
+import sanitizeInput from '../utils/sanitize.js';
 import '../styles/LoginPage.css';
 
 export default function LoginPage() {
@@ -46,7 +47,12 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
     try {
-      await login(email, password, use2FA ? code : undefined, remember);
+      await login(
+        sanitizeInput(email),
+        sanitizeInput(password),
+        use2FA ? sanitizeInput(code) : undefined,
+        remember
+      );
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);
@@ -57,7 +63,7 @@ export default function LoginPage() {
 
   async function handleReset() {
     try {
-      await resetPassword(email, newPassword);
+      await resetPassword(sanitizeInput(email), sanitizeInput(newPassword));
       toast({ title: 'Password updated', status: 'success', duration: 3000, isClosable: true });
       setNewPassword('');
       onClose();
