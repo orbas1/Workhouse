@@ -78,6 +78,26 @@ cd .. && node app.js               # serves static frontend and mounts /api rout
 ```
 `API_BASE_URL` in `.env` controls the path where the backend is mounted when using `app.js`.
 
+## PM2 Process Management
+
+### Development
+Use PM2 to keep both services running in the background during development:
+
+```bash
+npm run setup
+pm2 start npm --name workhouse-backend --workspace backend -- run start
+pm2 start npm --name workhouse-frontend --workspace frontend -- run dev
+```
+
+### Production
+Build the frontend and serve it with PM2:
+
+```bash
+npm run build --workspace frontend
+pm2 start "serve -s dist" --name workhouse-frontend
+pm2 start backend/app.js --name workhouse-backend
+```
+
 ## Vercel Deployment
 The repository includes a `vercel.json` configuration that builds the React frontend and packages the Express backend as a serverless function. To deploy:
 
