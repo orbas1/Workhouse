@@ -1,15 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { ChakraProvider, Theme } from '@chakra-ui/react';
-import AboutSection from '../src/components/AboutSection'; 
 import '@testing-library/jest-dom';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import AboutSection from '../src/components/AboutSection';
+import { ChakraProvider } from '@chakra-ui/react';
+import AboutSection from '../src/components/AboutSection.jsx';
 
 describe('AboutSection', () => {
   it('renders provided bio', () => {
     render(
-      <ChakraProvider theme={Theme}>
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider>
         <AboutSection bio="Hello world" />
       </ChakraProvider>
     );
@@ -19,9 +16,7 @@ describe('AboutSection', () => {
 
   it('renders fallback when no bio provided', () => {
     render(
-      <ChakraProvider theme={Theme}>
-      <ChakraProvider value={defaultSystem}>
-
+      <ChakraProvider>
         <AboutSection />
       </ChakraProvider>
     );

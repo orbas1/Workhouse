@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, it, expect, vi } from 'vitest';
-import { ChakraProvider, Theme } from '@chakra-ui/react';
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import LiveEngagementAnalyticsPage from '../src/pages/LiveEngagementAnalyticsPage.jsx';
-vi.mock('react-chartjs-2', () => ({ __esModule: true, Line: () => null }));
 
+vi.mock('react-chartjs-2', () => ({ __esModule: true, Line: () => null }));
 vi.mock('../src/api/startupAnalytics.js', () => ({
   fetchStartupAnalytics: () => Promise.resolve({
     profileViews: 10,
@@ -18,8 +17,7 @@ vi.mock('../src/api/startupAnalytics.js', () => ({
 describe('LiveEngagementAnalyticsPage', () => {
   it.skip('renders analytics stats', async () => {
     render(
-      <ChakraProvider theme={Theme}>
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider>
         <LiveEngagementAnalyticsPage />
       </ChakraProvider>
     );

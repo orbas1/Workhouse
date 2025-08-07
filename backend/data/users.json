@@ -22,5 +22,41 @@
     "location": "Admin City",
     "bio": "Administrator",
     "expertise": "Administration"
+  },
+  {
+    "id": "33333333-3333-3333-3333-333333333334",
+    "username": "eveUser",
+    "password": "evepass",
+    "role": "buyer",
+    "full_name": "Eve Example",
+    "email": "eve@example.com",
+    "phone": "5550001111",
+    "location": "Eden",
+    "bio": "Frontend specialist",
+    "expertise": "React"
+  },
+  {
+    "id": "44444444-4444-4444-4444-444444444445",
+    "username": "frankUser",
+    "password": "frankpass",
+    "role": "seller",
+    "full_name": "Frank Freelancer",
+    "email": "frank@example.com",
+    "phone": "5552223333",
+    "location": "Remote",
+    "bio": "Backend guru",
+    "expertise": "Node.js"
+  },
+  {
+    "id": "55555555-5555-5555-5555-555555555556",
+    "username": "graceUser",
+    "password": "gracepass",
+    "role": "buyer",
+    "full_name": "Grace Hopper",
+    "email": "grace@example.com",
+    "phone": "5554445555",
+    "location": "Arlington",
+    "bio": "Computer pioneer",
+    "expertise": "COBOL"
   }
 ]
