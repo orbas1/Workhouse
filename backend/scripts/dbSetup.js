@@ -1,6 +1,6 @@
-require('../config/env');
-const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+const fs = require('fs');
 const net = require('net');
 const { Client } = require('pg');
 const mysql = require('mysql2/promise');
@@ -12,6 +12,9 @@ async function runMigrations() {
   const password = process.env.DB_PASSWORD || '';
   const port = process.env.DB_PORT || 5432;
   const type = (process.env.DB_TYPE || 'postgres').toLowerCase();
+
+  console.log('DB_USER:', process.env.DB_USER);
+  console.log('DB_PASSWORD:', typeof process.env.DB_PASSWORD, `"${process.env.DB_PASSWORD}"`);
 
   if (net.isIP(host) === 6) {
     throw new Error('IPv6 addresses are not supported for DB_HOST');
@@ -27,7 +30,8 @@ async function runMigrations() {
 
   if (type === 'mysql') {
     const admin = await mysql.createConnection({ host, user, password, port, multipleStatements: true });
-    await admin.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
+    await admin.query(`DROP DATABASE IF EXISTS \`${dbName}\``);
+    await admin.query(`CREATE DATABASE \`${dbName}\``);
     await admin.end();
 
     const client = await mysql.createConnection({ host, user, password, port, database: dbName, multipleStatements: true });
@@ -58,10 +62,9 @@ async function runMigrations() {
   // default to postgres
   const adminClient = new Client({ host, user, password, port, database: 'postgres' });
   await adminClient.connect();
-  const exists = await adminClient.query('SELECT 1 FROM pg_database WHERE datname = $1', [dbName]);
-  if (exists.rowCount === 0) {
-    await adminClient.query(`CREATE DATABASE "${dbName}"`);
-  }
+  await adminClient.query('SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $1', [dbName]);
+  await adminClient.query(`DROP DATABASE IF EXISTS "${dbName}"`);
+  await adminClient.query(`CREATE DATABASE "${dbName}"`);
   await adminClient.end();
 
   const client = new Client({ host, user, password, port, database: dbName });
