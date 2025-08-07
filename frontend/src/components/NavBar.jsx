@@ -8,7 +8,11 @@ import {
   InputGroup,
   InputLeftElement,
   IconButton,
-  Avatar
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 } from '@chakra-ui/react';
 import { SearchIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +29,7 @@ export default function NavBar({ onMenuOpen }) {
   };
 
   return (
-    <Flex as="header" bg="teal.500" color="white" p={4} align="center">
+    <Flex as="header" bg="blue.600" color="white" p={4} align="center" boxShadow="sm">
       <IconButton
         display={{ base: 'inline-flex', md: 'none' }}
         onClick={onMenuOpen}
@@ -43,19 +47,20 @@ export default function NavBar({ onMenuOpen }) {
         <Input type="text" placeholder="Search" bg="white" color="black" />
       </InputGroup>
       {user ? (
-        <>
-          <IconButton
+        <Menu>
+          <MenuButton
+            as={IconButton}
             mr={2}
             variant="ghost"
             color="white"
             icon={<Avatar size="sm" name={user.name || 'Account'} />}
-            onClick={() => navigate('/profile')}
             aria-label="Account"
           />
-          <Button variant="outline" color="white" onClick={handleLogout}>
-            Logout
-          </Button>
-        </>
+          <MenuList color="black">
+            <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </MenuList>
+        </Menu>
       ) : (
         <>
           <Button mr={2} variant="outline" color="white" onClick={() => navigate('/login')}>
