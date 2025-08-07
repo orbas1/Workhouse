@@ -88,6 +88,7 @@ If you prefer separate deployments, create one Vercel project with `frontend/` a
 Detailed endpoint and UI design notes live in:
 - `backend_guide.md` – overview of backend routes and planned services.
 - `frontend_guide.md` – roadmap for frontend pages and design principles.
+- `IDE_SETUP.md` – editor recommendations and debugging tips.
 
 ## Contributing
 Contributions are welcome! Fork the repository, create a branch and open a pull request.
