@@ -99,20 +99,34 @@ function ask(index = 0) {
       { label: 'Checking pm2 status', cmd: 'npx pm2 status workhouse' },
     ];
 
-    steps.forEach((step, i) => {
-      log(`Step ${i + 1}/${steps.length}: ${step.label}`);
-      try {
-        execSync(step.cmd, { stdio: 'inherit', ...(step.options || {}) });
-      } catch (err) {
-        log(`${step.label} failed: ${err.message}`);
+    function runStep(i = 0) {
+      if (i === steps.length) {
+        log(`Opening browser at ${answers.SITE_URL}`);
+        openBrowser(answers.SITE_URL);
+        log('Setup complete');
+        rl.close();
+        process.exit(0);
+        return;
       }
-    });
 
-    log(`Opening browser at ${answers.SITE_URL}`);
-    openBrowser(answers.SITE_URL);
-    log('Setup complete');
-    rl.close();
-    process.exit(0);
+      const step = steps[i];
+      rl.question(`Step ${i + 1}/${steps.length}: ${step.label}? (Y/n) `, answer => {
+        if (answer.trim().toLowerCase().startsWith('n')) {
+          log(`Skipped ${step.label}`);
+          runStep(i + 1);
+          return;
+        }
+        try {
+          execSync(step.cmd, { stdio: 'inherit', ...(step.options || {}) });
+          log(`Finished ${step.label}`);
+        } catch (err) {
+          log(`${step.label} failed: ${err.message}`);
+        }
+        runStep(i + 1);
+      });
+    }
+
+    runStep();
     return;
   }
   const q = questions[index];
