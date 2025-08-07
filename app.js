@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 
 // Reuse Express from the backend dependencies to avoid duplicating

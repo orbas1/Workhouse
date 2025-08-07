@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const dotenv = require('dotenv');
 
 const root = path.resolve(__dirname, '..');
 
@@ -14,6 +15,16 @@ const envExample = path.join(root, '.env.example');
 if (!fs.existsSync(envPath) && fs.existsSync(envExample)) {
   fs.copyFileSync(envExample, envPath);
   console.log('Created .env from .env.example');
+}
+
+// Load environment variables so child processes inherit them
+dotenv.config({ path: envPath });
+
+// Ensure backend has an .env file for its config loader
+const backendEnv = path.join(root, 'backend', '.env');
+if (!fs.existsSync(backendEnv)) {
+  fs.copyFileSync(envPath, backendEnv);
+  console.log('Created backend/.env from .env');
 }
 
 console.log('Installing dependencies...');
