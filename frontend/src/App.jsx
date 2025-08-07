@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import SettingsDashboardPage from './pages/SettingsDashboardPage.jsx';
 import GlobalSearchPage from './pages/GlobalSearchPage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
+import LiveFeedPage from './pages/LiveFeedPage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import Layout from './components/Layout.jsx';
 
@@ -27,8 +28,9 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 <Protected>
                   <Layout>
@@ -73,6 +75,16 @@ export default function App() {
                 <Protected>
                   <Layout>
                     <GlobalSearchPage />
+                  </Layout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/feed"
+              element={
+                <Protected>
+                  <Layout>
+                    <LiveFeedPage />
                   </Layout>
                 </Protected>
               }

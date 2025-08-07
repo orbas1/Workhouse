@@ -14,3 +14,10 @@ CREATE TABLE IF NOT EXISTS live_feed_events (
   title VARCHAR(255) NOT NULL,
   start_time TIMESTAMP NOT NULL
 );
+
+-- Demo data for initial deployment
+INSERT INTO live_feed_posts (author, content, category)
+VALUES ('System', 'Welcome to the live feed!', 'general');
+
+INSERT INTO live_feed_events (title, start_time)
+VALUES ('Demo Event', NOW());

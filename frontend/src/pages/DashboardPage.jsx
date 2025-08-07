@@ -17,6 +17,8 @@ import { getDashboard } from '../api/dashboard.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import WeatherWidget from '../components/WeatherWidget.jsx';
 import NewsWidget from '../components/NewsWidget.jsx';
+import HelloWidget from '../components/HelloWidget.jsx';
+import LiveFeedWidget from '../components/LiveFeedWidget.jsx';
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -60,14 +62,11 @@ export default function DashboardPage() {
 
   return (
     <Box className="dashboard-page" p={4}>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4} mb={6}>
-        <Box p={4} borderWidth="1px" borderRadius="md" bg="white">
-          <Heading size="md">Welcome, {user?.name || user?.username}</Heading>
-          <Text mt={1}>Role: {user?.role}</Text>
-          <Text mt={2}>Glad to have you here.</Text>
-        </Box>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={4} mb={6}>
+        <HelloWidget />
         <WeatherWidget />
         <NewsWidget />
+        <LiveFeedWidget />
       </SimpleGrid>
       <SimpleGrid columns={[1, 2, 4]} spacing={4}>
         {stats.map((s) =>
