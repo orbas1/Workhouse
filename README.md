@@ -52,16 +52,17 @@ Workhouse/
    npm run setup
    ```
    The script installs packages, runs database migrations using the configured credentials and seeds sample data.
-3. **Start the services**:
+3. **(Optional) Use the installation wizard**
+   - For an interactive walkthrough that helps configure environment variables and database settings run:
+     ```bash
+     npm run setup:wizard
+     ```
+   - The wizard guides you through initial configuration and then executes the same steps as `npm run setup`.
+4. **Start the services**:
    ```bash
    npm start          # start API on port 5000
    npm run start:frontend  # launch React dev server
    ```
-
-For custom configuration through interactive prompts, run:
-```bash
-npm run setup:wizard
-```
 
 ## Running the App
 ### Development

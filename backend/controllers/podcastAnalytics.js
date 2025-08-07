@@ -95,6 +95,9 @@ async function recordListenHandler(req, res) {
       podcastId: req.params.podcastId,
     });
     res.status(err.status || 500).json({ error: err.message });
+  }
+}
+
 async function creatorSeriesHandler(req, res) {
   try {
     const data = await getCreatorSeries(req.user.id);

@@ -52,8 +52,16 @@ function listProjects(ownerId) {
 }
 
 
-function createTask({ projectId, title, description = '', category = null, location = null, budget = null, dueDate = null }) {
-function createTask({ projectId, title, description = '', dueDate = null, ownerId }) {
+function createTask({
+  projectId,
+  title,
+  description = '',
+  category = null,
+  location = null,
+  budget = null,
+  dueDate = null,
+  ownerId,
+}) {
   const id = randomUUID();
   const now = new Date();
   const task = {
