@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, it, expect, vi } from 'vitest';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Theme } from '@chakra-ui/react';
 import LiveEngagementAnalyticsPage from '../src/pages/LiveEngagementAnalyticsPage.jsx';
 vi.mock('react-chartjs-2', () => ({ Line: () => null }));
 
@@ -17,7 +17,7 @@ vi.mock('../src/api/startupAnalytics.js', () => ({
 describe('LiveEngagementAnalyticsPage', () => {
   it('renders analytics stats', async () => {
     render(
-      <ChakraProvider>
+      <ChakraProvider theme={Theme}>
         <LiveEngagementAnalyticsPage />
       </ChakraProvider>
     );
