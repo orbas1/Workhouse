@@ -3,6 +3,11 @@ const path = require('path');
 const { execSync } = require('child_process');
 const dotenv = require('dotenv');
 
+// This script mirrors the steps performed by the browser-based installer.
+// It is intended for automated environments or developers who prefer a
+// non-interactive setup. For most cases, `npm start` followed by visiting
+// `/install` in the browser provides a guided installation.
+
 const root = path.resolve(__dirname, '..');
 
 function run(cmd) {

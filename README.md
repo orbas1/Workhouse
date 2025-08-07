@@ -41,28 +41,37 @@ Workhouse/
 ## Prerequisites
 - Node.js v16+ and npm
 - PostgreSQL database
-- Copy `.env.example` to `.env` and update environment variables
+- A domain name if deploying publicly
 
-## Getting Started
-1. **Configure the database**
-   - Install PostgreSQL and ensure it is running.
-   - Copy `.env.example` to `.env` and update the `DB_*` variables to match your database credentials.
-2. **Run the setup script** to install dependencies and prepare the database:
+## Installation
+
+### Browser-based wizard (recommended)
+1. Install dependencies:
    ```bash
-   npm run setup
+   npm install
    ```
-   The script installs packages, runs database migrations using the configured credentials and seeds sample data.
-3. **(Optional) Use the installation wizard**
-   - For an interactive walkthrough that helps configure environment variables and database settings run:
-     ```bash
-     npm run setup:wizard
-     ```
-   - The wizard guides you through initial configuration and then executes the same steps as `npm run setup`.
-4. **Start the services**:
+2. Start the server and open the installer:
    ```bash
-   npm start          # start API on port 5000
-   npm run start:frontend  # launch React dev server
+   npm start
    ```
+   Visit [http://localhost:3000/install](http://localhost:3000/install) (or `http://your-domain/install`).
+3. The wizard verifies file permissions, captures site details, configures the database and creates the first administrator.
+   On completion it provides Apache and Nginx configuration snippets so the site can be served behind your own domain.
+4. Build production assets and restart the app:
+   ```bash
+   npm run build --workspace frontend
+   node app.js
+   ```
+5. Point your domain to the host and configure your web server. Sample configs live in `config/nginx.conf.example` and `config/apache.conf.example`.
+
+### Scripted setup (optional)
+For automated environments you can use the setup script instead of the wizard:
+
+```bash
+npm run setup
+```
+
+The script installs dependencies, runs database migrations and seeds sample data using values from `.env`.
 
 ## Running the App
 ### Development

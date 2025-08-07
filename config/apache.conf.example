@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+    ServerName example.com
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:3000/
+    ProxyPassReverse / http://localhost:3000/
+    ErrorLog ${APACHE_LOG_DIR}/workhouse-error.log
+    CustomLog ${APACHE_LOG_DIR}/workhouse-access.log combined
+</VirtualHost>
