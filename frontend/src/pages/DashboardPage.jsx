@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Heading,
-  SimpleGrid,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Spinner,
-  HStack,
-  Text,
-  Button,
-} from '@chakra-ui/react';
+import { Box, SimpleGrid, Spinner, HStack, Text, Button } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/DashboardPage.css';
 import { getDashboard } from '../api/dashboard.js';
@@ -19,6 +8,7 @@ import WeatherWidget from '../components/WeatherWidget.jsx';
 import NewsWidget from '../components/NewsWidget.jsx';
 import HelloWidget from '../components/HelloWidget.jsx';
 import LiveFeedWidget from '../components/LiveFeedWidget.jsx';
+import DashboardStat from '../components/DashboardStat.jsx';
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -71,13 +61,12 @@ export default function DashboardPage() {
       <SimpleGrid columns={[1, 2, 4]} spacing={4}>
         {stats.map((s) =>
           data && typeof data === 'object' && s.key in data ? (
-            <Stat key={s.key} p={4} shadow="sm" borderWidth="1px" borderRadius="md" bg="white">
-              <StatLabel>{s.label}</StatLabel>
-              <StatNumber>
-                {s.prefix || ''}
-                {data[s.key]}
-              </StatNumber>
-            </Stat>
+            <DashboardStat
+              key={s.key}
+              label={s.label}
+              value={data[s.key]}
+              prefix={s.prefix || ''}
+            />
           ) : null
         )}
       </SimpleGrid>

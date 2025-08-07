@@ -33,6 +33,14 @@ const argonTheme = extendTheme({
         },
       },
     },
+    Card: {
+      baseStyle: {
+        p: 6,
+        borderRadius: 'lg',
+        boxShadow: '0 0 2rem 0 rgba(136, 152, 170, 0.15)',
+        backgroundColor: 'white',
+      },
+    },
   },
 });
 
