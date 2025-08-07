@@ -2,6 +2,8 @@ require('./config/env');
 const express = require('express');
 const cors = require('cors');
 const products = require('./data/products.json');
+const installRoutes = require('./routes/install');
+const requireInstallation = require('./middleware/requireInstallation');
 const authRoutes = require('./routes/auth');
 const landingRoutes = require('./routes/landing');
 const n8nRoutes = require('./routes/n8n');
@@ -17,6 +19,9 @@ const logger = require('./utils/logger');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use('/install', installRoutes);
+app.use(requireInstallation);
 
 app.get('/operations/retail/products', (req, res) => {
   res.json(products);

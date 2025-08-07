@@ -9,15 +9,27 @@ data.
 - Node.js 18+
 - PostgreSQL server
 
-## Quick setup
+## Browser-based setup
+
+1. From the repository root start the server:
+
+   ```bash
+   npm start
+   ```
+
+2. Open [http://localhost:3000/install](http://localhost:3000/install) in your browser.
+3. Follow the wizard to verify permissions, enter site details, configure the database and create the first admin user.
+4. When the wizard finishes it runs database migrations, seeds data and redirects to the dashboard.
+
+## Quick setup script
 
 1. Ensure PostgreSQL is installed and running.
 2. Copy `.env.example` to `.env` and update the `DB_*` values to match your local database credentials.
 3. From the repository root run:
 
-```bash
-npm run setup
-```
+   ```bash
+   npm run setup
+   ```
 
 The script installs dependencies, runs migrations using the configured credentials and seeds the database with sample data. If `.env` is missing it will be created from `.env.example`.
 
