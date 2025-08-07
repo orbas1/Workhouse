@@ -1,12 +1,23 @@
-import { Box, Heading } from '@chakra-ui/react';
-import NavMenu from '../components/NavMenu.jsx';
+import { SimpleGrid, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
+import DashboardLayout from '../components/DashboardLayout.jsx';
 
 export default function MarketingDashboard() {
   return (
-    <Box p={4}>
-      <NavMenu />
-      <Heading mb={4}>Marketing Dashboard</Heading>
-      {/* TODO: Add marketing analytics and campaign tools */}
-    </Box>
+    <DashboardLayout title="Marketing Dashboard" requiredRole="marketing">
+      <SimpleGrid columns={[1, 3]} spacing={4}>
+        <Stat>
+          <StatLabel>Campaigns</StatLabel>
+          <StatNumber>4</StatNumber>
+        </Stat>
+        <Stat>
+          <StatLabel>Leads</StatLabel>
+          <StatNumber>120</StatNumber>
+        </Stat>
+        <Stat>
+          <StatLabel>Conversion</StatLabel>
+          <StatNumber>12%</StatNumber>
+        </Stat>
+      </SimpleGrid>
+    </DashboardLayout>
   );
 }
