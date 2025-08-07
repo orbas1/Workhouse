@@ -21,6 +21,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { getInstallStatus, runInstallation, checkDatabaseConnection } from '../api/install.js';
+import { useInstall } from '../context/InstallContext.jsx';
 import '../styles/InstallationWizardPage.css';
 
 export default function InstallationWizardPage() {
@@ -35,6 +36,7 @@ export default function InstallationWizardPage() {
   const [error, setError] = useState('');
   const [complete, setComplete] = useState(false);
   const [dbCheck, setDbCheck] = useState(null);
+  const { refresh } = useInstall();
 
   const errorSuggestions = {
     'Admin user already exists': 'Try a different username.',
@@ -81,6 +83,7 @@ export default function InstallationWizardPage() {
     } else {
       try {
         await runInstallation({ dbConfig, admin, app });
+        await refresh();
         setComplete(true);
       } catch (e) {
         const msg = e.response?.data?.error || e.message;
