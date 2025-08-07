@@ -89,6 +89,22 @@ Detailed endpoint and UI design notes live in:
 - `backend_guide.md` – overview of backend routes and planned services.
 - `frontend_guide.md` – roadmap for frontend pages and design principles.
 - `IDE_SETUP.md` – editor recommendations and debugging tips.
+- `developer_guide.md` – commands and workflows for contributors.
+- `UPDATE_PLAN.md` – short‑term roadmap derived from `agents.md`.
+- `CHANGELOG.md` – record of notable changes.
+
+## Docker
+Build and run the combined application in a container:
+
+```bash
+docker-compose up --build
+```
+
+To open a shell in the container:
+
+```bash
+docker-compose run --rm workhouse sh
+```
 
 ## Contributing
 Contributions are welcome! Fork the repository, create a branch and open a pull request.
