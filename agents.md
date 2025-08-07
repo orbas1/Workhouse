@@ -5,7 +5,7 @@ The following stages outline tasks to bring the Workhouse platform to a producti
 ## Stage 1: Backend Foundation
 - Consolidate backend and frontend under unified `app.js` orchestrator.
 - Expose backend API and frontend assets on separate ports via the unified server.
-- Add database models, migrations, and seeding strategy.
+- Add database models, migrations, and seeding strategy with dummy data and cleanup scripts.
 - Implement automated testing for core services.
 
 ## Stage 2: Frontend Integration

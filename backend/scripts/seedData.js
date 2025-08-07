@@ -34,9 +34,31 @@ async function seedUsers() {
   console.log('Seeded users');
 }
 
+async function seedProfiles() {
+  const dataPath = path.join(__dirname, '..', 'data', 'profiles.json');
+  if (!fs.existsSync(dataPath)) return;
+  const profiles = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  const dbName = process.env.DB_NAME || 'workhouse';
+
+  for (const p of profiles) {
+    const contact = escape(JSON.stringify(p.contact || {}));
+    const preferences = escape(JSON.stringify(p.preferences || {}));
+    const portfolio = escape(JSON.stringify(p.portfolio || {}));
+    const visibility = escape(JSON.stringify(p.visibility || {}));
+    const theme = escape(JSON.stringify(p.theme || {}));
+    const skills = `ARRAY[${(p.skills || []).map(s => `'${escape(s)}'`).join(',')}]`;
+    const query = `INSERT INTO profiles (id, user_id, role, full_name, title, location, avatar_url, bio, contact, preferences, skills, portfolio, visibility, theme)
+      VALUES ('${escape(p.id)}', '${escape(p.user_id)}', '${escape(p.role)}', '${escape(p.full_name)}', '${escape(p.title)}', '${escape(p.location)}', '${escape(p.avatar_url)}', '${escape(p.bio)}', '${contact}'::jsonb, '${preferences}'::jsonb, ${skills}, '${portfolio}'::jsonb, '${visibility}'::jsonb, '${theme}'::jsonb)
+      ON CONFLICT (id) DO UPDATE SET user_id = EXCLUDED.user_id, role = EXCLUDED.role, full_name = EXCLUDED.full_name, title = EXCLUDED.title, location = EXCLUDED.location, avatar_url = EXCLUDED.avatar_url, bio = EXCLUDED.bio, contact = EXCLUDED.contact, preferences = EXCLUDED.preferences, skills = EXCLUDED.skills, portfolio = EXCLUDED.portfolio, visibility = EXCLUDED.visibility, theme = EXCLUDED.theme;`;
+    execSync(`echo "${query}" | sudo -u postgres psql -d ${dbName}`, { stdio: 'inherit' });
+  }
+  console.log('Seeded profiles');
+}
+
 async function run() {
   await seedUsers();
   await seedProducts();
+  await seedProfiles();
 }
 
 run().catch(err => {

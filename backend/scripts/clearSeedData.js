@@ -32,9 +32,23 @@ async function clearProducts() {
   console.log('Cleared products');
 }
 
+async function clearProfiles() {
+  const dataPath = path.join(__dirname, '..', 'data', 'profiles.json');
+  if (!fs.existsSync(dataPath)) return;
+  const profiles = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  const dbName = process.env.DB_NAME || 'workhouse';
+
+  for (const p of profiles) {
+    const query = `DELETE FROM profiles WHERE id='${escape(p.id)}';`;
+    execSync(`echo "${query}" | sudo -u postgres psql -d ${dbName}`, { stdio: 'inherit' });
+  }
+  console.log('Cleared profiles');
+}
+
 async function run() {
   await clearUsers();
   await clearProducts();
+  await clearProfiles();
 }
 
 run().catch(err => {
